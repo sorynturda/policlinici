@@ -17,9 +17,9 @@ public class Main {
       ResultSetMetaData rsmd = null;
       try {
           connection = DriverManager.
-             getConnection("jdbc:mysql://localhost/PhoneBook?user=root&password=");
+             getConnection("jdbc:mysql://localhost/phonebook?user=root&password=parola"); //parola = parola root
           insertStatement = connection.createStatement();
-          insertStatement.execute("INSERT INTO Contacts (FirstName, LastName, HomePhone, MobilePhone, EmailAddress) " + 
+          insertStatement.execute("INSERT INTO contacts (FirstName, LastName, HomePhone, MobilePhone, EmailAddress) " +
              "VALUES ('John','Doe','0040264123456','0040722123456','john.doe@example.com')");
           insertStatement.execute("INSERT INTO Contacts (FirstName, LastName, HomePhone, MobilePhone, EmailAddress) " + 
              "VALUES ('Jane','Doe','0040264123456','0040744123456','jane.doe@example.com')");
