@@ -4,7 +4,7 @@ import java.sql.*;
 public class Main {
    public static void main(String[] args) {
       try {
-          Class.forName("com.mysql.jdbc.Driver").newInstance();
+          Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
       }
       catch (Exception ex) {
           System.err.println("An Exception occured during JDBC Driver loading." + 
