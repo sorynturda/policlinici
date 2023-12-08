@@ -13,7 +13,6 @@ public class Main {
       }
       Connection connection = null;
       Statement selectStatement = null, insertStatement = null;
-      CallableStatement callProcedure = null;
       ResultSet rs = null;
       ResultSetMetaData rsmd = null;
       try {
@@ -22,15 +21,8 @@ public class Main {
           insertStatement = connection.createStatement();
           insertStatement.execute("INSERT INTO contacts (FirstName, LastName, HomePhone, MobilePhone, EmailAddress) " +
              "VALUES ('John','Doe','0040264123456','0040722123456','john.doe@example.com')");
-          insertStatement.execute("INSERT INTO Contacts (FirstName, LastName, HomePhone, MobilePhone, EmailAddress) " +
+          insertStatement.execute("INSERT INTO Contacts (FirstName, LastName, HomePhone, MobilePhone, EmailAddress) " + 
              "VALUES ('Jane','Doe','0040264123456','0040744123456','jane.doe@example.com')");
-
-          String query = "{CALL procedura(?, ?)}";
-          callProcedure = connection.prepareCall(query);
-          callProcedure.setString(1, "testNume");
-          callProcedure.setString(2, "testPrenume");
-          callProcedure.execute();
-
           selectStatement = connection.createStatement();
           selectStatement.execute("SELECT * FROM Contacts");
           rs = selectStatement.getResultSet();
