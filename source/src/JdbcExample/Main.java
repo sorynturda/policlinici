@@ -13,16 +13,12 @@ public class Main {
         }
         Connection connection = null;
         Statement selectStatement = null, insertStatement = null;
-        String query = "{call procedura(?,?)}";
         ResultSet rs = null;
         ResultSetMetaData rsmd = null;
         try {
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/phonebook?user=root&password=parola"); //parola = parola root
-            CallableStatement stmt = connection.prepareCall(query);
-            stmt.setString(1, "ss");
-            stmt.setString(2, "ss");
-            rs = stmt.executeQuery();
+
 
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
