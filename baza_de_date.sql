@@ -1,7 +1,7 @@
 -- "NU AVEM FOREIGN KEY AICI, FACEM LA ALTER TABLE IN ALT FISIER"  Dan asked calmly
 
-CREATE SCHEMA IF NOT EXISTS policlinici;
-USE policlinici;
+CREATE SCHEMA IF NOT EXISTS policlinica;
+USE policlinica;
 
 create table if not exists cont(
 	id int auto_increment primary key not null,
