@@ -116,3 +116,11 @@ create table if not exists programari(
     id_medic int not null,
     data_si_ora datetime not null
 );
+
+create table if not exists servicii_oferite;
+create table if not exists servicii_specialitati;
+create table if not exists servicii_oferite_programare;
+create table if not exists servicii_specialitate;
+create table if not exists servici_oferite_raport;
+create table if not exists servici_specialitate;
+create table if not exists orar;
