@@ -3,7 +3,7 @@
 CREATE SCHEMA IF NOT EXISTS policlinica;
 USE policlinica;
 
-create table if not exists cont(
+create table if not exists conturi(
 	id int auto_increment primary key not null,
 	nume_utilizator varchar(20) not null,
     parola varchar(20) not null
@@ -87,7 +87,7 @@ create table if not exists concedii(
     data_sfarsit date not null
 );
 
-create table if not exists bon_fiscal(
+create table if not exists bonuri_fiscale(
     id int auto_increment primary key not null,
     id_raport int not null,
     id_angajat int not null,
@@ -96,8 +96,8 @@ create table if not exists bon_fiscal(
 
 create table if not exists rapoarte(
     id int auto_increment primary key not null,
-    id_rapot int not null,
-    id_angajat int not null,
+    id_pacient int not null,
+    id_medic int not null,
     id_asistent int not null,
     nume_medic_recomandare varchar(20),
     prenume_medic_recomandare varchar(20),
@@ -125,8 +125,8 @@ create table if not exists servicii(
     durata time not null
 );
 
-create table if not exists orar(
-    id_angajat int not null,
+create table if not exists orar_medici(
+    id_medic int not null,
     orar_specific boolean not null default false,
     zi_saptamana_sau_data varchar(20) not null,
     ora_inceput time not null,
@@ -148,13 +148,13 @@ create table if not exists servicii_oferite_programare(
     id_serviciu int not null
 );
 
-create table if not exists servici_oferite_raport(
+create table if not exists servicii_oferite_raport(
     id_raport int not null,
     id_serviciu int not null,
     investigatii varchar(500) not null
 );
 
-create table if not exists servici_specialitate_medic(
+create table if not exists servicii_specialitate_medic(
     id_serviciu int not null,
     id_specialitate int not null
 );
