@@ -132,7 +132,7 @@ create table if not exists orar_medici(
     ora_sfarsit time not null
 );
 
-create table if not exists servicii_oferite(
+create table if not exists servicii_oferite_policlinici(
     id_policlinica int not null,
     id_serviciu int not null
 );
