@@ -5,9 +5,6 @@ ALTER TABLE servicii_oferite
 ADD FOREIGN KEY (id_policlinica) REFERENCES policlinici(id),
 ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);
 
-ALTER TABLE servicii
-ADD FOREIGN KEY (id_specialitate) REFERENCES specialitati(id);
-
 ALTER TABLE servicii_specialitati
 ADD FOREIGN KEY (id_specialitate) REFERENCES specialitati(id),
 ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);

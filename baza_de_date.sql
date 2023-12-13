@@ -119,7 +119,6 @@ create table if not exists programari(
 
 create table if not exists servicii(
     id int auto_increment primary key not null,
-    id_specialitate int not null,
     nume_serviciu varchar(50) not null,
     pret decimal(10,2) not null,
     durata time not null
