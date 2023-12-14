@@ -4,6 +4,7 @@ CREATE PROCEDURE InserarePacient(
     IN prenumePacient VARCHAR(20)
 )
 BEGIN
+   
     INSERT INTO pacienti (nume, prenume)
     VALUES (numePacient, prenumePacient);
 END //
@@ -17,6 +18,7 @@ CREATE PROCEDURE ProgramarePacient(
     IN dataSiOraProgramare DATETIME
 )
 BEGIN
+   
     INSERT INTO programari (id_pacient, id_medic, data_si_ora)
     VALUES (idPacient, idMedic, dataSiOraProgramare);
 END //
@@ -28,6 +30,7 @@ CREATE PROCEDURE SelectareSpecialitatiMedic(
     IN idMedic INT
 )
 BEGIN
+    
     SELECT nume_specialitate, grad
     FROM specialitati
     WHERE id_medic = idMedic;
@@ -42,6 +45,7 @@ CREATE PROCEDURE EmitereBonFiscal(
     IN totalBon DECIMAL(10, 2)
 )
 BEGIN
+    
     INSERT INTO bonuri_fiscale (id_raport, id_angajat, total)
     VALUES (idRaport, idAngajat, totalBon);
 END //
@@ -53,6 +57,7 @@ CREATE PROCEDURE ExtrageRaport(
     IN idRaport INT
 )
 BEGIN
+   
     SELECT * FROM rapoarte
     WHERE id = idRaport;
 END //
@@ -69,6 +74,7 @@ CREATE PROCEDURE ActualizareRaport(
     IN parafa BOOLEAN
 )
 BEGIN
+   
     UPDATE rapoarte
     SET istoric = istoric, simptome = simptome, diagnostic = diagnostic, recomandari = recomandari, parafa = parafa
     WHERE id = idRaport;
@@ -81,6 +87,7 @@ CREATE PROCEDURE ValidareRaport(
     IN idRaport INT
 )
 BEGIN
+   
     UPDATE rapoarte
     SET parafa = TRUE
     WHERE id = idRaport;
@@ -91,6 +98,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE ExtragePacienti()
 BEGIN
+    
     SELECT * FROM pacienti;
 END //
 DELIMITER ;
@@ -99,6 +107,7 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE ExtrageRapoarte()
 BEGIN
+    
     SELECT * FROM rapoarte;
 END //
 DELIMITER ;

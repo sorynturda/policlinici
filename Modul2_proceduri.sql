@@ -1,9 +1,10 @@
-DELIMITER //
 
+DELIMITER //
 CREATE FUNCTION VenitTotalPoliclinici() RETURNS DECIMAL(10, 2)
 DETERMINISTIC
 BEGIN
     DECLARE totalVenit DECIMAL(10, 2);
+
     SELECT SUM(total) INTO totalVenit
     FROM (
         SELECT SUM(total) AS total
@@ -17,26 +18,27 @@ BEGIN
         SELECT SUM(total) AS total
         FROM bonuri_fiscale
     ) AS venituri;
+
     RETURN totalVenit;
 END //
-
 DELIMITER ;
 
-DELIMITER //
 
+DELIMITER //
 CREATE FUNCTION Cheltuieli() RETURNS DECIMAL(10, 2)
 DETERMINISTIC
 BEGIN
     DECLARE totalCheltuieli DECIMAL(10, 2);
+
     SELECT SUM(salariu_negociat * numar_ore) INTO totalCheltuieli
     FROM angajati;
+
     RETURN totalCheltuieli;
 END //
-
 DELIMITER ;
 
-DELIMITER //
 
+DELIMITER //
 CREATE FUNCTION ProfitLunar(luna INT, an INT) RETURNS DECIMAL(10, 2)
 DETERMINISTIC
 BEGIN
@@ -48,16 +50,16 @@ BEGIN
 
     RETURN venit - cheltuieli;
 END //
-
 DELIMITER ;
 
-DELIMITER //
 
+DELIMITER //
 CREATE FUNCTION ProfitMedicLocatieSpecialitate(idMedic INT) RETURNS DECIMAL(10, 2)
 DETERMINISTIC
 BEGIN
     DECLARE venit DECIMAL(10, 2);
     DECLARE cheltuieli DECIMAL(10, 2);
+
     SELECT SUM(total) INTO venit
     FROM (
         SELECT SUM(total) AS total
@@ -81,19 +83,19 @@ BEGIN
 
     RETURN venit - cheltuieli;
 END //
-
 DELIMITER ;
 
-DELIMITER //
 
+DELIMITER //
 CREATE FUNCTION SalariuAngajat(idAngajat INT) RETURNS DECIMAL(10, 2)
 DETERMINISTIC
 BEGIN
     DECLARE salariu DECIMAL(10, 2);
+
     SELECT salariu_negociat * numar_ore INTO salariu
     FROM angajati
     WHERE id = idAngajat;
+
     RETURN salariu;
 END //
-
 DELIMITER ;
