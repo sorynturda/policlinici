@@ -5,13 +5,13 @@ USE policlinica;
 
 create table if not exists conturi(
 	id int auto_increment primary key not null,
-	nume_utilizator varchar(20) not null,
+	nume_utilizator varchar(20) unique not null,
     parola varchar(20) not null
 );
 
 create table if not exists utilizatori(
 	id int auto_increment primary key not null,
-    id_cont int not null,
+    id_cont int unique not null,
     departament varchar(20) not null,
     adresa varchar(50) not null,
     cnp varchar(13) not null,
@@ -33,7 +33,7 @@ create table if not exists policlinici(
 
 create table if not exists angajati(
 	id int auto_increment primary key not null,
-    id_utilizator int not null,
+    id_utilizator int unique not null,
     id_policlinica int not null,
     functie varchar(20) not null,
     salariu_negociat decimal(8, 2) not null,
@@ -42,8 +42,8 @@ create table if not exists angajati(
 
 create table if not exists medici(
 	id int auto_increment primary key not null,
-    id_angajat int not null,
-    cod_parafa varchar(10) not null,
+    id_angajat int unique not null,
+    cod_parafa varchar(10) unique not null,
     titlu_stiintific varchar(50),
     post_didactic varchar(50),
     venit_aditional decimal(3, 2) default 0
@@ -51,7 +51,7 @@ create table if not exists medici(
 
 create table if not exists asistenti_medicali(
 	id int auto_increment primary key not null,
-    id_angajat int not null,
+    id_angajat int unique not null,
     tip varchar(20) not null,
     grad varchar(20) not null
 );
