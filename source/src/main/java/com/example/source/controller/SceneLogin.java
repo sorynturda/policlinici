@@ -1,4 +1,6 @@
-package com.example.source;
+package com.example.source.controller;
+
+import com.example.source.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,7 +12,7 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SceneLoginController {
+public class SceneLogin {
     HelloApplication main = new HelloApplication();
 
     @FXML
@@ -22,17 +24,16 @@ public class SceneLoginController {
     @FXML
     private Button buttonLogIn;
 
-    public SceneLoginController() {
+    public SceneLogin() {
     }
 
 
     public void switchToSceneUser(ActionEvent event) throws IOException, SQLException {
-        if(Model.extrageContUtilizator(textFieldUsername.getText(), passwordFieldPassword.getText())) {
+        if (Model.extrageContUtilizator(textFieldUsername.getText(), passwordFieldPassword.getText())) {
             main.changeScene("scene-user-view.fxml");
-        }else if (textFieldUsername.getText().isEmpty() && passwordFieldPassword.getText().isEmpty()) {
+        } else if (textFieldUsername.getText().isEmpty() && passwordFieldPassword.getText().isEmpty()) {
             labelErrorLogIn.setText("Introduceti numele de utilizator si parola!");
-        }
-        else {
+        } else {
             labelErrorLogIn.setText("Nume de utilizator sau parola incorecte!");
         }
     }
