@@ -1,10 +1,12 @@
 package com.example.source;
 
 public class ContUtilizator {
+    private Integer id;
     private String username;
     private String password;
 
-    public ContUtilizator(String username, String password) {
+    public ContUtilizator(Integer id, String username, String password) {
+        this.id = id;
         this.username = username;
         this.password = password;
     }
@@ -20,7 +22,8 @@ public class ContUtilizator {
     @Override
     public String toString() {
         return "ContUtilizator{" +
-                "username='" + username + '\'' +
+                "id=" + id +
+                ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
     }

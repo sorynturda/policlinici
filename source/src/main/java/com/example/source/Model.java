@@ -49,7 +49,7 @@ public class Model {
         if(resultSet.next() == false)
             return false;
 
-        contUtilizator = new ContUtilizator(resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
+        contUtilizator = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
         System.out.println(contUtilizator);
         return true;
     }
