@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
             stage.setScene(scene);
             stage.show();
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
