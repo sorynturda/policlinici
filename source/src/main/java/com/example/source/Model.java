@@ -3,14 +3,14 @@ package com.example.source;
 import java.sql.*;
 
 public class Model {
-    static Connection connection;
-    static Statement selectStatement, insertStatement;
-    static ResultSet resultSet;
-    static ResultSetMetaData resultSetMetaData;
+    static private Connection connection;
+    static private Statement selectStatement, insertStatement;
+    static private ResultSet resultSet;
+    static private ResultSetMetaData resultSetMetaData;
 
-    static CallableStatement callableStatement;
+    static private CallableStatement callableStatement;
 
-    static ContUtilizator contUtilizator;
+    static private ContUtilizator contUtilizator;
 
     public Model() throws SQLException {
         connection = null;
