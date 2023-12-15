@@ -1,11 +1,10 @@
-package com.example.source.controller;
+package com.example.source;
 
-import com.example.source.*;
 import javafx.event.ActionEvent;
 
 import java.io.IOException;
 
-public class SceneUser {
+public class SceneUserController {
     HelloApplication main = new HelloApplication();
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
