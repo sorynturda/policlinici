@@ -22,6 +22,10 @@ public class SceneResurseUmane {
     @FXML
     private TableView<Angajat> tabel;
     @FXML
+    private TableColumn<Angajat, Integer> id;
+    @FXML
+    private TableColumn<Angajat, Integer> id_utilizator;
+    @FXML
     private TableColumn<Angajat, String> nume;
     @FXML
     private TableColumn<Angajat, String> prenume;
@@ -33,14 +37,28 @@ public class SceneResurseUmane {
         String input = inputTextField.getText().trim();
         if (!input.isEmpty()) {
             angajati = Model.cautaAngajat(input);
-            nume.setCellValueFactory(new PropertyValueFactory<>("nume"));
-            prenume.setCellValueFactory(new PropertyValueFactory<>("prenume"));
-            functie.setCellValueFactory(new PropertyValueFactory<>("functie"));
-            tabel.setItems(angajati);
+            populateTabel();
+        } else {
+            angajati = Model.listaAngajati();
+            populateTabel();
         }
+    }
+
+    private void populateTabel() {
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id_utilizator.setCellValueFactory(new PropertyValueFactory<>("id_utilizator"));
+        nume.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenume.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        functie.setCellValueFactory(new PropertyValueFactory<>("functie"));
+        tabel.setItems(angajati);
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         main.changeScene("scene-login-view.fxml");
+    }
+
+    public void functie(ActionEvent event) throws IOException {
+        Angajat a = tabel.getSelectionModel().getSelectedItem();
+        System.out.println(a);
     }
 }

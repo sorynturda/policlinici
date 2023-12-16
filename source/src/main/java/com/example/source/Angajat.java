@@ -1,14 +1,26 @@
 package com.example.source;
 
 public class Angajat {
+    private int id;
+    private int id_utilizator;
     private String nume;
     private String prenume;
     private String functie;
 
-    public Angajat(String nume, String prenume, String functie) {
+    public Angajat(int id, int id_utilizator, String nume, String prenume, String functie) {
+        this.id = id;
+        this.id_utilizator = id_utilizator;
         this.nume = nume;
         this.prenume = prenume;
         this.functie = functie;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getId_utilizator() {
+        return id_utilizator;
     }
 
     public String getNume() {
@@ -26,7 +38,9 @@ public class Angajat {
     @Override
     public String toString() {
         return "Angajat{" +
-                "nume='" + nume + '\'' +
+                "id=" + id +
+                ", id_utilizator=" + id_utilizator +
+                ", nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 ", functie='" + functie + '\'' +
                 '}';
