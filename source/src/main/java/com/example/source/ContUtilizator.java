@@ -1,5 +1,4 @@
 package com.example.source;
-
 public class ContUtilizator {
     private Integer id;
     private String username;

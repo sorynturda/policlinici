@@ -1,22 +1,28 @@
 package com.example.source.controller;
 
 import com.example.source.Angajat;
-import com.example.source.HelloApplication;
 import com.example.source.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.SQLException;
 
 public class SceneResurseUmane {
-    HelloApplication main = new HelloApplication();
+    private Stage stage;
+    private Scene scene;
+    private Parent root;
     @FXML
     private TextField inputTextField;
     @FXML
@@ -53,12 +59,16 @@ public class SceneResurseUmane {
         tabel.setItems(angajati);
     }
 
-    public void switchToSceneLogin(ActionEvent event) throws IOException {
-        main.changeScene("scene-login-view.fxml");
-    }
-
     public void functie(ActionEvent event) throws IOException {
         Angajat a = tabel.getSelectionModel().getSelectedItem();
         System.out.println(a);
+    }
+
+    public void switchToSceneLogin(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("scene-login-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 }
