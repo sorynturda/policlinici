@@ -1,5 +1,8 @@
-package com.example.source;
+package com.example.source.controller;
 
+import com.example.source.Angajat;
+import com.example.source.HelloApplication;
+import com.example.source.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -8,14 +11,11 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
-import java.sql.Array;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-public class SceneResurseUmaneController {
+public class SceneResurseUmane {
     HelloApplication main = new HelloApplication();
     @FXML
     private TextField inputTextField;

@@ -1,5 +1,7 @@
-package com.example.source;
+package com.example.source.controller;
 
+import com.example.source.HelloApplication;
+import com.example.source.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,9 +12,8 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SceneLoginController {
+public class SceneLogin {
     HelloApplication main = new HelloApplication();
-
     @FXML
     private Label labelErrorLogIn;
     @FXML
@@ -22,7 +23,7 @@ public class SceneLoginController {
     @FXML
     private Button buttonLogIn;
 
-    public SceneLoginController() {
+    public SceneLogin() {
     }
 
 

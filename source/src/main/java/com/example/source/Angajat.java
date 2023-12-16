@@ -2,7 +2,6 @@ package com.example.source;
 
 public class Angajat {
     private String nume;
-
     private String prenume;
     private String functie;
 

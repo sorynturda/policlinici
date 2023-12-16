@@ -4,16 +4,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Model {
     static private Connection connection;
     static private Statement selectStatement, insertStatement;
     static private ResultSet resultSet;
     static private ResultSetMetaData resultSetMetaData;
-
     static private CallableStatement callableStatement;
-
     static private ContUtilizator contUtilizator;
 
     public Model() throws SQLException {
@@ -70,9 +67,6 @@ public class Model {
             String prenume = resultSet.getString("prenume");
             String functie = resultSet.getString("functie");
             angajati.add(new Angajat(nume, prenume, functie));
-            System.out.println("Nume: " + nume);
-            System.out.println("Nume: " + prenume);
-            System.out.println("Nume: " + functie);
         }
         return angajati;
     }
