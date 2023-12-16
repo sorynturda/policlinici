@@ -2,12 +2,19 @@ DELIMITER //
 CREATE PROCEDURE CautaAngajat(IN input VARCHAR(30))
 BEGIN
    
-    SELECT u.nume, u.prenume, a.functie FROM angajati a
+    SELECT a.id, a.id_utilizator, u.nume, u.prenume, a.functie FROM angajati a
     INNER JOIN utilizatori u ON a.id_utilizator = u.id
     WHERE u.nume = input OR u.prenume = input OR a.functie = input;
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE AfiseazaAngajati()
+BEGIN
+	SELECT a.id, a.id_utilizator, u.nume, u.prenume, a.functie FROM angajati a
+	INNER JOIN utilizatori u ON a.id_utilizator = u.id;
+END //
+DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE ModificaOrar(IN idMedic INT, IN ziuaSauData VARCHAR(20), IN oraInceput TIME, IN oraSfarsit TIME)
