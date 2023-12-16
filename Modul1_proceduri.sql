@@ -1,10 +1,10 @@
 DELIMITER //
-CREATE PROCEDURE CautaAngajat(IN numeFamilie VARCHAR(30), IN prenume VARCHAR(30), IN functie VARCHAR(20))
+CREATE PROCEDURE CautaAngajat(IN input VARCHAR(30))
 BEGIN
    
-    SELECT * FROM angajati a
+    SELECT u.nume, u.prenume, a.functie FROM angajati a
     INNER JOIN utilizatori u ON a.id_utilizator = u.id
-    WHERE u.nume = numeFamilie AND u.prenume = prenume AND a.functie = functie;
+    WHERE u.nume = input OR u.prenume = input OR a.functie = input;
 END //
 DELIMITER ;
 
