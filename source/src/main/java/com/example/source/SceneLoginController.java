@@ -28,7 +28,10 @@ public class SceneLoginController {
 
     public void switchToSceneUser(ActionEvent event) throws IOException, SQLException {
         if (Model.extrageContUtilizator(textFieldUsername.getText(), passwordFieldPassword.getText())) {
-            main.changeScene("scene-user-view.fxml");
+            if (textFieldUsername.getText().equals("resurseumane"))
+                main.changeScene("scene-resurse-umane-view.fxml");
+            else
+                main.changeScene("scene-user-view.fxml");
         } else if (textFieldUsername.getText().isEmpty() && passwordFieldPassword.getText().isEmpty()) {
             labelErrorLogIn.setText("Introduceti numele de utilizator si parola!");
         } else {

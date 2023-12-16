@@ -1,6 +1,10 @@
 package com.example.source;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Model {
     static private Connection connection;
@@ -46,11 +50,30 @@ public class Model {
         callableStatement.setString(2, password);
         resultSet = callableStatement.executeQuery();
 
-        if(resultSet.next() == false)
+        if (resultSet.next() == false)
             return false;
 
         contUtilizator = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
         System.out.println(contUtilizator);
         return true;
+    }
+
+    public static ObservableList<Angajat> cautaAngajat(String input) throws SQLException {
+        System.out.println(input);
+        String query = "{call CautaAngajat(?)}";
+        callableStatement = connection.prepareCall(query);
+        callableStatement.setString(1, input);
+        resultSet = callableStatement.executeQuery();
+        ObservableList<Angajat> angajati = FXCollections.observableArrayList();
+        while (resultSet.next()) {
+            String nume = resultSet.getString("nume");
+            String prenume = resultSet.getString("prenume");
+            String functie = resultSet.getString("functie");
+            angajati.add(new Angajat(nume, prenume, functie));
+            System.out.println("Nume: " + nume);
+            System.out.println("Nume: " + prenume);
+            System.out.println("Nume: " + functie);
+        }
+        return angajati;
     }
 }
