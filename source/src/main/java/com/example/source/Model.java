@@ -6,21 +6,16 @@ import javafx.collections.ObservableList;
 import java.sql.*;
 
 public class Model {
-    static private Connection connection;
-    static private Statement selectStatement, insertStatement;
-    static private ResultSet resultSet;
-    static private ResultSetMetaData resultSetMetaData;
-    static private CallableStatement callableStatement;
-    static private ContUtilizator contUtilizator;
+    static public boolean extrageContUtilizator(String username, String password) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+        ContUtilizator contUtilizator = null;
 
-    public Model() throws SQLException {
-        connection = null;
-        selectStatement = null;
-        insertStatement = null;
-        resultSet = null;
-        resultSetMetaData = null;
-        callableStatement = null;
-        contUtilizator = null;
+        boolean booleanVariable = false;
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -32,41 +27,111 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola"); //parola = parola root
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call CautaCont(?,?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, username);
+            callableStatement.setString(2, password);
+            resultSet = callableStatement.executeQuery();
 
+            if (resultSet.next() == false)
+                booleanVariable = false;
+            else {
+                contUtilizator = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
+                System.out.println(contUtilizator);
+                booleanVariable = true;
+            }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
             sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
         }
-    }
-
-    static public boolean extrageContUtilizator(String username, String password) throws SQLException {
-        String query = "{call CautaCont(?,?)}";
-        callableStatement = connection.prepareCall(query);
-        callableStatement.setString(1, username);
-        callableStatement.setString(2, password);
-        resultSet = callableStatement.executeQuery();
-
-        if (resultSet.next() == false)
-            return false;
-
-        contUtilizator = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
-        System.out.println(contUtilizator);
-        return true;
+        return booleanVariable;
     }
 
     public static ObservableList<Angajat> cautaAngajat(String input) throws SQLException {
-        System.out.println(input);
-        String query = "{call CautaAngajat(?)}";
-        callableStatement = connection.prepareCall(query);
-        callableStatement.setString(1, input);
-        resultSet = callableStatement.executeQuery();
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+        ContUtilizator contUtilizator = null;
+
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
-        while (resultSet.next()) {
-            String nume = resultSet.getString("nume");
-            String prenume = resultSet.getString("prenume");
-            String functie = resultSet.getString("functie");
-            angajati.add(new Angajat(nume, prenume, functie));
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call CautaAngajat(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, input);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                String nume = resultSet.getString("nume");
+                String prenume = resultSet.getString("prenume");
+                String functie = resultSet.getString("functie");
+                angajati.add(new Angajat(nume, prenume, functie));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
         }
         return angajati;
     }

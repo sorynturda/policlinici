@@ -13,6 +13,7 @@ import java.io.IOException;
 
 public class HelloApplication extends Application {
     private static Stage currentStage;
+
     @Override
     public void start(Stage stage) throws IOException, SQLException {
         try {
@@ -27,8 +28,6 @@ public class HelloApplication extends Application {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        Model model = new Model();
     }
 
     public void changeScene(String fxml) throws IOException {
