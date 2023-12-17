@@ -30,3 +30,5 @@ public class HelloApplication extends Application {
         launch();
     }
 }
+
+// de adaugat salariu si nr ore angajat

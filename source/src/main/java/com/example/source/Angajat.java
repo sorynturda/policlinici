@@ -6,6 +6,8 @@ public class Angajat {
     private String nume;
     private String prenume;
     private String functie;
+    private Integer salariu_negociat;
+    private Integer numar_ore;
 
     public Angajat(int id, int id_utilizator, String nume, String prenume, String functie) {
         this.id = id;
