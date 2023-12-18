@@ -1,5 +1,4 @@
-package com.example.source;
-
+package com.example.source.claseTabele;
 public class Utilizator {
     private Integer id;
     private String departament;

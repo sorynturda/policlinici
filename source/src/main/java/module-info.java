@@ -11,4 +11,6 @@ module app {
     opens com.example.source.controller to javafx.fxml;
     exports com.example.source;
     opens com.example.source to javafx.fxml;
+    exports com.example.source.claseTabele;
+    opens com.example.source.claseTabele to javafx.fxml;
 }

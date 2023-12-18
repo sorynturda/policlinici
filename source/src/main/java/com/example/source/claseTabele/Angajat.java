@@ -1,4 +1,4 @@
-package com.example.source;
+package com.example.source.claseTabele;
 
 public class Angajat {
     private int id;
@@ -6,8 +6,8 @@ public class Angajat {
     private String nume;
     private String prenume;
     private String functie;
-    private Integer salariu_negociat;
-    private Integer numar_ore;
+    private int salariu_negociat;
+    private int numar_ore;
 
     public Angajat(int id, int id_utilizator, String nume, String prenume, String functie) {
         this.id = id;

@@ -1,5 +1,6 @@
 package com.example.source.controller;
 
+import com.example.source.Model;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -15,10 +16,7 @@ public class SceneUser {
     private Parent root;
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-login-view.fxml"));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+        String scene = "/com.example.source/scene-login-view.fxml";
+        Model.logOut(event, scene);
     }
 }

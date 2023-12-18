@@ -1,4 +1,4 @@
-package com.example.source;
+package com.example.source.claseTabele;
 
 public class AsistentMedical {
     private Integer id;

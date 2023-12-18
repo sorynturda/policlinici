@@ -1,10 +1,39 @@
 package com.example.source;
+
+import com.example.source.claseTabele.Angajat;
+import com.example.source.claseTabele.ContUtilizator;
+import com.example.source.claseTabele.Utilizator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.event.ActionEvent;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.sql.*;
 
 public class Model {
+    private static ContUtilizator contCurent;
+    private static Utilizator utilizatorCurent;
+    private static Angajat angajatCurent;
+    private static Stage stage;
+    private static Scene scene;
+    private static Parent root;
+
+    public static void logOut(ActionEvent event, String scenePath) throws IOException {
+        root = FXMLLoader.load(Model.class.getResource(scenePath));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+        contCurent = null;
+        angajatCurent = null;
+        utilizatorCurent = null;
+    }
+
     static public boolean extrageContUtilizator(String username, String password) throws SQLException {
         Connection connection = null;
         Statement selectStatement = null;
