@@ -30,7 +30,7 @@ public class SceneLogin {
     private Button buttonLogIn;
 
     public void switchToSceneUser(ActionEvent event) throws IOException, SQLException {
-        if (Model.extrageContUtilizator(textFieldUsername.getText(), passwordFieldPassword.getText())) {
+        if (Model.logIn(textFieldUsername.getText(), passwordFieldPassword.getText())) {
             if (textFieldUsername.getText().equals("resurseumane")) {
                 switchToSceneResurseUmane(event);
             } else {
