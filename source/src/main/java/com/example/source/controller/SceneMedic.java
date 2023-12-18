@@ -1,6 +1,7 @@
 package com.example.source.controller;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class SceneMedic {
@@ -22,4 +23,6 @@ public class SceneMedic {
     private Label labelIban;
     @FXML
     private Label labelDataAngajarii;
+    @FXML
+    private Button buttonLogOut;
 }

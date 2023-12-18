@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
@@ -8,7 +9,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
-
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
    <left>
@@ -21,6 +21,11 @@
             </ImageView>
             <Label id="labelNume" layoutX="52.0" layoutY="225.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" />
             <Label id="labelPrenume" layoutX="52.0" layoutY="283.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" />
+            <Button id="buttonLogOut" layoutX="72.0" layoutY="378.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ffffff;" text="Log Out">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </left>
