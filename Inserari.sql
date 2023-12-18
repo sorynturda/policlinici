@@ -72,7 +72,8 @@ VALUES
     (19, true, '2023-06-30', '11:00:00', '17:00:00'),
     (20, true, '2023-08-15', '13:00:00', '19:00:00');
 
-INSERT INTO policlinica.angajati
-VALUES  (1, 5, 1, "medic", 6969.69, 55),
+INSERT INTO policlinica.angajati (id_utilizator, id_policlinica, functie, salariu_negociat, numar_ore)
+VALUES  (5, 1, "medic", 6969.69, 55),
 	(4, 1, "super erou", 6969.69, 55);
+
  
