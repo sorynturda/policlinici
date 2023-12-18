@@ -1,6 +1,9 @@
 package com.example.source.claseTabele;
+
 public class ContUtilizator {
     private Integer id;
+
+
     private String username;
     private String password;
 
@@ -16,6 +19,10 @@ public class ContUtilizator {
 
     public String getPassword() {
         return password;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     @Override

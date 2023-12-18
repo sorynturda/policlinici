@@ -66,6 +66,7 @@ public class Model {
             else {
                 contCurent = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
                 System.out.println(contCurent);
+                extrageUtilizator(contCurent.getId());
                 booleanVariable = true;
             }
         } catch (SQLException sqlex) {
@@ -227,5 +228,78 @@ public class Model {
             }
         }
         return angajati;
+    }
+
+    public static void extrageUtilizator(int id) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call CautaUtilizatorDupaCont(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id));
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next())
+                utilizatorCurent = new Utilizator(
+                        resultSet.getInt("id"),
+                        resultSet.getString("departament"),
+                        resultSet.getString("adresa"),
+                        resultSet.getString("cnp"),
+                        resultSet.getString("nume"),
+                        resultSet.getString("prenume"),
+                        resultSet.getString("telefon"),
+                        resultSet.getString("email"),
+                        resultSet.getString("IBAN"),
+                        resultSet.getString("data_angajarii"),
+                        resultSet.getString("rol")
+                );
+            System.out.println(utilizatorCurent);
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static Utilizator getUtilizatorCurent() {
+        return utilizatorCurent;
     }
 }
