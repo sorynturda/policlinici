@@ -34,14 +34,13 @@ public class Model {
         utilizatorCurent = null;
     }
 
-    static public boolean extrageContUtilizator(String username, String password) throws SQLException {
+    static public boolean logIn(String username, String password) throws SQLException {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
-        ContUtilizator contUtilizator = null;
 
         boolean booleanVariable = false;
 
@@ -65,8 +64,8 @@ public class Model {
             if (resultSet.next() == false)
                 booleanVariable = false;
             else {
-                contUtilizator = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
-                System.out.println(contUtilizator);
+                contCurent = new ContUtilizator(Integer.parseInt(resultSet.getString("id")), resultSet.getString("nume_utilizator"), resultSet.getString("parola"));
+                System.out.println(contCurent);
                 booleanVariable = true;
             }
         } catch (SQLException sqlex) {
