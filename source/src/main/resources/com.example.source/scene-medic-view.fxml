@@ -19,8 +19,14 @@
                         <Image url="@doctor_image.png" />
                     </image>
                 </ImageView>
-                <Label fx:id="labelNume" layoutX="52.0" layoutY="225.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" />
-                <Label id="labelPrenume" fx:id="labelPrenume" layoutX="52.0" layoutY="283.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" />
+                <Label fx:id="labelNume" alignment="CENTER" layoutX="52.0" layoutY="225.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+                <Label id="labelPrenume" fx:id="labelPrenume" alignment="CENTER" layoutX="52.0" layoutY="283.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
                 <Button id="buttonLogOut" fx:id="buttonLogOut" layoutX="72.0" layoutY="378.0" mnemonicParsing="false" onAction="#switchToSceneLogin" prefHeight="30.0" prefWidth="120.0" style="-fx-background-color: #ffffff;" text="Log Out">
                     <font>
                         <Font name="System Bold" size="14.0" />
@@ -36,13 +42,34 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #d1e0e0;">
                             <children>
-                                <Label id="labelDepartament" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
-                                <Label id="labelAdresa" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
-                                <Label id="labelCnp" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
-                                <Label id="labelTelefon" layoutX="150.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
-                                <Label id="labelEmail" layoutX="150.0" layoutY="215.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
-                                <Label id="labelIban" layoutX="150.0" layoutY="265.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
-                                <Label id="labelDataAngajarii" layoutX="150.0" layoutY="315.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" />
+                                <Label fx:id="labelDepartament" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                                <Label fx:id="labelAdresa" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                                <Label fx:id="labelCnp" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                                <Label fx:id="labelTelefon" alignment="CENTER" layoutX="150.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                                <Label fx:id="labelEmail" alignment="CENTER" layoutX="150.0" layoutY="215.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                                <Label fx:id="labelIban" alignment="CENTER" layoutX="150.0" layoutY="265.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
+                                <Label fx:id="labelDataAngajarii" alignment="CENTER" layoutX="150.0" layoutY="315.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                           <font>
+                              <Font size="16.0" />
+                           </font></Label>
                                 <Label layoutX="14.0" layoutY="15.0" prefHeight="40.0" prefWidth="130.0" text="DEPARTAMENT:">
                                     <font>
                                         <Font name="System Bold" size="14.0" />
