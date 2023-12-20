@@ -40,11 +40,14 @@ public class SceneLogin {
                 if(Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
                     switchToSceneMedic(event);
                 }
-                if(Model.getAngajatCurent().getFunctie().compareTo(Model.RESURSE_UMANE) == 0) {
+                else if(Model.getAngajatCurent().getFunctie().compareTo(Model.RESURSE_UMANE) == 0) {
                     switchToSceneResurseUmane(event);
                 }
-                if(Model.getAngajatCurent().getFunctie().compareTo(Model.ECONOMIC) == 0){
+                else if(Model.getAngajatCurent().getFunctie().compareTo(Model.ECONOMIC) == 0){
                     switchToSceneEconomic(event);
+                }
+                else if(Model.getAngajatCurent().getFunctie().compareTo(Model.ASISTENT_MEDICAL) == 0) {
+                    switchToSceneAsistentMedical(event);
                 }
             }
         } else if (textFieldUsername.getText().isEmpty() && passwordFieldPassword.getText().isEmpty()) {
@@ -72,6 +75,14 @@ public class SceneLogin {
 
     public void switchToSceneEconomic(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-economic-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToSceneAsistentMedical(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-asistent-medical-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

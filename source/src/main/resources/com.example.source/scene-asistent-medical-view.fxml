@@ -10,13 +10,13 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneEconomic">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneAsistentMedical">
     <left>
-        <AnchorPane prefHeight="450.0" prefWidth="263.0" style="-fx-background-color: #ffff66;" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="450.0" prefWidth="263.0" style="-fx-background-color: #ff4d4d;" BorderPane.alignment="CENTER">
             <children>
-                <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="57.0" layoutY="35.0" pickOnBounds="true" preserveRatio="true">
+                <ImageView fitHeight="150.0" fitWidth="87.0" layoutX="88.0" layoutY="42.0" pickOnBounds="true" preserveRatio="true">
                     <image>
-                        <Image url="@economic.png" />
+                        <Image url="@asistent_medical.png" />
                     </image>
                 </ImageView>
                 <Label fx:id="labelNume" alignment="CENTER" layoutX="52.0" layoutY="225.0" prefHeight="40.0" prefWidth="160.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
@@ -109,16 +109,11 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="ANGAJATI">
+                <Tab text="PACIENTI">
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                     </content>
                 </Tab>
-            <Tab text="POLICLINICI">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-               </content>
-            </Tab>
             </tabs>
         </TabPane>
     </right>

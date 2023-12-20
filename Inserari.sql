@@ -4,16 +4,18 @@ INSERT INTO conturi (nume_utilizator, parola) VALUES
     ('resurseumane', 'resurse123'),
     ('economic', 'economic123'),
     ('medic', 'medic123'),
-    ("medic2", "medic111");
+    ("medic2", "medic111"),
+    ("asistent", "asistent123");
 
 
 INSERT INTO utilizatori (id_cont, departament, adresa, cnp, nume, prenume, telefon, email, iban, data_angajarii, rol) VALUES
-    (1, 'Administrație', 'Strada Administratiei, nr. 1, Bucuresti', '1234567890123', 'Ion', 'Popescu', '0720123456', 'ion.popescu@email.com', 'RO123456789012345678901234567890', '2022-01-01', 'super_admin'),
-    (2, 'Recepție', 'Strada Receptiei, nr. 2, Bucuresti', '2345678901234', 'Maria', 'Ionescu', '0720345678', 'maria.ionescu@email.com', 'RO234567890123456789012345678901', '2022-02-01', 'utilizator'),
+    (1, 'Administratie', 'Strada Administratiei, nr. 1, Bucuresti', '1234567890123', 'Ion', 'Popescu', '0720123456', 'ion.popescu@email.com', 'RO123456789012345678901234567890', '2022-01-01', 'super_admin'),
+    (2, 'Medical', 'Strada Receptiei, nr. 2, Bucuresti', '2345678901234', 'Maria', 'Ionescu', '0720345678', 'maria.ionescu@email.com', 'RO234567890123456789012345678901', '2022-02-01', 'utilizator'),
     (3, 'Resurse Umane', 'Strada Resurselor, nr. 3, Bucuresti', '3456789012345', 'Alex', 'Georgescu', '0720567890', 'alex.georgescu@email.com', 'RO345678901234567890123456789012', '2022-03-01', 'utilizator'),
     (4, 'Economic', 'Strada Comertului, nr. 4, Bucuresti', '4567890123456', 'Elena', 'Dumitrescu', '0720789012', 'elena.dumitrescu@email.com', 'RO456789012345678901234567890123', '2022-04-01', 'utilizator'),
-    (5, 'Medic', 'Strada Medicilor, nr. 5, Bucuresti', '5678901234567', 'Radu', 'Stoica', '0720901234', 'radu.stoica@email.com', 'RO567890123456789012345678901234', '2022-05-01', 'utilizator'),
-	(6, 'Medic', 'Strada Medicilor Alta, nr. 5, Cluj', '3213131313154', 'Ionel', 'Marcel', '0720903214', 'ionel.marcel@email.com', 'RO567890123456789012345678901234', '2020-05-01', 'utilizator');
+    (5, 'Medical', 'Strada Medicilor, nr. 5, Bucuresti', '5678901234567', 'Radu', 'Stoica', '0720901234', 'radu.stoica@email.com', 'RO567890123456789012345678901234', '2022-05-01', 'utilizator'),
+	(6, 'Medical', 'Strada Medicilor Alta, nr. 5, Cluj', '3213131313154', 'Ionel', 'Marcel', '0720903214', 'ionel.marcel@email.com', 'RO567890123456789012345678901234', '2020-05-01', 'utilizator'),
+	(7, 'Medical', 'Strada Asistentilor, nr. 7, Cluj', '3213137846554', 'Pop', 'Ana', '0720928364', 'ana.pop@email.com', 'RO567890123459453826345678901234', '2010-04-02', 'utilizator');
 
     
 INSERT INTO program_functionare (duminica, luni, marti, miercuri, joi, vineri, sambata) VALUES
@@ -37,7 +39,8 @@ INSERT INTO policlinici (id_program_functionare, adresa, denumire) VALUES
     (3, 3, 'resurse_umane', 3500.00, 35),
     (4, 4, 'economic', 3000.00, 37),
     (5, 5, 'medic', 7000.00, 45),
-    (6, 3, 'medic', 9000.00, 40);
+    (6, 3, 'medic', 9000.00, 40),
+	(7, 3, 'asistent_medical', 8000.00, 30);
     
     INSERT INTO pacienti (nume, prenume) VALUES
     ('Popescu', 'Ana'),
