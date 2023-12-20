@@ -1,41 +1,20 @@
 package com.example.source.controller;
 
-import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
+import com.example.source.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.ResourceBundle;
 
-public class SceneResurseUmane implements Initializable {
-    @FXML
-    private Label labelNume;
-    @FXML
-    private Label labelPrenume;
-    @FXML
-    private Label labelDepartament;
-    @FXML
-    private Label labelAdresa;
-    @FXML
-    private Label labelCnp;
-    @FXML
-    private Label labelTelefon;
-    @FXML
-    private Label labelEmail;
-    @FXML
-    private Label labelIban;
-    @FXML
-    private Label labelDataAngajarii;
-    @FXML
-    private Button buttonLogOut;
+public class SceneResurseUmaneOld {
     @FXML
     private TextField inputTextField;
     @FXML
@@ -72,40 +51,13 @@ public class SceneResurseUmane implements Initializable {
         tabel.setItems(angajati);
     }
 
-    public void selecteazaAngajat(ActionEvent event) throws IOException {
+    public void functie(ActionEvent event) throws IOException {
         Angajat a = tabel.getSelectionModel().getSelectedItem();
         System.out.println(a);
-        try {
-            Model.switchToWindowOrare(event, a);
-        } catch (NullPointerException e) {
-            System.out.println(e);
-        }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        labelNume.setText(Model.getUtilizatorCurent().getNume());
-        labelPrenume.setText(Model.getUtilizatorCurent().getPrenume());
-        labelDepartament.setText(Model.getUtilizatorCurent().getDepartament());
-        labelAdresa.setText(Model.getUtilizatorCurent().getAdresa());
-        labelCnp.setText(Model.getUtilizatorCurent().getCnp());
-        labelTelefon.setText(Model.getUtilizatorCurent().getTelefon());
-        labelEmail.setText(Model.getUtilizatorCurent().getEmail());
-        labelIban.setText(Model.getUtilizatorCurent().getIban());
-        labelDataAngajarii.setText(Model.getUtilizatorCurent().getData_angajarii());
-        try {
-            angajati = Model.listaAngajati();
-            populateTabel();
-        } catch (SQLException e) {
-            System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
-            throw new RuntimeException(e);
-        }
-
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);
     }
-
 }

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="531.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneResurseUmaneOrar">
+   <children>
+      <Label fx:id="labelAngajat" alignment="CENTER" layoutX="139.0" layoutY="127.0" prefHeight="250.0" prefWidth="514.0" text="Label">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Button fx:id="butonInapoi" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="Inapoi la pagina principala" />
+   </children>
+</AnchorPane>

@@ -3,6 +3,7 @@ package com.example.source;
 import com.example.source.claseTabele.Angajat;
 import com.example.source.claseTabele.ContUtilizator;
 import com.example.source.claseTabele.Utilizator;
+import com.example.source.controller.SceneResurseUmaneOrar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -371,6 +372,27 @@ public class Model {
                 }
             }
         }
+    }
+
+    public static void switchToWindowOrare(ActionEvent event, Angajat a) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-resurse-umane-orar-view.fxml"));
+        root = loader.load();
+
+        SceneResurseUmaneOrar orar = loader.getController();
+        orar.setAngajatCurent(a);
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void goToMainMenu(ActionEvent event, String scenePath) throws IOException {
+        root = FXMLLoader.load(Model.class.getResource(scenePath));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public static Utilizator getUtilizatorCurent() {
