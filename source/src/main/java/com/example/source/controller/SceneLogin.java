@@ -37,17 +37,16 @@ public class SceneLogin {
 
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.UTILIZATOR) == 0) {
                 Model.extrageAngajatDupaUtilizator(Model.getUtilizatorCurent().getId());
-                if(Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
+                if (Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
                     switchToSceneMedic(event);
-                }
-                else if(Model.getAngajatCurent().getFunctie().compareTo(Model.RESURSE_UMANE) == 0) {
+                } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.RESURSE_UMANE) == 0) {
                     switchToSceneResurseUmane(event);
-                }
-                else if(Model.getAngajatCurent().getFunctie().compareTo(Model.ECONOMIC) == 0){
+                } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.ECONOMIC) == 0) {
                     switchToSceneEconomic(event);
-                }
-                else if(Model.getAngajatCurent().getFunctie().compareTo(Model.ASISTENT_MEDICAL) == 0) {
+                } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.ASISTENT_MEDICAL) == 0) {
                     switchToSceneAsistentMedical(event);
+                } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.RECEPTIONER) == 0) {
+                    switchToSceneReceptioner(event);
                 }
             }
         } else if (textFieldUsername.getText().isEmpty() && passwordFieldPassword.getText().isEmpty()) {
@@ -83,6 +82,14 @@ public class SceneLogin {
 
     public void switchToSceneAsistentMedical(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-asistent-medical-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToSceneReceptioner(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-receptioner-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
