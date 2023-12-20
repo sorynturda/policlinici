@@ -8,53 +8,54 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="554.0" prefWidth="623.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneResurseUmaneOrar">
+<BorderPane prefHeight="428.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneResurseUmaneOrar">
    <top>
       <AnchorPane prefHeight="116.0" prefWidth="623.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelAngajat" alignment="CENTER" layoutX="227.0" layoutY="33.0" prefHeight="50.0" prefWidth="330.0" text="Label">
+            <Label fx:id="labelAngajat" alignment="CENTER" layoutX="227.0" layoutY="33.0" prefHeight="50.0" prefWidth="374.0" text="Label">
                <font>
-                  <Font size="33.0" />
+                  <Font size="21.0" />
                </font>
             </Label>
             <Button fx:id="butonInapoi" layoutX="14.0" layoutY="42.0" mnemonicParsing="false" onAction="#goBack" text="Inapoi la pagina principala" />
          </children>
       </AnchorPane>
    </top>
-   <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   <bottom>
+      <AnchorPane prefHeight="215.0" prefWidth="642.0" BorderPane.alignment="CENTER">
          <children>
             <ChoiceBox fx:id="alegeZi" layoutX="25.0" layoutY="26.0" prefWidth="150.0" />
-            <Label fx:id="labelZiSelectata" alignment="CENTER" layoutX="348.0" layoutY="19.0" prefHeight="42.0" prefWidth="129.0" text="ZiuaSelectata">
+            <Label fx:id="labelZiSelectata" alignment="CENTER" layoutX="320.0" layoutY="14.0" prefHeight="42.0" prefWidth="147.0" text="Ziua Selectata">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="oraInceput" layoutX="337.0" layoutY="75.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="oraSfarsit" layoutX="337.0" layoutY="122.0" prefWidth="150.0" />
-            <Label fx:id="labelOraInceput" contentDisplay="TOP" layoutX="193.0" layoutY="68.0" prefHeight="42.0" prefWidth="129.0" text="Ora inceput:">
+            <ChoiceBox fx:id="oraInceput" layoutX="319.0" layoutY="70.0" prefWidth="150.0" />
+            <ChoiceBox fx:id="oraSfarsit" layoutX="319.0" layoutY="117.0" prefWidth="150.0" />
+            <Label fx:id="labelOraInceput" contentDisplay="TOP" layoutX="175.0" layoutY="63.0" prefHeight="42.0" prefWidth="129.0" text="Ora inceput:">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <Label fx:id="labelOraSfarsit" contentDisplay="TOP" layoutX="193.0" layoutY="115.0" prefHeight="42.0" prefWidth="129.0" text="Ora sfarsit:">
+            <Label fx:id="labelOraSfarsit" contentDisplay="TOP" layoutX="175.0" layoutY="110.0" prefHeight="42.0" prefWidth="129.0" text="Ora sfarsit:">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
+            <Button fx:id="butonOrar" layoutX="530.0" layoutY="69.0" mnemonicParsing="false" onAction="#butonOrarApasat" text="Orar" />
          </children>
       </AnchorPane>
-   </center>
-   <bottom>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+   </bottom>
+   <center>
+      <AnchorPane prefHeight="211.0" prefWidth="623.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" layoutX="30.0" layoutY="21.0" prefHeight="42.0" prefWidth="129.0" text="Concediu">
                <font>
                   <Font size="22.0" />
                </font>
             </Label>
-            <DatePicker fx:id="concediuInceput" layoutX="331.0" layoutY="29.0" />
-            <DatePicker fx:id="concediuSfarsit" layoutX="331.0" layoutY="87.0" />
+            <DatePicker fx:id="concediuInceput" layoutX="321.0" layoutY="29.0" />
+            <DatePicker fx:id="concediuSfarsit" layoutX="321.0" layoutY="86.0" />
             <Label fx:id="labelZiInceput" contentDisplay="TOP" layoutX="182.0" layoutY="21.0" prefHeight="42.0" prefWidth="129.0" text="Zi inceput:">
                <font>
                   <Font size="22.0" />
@@ -65,7 +66,8 @@
                   <Font size="22.0" />
                </font>
             </Label>
+            <Button fx:id="butonConcediu" layoutX="526.0" layoutY="26.0" mnemonicParsing="false" onAction="#butonConcediuApasat" text="Concediu" />
          </children>
       </AnchorPane>
-   </bottom>
+   </center>
 </BorderPane>

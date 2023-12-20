@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
@@ -20,6 +21,10 @@ public class SceneResurseUmaneOrar implements Initializable {
     private Label labelAngajat;
     @FXML
     private Button butonInapoi;
+    @FXML
+    private Button butonConcediu;
+    @FXML
+    private Button butonOrar;
     @FXML
     private ChoiceBox<String> alegeZi;
     @FXML
@@ -48,7 +53,7 @@ public class SceneResurseUmaneOrar implements Initializable {
 
     public void setAngajatCurent(Angajat angajatCurent) {
         this.angajatCurent = angajatCurent;
-        labelAngajat.setText(angajatCurent.getNume() + " " + angajatCurent.getPrenume());
+        labelAngajat.setText(angajatCurent.getFunctie() + ": " + angajatCurent.getNume() + " " + angajatCurent.getPrenume());
         setOrar(angajatCurent.getFunctie().trim().equals("medic"));
     }
 
@@ -70,6 +75,12 @@ public class SceneResurseUmaneOrar implements Initializable {
         oraSfarsit.setValue(ore[DIFERENTA_ORE]);
     }
 
+    public void butonConcediuApasat(ActionEvent event){
+        System.out.println("concedoi: " + angajatCurent);
+    }
+    public void butonOrarApasat(ActionEvent event){
+        System.out.println("orar: " + angajatCurent);
+    }
     public void setOrar(boolean value) {
         alegeZi.setVisible(value);
         labelZiSelectata.setVisible(value);
@@ -77,6 +88,7 @@ public class SceneResurseUmaneOrar implements Initializable {
         labelOraSfarsit.setVisible(value);
         oraSfarsit.setVisible(value);
         oraInceput.setVisible(value);
+        butonOrar.setVisible(value);
         if (value) {
             alegeZi.setValue(zile[0]);
             String zi = alegeZi.getValue();
