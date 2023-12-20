@@ -31,10 +31,21 @@ public class SceneLogin {
 
     public void switchToSceneUser(ActionEvent event) throws IOException, SQLException {
         if (Model.logIn(textFieldUsername.getText(), passwordFieldPassword.getText())) {
-            if (textFieldUsername.getText().equals("resurseumane")) {
-                switchToSceneResurseUmane(event);
-            } else {
-                switchToSceneMedic(event);
+            if (Model.getUtilizatorCurent().getRol().compareTo(Model.SUPERADMIN) == 0) {
+
+            } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.ADMIN) == 0) {
+
+            } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.UTILIZATOR) == 0) {
+                Model.extrageAngajatDupaUtilizator(Model.getUtilizatorCurent().getId());
+                if(Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
+                    switchToSceneMedic(event);
+                }
+                if(Model.getAngajatCurent().getFunctie().compareTo(Model.RESURSE_UMANE) == 0) {
+                    switchToSceneResurseUmane(event);
+                }
+                if(Model.getAngajatCurent().getFunctie().compareTo(Model.ECONOMIC) == 0){
+                    switchToSceneEconomic(event);
+                }
             }
         } else if (textFieldUsername.getText().isEmpty() && passwordFieldPassword.getText().isEmpty()) {
             labelErrorLogIn.setText("Introduceti numele de utilizator si parola!");
@@ -53,6 +64,14 @@ public class SceneLogin {
 
     public void switchToSceneResurseUmane(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-resurse-umane-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public void switchToSceneEconomic(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-economic-view.fxml"));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);

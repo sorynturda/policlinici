@@ -12,3 +12,10 @@ BEGIN
     select * from utilizatori where id_cont = id;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CautaAngajatDupaUtilizator(IN id INT)
+BEGIN
+    select * from angajati where id_utilizator = id;
+END //
+DELIMITER ;

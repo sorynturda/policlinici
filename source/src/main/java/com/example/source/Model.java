@@ -16,6 +16,14 @@ import java.io.IOException;
 import java.sql.*;
 
 public class Model {
+    public static final String SUPERADMIN = "super_admin";
+    public static final String ADMIN = "admin";
+    public static final String UTILIZATOR = "utilizator";
+    public static final String MEDIC = "medic";
+    public static final String ASISTENT_MEDICAL = "asistent_medical";
+    public static final String RECEPTIONER = "receptioner";
+    public static final String ECONOMIC = "economic";
+    public static final String RESURSE_UMANE = "resurse_umane";
     private static ContUtilizator contCurent;
     private static Utilizator utilizatorCurent;
     private static Angajat angajatCurent;
@@ -299,7 +307,77 @@ public class Model {
         }
     }
 
+    public static void extrageAngajatDupaUtilizator(int id) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call CautaAngajatDupaUtilizator(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id));
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next())
+                angajatCurent = new Angajat(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_utilizator"),
+                        resultSet.getInt("id_policlinica"),
+                        utilizatorCurent.getNume(),
+                        utilizatorCurent.getPrenume(),
+                        resultSet.getString("functie"),
+                        resultSet.getInt("salariu_negociat"),
+                        resultSet.getInt("numar_ore")
+                );
+            System.out.println(angajatCurent);
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
     public static Utilizator getUtilizatorCurent() {
         return utilizatorCurent;
+    }
+
+    public static Angajat getAngajatCurent() {
+        return angajatCurent;
     }
 }

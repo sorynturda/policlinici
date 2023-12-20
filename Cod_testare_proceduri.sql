@@ -22,3 +22,4 @@ CALL InserareServiciiSpecialitateMedic(1, 1);
 CALL ExtrageServicii();
 CALL ExtrageOrarMedic(1);
 CALL CautaCont("superadmin", "parola123");
+CALL CautaAngajatDupaUtilizator(1);
