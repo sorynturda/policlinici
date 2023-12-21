@@ -15,6 +15,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 
 public class Model {
     public static final String SUPERADMIN = "super_admin";
@@ -277,6 +279,132 @@ public class Model {
                         resultSet.getString("rol")
                 );
             System.out.println(utilizatorCurent);
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static boolean concediuCorect(int id_angajat, Date ziInceput, Date ziSfarsit) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        boolean posibil = true;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT  id, concedii.id_angajat, concedii.data_inceput, concedii.data_sfarsit FROM concedii " +
+                    "WHERE concedii.id_angajat = " + id_angajat +
+                    " AND id = (SELECT max(id) FROM concedii WHERE id_angajat = " + id_angajat + ")";
+
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                id_angajat = resultSet.getInt("id_angajat");
+                Date data_inceput = resultSet.getDate("data_inceput");
+                Date data_sfarsit = resultSet.getDate("data_sfarsit");
+                if(ziInceput.before(data_sfarsit) || ziInceput.equals(data_sfarsit)) {
+                    posibil = false;
+                    System.out.println(ziInceput + "    " + data_sfarsit);
+                }
+                System.out.println(id + " " + id_angajat + " " + data_inceput + " " + data_sfarsit);
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return posibil;
+    }
+
+    public static void adaugaConcediu(int id_angajat, LocalDate ziInceput, LocalDate ziSfarsit) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call SeteazaConcediu(?, ?, ?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id_angajat));
+            callableStatement.setString(2, ziInceput.toString());
+            callableStatement.setString(3, ziSfarsit.toString());
+            resultSet = callableStatement.executeQuery();
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
             sqlex.printStackTrace(System.err);

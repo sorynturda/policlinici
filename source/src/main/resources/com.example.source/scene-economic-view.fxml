@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -110,9 +113,31 @@
                     </content>
                 </Tab>
                 <Tab text="ANGAJATI">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="nume" prefWidth="172.00000303983688" text="Nume" />
+                              <TableColumn fx:id="prenume" prefWidth="149.6000213623047" text="Prenume" />
+                              <TableColumn fx:id="functie" prefWidth="165.59991455078125" text="Functie" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="inputTextField" layoutX="170.0" layoutY="26.0" prefHeight="24.0" prefWidth="146.0" />
+                              <Label layoutX="46.0" layoutY="23.0" prefHeight="31.0" prefWidth="116.0" text="Cauta angajat" />
+                              <Button layoutX="348.0" layoutY="21.0" minWidth="37.0" mnemonicParsing="false" onAction="#cautaAngajat" prefHeight="35.0" prefWidth="50.0" text="cauta" />
+                              <Button layoutX="415.0" layoutY="21.0" minWidth="47.0" mnemonicParsing="false" onAction="#selecteazaAngajat" prefHeight="36.0" prefWidth="47.0" text="select" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
                 </Tab>
             <Tab text="POLICLINICI">
                <content>
