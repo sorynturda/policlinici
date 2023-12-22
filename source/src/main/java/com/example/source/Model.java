@@ -1,9 +1,11 @@
 package com.example.source;
 
 import com.example.source.claseTabele.Angajat;
+import com.example.source.claseTabele.ConcediuT;
 import com.example.source.claseTabele.ContUtilizator;
 import com.example.source.claseTabele.Utilizator;
-import com.example.source.controller.SceneResurseUmaneOrar;
+import com.example.source.controller.ResurseUmane.SceneConcediu;
+import com.example.source.controller.ResurseUmane.SceneOrarConcediu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -16,7 +18,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.chrono.ChronoLocalDate;
 
 public class Model {
     public static final String SUPERADMIN = "super_admin";
@@ -30,6 +31,7 @@ public class Model {
     private static ContUtilizator contCurent;
     private static Utilizator utilizatorCurent;
     private static Angajat angajatCurent;
+    private static Angajat angajatSelectat;
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
@@ -119,7 +121,6 @@ public class Model {
         ResultSet resultSet = null;
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
-        ContUtilizator contUtilizator = null;
 
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
@@ -184,7 +185,6 @@ public class Model {
         ResultSet resultSet = null;
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
-        ContUtilizator contUtilizator = null;
 
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
@@ -239,6 +239,69 @@ public class Model {
             }
         }
         return angajati;
+    }
+
+    public static ObservableList<ConcediuT> listaConcedii(int id_angajat) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<ConcediuT> concedii = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call ExtrageConcediiReadOnly(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id_angajat));
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                Date data_inceput = resultSet.getDate("data_inceput");
+                Date data_sfarsit = resultSet.getDate("data_sfarsit");
+                System.out.println(id + " " + " " + id_angajat + " " + " " + data_inceput + " " + " " + data_sfarsit);
+                concedii.add(new ConcediuT(id, id_angajat, data_inceput, data_sfarsit));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return concedii;
     }
 
     public static void extrageUtilizator(int id) {
@@ -337,12 +400,12 @@ public class Model {
 
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 id_angajat = resultSet.getInt("id_angajat");
                 Date data_inceput = resultSet.getDate("data_inceput");
                 Date data_sfarsit = resultSet.getDate("data_sfarsit");
-                if(ziInceput.before(data_sfarsit) || ziInceput.equals(data_sfarsit)) {
+                if (ziInceput.before(data_sfarsit) || ziInceput.equals(data_sfarsit)) {
                     posibil = false;
                     System.out.println(ziInceput + "    " + data_sfarsit);
                 }
@@ -503,11 +566,26 @@ public class Model {
     }
 
     public static void switchToWindowOrare(ActionEvent event, Angajat a) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-resurse-umane-orar-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-resurse-umane-orar-concediu-view.fxml"));
         root = loader.load();
 
-        SceneResurseUmaneOrar orar = loader.getController();
-        orar.setAngajatCurent(a);
+        SceneOrarConcediu orar = loader.getController();
+        orar.setAngajatSelectat(a);
+        angajatSelectat = a;
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void switchToWindowConcedii(ActionEvent event, Angajat a) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-resurse-umane-concedii-view.fxml"));
+        root = loader.load();
+
+        SceneConcediu concediu = loader.getController();
+        concediu.setAngajatSelectat(a);
+        angajatSelectat = a;
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
@@ -523,11 +601,23 @@ public class Model {
         stage.show();
     }
 
+    public static void goToOrarConcediu(ActionEvent event, String scenePath) throws IOException {
+        root = FXMLLoader.load(Model.class.getResource(scenePath));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public static Utilizator getUtilizatorCurent() {
         return utilizatorCurent;
     }
 
     public static Angajat getAngajatCurent() {
         return angajatCurent;
+    }
+
+    public static Angajat getAngajatSelectat() {
+        return angajatSelectat;
     }
 }

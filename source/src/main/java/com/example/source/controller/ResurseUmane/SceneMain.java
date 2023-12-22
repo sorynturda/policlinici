@@ -1,4 +1,4 @@
-package com.example.source.controller;
+package com.example.source.controller.ResurseUmane;
 
 import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
@@ -15,7 +15,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-public class SceneResurseUmane implements Initializable {
+public class SceneMain implements Initializable {
     @FXML
     private Label labelNume;
     @FXML
@@ -52,6 +52,26 @@ public class SceneResurseUmane implements Initializable {
     private TableColumn<Angajat, String> functie;
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        labelNume.setText(Model.getUtilizatorCurent().getNume());
+        labelPrenume.setText(Model.getUtilizatorCurent().getPrenume());
+        labelDepartament.setText(Model.getUtilizatorCurent().getDepartament());
+        labelAdresa.setText(Model.getUtilizatorCurent().getAdresa());
+        labelCnp.setText(Model.getUtilizatorCurent().getCnp());
+        labelTelefon.setText(Model.getUtilizatorCurent().getTelefon());
+        labelEmail.setText(Model.getUtilizatorCurent().getEmail());
+        labelIban.setText(Model.getUtilizatorCurent().getIban());
+        labelDataAngajarii.setText(Model.getUtilizatorCurent().getData_angajarii());
+        try {
+            angajati = Model.listaAngajati();
+            populateTabel();
+        } catch (SQLException e) {
+            System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
+            throw new RuntimeException(e);
+        }
+    }
+
     public void cautaAngajat(ActionEvent event) throws IOException, SQLException {
         String input = inputTextField.getText().trim();
         if (!input.isEmpty()) {
@@ -80,27 +100,6 @@ public class SceneResurseUmane implements Initializable {
         } catch (NullPointerException e) {
             System.out.println(e);
         }
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        labelNume.setText(Model.getUtilizatorCurent().getNume());
-        labelPrenume.setText(Model.getUtilizatorCurent().getPrenume());
-        labelDepartament.setText(Model.getUtilizatorCurent().getDepartament());
-        labelAdresa.setText(Model.getUtilizatorCurent().getAdresa());
-        labelCnp.setText(Model.getUtilizatorCurent().getCnp());
-        labelTelefon.setText(Model.getUtilizatorCurent().getTelefon());
-        labelEmail.setText(Model.getUtilizatorCurent().getEmail());
-        labelIban.setText(Model.getUtilizatorCurent().getIban());
-        labelDataAngajarii.setText(Model.getUtilizatorCurent().getData_angajarii());
-        try {
-            angajati = Model.listaAngajati();
-            populateTabel();
-        } catch (SQLException e) {
-            System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
-            throw new RuntimeException(e);
-        }
-
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {

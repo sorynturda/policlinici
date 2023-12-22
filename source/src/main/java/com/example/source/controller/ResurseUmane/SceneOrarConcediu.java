@@ -1,4 +1,4 @@
-package com.example.source.controller;
+package com.example.source.controller.ResurseUmane;
 
 import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
@@ -9,7 +9,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import org.controlsfx.control.action.Action;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,7 +18,7 @@ import java.util.ResourceBundle;
 
 import static java.time.temporal.ChronoUnit.DAYS;
 
-public class SceneResurseUmaneOrar implements Initializable {
+public class SceneOrarConcediu implements Initializable {
 
     @FXML
     private Label labelAngajat;
@@ -29,6 +28,8 @@ public class SceneResurseUmaneOrar implements Initializable {
     private Button butonConcediu;
     @FXML
     private Button butonOrar;
+    @FXML
+    private Button butonAfiseazaConcediu;
     @FXML
     private ChoiceBox<String> alegeZi;
     @FXML
@@ -55,12 +56,12 @@ public class SceneResurseUmaneOrar implements Initializable {
     private String[] ore = new String[] {"07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"};
     private static int DIFERENTA_ORE = 12;
     private static int ZILE_MAXIME_CONCEDIU = 14;
-    private Angajat angajatCurent;
+    private Angajat angajatSelectat;
 
-    public void setAngajatCurent(Angajat angajatCurent) {
-        this.angajatCurent = angajatCurent;
-        labelAngajat.setText(angajatCurent.getFunctie() + ": " + angajatCurent.getNume() + " " + angajatCurent.getPrenume());
-        setOrar(angajatCurent.getFunctie().trim().equals("medic"));
+    public void setAngajatSelectat(Angajat angajatSelectat) {
+        this.angajatSelectat = angajatSelectat;
+        labelAngajat.setText(angajatSelectat.getFunctie() + ": " + angajatSelectat.getNume() + " " + angajatSelectat.getPrenume());
+        setOrar(angajatSelectat.getFunctie().trim().equals("medic"));
     }
 
     public void goBack(ActionEvent event) throws IOException {
@@ -70,8 +71,8 @@ public class SceneResurseUmaneOrar implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        angajatCurent = Model.getAngajatCurent();
-        setOrar(angajatCurent.getFunctie().trim().equals("medic"));
+        angajatSelectat = Model.getAngajatCurent();
+        setOrar(angajatSelectat.getFunctie().trim().equals("medic"));
         labelConfirmareConcediu.setText("");
     }
 
@@ -85,12 +86,14 @@ public class SceneResurseUmaneOrar implements Initializable {
     public void butonConcediuApasat(ActionEvent event) {
         LocalDate ziInceput = concediuInceput.getValue();
         LocalDate ziSfarsit = concediuSfarsit.getValue();
+        if(ziSfarsit == null || ziSfarsit == null)
+            return;
         long nrZileConcediu = DAYS.between(ziInceput, ziSfarsit);
         if (ziSfarsit.isAfter(ziInceput) && (int) nrZileConcediu <= ZILE_MAXIME_CONCEDIU){
             System.out.println(ziInceput + "\n" + ziSfarsit);
             System.out.println(nrZileConcediu);
-            if(Model.concediuCorect(angajatCurent.getId(), Date.valueOf(ziInceput), Date.valueOf(ziSfarsit))) {
-                Model.adaugaConcediu(angajatCurent.getId(), ziInceput, ziSfarsit);
+            if(Model.concediuCorect(angajatSelectat.getId(), Date.valueOf(ziInceput), Date.valueOf(ziSfarsit))) {
+                Model.adaugaConcediu(angajatSelectat.getId(), ziInceput, ziSfarsit);
                 labelConfirmareConcediu.setText("Succes!");
             }
             else{
@@ -100,7 +103,11 @@ public class SceneResurseUmaneOrar implements Initializable {
     }
 
     public void butonOrarApasat(ActionEvent event) {
-        System.out.println("orar: " + angajatCurent);
+        System.out.println("orar: " + angajatSelectat);
+    }
+
+    public void afiseazaConcediu(ActionEvent event) throws IOException {
+        Model.switchToWindowConcedii(event, angajatSelectat);
     }
 
     public void setOrar(boolean value) {

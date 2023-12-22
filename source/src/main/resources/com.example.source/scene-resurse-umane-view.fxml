@@ -15,7 +15,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0"
             prefWidth="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.source.controller.SceneResurseUmane">
+            fx:controller="com.example.source.controller.ResurseUmane.SceneMain">
     <left>
         <AnchorPane prefHeight="450.0" prefWidth="263.0" style="-fx-background-color: #66ffcc;"
                     BorderPane.alignment="CENTER">
@@ -175,7 +175,8 @@
                                                 onAction="#cautaAngajat" prefHeight="35.0" prefWidth="50.0"
                                                 text="cauta"/>
                                         <Button layoutX="415.0" layoutY="21.0" minWidth="47.0" mnemonicParsing="false"
-                                                onAction="#selecteazaAngajat" prefHeight="36.0" prefWidth="47.0" text="select"/>
+                                                onAction="#selecteazaAngajat" prefHeight="36.0" prefWidth="47.0"
+                                                text="select"/>
                                     </children>
                                 </AnchorPane>
                             </top>

@@ -1,4 +1,4 @@
-package com.example.source.controller;
+package com.example.source.controller.ResurseUmane;
 
 import com.example.source.claseTabele.Angajat;
 import com.example.source.Model;
@@ -14,7 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.sql.SQLException;
 
-public class SceneResurseUmaneOld {
+public class SceneMainOld {
     @FXML
     private TextField inputTextField;
     @FXML

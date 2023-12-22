@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="428.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneResurseUmaneOrar">
+<BorderPane prefHeight="428.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.ResurseUmane.SceneOrarConcediu">
    <top>
       <AnchorPane prefHeight="116.0" prefWidth="623.0" BorderPane.alignment="CENTER">
          <children>
@@ -72,6 +72,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
+            <Button fx:id="butonAfiseazaConcediu" layoutX="46.0" layoutY="73.0" mnemonicParsing="false" onAction="#afiseazaConcediu" text="Afiseaza" />
          </children>
       </AnchorPane>
    </center>
