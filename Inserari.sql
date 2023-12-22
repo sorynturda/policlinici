@@ -82,4 +82,10 @@ VALUES
 -- VALUES  (5, 1, "medic", 6969.69, 55),
 -- 	(4, 1, "super erou", 6969.69, 55);
 
+INSERT INTO servicii_specialitate VALUES
+	(1, 3),
+	(1, 4),
+	(1, 5);
+
+
  
