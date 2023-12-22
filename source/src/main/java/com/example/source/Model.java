@@ -1,9 +1,6 @@
 package com.example.source;
 
-import com.example.source.claseTabele.Angajat;
-import com.example.source.claseTabele.ConcediuT;
-import com.example.source.claseTabele.ContUtilizator;
-import com.example.source.claseTabele.Utilizator;
+import com.example.source.claseTabele.*;
 import com.example.source.controller.ResurseUmane.SceneConcediu;
 import com.example.source.controller.ResurseUmane.SceneOrarConcediu;
 import javafx.collections.FXCollections;
@@ -304,6 +301,67 @@ public class Model {
         return concedii;
     }
 
+    public static ObservableList<Pacient> listaPacienti() throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call ExtragePacienti()}";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nume = resultSet.getString("nume");
+                String prenume = resultSet.getString("prenume");
+                pacienti.add(new Pacient(id, nume, prenume));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return pacienti;
+    }
+
     public static void extrageUtilizator(int id) {
         Connection connection = null;
         Statement selectStatement = null;
@@ -594,14 +652,6 @@ public class Model {
     }
 
     public static void goToMainMenu(ActionEvent event, String scenePath) throws IOException {
-        root = FXMLLoader.load(Model.class.getResource(scenePath));
-        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public static void goToOrarConcediu(ActionEvent event, String scenePath) throws IOException {
         root = FXMLLoader.load(Model.class.getResource(scenePath));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
