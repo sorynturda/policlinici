@@ -132,12 +132,12 @@ create table if not exists orar_medici(
     ora_sfarsit time not null
 );
 
-create table if not exists servicii_oferite_policlinici(
+create table if not exists servicii_oferite_policlinica(
     id_policlinica int not null,
     id_serviciu int not null
 );
 
-create table if not exists servicii_specialitati(
+create table if not exists servicii_specialitate(
     id_specialitate int not null,
     id_serviciu int not null
 );
@@ -151,9 +151,4 @@ create table if not exists servicii_oferite_raport(
     id_raport int not null,
     id_serviciu int not null,
     investigatii varchar(500) not null
-);
-
-create table if not exists servicii_specialitate_medic(
-    id_serviciu int not null,
-    id_specialitate int not null
 );

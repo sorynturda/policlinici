@@ -1,11 +1,11 @@
 ALTER TABLE policlinici
 ADD FOREIGN KEY (id_program_functionare) REFERENCES program_functionare(id);
 
-ALTER TABLE servicii_oferite_policlinici
+ALTER TABLE servicii_oferite_policlinica
 ADD FOREIGN KEY (id_policlinica) REFERENCES policlinici(id),
 ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);
 
-ALTER TABLE servicii_specialitati
+ALTER TABLE servicii_specialitate
 ADD FOREIGN KEY (id_specialitate) REFERENCES specialitati(id),
 ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);
 
@@ -15,10 +15,6 @@ ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);
 
 ALTER TABLE servicii_oferite_raport
 ADD FOREIGN KEY (id_raport) REFERENCES rapoarte(id),
-ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);
-
-ALTER TABLE servicii_specialitate_medic
-ADD FOREIGN KEY (id_serviciu) REFERENCES specialitati(id),
 ADD FOREIGN KEY (id_serviciu) REFERENCES servicii(id);
 
 ALTER TABLE specialitati
