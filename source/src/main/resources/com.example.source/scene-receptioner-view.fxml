@@ -45,7 +45,7 @@
             <tabs>
                 <Tab text="DETALII CONT">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #d1e0e0;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #e6e6ff;">
                             <children>
                                 <Label fx:id="labelDepartament" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                     <font>
@@ -125,7 +125,7 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #e6ffff;" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="id" prefWidth="128.0" text="id" visible="false" />
                               <TableColumn fx:id="nume" editable="false" prefWidth="242.0" text="Nume" />
@@ -134,12 +134,21 @@
                         </TableView>
                      </center>
                      <top>
-                        <AnchorPane prefHeight="77.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #99ddff;" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField fx:id="inputTextField" layoutX="170.0" layoutY="26.0" prefHeight="24.0" prefWidth="146.0" />
-                              <Label layoutX="46.0" layoutY="23.0" prefHeight="31.0" prefWidth="116.0" text="Cauta pacient" />
-                              <Button layoutX="348.0" layoutY="21.0" minWidth="37.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="50.0" text="cauta" />
-                              <Button layoutX="415.0" layoutY="21.0" minWidth="47.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="47.0" text="select" />
+                              <TextField fx:id="inputTextField" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
+                              <Label alignment="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENT:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
                            </children>
                         </AnchorPane>
                      </top>

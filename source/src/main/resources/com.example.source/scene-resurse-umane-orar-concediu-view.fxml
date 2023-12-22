@@ -8,71 +8,83 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="428.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.ResurseUmane.SceneOrarConcediu">
+<BorderPane prefHeight="410.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.ResurseUmane.SceneOrarConcediu">
    <top>
-      <AnchorPane prefHeight="116.0" prefWidth="623.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="95.0" prefWidth="630.0" style="-fx-background-color: #99e6ff;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelAngajat" alignment="CENTER" layoutX="227.0" layoutY="33.0" prefHeight="50.0" prefWidth="374.0" text="Label">
+            <Label fx:id="labelAngajat" alignment="CENTER" layoutX="117.0" layoutY="28.0" prefHeight="60.0" prefWidth="500.0" text="Label">
                <font>
-                  <Font size="21.0" />
+                  <Font size="36.0" />
                </font>
             </Label>
-            <Button fx:id="butonInapoi" layoutX="14.0" layoutY="42.0" mnemonicParsing="false" onAction="#goBack" text="Inapoi la pagina principala" />
+            <Button fx:id="butonInapoi" layoutX="27.0" layoutY="28.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ffffff;" text="&lt; INAPOI">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </top>
    <bottom>
-      <AnchorPane prefHeight="215.0" prefWidth="642.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="180.0" prefWidth="630.0" style="-fx-background-color: #e6f7ff;" BorderPane.alignment="CENTER">
          <children>
-            <ChoiceBox fx:id="alegeZi" layoutX="25.0" layoutY="26.0" prefWidth="150.0" />
-            <Label fx:id="labelZiSelectata" alignment="CENTER" layoutX="320.0" layoutY="14.0" prefHeight="42.0" prefWidth="147.0" text="Ziua Selectata">
+            <ChoiceBox fx:id="alegeZi" layoutX="229.0" layoutY="29.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+            <Label fx:id="labelZiSelectata" alignment="CENTER" layoutX="67.0" layoutY="23.0" prefHeight="40.0" prefWidth="140.0" text="ZI SELECTATA:">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <ChoiceBox fx:id="oraInceput" layoutX="319.0" layoutY="70.0" prefWidth="150.0" />
-            <ChoiceBox fx:id="oraSfarsit" layoutX="319.0" layoutY="117.0" prefWidth="150.0" />
-            <Label fx:id="labelOraInceput" contentDisplay="TOP" layoutX="175.0" layoutY="63.0" prefHeight="42.0" prefWidth="129.0" text="Ora inceput:">
+            <ChoiceBox fx:id="oraInceput" layoutX="229.0" layoutY="90.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+            <ChoiceBox fx:id="oraSfarsit" layoutX="229.0" layoutY="131.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+            <Label fx:id="labelOraInceput" alignment="CENTER" contentDisplay="TOP" layoutX="67.0" layoutY="85.0" prefHeight="40.0" prefWidth="140.0" text="ORA INCEPUT:">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="labelOraSfarsit" contentDisplay="TOP" layoutX="175.0" layoutY="110.0" prefHeight="42.0" prefWidth="129.0" text="Ora sfarsit:">
+            <Label fx:id="labelOraSfarsit" alignment="CENTER" contentDisplay="TOP" layoutX="67.0" layoutY="126.0" prefHeight="40.0" prefWidth="140.0" text="ORA SFARSIT:">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="butonOrar" layoutX="530.0" layoutY="69.0" mnemonicParsing="false" onAction="#butonOrarApasat" text="Orar" />
+            <Button fx:id="butonOrar" layoutX="495.0" layoutY="28.0" mnemonicParsing="false" onAction="#butonOrarApasat" prefHeight="70.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </bottom>
    <center>
-      <AnchorPane prefHeight="211.0" prefWidth="623.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="150.0" prefWidth="630.0" style="-fx-background-color: #b3e6ff;" BorderPane.alignment="CENTER">
          <children>
-            <Label alignment="CENTER" layoutX="30.0" layoutY="21.0" prefHeight="42.0" prefWidth="129.0" text="Concediu">
+            <Label alignment="CENTER" layoutX="11.0" layoutY="21.0" prefHeight="42.0" prefWidth="129.0" text="CONCEDIU">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <DatePicker fx:id="concediuInceput" layoutX="321.0" layoutY="29.0" />
-            <DatePicker fx:id="concediuSfarsit" layoutX="321.0" layoutY="86.0" />
-            <Label fx:id="labelZiInceput" contentDisplay="TOP" layoutX="182.0" layoutY="21.0" prefHeight="42.0" prefWidth="129.0" text="Zi inceput:">
+            <DatePicker fx:id="concediuInceput" layoutX="280.0" layoutY="27.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+            <DatePicker fx:id="concediuSfarsit" layoutX="280.0" layoutY="63.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+            <Label fx:id="labelZiInceput" alignment="CENTER" contentDisplay="TOP" layoutX="140.0" layoutY="22.0" prefHeight="40.0" prefWidth="120.0" text="ZI INCEPUT:">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Label fx:id="labelZiSfarsit" contentDisplay="TOP" layoutX="182.0" layoutY="78.0" prefHeight="42.0" prefWidth="129.0" text="Zi sfarsit:">
+            <Label fx:id="labelZiSfarsit" alignment="CENTER" contentDisplay="TOP" layoutX="140.0" layoutY="58.0" prefHeight="40.0" prefWidth="120.0" text="ZI SFARSIT:">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Label>
-            <Button fx:id="butonConcediu" layoutX="526.0" layoutY="26.0" mnemonicParsing="false" onAction="#butonConcediuApasat" text="Concediu" />
-            <Label fx:id="labelConfirmareConcediu" alignment="CENTER" layoutX="512.0" layoutY="78.0" prefHeight="35.0" prefWidth="113.0">
+            <Button fx:id="butonConcediu" layoutX="495.0" layoutY="22.0" mnemonicParsing="false" onAction="#butonConcediuApasat" prefHeight="70.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
+               </font></Button>
+            <Label fx:id="labelConfirmareConcediu" alignment="CENTER" layoutX="495.0" layoutY="92.0" prefHeight="30.0" prefWidth="100.0">
+               <font>
+                  <Font size="14.0" />
                </font>
             </Label>
-            <Button fx:id="butonAfiseazaConcediu" layoutX="46.0" layoutY="73.0" mnemonicParsing="false" onAction="#afiseazaConcediu" text="Afiseaza" />
+            <Button fx:id="butonAfiseazaConcediu" layoutX="36.0" layoutY="63.0" mnemonicParsing="false" onAction="#afiseazaConcediu" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="AFISEAZA">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
          </children>
       </AnchorPane>
    </center>

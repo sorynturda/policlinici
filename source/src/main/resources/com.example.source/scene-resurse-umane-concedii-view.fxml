@@ -8,30 +8,30 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="969.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.ResurseUmane.SceneConcediu">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="410.0" prefWidth="630.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.ResurseUmane.SceneConcediu">
    <center>
-      <AnchorPane prefHeight="439.0" prefWidth="1093.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="439.0" prefWidth="1093.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
          <children>
-            <TableView fx:id="tabel" layoutX="256.0" layoutY="41.0" prefHeight="336.0" prefWidth="458.0">
+            <TableView fx:id="tabel" layoutX="86.0" layoutY="6.0" prefHeight="291.0" prefWidth="457.0" style="-fx-background-color: #ffffff;">
               <columns>
-                <TableColumn fx:id="data_inceput" prefWidth="230.0" resizable="false" text="Data Inceput" />
-                <TableColumn fx:id="data_sfarsit" prefWidth="227.0" resizable="false" text="Data Sfarsit" />
+                <TableColumn fx:id="data_inceput" prefWidth="230.0" resizable="false" text="DATA INCEPUT" />
+                <TableColumn fx:id="data_sfarsit" prefWidth="227.0" resizable="false" text="DATA SFARSIT" />
               </columns>
             </TableView>
          </children>
       </AnchorPane>
    </center>
    <top>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="95.0" prefWidth="630.0" style="-fx-background-color: #99e6ff;" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="labelAngajat" alignment="CENTER" layoutX="192.0" layoutY="46.0" prefHeight="109.0" prefWidth="586.0" text="Label">
+            <Label fx:id="labelAngajat" alignment="CENTER" layoutX="117.0" layoutY="28.0" prefHeight="60.0" prefWidth="500.0" text="Label">
                <font>
-                  <Font size="33.0" />
+                  <Font size="36.0" />
                </font>
             </Label>
-            <Button fx:id="butonInapoi" layoutX="28.0" layoutY="21.0" mnemonicParsing="false" onAction="#goBack" prefHeight="89.0" prefWidth="205.0" text="Inapoi">
+            <Button fx:id="butonInapoi" layoutX="27.0" layoutY="28.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ffffff;" text="&lt; INAPOI">
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="14.0" />
                </font></Button>
          </children>
       </AnchorPane>
