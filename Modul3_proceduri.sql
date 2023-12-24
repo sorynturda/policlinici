@@ -111,3 +111,15 @@ BEGIN
     SELECT * FROM rapoarte;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE AfiseazaMedici()
+BEGIN
+    
+	SELECT m.id, m.id_angajat, m.cod_parafa, m.titlu_stiintific, m.post_didactic, m.venit_aditional, u.nume, u.prenume FROM utilizatori u, medici m
+	JOIN angajati a 
+	WHERE a.functie = "medic" AND a.id_utilizator = u.id and m.id_angajat = a.id
+
+
+END //
+DELIMITER ;
