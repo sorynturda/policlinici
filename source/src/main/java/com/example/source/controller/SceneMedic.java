@@ -86,6 +86,13 @@ public class SceneMedic implements Initializable {
         tableSpecialitati.setItems(specialitati);
     }
 
+    public void cautaPacient(ActionEvent event) throws IOException {
+
+    }
+
+    public void selecteazaPacient(ActionEvent event) throws IOException {
+
+    }
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);
