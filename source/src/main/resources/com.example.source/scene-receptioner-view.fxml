@@ -141,11 +141,11 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Label>
-                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" onAction="#cautaPacient" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>
-                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" onAction="#selecteazaPacient" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>

@@ -7,10 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -19,6 +16,8 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class SceneMain implements Initializable {
+    @FXML
+    private TextField inputTextField;
     @FXML
     private Label labelNume;
     @FXML
@@ -74,6 +73,27 @@ public class SceneMain implements Initializable {
         nume.setCellValueFactory(new PropertyValueFactory<>("nume"));
         prenume.setCellValueFactory(new PropertyValueFactory<>("prenume"));
         tabel.setItems(pacienti);
+    }
+
+    public void selecteazaPacient(ActionEvent event) throws IOException {
+        Pacient pacient = tabel.getSelectionModel().getSelectedItem();
+        System.out.println(pacient);
+        try {
+            Model.switchToWindowProgramare(event, pacient);
+        } catch (NullPointerException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void cautaPacient(ActionEvent event) throws IOException, SQLException {
+        String input = inputTextField.getText().trim();
+        if (!input.isEmpty()) {
+            pacienti = Model.cautaPacient(input);
+            populateTabel();
+        } else {
+            pacienti = Model.listaPacienti();
+            populateTabel();
+        }
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
