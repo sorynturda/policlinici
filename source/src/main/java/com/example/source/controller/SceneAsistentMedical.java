@@ -31,6 +31,10 @@ public class SceneAsistentMedical implements Initializable {
     @FXML
     private Label labelDataAngajarii;
     @FXML
+    private Label labelTip;
+    @FXML
+    private Label labelGrad;
+    @FXML
     private Button buttonLogOut;
 
     @Override
@@ -44,6 +48,8 @@ public class SceneAsistentMedical implements Initializable {
         labelEmail.setText(Model.getUtilizatorCurent().getEmail());
         labelIban.setText(Model.getUtilizatorCurent().getIban());
         labelDataAngajarii.setText(Model.getUtilizatorCurent().getData_angajarii());
+        labelTip.setText(Model.getAsistentCurent().getTip());
+        labelGrad.setText(Model.getAsistentCurent().getGrad());
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {

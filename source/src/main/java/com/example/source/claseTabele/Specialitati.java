@@ -1,13 +1,13 @@
 package com.example.source.claseTabele;
 
-public class AsistentMedical {
+public class Specialitati {
     private Integer id;
-    private String tip;
+    private String nume_specialitate;
     private String grad;
 
-    public AsistentMedical(Integer id, String tip, String grad) {
+    public Specialitati(Integer id, String nume_specialitate, String grad) {
         this.id = id;
-        this.tip = tip;
+        this.nume_specialitate = nume_specialitate;
         this.grad = grad;
     }
 
@@ -15,8 +15,8 @@ public class AsistentMedical {
         return id;
     }
 
-    public String getTip() {
-        return tip;
+    public String getNume_specialitate() {
+        return nume_specialitate;
     }
 
     public String getGrad() {
@@ -25,9 +25,9 @@ public class AsistentMedical {
 
     @Override
     public String toString() {
-        return "AsistentMedical{" +
+        return "Specialitati{" +
                 "id=" + id +
-                ", tip='" + tip + '\'' +
+                ", nume_specialitate='" + nume_specialitate + '\'' +
                 ", grad='" + grad + '\'' +
                 '}';
     }

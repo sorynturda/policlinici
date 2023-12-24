@@ -29,6 +29,8 @@ public class Model {
     private static Utilizator utilizatorCurent;
     private static Angajat angajatCurent;
     private static Angajat angajatSelectat;
+    private static Medic medicCurent;
+    private static AsistentMedical asistentCurent;
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
@@ -362,6 +364,68 @@ public class Model {
         return pacienti;
     }
 
+    public static ObservableList<Specialitati> listaSpecialitatiMedic(int id) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call AfiseazaSpecialitati(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id));
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id_specialitate = resultSet.getInt("id");
+                String nume_specialitate = resultSet.getString("nume_specialitate");
+                String grad = resultSet.getString("grad");
+                specialitati.add(new Specialitati(id_specialitate, nume_specialitate, grad));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return specialitati;
+    }
+
     public static void extrageUtilizator(int id) {
         Connection connection = null;
         Statement selectStatement = null;
@@ -623,6 +687,130 @@ public class Model {
         }
     }
 
+    public static void extrageAsistentMedical(int id) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call CautaAsistentMedical(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id));
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next())
+                asistentCurent = new AsistentMedical(
+                        resultSet.getInt("id"),
+                        resultSet.getString("tip"),
+                        resultSet.getString("grad")
+                );
+            System.out.println(asistentCurent);
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void extrageMedic(int id) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call CautaMedic(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id));
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next())
+                medicCurent = new Medic(
+                        resultSet.getInt("id"),
+                        resultSet.getString("cod_parafa"),
+                        resultSet.getString("titlu_stiintific"),
+                        resultSet.getString("post_didactic"),
+                        resultSet.getDouble("venit_aditional")
+                );
+            System.out.println(medicCurent);
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
     public static void switchToWindowOrare(ActionEvent event, Angajat a) throws IOException {
         FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-resurse-umane-orar-concediu-view.fxml"));
         root = loader.load();
@@ -669,5 +857,13 @@ public class Model {
 
     public static Angajat getAngajatSelectat() {
         return angajatSelectat;
+    }
+
+    public static Medic getMedicCurent() {
+        return medicCurent;
+    }
+
+    public static AsistentMedical getAsistentCurent() {
+        return asistentCurent;
     }
 }

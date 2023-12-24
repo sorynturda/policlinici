@@ -19,3 +19,24 @@ BEGIN
     select * from angajati where id_utilizator = id;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CautaAsistentMedical(IN id INT)
+BEGIN
+    select * from asistenti_medicali where id_angajat = id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE CautaMedic(IN id INT)
+BEGIN
+    select * from medici where id_angajat = id;
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE AfiseazaSpecialitati(IN id INT)
+BEGIN
+    select * from specialitati where id_medic = id;
+END //
+DELIMITER ;

@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -40,7 +43,7 @@
             <tabs>
                 <Tab text="DETALII CONT">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #d1e0e0;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #b3fff0;">
                             <children>
                                 <Label fx:id="labelDepartament" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                            <font>
@@ -109,11 +112,107 @@
                         </AnchorPane>
                     </content>
                 </Tab>
-                <Tab text="PACIENTI">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
+            <Tab text="DETALII SUPLIMENTARE">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutY="-1.0" prefHeight="422.0" prefWidth="489.0" style="-fx-background-color: #b3fff0;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="15.0" prefHeight="40.0" prefWidth="130.0" text="COD PARAFA:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="130.0" text="TITLU STIINTIFIC:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelCodParafa" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelTitluStiintific" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="130.0" text="POST DIDACTIC:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelPostDidactic" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="165.0" prefHeight="40.0" prefWidth="130.0" text="VENIT ADITIONAL:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelVenitAditional" alignment="CENTER" layoutX="150.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <TableView fx:id="tableSpecialitati" layoutX="150.0" layoutY="215.0" prefHeight="179.0" prefWidth="300.0" style="-fx-background-color: #ffffff;">
+                                <columns>
+                                  <TableColumn fx:id="nume_specialitate" minWidth="7.33331298828125" prefWidth="191.3333282470703" text="Specialitate" />
+                                  <TableColumn fx:id="grad" prefWidth="108.0" text="Grad" />
+                                </columns>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                        <Label layoutX="14.0" layoutY="215.0" prefHeight="40.0" prefWidth="130.0" text="Specialitati:">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="PACIENTI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="nume" prefWidth="150.0" text="NUME" />
+                              <TableColumn fx:id="prenume" prefWidth="170.0" text="PRENUME" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #b3fff0;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="inputTextField" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENTI:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" onAction="#cautaPacient" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" onAction="#selecteazaPacient" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </right>

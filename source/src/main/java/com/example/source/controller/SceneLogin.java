@@ -38,12 +38,14 @@ public class SceneLogin {
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.UTILIZATOR) == 0) {
                 Model.extrageAngajatDupaUtilizator(Model.getUtilizatorCurent().getId());
                 if (Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
+                    Model.extrageMedic(Model.getAngajatCurent().getId());
                     switchToSceneMedic(event);
                 } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.RESURSE_UMANE) == 0) {
                     switchToSceneResurseUmane(event);
                 } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.ECONOMIC) == 0) {
                     switchToSceneEconomic(event);
                 } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.ASISTENT_MEDICAL) == 0) {
+                    Model.extrageAsistentMedical(Model.getAngajatCurent().getId());
                     switchToSceneAsistentMedical(event);
                 } else if (Model.getAngajatCurent().getFunctie().compareTo(Model.RECEPTIONER) == 0) {
                     switchToSceneReceptioner(event);

@@ -23,3 +23,6 @@ CALL ExtrageServicii();
 CALL ExtrageOrarMedic(1);
 CALL CautaCont("superadmin", "parola123");
 CALL CautaAngajatDupaUtilizator(1);
+CALL CautaAsistentMedical(7);
+CALL CautaMedic(5);
+CALL AfiseazaSpecialitati(1);

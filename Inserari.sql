@@ -57,12 +57,15 @@ VALUES
 --     (25, 'MP98765', 'Doctor in Stomatologie', 'Profesor Universitar', 0),
 --     (25, 'MP24680', 'Medic Specialist Neurologie', 'Conferentiar Universitar', 0.3);
     
+    INSERT INTO asistenti_medicali (id_angajat, tip, grad) VALUES 
+    (7, 'generalist', 'grad2');
+    
     INSERT INTO specialitati (id_medic, nume_specialitate, grad) VALUES
     (1, 'Cardiologie', 'Primar'),
-    (2, 'Radiologie', 'Specialist');
---     (18, 'ORL', 'Primar'),
---     (19, 'Stomatologie', 'Primar'),
---     (20, 'Neurologie', 'Primar');
+    (2, 'Radiologie', 'Specialist'),
+    (1, 'ORL', 'Primar'),
+    (1, 'Stomatologie', 'Primar'),
+    (2, 'Neurologie', 'Primar');
     
     INSERT INTO servicii (nume_serviciu, pret, durata) VALUES
     ('Consultatie Medic Primar', 150.00, '00:30:00'),
