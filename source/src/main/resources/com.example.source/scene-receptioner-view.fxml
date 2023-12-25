@@ -155,6 +155,44 @@
                   </BorderPane>
                </content>
             </Tab>
+            <Tab fx:id="tabAdaugaPacient" text="ADAUGA PACIENT">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #e6e6ff;">
+                     <children>
+                        <Label layoutX="80.0" layoutY="82.0" prefHeight="62.0" prefWidth="80.0" text="Nume:">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="80.0" layoutY="180.0" prefHeight="62.0" prefWidth="133.0" text="Prenume:">
+                           <font>
+                              <Font size="26.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="numePacientNouTextField" layoutX="205.0" layoutY="99.0" prefHeight="30.0" prefWidth="181.0" promptText="nume">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </TextField>
+                        <TextField fx:id="prenumePacientNouTextField" layoutX="205.0" layoutY="191.0" prefHeight="30.0" prefWidth="181.0" promptText="prenume">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </TextField>
+                        <Button layoutX="147.0" layoutY="280.0" minWidth="37.0" mnemonicParsing="false" onAction="#adaugaPacientNou" prefHeight="37.0" prefWidth="159.0" style="-fx-background-color: #ffffff;" text="ADAUGA PACIENT">
+                           <font>
+                              <Font name="System Bold" size="15.0" />
+                           </font>
+                        </Button>
+                        <Label fx:id="labelMesajPacientNou" alignment="CENTER" layoutX="55.0" layoutY="328.0" prefHeight="62.0" prefWidth="377.0" textFill="#ff2600">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </right>

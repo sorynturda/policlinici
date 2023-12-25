@@ -5,6 +5,8 @@ import com.example.source.claseTabele.Pacient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -18,6 +20,12 @@ import java.util.ResourceBundle;
 public class SceneMain implements Initializable {
     @FXML
     private TextField inputTextField;
+    @FXML
+    private TextField numePacientNouTextField;
+    @FXML
+    private TextField prenumePacientNouTextField;
+    @FXML
+    private Label labelMesajPacientNou;
     @FXML
     private Label labelNume;
     @FXML
@@ -39,6 +47,8 @@ public class SceneMain implements Initializable {
     @FXML
     private Button buttonLogOut;
     @FXML
+    private Tab tabAdaugaPacient;
+    @FXML
     private TableView<Pacient> tabel;
     @FXML
     private TableColumn<Pacient, Integer> id;
@@ -59,6 +69,19 @@ public class SceneMain implements Initializable {
         labelEmail.setText(Model.getUtilizatorCurent().getEmail());
         labelIban.setText(Model.getUtilizatorCurent().getIban());
         labelDataAngajarii.setText(Model.getUtilizatorCurent().getData_angajarii());
+        tabAdaugaPacient.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                labelMesajPacientNou.setText("");
+                try {
+                    cautaPacient(new ActionEvent());
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        });
         try {
             pacienti = Model.listaPacienti();
             populateTabel();
@@ -96,6 +119,22 @@ public class SceneMain implements Initializable {
         }
     }
 
+    public void adaugaPacientNou(ActionEvent event) throws SQLException {
+        String nume = numePacientNouTextField.getText();
+        String prenume = prenumePacientNouTextField.getText();
+        if (nume.isEmpty() || prenume.isEmpty()) {
+            labelMesajPacientNou.setText("Introduceti numele si prenumele pacientului!");
+        } else {
+            labelMesajPacientNou.setText("");
+            if (Model.cautaPacient(nume, prenume) == true)
+                labelMesajPacientNou.setText("Pacientul exista deja in baza de date!");
+            else {
+                Model.insereazaPacient(nume, prenume);
+                labelMesajPacientNou.setText("Pacientul a fost adaugat!");
+                populateTabel();
+            }
+        }
+    }
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);

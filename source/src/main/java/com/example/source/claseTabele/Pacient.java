@@ -26,7 +26,8 @@ public class Pacient {
     @Override
     public String toString() {
         return "Pacient{" +
-                "nume='" + nume + '\'' +
+                "id=" + id +
+                ", nume='" + nume + '\'' +
                 ", prenume='" + prenume + '\'' +
                 '}';
     }
