@@ -118,8 +118,22 @@ BEGIN
     
 	SELECT m.id, m.id_angajat, m.cod_parafa, m.titlu_stiintific, m.post_didactic, m.venit_aditional, u.nume, u.prenume FROM utilizatori u, medici m
 	JOIN angajati a 
-	WHERE a.functie = "medic" AND a.id_utilizator = u.id and m.id_angajat = a.id
+	WHERE a.functie = "medic" AND a.id_utilizator = u.id and m.id_angajat = a.id;
 
+
+END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE OrarAngajat(
+	IN id_angajat INT
+)
+BEGIN
+    
+	SELECT pf.id, pf.duminica, pf.luni, pf.marti, pf.miercuri, pf.joi, pf.vineri, pf.sambata FROM program_functionare pf
+	INNER JOIN angajati a
+	INNER JOIN policlinici p
+	WHERE a.id = id_angajat AND a.id_policlinica = p.id AND p.id_program_functionare = pf.id;
 
 END //
 DELIMITER ;
