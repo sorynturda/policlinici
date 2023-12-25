@@ -63,6 +63,10 @@ public class Medic {
         return prenume;
     }
 
+    public Integer getId_angajat() {
+        return id_angajat;
+    }
+
     public void afiseazaServicii() {
         for (Serviciu s : servicii)
             System.out.println(s.toString());
