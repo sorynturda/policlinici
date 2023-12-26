@@ -14,7 +14,7 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <Button layoutX="33.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
+      <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
       <ChoiceBox fx:id="alegeMedic" layoutX="33.0" layoutY="140.0" prefWidth="150.0" />
       <Label fx:id="labelMedic" layoutX="33.0" layoutY="186.0" prefHeight="66.0" prefWidth="170.0" text="Label" />
       <DatePicker fx:id="dataProgramare" layoutX="21.0" layoutY="240.0" />
