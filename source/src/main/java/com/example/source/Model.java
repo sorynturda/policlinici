@@ -1255,4 +1255,67 @@ public class Model {
         }
         return concedii;
     }
+
+    public static IntervalOrar extrageOrarMedicZiProgramare(Integer idAngajat, Date dataSelectata) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+        IntervalOrar res = new IntervalOrar();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call OrarPentrudataProgramare(?, ?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, idAngajat.toString());
+            callableStatement.setString(2, dataSelectata.toString());
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next()) {
+                Time ora_inceput = resultSet.getTime("ora_inceput");
+                Time ora_sfarsit = resultSet.getTime("ora_sfarsit");
+                res.setOra_inceput(ora_inceput);
+                res.setOra_sfarsit(ora_sfarsit);
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return res;
+    }
 }

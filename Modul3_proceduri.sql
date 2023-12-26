@@ -126,14 +126,57 @@ DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE OrarAngajat(
-	IN id_angajat INT
+	IN id_angajat INT,
+    IN numar_zi INT
 )
 BEGIN
     
-	SELECT pf.id, pf.duminica, pf.luni, pf.marti, pf.miercuri, pf.joi, pf.vineri, pf.sambata FROM program_functionare pf
-	INNER JOIN angajati a
-	INNER JOIN policlinici p
-	WHERE a.id = id_angajat AND a.id_policlinica = p.id AND p.id_program_functionare = pf.id;
+    set @zi = "duminica";
+    CASE
+		WHEN numar_zi = 2 THEN set @zi = "luni";
+		WHEN numar_zi = 3 THEN set @zi = "marti";
+		WHEN numar_zi = 4 THEN set @zi = "miercuri";
+        WHEN numar_zi = 5 THEN set  @zi = "joi";
+        WHEN numar_zi = 6 THEN set @zi = "vineri";
+        WHEN numar_zi = 7 THEN set @zi = "sambata";
+	END CASE;
+    SET @query = CONCAT('SELECT ', @zi,", SUBSTRING_INDEX(", @zi, ",'-',1) AS ora_inceput, SUBSTRING_INDEX(", @zi, ",'-',-1) AS ora_sfarsit FROM program_functionare pf INNER JOIN angajati a INNER JOIN policlinici p WHERE a.id = ", id_angajat, " AND a.id_policlinica = p.id AND p.id_program_functionare = pf.id");
+        PREPARE stmt FROM @query;
+        EXECUTE stmt;
+        DEALLOCATE PREPARE stmt;
+	-- SELECT @zi FROM program_functionare pf
+	-- INNER JOIN angajati a
+	-- INNER JOIN policlinici p
+	-- WHERE a.id = id_angajat AND a.id_policlinica = p.id AND p.id_program_functionare = pf.id;
 
 END //
+DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE OrarPentruDataProgramare (IN id INT, IN _data varchar(10))
+BEGIN
+
+    set @id_angajat = ( select id_angajat from medici
+                        where medici.id = id);
+    set @a = (select count(*) from orar_medici
+    where id_medic = id and zi_saptamana_sau_data = _data and zi_sau_data = 1);
+    if @a > 0 then
+        select om.ora_inceput, om.ora_sfarsit from orar_medici om
+        where id_medic = id and zi_saptamana_sau_data = _data and zi_sau_data = 1;
+    
+    else 
+        set @b =
+        (select count(*) from orar_medici om
+        join zi_saptamana z
+        where id_medic = id and zi_sau_data = 0 and dayofweek(_data) = z.id and z.zi = om.zi_saptamana_sau_data);
+        if @b > 0 then
+            select om.ora_inceput, om.ora_sfarsit from orar_medici om
+            join zi_saptamana z
+            where id_medic = id and zi_sau_data = 0 and dayofweek(_data) = z.id and z.zi = om.zi_saptamana_sau_data;
+        else
+            call OrarAngajat(@id_angajat, dayofweek(_data));
+        end if;
+    end if;
+    
+END
 DELIMITER ;

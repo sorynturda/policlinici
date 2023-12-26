@@ -115,7 +115,9 @@ create table if not exists programari(
     id_angajat int not null,
     id_pacient int not null,
     id_medic int not null,
-    data_si_ora datetime not null,
+    _data date not null,
+    ora_inceput time not null,
+    ora_sfarsit time not null,
     inregistrat boolean not null
 );
 
@@ -128,7 +130,7 @@ create table if not exists servicii(
 
 create table if not exists orar_medici(
     id_medic int not null,
-    orar_specific boolean not null default false,
+    zi_sau_data boolean not null default false,
     zi_saptamana_sau_data varchar(20) not null,
     ora_inceput time not null,
     ora_sfarsit time not null
@@ -153,4 +155,9 @@ create table if not exists servicii_oferite_raport(
     id_raport int not null,
     id_serviciu int not null,
     investigatii varchar(500) not null
+);
+
+create table if not exists zi_saptamana(
+	id int not null,
+    zi varchar(10) not null
 );

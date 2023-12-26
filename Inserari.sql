@@ -74,7 +74,7 @@ VALUES
     ('Extractie Dentara', 120.00, '00:20:00'),
     ('Consultatie Neurolog', 180.00, '00:40:00');
     
-    INSERT INTO orar_medici (id_medic, orar_specific, zi_saptamana_sau_data, ora_inceput, ora_sfarsit) VALUES
+    INSERT INTO orar_medici (id_medic, zi_sau_data, zi_saptamana_sau_data, ora_inceput, ora_sfarsit) VALUES
     (1, false, 'Luni', '10:00:00', '18:00:00'),
     (2, false, 'Miercuri', '09:00:00', '17:00:00'),
     (1, false, 'Vineri', '07:30:00', '15:30:00'),
@@ -90,6 +90,15 @@ INSERT INTO servicii_specialitate VALUES
 	(1, 4),
 	(1, 5),
 	(2, 1);
+
+INSERT INTO zi_saptamana VALUES
+	(1, "Duminica"),
+	(2, "Luni"),
+	(3, "Marti"),
+	(4, "Miercuri"),       
+	(5, "Joi"),
+	(6, "Vineri"),
+	(7, "Sambata");
 
 
  

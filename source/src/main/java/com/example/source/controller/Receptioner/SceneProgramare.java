@@ -1,10 +1,7 @@
 package com.example.source.controller.Receptioner;
 
-import com.example.source.claseTabele.DataConcediu;
+import com.example.source.claseTabele.*;
 import com.example.source.Model;
-import com.example.source.claseTabele.Medic;
-import com.example.source.claseTabele.Pacient;
-import com.example.source.claseTabele.Serviciu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -12,11 +9,11 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.ResourceBundle;
 
 public class SceneProgramare implements Initializable {
@@ -116,9 +113,11 @@ public class SceneProgramare implements Initializable {
     }
 
     public void faProgramare(){
-        
-        for(Serviciu s :serviciiProgramare)
-            System.out.println(s);
+        LocalDate dataSelectata = dataProgramare.getValue();
+        if(dataSelectata != null) {
+            IntervalOrar orar = Model.extrageOrarMedicZiProgramare(medicSelectat.getId(), Date.valueOf(dataSelectata));
+            
+        }
     }
 
     public void goBack(ActionEvent event) throws IOException {
