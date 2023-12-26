@@ -1215,13 +1215,13 @@ public class Model {
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
             String query = "SELECT * FROM policlinica.concedii " +
-                    "WHERE concedii.id_angajat = " + "'" + idAngajat + "' AND data_inceput > CURDATE()";
+                    "WHERE concedii.id_angajat = " + "'" + idAngajat + "'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
                 Date data_inceput = resultSet.getDate("data_inceput");
                 Date data_sfarsit = resultSet.getDate("data_sfarsit");
-                System.out.println(data_inceput + "->" + data_sfarsit);
+//                System.out.println(data_inceput + "->" + data_sfarsit);
                 concedii.add(new DataConcediu(data_inceput, data_sfarsit));
             }
         } catch (SQLException sqlex) {

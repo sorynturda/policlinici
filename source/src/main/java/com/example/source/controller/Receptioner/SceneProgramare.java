@@ -34,14 +34,6 @@ public class SceneProgramare implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         pacientSelectat = Model.getPacientSelectat();
-        dataProgramare.setDayCellFactory(picker -> new DateCell() { //date de azi incolo
-            @Override
-            public void updateItem(LocalDate date, boolean empty) {
-                super.updateItem(date, empty);
-                LocalDate azi = LocalDate.now();
-                setDisable(empty || date.compareTo(azi) < 0);
-            }
-        });
         try {
             medici = Model.listaMedici();
             creazaCheckBoxMedici();
@@ -84,10 +76,12 @@ public class SceneProgramare implements Initializable {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
+                LocalDate azi = LocalDate.now();
                 for (DataConcediu c : concedii) {
                     LocalDate data_inceput = c.getData_inceput().toLocalDate();
                     LocalDate data_sfarsit = c.getData_sfarsit().toLocalDate();
-                    setDisable(empty || (date.compareTo(data_inceput) >= 0 && date.compareTo(data_sfarsit) <= 0));
+                    System.out.println(data_inceput + "__" + data_sfarsit);
+                    setDisable(empty || (date.compareTo(azi) < 0) || (date.compareTo(data_inceput) >= 0 && date.compareTo(data_sfarsit) <= 0));
                 }
             }
         });
