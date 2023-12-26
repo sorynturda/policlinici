@@ -181,3 +181,10 @@ BEGIN
     
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE FinalProgramari (IN id INT, IN _data varchar(10))
+BEGIN
+	select max(ora_sfarsit) as final_ultima_programare from programari where programari._data = date(_data) and id_medic = id;
+END //
+DELIMITER ;

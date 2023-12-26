@@ -32,6 +32,7 @@ public class SceneProgramare implements Initializable {
     private ChoiceBox<String> alegeServiciu;
     @FXML
     private ChoiceBox<String> alegeOra;
+
     private ArrayList<Medic> medici;
     private Medic medicSelectat;
     private Pacient pacientSelectat;
@@ -124,6 +125,7 @@ public class SceneProgramare implements Initializable {
             for (Serviciu s : serviciiProgramare)
                 timp.setTime(timp.getTime() + s.getDurata().getTime() - Time.valueOf("00:00:00").getTime());
             System.out.println(timp);
+            System.out.println(Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata));
         }
     }
 
