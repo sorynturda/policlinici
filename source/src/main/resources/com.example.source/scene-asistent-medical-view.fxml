@@ -4,6 +4,9 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -141,11 +144,189 @@
                   </AnchorPane>
                </content>
             </Tab>
-                <Tab text="PACIENTI">
-                    <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-                    </content>
-                </Tab>
+            <Tab text="ORAR">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id1" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator1" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="nume1" prefWidth="241.3333181142807" text="ZI" />
+                              <TableColumn fx:id="prenume1" prefWidth="241.33338928222656" text="INTERVAL_ORAR" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="103.0" prefWidth="480.0" style="-fx-background-color: #cce6ff;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="239.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="LUNA:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="63.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="LOCATIE:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="140.0" layoutY="63.0" prefHeight="30.0" prefWidth="335.0" style="-fx-background-color: #ffffff;" text="..." textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab text="VENITURI">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <AnchorPane layoutY="-1.0" prefHeight="422.0" prefWidth="489.0" style="-fx-background-color: #cce6ff;">
+                           <children>
+                              <Label layoutX="14.0" layoutY="15.0" prefHeight="40.0" prefWidth="130.0" text="SALAR NEGOCIAT:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="130.0" text="NUMAR ORE:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="130.0" text="SALAR CALCULAT:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+            <Tab text="PACIENTI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tabel1" prefHeight="295.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id2" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="nume2" prefWidth="150.0" text="NUME" />
+                              <TableColumn fx:id="prenume2" prefWidth="170.0" text="PRENUME" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="97.0" prefWidth="480.0" style="-fx-background-color: #cce6ff;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENTI:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="RAPORT NOU">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab text="RAPOARTE PACIENTI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="nume" prefWidth="150.0" text="ID / DATA" />
+                              <TableColumn fx:id="prenume" prefWidth="170.0" text="NUME" />
+                              <TableColumn fx:id="nume3" prefWidth="150.0" text="PRENUME" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="97.0" prefWidth="480.0" style="-fx-background-color: #cce6ff;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="NUME:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="EDITEAZA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="60.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="PRENUME:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <TextField layoutX="140.0" layoutY="59.0" prefHeight="32.0" prefWidth="150.0" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </right>
