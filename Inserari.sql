@@ -76,10 +76,10 @@ VALUES
     
     INSERT INTO orar_medici (id_medic, orar_specific, zi_saptamana_sau_data, ora_inceput, ora_sfarsit) VALUES
     (1, false, 'Luni', '10:00:00', '18:00:00'),
-    (2, false, 'Miercuri', '09:00:00', '17:00:00');
---     (18, false, 'Vineri', '07:30:00', '15:30:00'),
---     (19, true, '2023-06-30', '11:00:00', '17:00:00'),
---     (20, true, '2023-08-15', '13:00:00', '19:00:00');
+    (2, false, 'Miercuri', '09:00:00', '17:00:00'),
+    (1, false, 'Vineri', '07:30:00', '15:30:00'),
+    (1, true, '2023-06-30', '11:00:00', '17:00:00'),
+    (2, true, '2023-08-15', '13:00:00', '19:00:00');
 
 -- INSERT INTO policlinica.angajati (id_utilizator, id_policlinica, functie, salariu_negociat, numar_ore)
 -- VALUES  (5, 1, "medic", 6969.69, 55),
