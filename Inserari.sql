@@ -86,10 +86,12 @@ VALUES
 -- 	(4, 1, "super erou", 6969.69, 55);
 
 INSERT INTO servicii_specialitate VALUES
-	(1, 3),
-	(1, 4),
-	(1, 5),
-	(2, 1);
+	(1, 1),
+	(2, 2),
+	(3, 3),
+	(4, 4),
+    (5, 5),
+    (2, 1);
 
 INSERT INTO zi_saptamana VALUES
 	(1, "Duminica"),
