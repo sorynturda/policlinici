@@ -31,8 +31,6 @@ public class SceneProgramare implements Initializable {
     @FXML
     private ChoiceBox<String> alegeServiciu;
     @FXML
-    private ChoiceBox<String> alegeOra;
-    @FXML
     private Label labelMesaj;
 
     private ArrayList<Medic> medici;
