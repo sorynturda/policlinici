@@ -32,6 +32,8 @@ public class SceneProgramare implements Initializable {
     private ChoiceBox<String> alegeServiciu;
     @FXML
     private ChoiceBox<String> alegeOra;
+    @FXML
+    private Label labelMesaj;
 
     private ArrayList<Medic> medici;
     private Medic medicSelectat;
@@ -121,11 +123,23 @@ public class SceneProgramare implements Initializable {
         LocalDate dataSelectata = dataProgramare.getValue();
         if (dataSelectata != null) {
             IntervalOrar orar = Model.extrageOrarMedicZiProgramare(medicSelectat.getId(), Date.valueOf(dataSelectata));
-            Time timp = orar.getOra_inceput();
+            Time timp = Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata, orar.getOra_inceput());
+            Time timpInceput = timp;
             for (Serviciu s : serviciiProgramare)
                 timp.setTime(timp.getTime() + s.getDurata().getTime() - Time.valueOf("00:00:00").getTime());
-            System.out.println(timp);
-            System.out.println(Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata, timp));
+            System.out.println(timp + " " + orar.getOra_sfarsit());
+
+            if(timp.toLocalTime().isAfter(orar.getOra_sfarsit().toLocalTime())) {
+                labelMesaj.setText("SELECTATI ALTA DATA");
+            }
+            else {
+                labelMesaj.setText("PROGRAMARE EFECTUATA CU SUCCES " + timpInceput.toString());
+                
+            }
+
+        }
+        else {
+            labelMesaj.setText("SELECTATI DATA");
         }
     }
 

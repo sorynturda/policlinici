@@ -22,5 +22,6 @@
       <Button layoutX="291.0" layoutY="301.0" mnemonicParsing="false" onAction="#adaugaServiciu" text="adauga" />
       <Button layoutX="268.0" layoutY="253.0" mnemonicParsing="false" onAction="#faProgramare" text="PROGRAMEAZA" />
       <ChoiceBox fx:id="alegeOra" layoutX="423.0" layoutY="140.0" prefWidth="150.0" />
+      <Label fx:id="labelMesaj" alignment="CENTER" layoutX="140.0" layoutY="336.0" prefHeight="17.0" prefWidth="329.0" />
    </children>
 </AnchorPane>
