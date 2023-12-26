@@ -72,6 +72,10 @@ public class Medic {
             System.out.println(s.toString());
     }
 
+    public ArrayList<Serviciu> getServicii() {
+        return servicii;
+    }
+
     @Override
     public String toString() {
         return "Medic{" +

@@ -88,7 +88,8 @@ VALUES
 INSERT INTO servicii_specialitate VALUES
 	(1, 3),
 	(1, 4),
-	(1, 5);
+	(1, 5),
+	(2, 1);
 
 
  
