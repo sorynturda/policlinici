@@ -124,17 +124,17 @@ public class SceneProgramare implements Initializable {
         if (dataSelectata != null) {
             IntervalOrar orar = Model.extrageOrarMedicZiProgramare(medicSelectat.getId(), Date.valueOf(dataSelectata));
             Time timp = Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata, orar.getOra_inceput());
-            Time timpInceput = timp;
+            Time timpInceput = Time.valueOf(timp.toLocalTime());
             for (Serviciu s : serviciiProgramare)
                 timp.setTime(timp.getTime() + s.getDurata().getTime() - Time.valueOf("00:00:00").getTime());
-            System.out.println(timp + " " + orar.getOra_sfarsit());
+            System.out.println(timpInceput + " " + timp + " " + orar.getOra_sfarsit());
 
             if(timp.toLocalTime().isAfter(orar.getOra_sfarsit().toLocalTime())) {
-                labelMesaj.setText("SELECTATI ALTA DATA");
+                labelMesaj.setText("TIMP INSUFICIENT SELECTATI ALTA DATA");
             }
             else {
+                Model.inserareProgramare(Model.idPoliclinicaDeCareApartineMedic(medicSelectat.getId()), Model.getAngajatCurent().getId(), pacientSelectat.getId(), medicSelectat.getId(), Date.valueOf(dataSelectata), timpInceput, timp);
                 labelMesaj.setText("PROGRAMARE EFECTUATA CU SUCCES " + timpInceput.toString());
-                
             }
 
         }

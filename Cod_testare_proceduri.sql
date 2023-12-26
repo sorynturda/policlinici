@@ -27,3 +27,4 @@ CALL CautaAsistentMedical(7);
 CALL CautaMedic(5);
 CALL AfiseazaSpecialitati(1);
 CALL FinalProgramari (1, "2023-01-19");
+CALL PoliclinicaDeCareApartineMedic(2);

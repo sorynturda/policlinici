@@ -40,3 +40,10 @@ BEGIN
     select * from specialitati where id_medic = id;
 END //
 DELIMITER ;
+
+DELIMITER //
+CREATE PROCEDURE PoliclinicaDeCareApartineMedic(IN id INT)
+BEGIN
+    select id_policlinica from angajati inner join medici where angajati.id = medici.id_angajat and medici.id = id;
+END //
+DELIMITER ;
