@@ -58,13 +58,13 @@ create table if not exists asistenti_medicali(
 
 create table if not exists program_functionare(
 	id int auto_increment primary key not null,
-    duminica varchar(15) not null,
-    luni varchar(15) not null,
-    marti varchar(15) not null,
-    miercuri varchar(15) not null,
-    joi varchar(15) not null,
-    vineri varchar(15) not null,
-    sambata varchar(15) not null
+    duminica varchar(20) not null,
+    luni varchar(20) not null,
+    marti varchar(20) not null,
+    miercuri varchar(20) not null,
+    joi varchar(20) not null,
+    vineri varchar(20) not null,
+    sambata varchar(20) not null
 );
 
 create table if not exists pacienti(

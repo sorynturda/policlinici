@@ -11,7 +11,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Time;
+import java.time.Clock;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -89,8 +92,8 @@ public class SceneProgramare implements Initializable {
     public void adaugaServiciu() {
         String serviciuSelectat = alegeServiciu.getValue();
         ArrayList<Serviciu> servicii = medicSelectat.getServicii();
-        for(Serviciu s : servicii)
-            if(s.getNume_serviciu().equals(serviciuSelectat))
+        for (Serviciu s : servicii)
+            if (s.getNume_serviciu().equals(serviciuSelectat))
                 serviciiProgramare.add(s);
     }
 
@@ -104,19 +107,23 @@ public class SceneProgramare implements Initializable {
                 for (DataConcediu c : concedii) {
                     LocalDate data_inceput = c.getData_inceput().toLocalDate();
                     LocalDate data_sfarsit = c.getData_sfarsit().toLocalDate();
-                    System.out.println(data_inceput + "__" + data_sfarsit);
                     if (!isDisabled())
                         setDisable(empty || (date.compareTo(azi) < 0) || (date.compareTo(data_inceput) >= 0 && date.compareTo(data_sfarsit) <= 0));
                 }
+                if(!isDisabled())
+                    setDisable(empty || date.isBefore(azi));
             }
         });
     }
 
-    public void faProgramare(){
+    public void faProgramare() {
         LocalDate dataSelectata = dataProgramare.getValue();
-        if(dataSelectata != null) {
+        if (dataSelectata != null) {
             IntervalOrar orar = Model.extrageOrarMedicZiProgramare(medicSelectat.getId(), Date.valueOf(dataSelectata));
-            
+            Time timp = orar.getOra_inceput();
+            for (Serviciu s : serviciiProgramare)
+                timp.setTime(timp.getTime() + s.getDurata().getTime() - Time.valueOf("00:00:00").getTime());
+            System.out.println(timp);
         }
     }
 

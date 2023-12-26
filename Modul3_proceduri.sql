@@ -139,6 +139,7 @@ BEGIN
         WHEN numar_zi = 5 THEN set  @zi = "joi";
         WHEN numar_zi = 6 THEN set @zi = "vineri";
         WHEN numar_zi = 7 THEN set @zi = "sambata";
+        ELSE set @zi = "duminica";
 	END CASE;
     SET @query = CONCAT('SELECT ', @zi,", SUBSTRING_INDEX(", @zi, ",'-',1) AS ora_inceput, SUBSTRING_INDEX(", @zi, ",'-',-1) AS ora_sfarsit FROM program_functionare pf INNER JOIN angajati a INNER JOIN policlinici p WHERE a.id = ", id_angajat, " AND a.id_policlinica = p.id AND p.id_program_functionare = pf.id");
         PREPARE stmt FROM @query;
@@ -178,5 +179,5 @@ BEGIN
         end if;
     end if;
     
-END
+END //
 DELIMITER ;
