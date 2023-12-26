@@ -125,16 +125,16 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #e6ffff;" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="id" prefWidth="128.0" text="id" visible="false" />
-                              <TableColumn fx:id="nume" editable="false" prefWidth="242.0" text="Nume" />
-                              <TableColumn fx:id="prenume" editable="false" prefWidth="244.0" text="Prenume" />
+                              <TableColumn fx:id="nume" editable="false" prefWidth="242.0" text="NUME" />
+                              <TableColumn fx:id="prenume" editable="false" prefWidth="244.0" text="PRENUME" />
                            </columns>
                         </TableView>
                      </center>
                      <top>
-                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #99ddff;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #e6e6ff;" BorderPane.alignment="CENTER">
                            <children>
                               <TextField fx:id="inputTextField" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
                               <Label alignment="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENT:">
@@ -159,27 +159,27 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #e6e6ff;">
                      <children>
-                        <Label layoutX="80.0" layoutY="82.0" prefHeight="62.0" prefWidth="80.0" text="Nume:">
+                        <Label alignment="CENTER" layoutX="45.0" layoutY="130.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="NUME:">
                            <font>
-                              <Font size="26.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <Label layoutX="80.0" layoutY="180.0" prefHeight="62.0" prefWidth="133.0" text="Prenume:">
+                        <Label alignment="CENTER" layoutX="45.0" layoutY="177.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="PRENUME:">
                            <font>
-                              <Font size="26.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="numePacientNouTextField" layoutX="205.0" layoutY="99.0" prefHeight="30.0" prefWidth="181.0" promptText="nume">
+                        <TextField fx:id="numePacientNouTextField" layoutX="205.0" layoutY="129.0" prefHeight="42.0" prefWidth="240.0" promptText="nume" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </TextField>
-                        <TextField fx:id="prenumePacientNouTextField" layoutX="205.0" layoutY="191.0" prefHeight="30.0" prefWidth="181.0" promptText="prenume">
+                        <TextField fx:id="prenumePacientNouTextField" layoutX="205.0" layoutY="176.0" prefHeight="42.0" prefWidth="240.0" promptText="prenume" style="-fx-background-color: #ffffff;">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="147.0" layoutY="280.0" minWidth="37.0" mnemonicParsing="false" onAction="#adaugaPacientNou" prefHeight="37.0" prefWidth="159.0" style="-fx-background-color: #ffffff;" text="ADAUGA PACIENT">
+                        <Button layoutX="154.0" layoutY="328.0" minWidth="37.0" mnemonicParsing="false" onAction="#adaugaPacientNou" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" text="ADAUGA PACIENT">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>

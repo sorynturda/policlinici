@@ -160,13 +160,13 @@
                               </Label>
                               <TableView fx:id="tableSpecialitati" layoutX="150.0" layoutY="215.0" prefHeight="179.0" prefWidth="300.0" style="-fx-background-color: #ffffff;">
                                 <columns>
-                                  <TableColumn fx:id="nume_specialitate" minWidth="7.33331298828125" prefWidth="191.3333282470703" text="Specialitate" />
-                                  <TableColumn fx:id="grad" prefWidth="108.0" text="Grad" />
+                                  <TableColumn fx:id="nume_specialitate" minWidth="7.33331298828125" prefWidth="191.3333282470703" text="SPECIALITATE" />
+                                  <TableColumn fx:id="grad" prefWidth="108.0" text="GRAD" />
                                 </columns>
                               </TableView>
                            </children>
                         </AnchorPane>
-                        <Label layoutX="14.0" layoutY="215.0" prefHeight="40.0" prefWidth="130.0" text="Specialitati:">
+                        <Label layoutX="14.0" layoutY="215.0" prefHeight="40.0" prefWidth="130.0" text="SPECIALITATI:">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

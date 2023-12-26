@@ -7,21 +7,61 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Receptioner.SceneProgramare">
+<AnchorPane prefHeight="400.0" prefWidth="541.0" style="-fx-background-color: #cceeff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Receptioner.SceneProgramare">
    <children>
-      <Label fx:id="labelPacient" alignment="CENTER" layoutX="140.0" layoutY="14.0" prefHeight="103.0" prefWidth="358.0" text="Label">
+      <ChoiceBox fx:id="alegeMedic" layoutX="178.0" layoutY="102.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+      <Label fx:id="labelMedic" alignment="CENTER" layoutX="377.0" layoutY="102.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="Label">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <DatePicker fx:id="dataProgramare" layoutX="178.0" layoutY="227.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+      <ChoiceBox fx:id="alegeServiciu" layoutX="178.0" layoutY="185.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+      <Button layoutX="377.0" layoutY="185.0" mnemonicParsing="false" onAction="#adaugaServiciu" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="ADAUGA">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <Button layoutX="188.0" layoutY="316.0" mnemonicParsing="false" onAction="#faProgramare" prefHeight="30.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="PROGRAMEAZA">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Button>
+      <ChoiceBox fx:id="alegeOra" layoutX="178.0" layoutY="143.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+      <Label fx:id="labelMesaj" alignment="CENTER" layoutX="123.0" layoutY="356.0" prefHeight="17.0" prefWidth="329.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font></Label>
+      <Label fx:id="labelZiSelectata" alignment="CENTER" layoutX="27.0" layoutY="102.0" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #ffffff;" text="MEDIC:">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Button layoutX="21.0" layoutY="14.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
-      <ChoiceBox fx:id="alegeMedic" layoutX="33.0" layoutY="140.0" prefWidth="150.0" />
-      <Label fx:id="labelMedic" layoutX="33.0" layoutY="186.0" prefHeight="66.0" prefWidth="170.0" text="Label" />
-      <DatePicker fx:id="dataProgramare" layoutX="21.0" layoutY="240.0" />
-      <ChoiceBox fx:id="alegeServiciu" layoutX="244.0" layoutY="140.0" prefWidth="150.0" />
-      <Button layoutX="291.0" layoutY="301.0" mnemonicParsing="false" onAction="#adaugaServiciu" text="adauga" />
-      <Button layoutX="268.0" layoutY="253.0" mnemonicParsing="false" onAction="#faProgramare" text="PROGRAMEAZA" />
-      <ChoiceBox fx:id="alegeOra" layoutX="423.0" layoutY="140.0" prefWidth="150.0" />
-      <Label fx:id="labelMesaj" alignment="CENTER" layoutX="140.0" layoutY="336.0" prefHeight="17.0" prefWidth="329.0" />
+      <Label fx:id="labelZiSelectata1" alignment="CENTER" layoutX="27.0" layoutY="143.0" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #ffffff;" text="ORA:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelZiSelectata11" alignment="CENTER" layoutX="27.0" layoutY="185.0" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #ffffff;" text="SERVICII:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelZiSelectata111" alignment="CENTER" layoutX="27.0" layoutY="227.0" prefHeight="30.0" prefWidth="140.0" style="-fx-background-color: #ffffff;" text="DATA:">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="10.0" layoutY="14.0" prefHeight="79.0" prefWidth="521.0" style="-fx-background-color: #b3d9ff;">
+         <children>
+            <Button alignment="CENTER" layoutX="14.0" layoutY="20.0" mnemonicParsing="false" onAction="#goBack" prefHeight="40.0" prefWidth="90.0" style="-fx-background-color: #ffffff;" text="&lt; INAPOI">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Label fx:id="labelPacient" alignment="CENTER" layoutX="149.0" layoutY="20.0" prefHeight="40.0" prefWidth="358.0" style="-fx-background-color: #ffffff;" text="Label">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>
