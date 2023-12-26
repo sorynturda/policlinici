@@ -91,7 +91,8 @@ create table if not exists bonuri_fiscale(
     id int auto_increment primary key not null,
     id_raport int not null,
     id_angajat int not null,
-    total decimal(10,2) not null
+    total decimal(10,2) not null,
+    data_emitere date not null
 );
 
 create table if not exists rapoarte(
@@ -114,7 +115,8 @@ create table if not exists programari(
     id_angajat int not null,
     id_pacient int not null,
     id_medic int not null,
-    data_si_ora datetime not null
+    data_si_ora datetime not null,
+    inregistrat boolean not null
 );
 
 create table if not exists servicii(
