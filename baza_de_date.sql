@@ -157,6 +157,11 @@ create table if not exists servicii_oferite_raport(
     investigatii varchar(500) not null
 );
 
+create table if not exists servicii_specialitate_medic(
+    id_serviciu int not null,
+    id_specialitate int not null
+);
+
 create table if not exists zi_saptamana(
 	id int not null,
     zi varchar(10) not null
