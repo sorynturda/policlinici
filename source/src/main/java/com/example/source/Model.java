@@ -1319,7 +1319,7 @@ public class Model {
         return res;
     }
 
-     public static Time extrageFinalProgramari(int id, LocalDate data) {
+     public static Time extrageFinalProgramari(int id, LocalDate data, Time oraInceput) {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1348,6 +1348,9 @@ public class Model {
             if (resultSet.next()) {
                 res = resultSet.getTime("final_ultima_programare");
             }
+
+            if(res == null)
+                res = oraInceput;
 
             System.out.println(res);
         } catch (SQLException sqlex) {

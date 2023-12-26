@@ -125,7 +125,7 @@ public class SceneProgramare implements Initializable {
             for (Serviciu s : serviciiProgramare)
                 timp.setTime(timp.getTime() + s.getDurata().getTime() - Time.valueOf("00:00:00").getTime());
             System.out.println(timp);
-            System.out.println(Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata));
+            System.out.println(Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata, timp));
         }
     }
 
