@@ -264,14 +264,14 @@
                               <Font size="17.0" />
                            </font>
                         </TextField>
-                        <Button layoutX="154.0" layoutY="328.0" minWidth="37.0" mnemonicParsing="false" onAction="#adaugaPacientNou" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" text="ADAUGA PACIENT">
+                        <Button layoutX="153.0" layoutY="303.0" minWidth="37.0" mnemonicParsing="false" onAction="#adaugaPacientNou" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" text="ADAUGA PACIENT">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font>
                         </Button>
-                        <Label fx:id="labelMesajPacientNou" alignment="CENTER" layoutX="55.0" layoutY="328.0" prefHeight="62.0" prefWidth="377.0" textFill="#ff2600">
+                        <Label fx:id="labelMesajPacientNou" alignment="CENTER" layoutX="54.0" layoutY="345.0" prefHeight="62.0" prefWidth="377.0" textFill="#ff2600">
                            <font>
-                              <Font size="18.0" />
+                              <Font name="System Bold" size="18.0" />
                            </font>
                         </Label>
                      </children>
