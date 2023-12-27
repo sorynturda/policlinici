@@ -103,6 +103,13 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE ExtragePacientiProgramatiMedic(IN id_medic INT)
+BEGIN
+    SELECT programari.id, programari.id_policlinica, programari.id_angajat, programari.id_pacient, programari.id_medic, programari._data, programari.ora_inceput, programari.ora_sfarsit, programari.inregistrat, pacienti.nume, pacienti.prenume
+    FROM pacienti inner join programari where pacienti.id = programari.id_pacient and programari.id_medic = id_medic;
+END //
+DELIMITER ;
 
 DELIMITER //
 CREATE PROCEDURE ExtrageRapoarte()
@@ -188,3 +195,5 @@ BEGIN
 	select max(ora_sfarsit) as final_ultima_programare from programari where programari._data = date(_data) and id_medic = id;
 END //
 DELIMITER ;
+
+

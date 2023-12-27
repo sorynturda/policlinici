@@ -274,19 +274,21 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tabel1" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tabelPacienti" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="id2" prefWidth="128.0" text="id" visible="false" />
                               <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
-                              <TableColumn fx:id="nume2" prefWidth="150.0" text="NUME" />
-                              <TableColumn fx:id="prenume2" prefWidth="170.0" text="PRENUME" />
+                              <TableColumn fx:id="numePacient" prefWidth="100.66668450832367" text="NUME" />
+                              <TableColumn fx:id="prenumePacient" prefWidth="109.33332061767578" text="PRENUME" />
+                              <TableColumn fx:id="dataProgramare" prefWidth="138.66664123535156" text="DATA PROGRAMARE" />
+                              <TableColumn fx:id="oraProgramare" prefWidth="138.66664123535156" text="ORA PROGRAMARE" />
                            </columns>
                         </TableView>
                      </center>
                      <top>
                         <AnchorPane prefHeight="97.0" prefWidth="480.0" style="-fx-background-color: #b3fff0;" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField fx:id="inputTextField2" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
+                              <TextField fx:id="inputTextFieldPacienti" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENTI:" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />

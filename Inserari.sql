@@ -106,4 +106,6 @@ insert into programari (id_policlinica, id_angajat, id_pacient, id_medic, _data,
 (5, 5, 1, 1, "2024-01-19", "11:00:00", "13:00:00", false);
 insert into programari (id_policlinica, id_angajat, id_pacient, id_medic, _data, ora_inceput, ora_sfarsit, inregistrat) values
 (5, 5, 2, 1, "2024-01-19", "13:00:00", "14:30:00", false);
+insert into programari (id_policlinica, id_angajat, id_pacient, id_medic, _data, ora_inceput, ora_sfarsit, inregistrat) values
+(5, 5, 1, 1, "2024-01-22", "10:00:00", "12:00:00", false);
 

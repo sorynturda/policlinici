@@ -1501,4 +1501,76 @@ public class Model {
             }
         }
     }
+
+    public static ObservableList<Programare> cautaProgramariMedic(int id_medic) throws SQLException{
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Programare> programari = FXCollections.observableArrayList();
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call ExtragePacientiProgramatiMedic(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(id_medic));
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                Programare programare = new Programare(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_policlinica"),
+                        resultSet.getInt("id_angajat"),
+                        resultSet.getInt("id_pacient"),
+                        resultSet.getInt("id_medic"),
+                        resultSet.getDate("_data"),
+                        resultSet.getTime("ora_inceput"),
+                        resultSet.getTime("ora_sfarsit"),
+                        resultSet.getBoolean("inregistrat"),
+                        resultSet.getString("nume"),
+                        resultSet.getString("prenume")
+                        );
+                programari.add(programare);
+            }
+            System.out.println(programari);
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return programari;
+    }
 }

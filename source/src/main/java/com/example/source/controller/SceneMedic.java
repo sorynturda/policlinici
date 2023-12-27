@@ -1,16 +1,15 @@
 package com.example.source.controller;
 
 import com.example.source.Model;
+import com.example.source.claseTabele.Pacient;
+import com.example.source.claseTabele.Programare;
 import com.example.source.claseTabele.Specialitati;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -52,9 +51,22 @@ public class SceneMedic implements Initializable {
     @FXML
     private TableColumn<Specialitati, String> grad;
     @FXML
+    private TableView<Programare> tabelPacienti;
+    @FXML
+    private TableColumn<Programare, String> numePacient;
+    @FXML
+    private TableColumn<Programare, String> prenumePacient;
+    @FXML
+    private TableColumn<Programare, String> dataProgramare;
+    @FXML
+    private TableColumn<Programare, String> oraProgramare;
+    @FXML
     private Button buttonLogOut;
+    @FXML
+    private TextField inputTextFieldPacienti;
 
     ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
+    ObservableList<Programare> programari = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -73,21 +85,43 @@ public class SceneMedic implements Initializable {
         labelVenitAditional.setText(Model.getMedicCurent().getVenit_aditional().toString());
         try {
             specialitati = Model.listaSpecialitatiMedic(Model.getMedicCurent().getId());
-            populateTabel();
+            populateTabelSpecialitati();
         } catch (SQLException e) {
-            System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
+            System.out.println("EROARE IN MEDIC LA INITIALIZARE SPECIALITATI");
+            throw new RuntimeException(e);
+        }
+        try {
+            programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
+            populateTabelPacienti();
+        } catch (SQLException e) {
+            System.out.println("EROARE IN MEDIC LA INITIALIZARE PACIENTI");
             throw new RuntimeException(e);
         }
     }
 
-    private void populateTabel() {
+    private void populateTabelSpecialitati() {
         nume_specialitate.setCellValueFactory(new PropertyValueFactory<>("nume_specialitate"));
         grad.setCellValueFactory(new PropertyValueFactory<>("grad"));
         tableSpecialitati.setItems(specialitati);
     }
 
-    public void cautaPacient(ActionEvent event) throws IOException {
+    private void populateTabelPacienti() {
+        numePacient.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
+        oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
+        tabelPacienti.setItems(programari);
+    }
 
+    public void cautaPacient(ActionEvent event) throws IOException, SQLException {
+//        String input = inputTextFieldPacienti.getText().trim();
+//        if (!input.isEmpty()) {
+//            programari = Model.cautaPacient(input);
+//            populateTabelPacienti();
+//        } else {
+//            programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
+//            populateTabelPacienti();
+//        }
     }
 
     public void selecteazaPacient(ActionEvent event) throws IOException {
