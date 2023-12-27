@@ -1,9 +1,7 @@
 package com.example.source.controller;
 
 import com.example.source.Model;
-import com.example.source.claseTabele.Pacient;
-import com.example.source.claseTabele.Programare;
-import com.example.source.claseTabele.Specialitati;
+import com.example.source.claseTabele.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -15,6 +13,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class SceneMedic implements Initializable {
@@ -45,6 +46,8 @@ public class SceneMedic implements Initializable {
     @FXML
     private Label labelVenitAditional;
     @FXML
+    private Label labelLocatie;
+    @FXML
     private TableView<Specialitati> tableSpecialitati;
     @FXML
     private TableColumn<Specialitati, String> nume_specialitate;
@@ -64,6 +67,19 @@ public class SceneMedic implements Initializable {
     private Button buttonLogOut;
     @FXML
     private TextField inputTextFieldPacienti;
+    @FXML
+    private ChoiceBox<String> alegeLuna;
+    @FXML
+    private ChoiceBox<String> alegeAn;
+    @FXML
+    private TableView<OrarAngajat> tabelOrar;
+    @FXML
+    private TableColumn<OrarAngajat, Integer> coloanaZi;
+    @FXML
+    private TableColumn<OrarAngajat, String> coloanaInterval;
+    private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
+            "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
+    ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
 
     ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
     ObservableList<Programare> programari = FXCollections.observableArrayList();
@@ -83,6 +99,8 @@ public class SceneMedic implements Initializable {
         labelTitluStiintific.setText(Model.getMedicCurent().getTitlu_stiintific());
         labelPostDidactic.setText(Model.getMedicCurent().getPost_didactic());
         labelVenitAditional.setText(Model.getMedicCurent().getVenit_aditional().toString());
+        labelLocatie.setText(Model.getUtilizatorCurent().getAdresa());
+        setAlegeLunaAn();
         try {
             specialitati = Model.listaSpecialitatiMedic(Model.getMedicCurent().getId());
             populateTabelSpecialitati();
@@ -113,6 +131,84 @@ public class SceneMedic implements Initializable {
         tabelPacienti.setItems(programari);
     }
 
+    private void populateTabelConcediu() {
+        coloanaZi.setCellValueFactory(new PropertyValueFactory<>("zi"));
+        coloanaInterval.setCellValueFactory(new PropertyValueFactory<>("interval"));
+        tabelOrar.setItems(orar);
+    }
+
+    private void setAlegeLunaAn() {
+        alegeLuna.setValue(luni[0]);
+        alegeLuna.getItems().addAll(luni);
+        int anCurent = LocalDate.now().getYear();
+        alegeAn.setValue(Integer.toString(anCurent));
+        alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+    }
+
+    public void afiseazaOrar() {
+        int policlinica = Model.getAngajatCurent().getId_policlinica();
+        ArrayList<String> orarString = Model.orarPoliclinica(policlinica);
+        String luna = alegeLuna.getValue();
+        int numarLuna = getNumarLuna(luna);
+        int an = Integer.parseInt(alegeAn.getValue());
+        LocalDate data = LocalDate.of(an, numarLuna, 1);
+        HashMap<String, String> H = faHashMap(orarString);
+        orar.clear();
+        for (int i = 1; i <= data.lengthOfMonth(); i++)
+            orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
+        puneConcediuInOrar(data);
+        populateTabelConcediu();
+    }
+
+    private int getNumarLuna(String luna) {
+        for (int i = 0; i < 12; i++)
+            if (luni[i].equals(luna))
+                return i + 1;
+        return 1;
+    }
+
+    private void puneConcediuInOrar(LocalDate data) {
+        ArrayList<DataConcediu> concedii = Model.angajatInConcediu(Model.getAngajatCurent().getId());
+        for (DataConcediu it : concedii) {
+            LocalDate data_inceput = it.getData_inceput().toLocalDate();
+            LocalDate data_sfarsit = it.getData_sfarsit().toLocalDate();
+            if (data_sfarsit.getYear() == data_inceput.getYear() && data.getYear() == data_inceput.getYear()) {
+                if (data_sfarsit.getMonth() == data_inceput.getMonth() && data_sfarsit.getMonth() == data.getMonth())
+                    for (int i = data_inceput.getDayOfMonth() - 1; i < data_sfarsit.getDayOfMonth(); i++)
+                        orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                else {
+                    if (data_inceput.getMonth() != data_sfarsit.getMonth()) {
+                        if (data_inceput.getMonth() == data.getMonth())
+                            for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
+                                orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                        if (data_sfarsit.getMonth() == data.getMonth())
+                            for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
+                                orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                    }
+                }
+            } else {
+                if (data_inceput.getYear() == data.getYear() && data_inceput.getMonth() == data.getMonth())
+                    for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
+                        orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                if (data_sfarsit.getYear() == data.getYear() && data_sfarsit.getMonth() == data.getMonth())
+                    for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
+                        orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+            }
+        }
+    }
+
+    private HashMap<String, String> faHashMap(ArrayList<String> orar) {
+        HashMap<String, String> H = new HashMap<>();
+        H.put("SUNDAY", orar.get(0));
+        H.put("MONDAY", orar.get(1));
+        H.put("TUESDAY", orar.get(2));
+        H.put("WEDNESDAY", orar.get(3));
+        H.put("THURSDAY", orar.get(4));
+        H.put("FRIDAY", orar.get(5));
+        H.put("SATURDAY", orar.get(6));
+        return H;
+    }
+
     public void cautaPacient(ActionEvent event) throws IOException, SQLException {
 //        String input = inputTextFieldPacienti.getText().trim();
 //        if (!input.isEmpty()) {
@@ -127,6 +223,7 @@ public class SceneMedic implements Initializable {
     public void selecteazaPacient(ActionEvent event) throws IOException {
 
     }
+
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);
