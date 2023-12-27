@@ -179,13 +179,13 @@ public class SceneMain implements Initializable {
             LocalDate data_inceput = it.getData_inceput().toLocalDate();
             LocalDate data_sfarsit = it.getData_sfarsit().toLocalDate();
             if (data_sfarsit.getYear() == data_inceput.getYear()) {
-                if (data_sfarsit.getMonth() == data_inceput.getMonth() && data_sfarsit.getMonth() == data.getMonth())
+                if (data_sfarsit.getMonth() == data_inceput.getMonth() && data_sfarsit.getMonth() == data.getMonth() && data.getYear() == data_inceput.getYear())
                     for (int i = data_inceput.getDayOfMonth() - 1; i < data_sfarsit.getDayOfMonth(); i++)
                         orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
                 else {
                     if (data_inceput.getMonth() != data_sfarsit.getMonth()) {
                         if (data_inceput.getMonth() == data.getMonth())
-                            for (int i = data_inceput.getDayOfMonth() - 1; i < data.getDayOfMonth(); i++)
+                            for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
                                 orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
                         if (data_sfarsit.getMonth() == data.getMonth())
                             for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
