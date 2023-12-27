@@ -12,9 +12,7 @@ import java.net.URL;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
-import java.time.Clock;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
@@ -99,7 +97,7 @@ public class SceneProgramare implements Initializable {
     }
 
     private void restrictieData() {
-        ArrayList<DataConcediu> concedii = Model.medicInConcediu(medicSelectat.getId_angajat());
+        ArrayList<DataConcediu> concedii = Model.angajatInConcediu(medicSelectat.getId_angajat());
         dataProgramare.setDayCellFactory(picker -> new DateCell() { //date de azi incolo
             @Override
             public void updateItem(LocalDate date, boolean empty) {
@@ -111,7 +109,7 @@ public class SceneProgramare implements Initializable {
                     if (!isDisabled())
                         setDisable(empty || (date.compareTo(azi) < 0) || (date.compareTo(data_inceput) >= 0 && date.compareTo(data_sfarsit) <= 0));
                 }
-                if(!isDisabled())
+                if (!isDisabled())
                     setDisable(empty || date.isBefore(azi));
             }
         });
@@ -127,16 +125,14 @@ public class SceneProgramare implements Initializable {
                 timp.setTime(timp.getTime() + s.getDurata().getTime() - Time.valueOf("00:00:00").getTime());
             System.out.println(timpInceput + " " + timp + " " + orar.getOra_sfarsit());
 
-            if(timp.toLocalTime().isAfter(orar.getOra_sfarsit().toLocalTime())) {
+            if (timp.toLocalTime().isAfter(orar.getOra_sfarsit().toLocalTime())) {
                 labelMesaj.setText("TIMP INSUFICIENT SELECTATI ALTA DATA");
-            }
-            else {
+            } else {
                 Model.inserareProgramare(Model.idPoliclinicaDeCareApartineMedic(medicSelectat.getId()), Model.getAngajatCurent().getId(), pacientSelectat.getId(), medicSelectat.getId(), Date.valueOf(dataSelectata), timpInceput, timp);
                 labelMesaj.setText("PROGRAMARE EFECTUATA CU SUCCES " + timpInceput.toString());
             }
 
-        }
-        else {
+        } else {
             labelMesaj.setText("SELECTATI DATA SI SERVICII");
         }
     }

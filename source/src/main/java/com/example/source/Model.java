@@ -1193,7 +1193,7 @@ public class Model {
         }
     }
 
-    public static ArrayList<DataConcediu> medicInConcediu(Integer idAngajat) {
+    public static ArrayList<DataConcediu> angajatInConcediu(Integer idAngajat) {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1319,7 +1319,7 @@ public class Model {
         return res;
     }
 
-     public static Time extrageFinalProgramari(int id, LocalDate data, Time oraInceput) {
+    public static Time extrageFinalProgramari(int id, LocalDate data, Time oraInceput) {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1349,7 +1349,7 @@ public class Model {
                 res = resultSet.getTime("final_ultima_programare");
             }
 
-            if(res == null)
+            if (res == null)
                 res = oraInceput;
 
             System.out.println(res);
@@ -1469,7 +1469,7 @@ public class Model {
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO programari (id_policlinica, id_angajat, id_pacient, id_medic, _data, ora_inceput, ora_sfarsit, inregistrat) " +
-                    "VALUES (" + id_policlinica + " , " + id_angajat + " , " + id_pacient + " , "  + id_medic + " , '" + data.toString() + "' , '" + ora_inceput.toString() + "' , '" + ora_finalizare.toString() + "' , false )");
+                    "VALUES (" + id_policlinica + " , " + id_angajat + " , " + id_pacient + " , " + id_medic + " , '" + data.toString() + "' , '" + ora_inceput.toString() + "' , '" + ora_finalizare.toString() + "' , false )");
 
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -1502,7 +1502,7 @@ public class Model {
         }
     }
 
-    public static ObservableList<Programare> cautaProgramariMedic(int id_medic) throws SQLException{
+    public static ObservableList<Programare> cautaProgramariMedic(int id_medic) throws SQLException {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1538,7 +1538,7 @@ public class Model {
                         resultSet.getBoolean("inregistrat"),
                         resultSet.getString("nume"),
                         resultSet.getString("prenume")
-                        );
+                );
                 programari.add(programare);
             }
             System.out.println(programari);
@@ -1572,5 +1572,73 @@ public class Model {
             }
         }
         return programari;
+    }
+
+    public static ArrayList<String> orarPoliclinica(int policlinica) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ArrayList<String> orar = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "select duminica as '1', luni as '2', marti as '3', miercuri as '4',"
+                    + "joi as '5', vineri as '6', sambata as '7' from program_functionare pf " + "join policlinici p"
+                    + " where p.id_program_functionare = pf.id and p.id =" + "'" + policlinica + "'";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+
+                orar.add(resultSet.getString(1));
+                orar.add(resultSet.getString(2));
+                orar.add(resultSet.getString(3));
+                orar.add(resultSet.getString(4));
+                orar.add(resultSet.getString(5));
+                orar.add(resultSet.getString(6));
+                orar.add(resultSet.getString(7));
+
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return orar;
     }
 }

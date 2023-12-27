@@ -18,4 +18,12 @@ public class DataConcediu {
     public Date getData_sfarsit() {
         return data_sfarsit;
     }
+
+    @Override
+    public String toString() {
+        return "DataConcediu{" +
+                "data_inceput=" + data_inceput +
+                ", data_sfarsit=" + data_sfarsit +
+                '}';
+    }
 }
