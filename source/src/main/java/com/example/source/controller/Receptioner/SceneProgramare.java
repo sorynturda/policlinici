@@ -119,7 +119,7 @@ public class SceneProgramare implements Initializable {
 
     public void faProgramare() {
         LocalDate dataSelectata = dataProgramare.getValue();
-        if (dataSelectata != null) {
+        if (dataSelectata != null && !serviciiProgramare.isEmpty()) {
             IntervalOrar orar = Model.extrageOrarMedicZiProgramare(medicSelectat.getId(), Date.valueOf(dataSelectata));
             Time timp = Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata, orar.getOra_inceput());
             Time timpInceput = Time.valueOf(timp.toLocalTime());
@@ -137,7 +137,7 @@ public class SceneProgramare implements Initializable {
 
         }
         else {
-            labelMesaj.setText("SELECTATI DATA");
+            labelMesaj.setText("SELECTATI DATA SI SERVICII");
         }
     }
 
