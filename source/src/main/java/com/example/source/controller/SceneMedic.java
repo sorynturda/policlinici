@@ -83,6 +83,16 @@ public class SceneMedic implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
+    @FXML
+    private TableView<Pacient> tabelPacientiProgramati;
+    @FXML
+    private TableColumn<Pacient, String> numePacientProgramare;
+    @FXML
+    private TableColumn<Pacient, String> prenumePacientProgramare;
+    @FXML
+    private TableColumn<Pacient, String> dataPacientProgramare;
+    @FXML
+    private TableColumn<Pacient, String> oraPacientProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();

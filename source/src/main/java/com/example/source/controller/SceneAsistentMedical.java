@@ -54,6 +54,8 @@ public class SceneAsistentMedical implements Initializable {
     @FXML
     private Button buttonLogOut;
     @FXML
+    private TextField cautaPacientProgramatTextField;
+    @FXML
     private ChoiceBox<String> alegeLuna;
     @FXML
     private ChoiceBox<String> alegeAn;
@@ -63,9 +65,16 @@ public class SceneAsistentMedical implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
+    @FXML
+    private TableView<Pacient> tabelPacientiProgramati;
+    @FXML
+    private TableColumn<Pacient, String> numePacientProgramare;
+    @FXML
+    private TableColumn<Pacient, String> prenumePacientProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
+    ObservableList<Pacient> pacientiProgramati = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -177,6 +186,38 @@ public class SceneAsistentMedical implements Initializable {
         H.put("FRIDAY", orar.get(5));
         H.put("SATURDAY", orar.get(6));
         return H;
+    }
+
+    public void afiseazaPacientiProgramatiAzi() {
+        pacientiProgramati.clear();
+        pacientiProgramati = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
+        populateTabelPacientiProgramati();
+    }
+
+    public void afiseazaPacientiProgramati() {
+        pacientiProgramati.clear();
+        String text = cautaPacientProgramatTextField.getText();
+        if (text.isEmpty())
+            pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
+        else
+            switch (text.split(" ").length) {
+                case 1:
+                    pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0]);
+                    break;
+                case 2:
+                    pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0], text.split(" ")[1]);
+                    break;
+                default:
+                    System.out.println("DOAR DOUA CUVINTE");
+                    break;
+            }
+        populateTabelPacientiProgramati();
+    }
+
+    private void populateTabelPacientiProgramati() {
+        numePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        tabelPacientiProgramati.setItems(pacientiProgramati);
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
