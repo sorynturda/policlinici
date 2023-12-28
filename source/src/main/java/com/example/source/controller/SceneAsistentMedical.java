@@ -56,9 +56,16 @@ public class SceneAsistentMedical implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
+    @FXML
+    private TableView<Pacient> tabelPacientiProgramati;
+    @FXML
+    private TableColumn<Pacient, String> numePacientProgramare;
+    @FXML
+    private TableColumn<Pacient, String> prenumePacientProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
+    ObservableList<Pacient> pacientiProgramati = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -153,6 +160,13 @@ public class SceneAsistentMedical implements Initializable {
         H.put("FRIDAY", orar.get(5));
         H.put("SATURDAY", orar.get(6));
         return H;
+    }
+
+    public void afiseazaPacientiProgramatiAzi() {
+        pacientiProgramati = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
+        numePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        tabelPacientiProgramati.setItems(pacientiProgramati);
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {

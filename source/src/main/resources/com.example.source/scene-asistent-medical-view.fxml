@@ -233,12 +233,12 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <TableView fx:id="tabel1" prefHeight="295.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+                        <TableView fx:id="tabelPacientiProgramati" prefHeight="295.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
                            <columns>
                               <TableColumn fx:id="id2" prefWidth="128.0" text="id" visible="false" />
                               <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
-                              <TableColumn fx:id="nume2" prefWidth="150.0" text="NUME" />
-                              <TableColumn fx:id="prenume2" prefWidth="170.0" text="PRENUME" />
+                              <TableColumn fx:id="numePacientProgramare" editable="false" prefWidth="242.0" sortable="false" text="NUME" />
+                              <TableColumn fx:id="prenumePacientProgramare" editable="false" prefWidth="244.0" sortable="false" text="PRENUME" />
                            </columns>
                         </TableView>
                      </center>
@@ -266,7 +266,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
+                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#afiseazaPacientiProgramatiAzi" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
