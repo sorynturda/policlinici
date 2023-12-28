@@ -47,6 +47,8 @@ public class SceneAsistentMedical implements Initializable {
     @FXML
     private Button buttonLogOut;
     @FXML
+    private TextField cautaPacientProgramatTextField;
+    @FXML
     private ChoiceBox<String> alegeLuna;
     @FXML
     private ChoiceBox<String> alegeAn;
@@ -163,7 +165,32 @@ public class SceneAsistentMedical implements Initializable {
     }
 
     public void afiseazaPacientiProgramatiAzi() {
+        pacientiProgramati.clear();
         pacientiProgramati = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
+        populateTabelPacientiProgramati();
+    }
+
+    public void afiseazaPacientiProgramati() {
+        pacientiProgramati.clear();
+        String text = cautaPacientProgramatTextField.getText();
+        if (text.isEmpty())
+            pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
+        else
+            switch (text.split(" ").length) {
+                case 1:
+                    pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0]);
+                    break;
+                case 2:
+                    pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0], text.split(" ")[1]);
+                    break;
+                default:
+                    System.out.println("DOAR DOUA CUVINTE");
+                    break;
+            }
+        populateTabelPacientiProgramati();
+    }
+
+    private void populateTabelPacientiProgramati() {
         numePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("nume"));
         prenumePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("prenume"));
         tabelPacientiProgramati.setItems(pacientiProgramati);
