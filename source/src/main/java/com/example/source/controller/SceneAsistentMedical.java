@@ -194,13 +194,11 @@ public class SceneAsistentMedical implements Initializable {
     }
 
     public void afiseazaPacientiProgramatiAzi() {
-//        programari.clear();
-//        programari = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
-//        populateTabelPacienti();
+        programari.clear();
+        programari = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
+        populateTabelPacienti();
     }
-    public void cautaPacient(){
 
-    }
     public void afiseazaPacientiProgramati() {
         programari.clear();
         String text = cautaPacientProgramatTextField.getText();

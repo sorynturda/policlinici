@@ -268,7 +268,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="276.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
+                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#afiseazaPacientiProgramatiAzi" prefHeight="30.0" prefWidth="276.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
