@@ -2,6 +2,7 @@ package com.example.source.controller.ResurseUmane;
 
 import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
+import com.example.source.claseTabele.Medic;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -13,6 +14,8 @@ import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -52,8 +55,10 @@ public class SceneOrarConcediu implements Initializable {
     private DatePicker concediuInceput;
     @FXML
     private DatePicker concediuSfarsit;
-    private String[] zile = new String[] {"Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"};
-    private String[] ore = new String[] {"07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"};
+    @FXML
+    private DatePicker dataOrar;
+    private String[] zile = new String[]{"Duminica", "Luni", "Marti", "Miercuri", "Joi", "Vineri", "Sambata"};
+    private String[] ore = new String[]{"07:00", "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00", "19:00"};
     private static int DIFERENTA_ORE = 12;
     private static int ZILE_MAXIME_CONCEDIU = 14;
     private Angajat angajatSelectat;
@@ -86,24 +91,31 @@ public class SceneOrarConcediu implements Initializable {
     public void butonConcediuApasat(ActionEvent event) {
         LocalDate ziInceput = concediuInceput.getValue();
         LocalDate ziSfarsit = concediuSfarsit.getValue();
-        if(ziSfarsit == null || ziSfarsit == null)
+        if (ziSfarsit == null || ziSfarsit == null)
             return;
         long nrZileConcediu = DAYS.between(ziInceput, ziSfarsit);
-        if (ziSfarsit.isAfter(ziInceput) && (int) nrZileConcediu <= ZILE_MAXIME_CONCEDIU){
+        if (ziSfarsit.isAfter(ziInceput) && (int) nrZileConcediu <= ZILE_MAXIME_CONCEDIU) {
             System.out.println(ziInceput + "\n" + ziSfarsit);
             System.out.println(nrZileConcediu);
-            if(Model.concediuCorect(angajatSelectat.getId(), Date.valueOf(ziInceput), Date.valueOf(ziSfarsit))) {
+            if (Model.concediuCorect(angajatSelectat.getId(), Date.valueOf(ziInceput), Date.valueOf(ziSfarsit))) {
                 Model.adaugaConcediu(angajatSelectat.getId(), ziInceput, ziSfarsit);
                 labelConfirmareConcediu.setText("Succes!");
-            }
-            else{
+            } else {
                 labelConfirmareConcediu.setText("Eroare");
             }
         }
     }
 
-    public void butonOrarApasat(ActionEvent event) {
-        System.out.println("orar: " + angajatSelectat);
+    public void butonOrarApasat(ActionEvent event) throws SQLException {
+        String zi = alegeZi.getValue();
+        Medic medicSelectat = Model.cautaMedic(angajatSelectat.getId());
+        LocalDate data = dataOrar.getValue();
+        String ora_inceput = oraInceput.getValue() + ":00";
+        String ora_sfarsit = oraSfarsit.getValue() + ":00";
+        if (data == null)
+            Model.modificaOrarMedic(medicSelectat.getId(), 0, zi, Time.valueOf(ora_inceput), Time.valueOf(ora_sfarsit));
+        else
+            Model.modificaOrarMedic(medicSelectat.getId(), 1, data.toString(), Time.valueOf(ora_inceput), Time.valueOf(ora_sfarsit));
     }
 
     public void afiseazaConcediu(ActionEvent event) throws IOException {
