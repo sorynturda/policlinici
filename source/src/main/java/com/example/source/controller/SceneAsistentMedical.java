@@ -3,6 +3,7 @@ package com.example.source.controller;
 import com.example.source.Model;
 import com.example.source.claseTabele.DataConcediu;
 import com.example.source.claseTabele.OrarAngajat;
+import com.example.source.claseTabele.Pacient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

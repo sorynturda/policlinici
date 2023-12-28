@@ -1897,4 +1897,67 @@ public class Model {
         return pacienti;
     }
 
+    public static String programMedicZi(Integer idAngajat, Date dataSelectata) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        String interval = "";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call OrarPentrudataProgramare(?, ?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, idAngajat.toString());
+            callableStatement.setString(2, dataSelectata.toString());
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next()) {
+                String ora_inceput = resultSet.getString("ora_inceput");
+                String ora_sfarsit = resultSet.getString("ora_sfarsit");
+                interval = ora_inceput + "-" + ora_sfarsit;
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return interval;
+    }
+
 }

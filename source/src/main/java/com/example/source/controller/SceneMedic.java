@@ -12,6 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ public class SceneMedic implements Initializable {
         }
         try {
             programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
-            populateTabelPacienti();
+//            populateTabelPacienti();
         } catch (SQLException e) {
             System.out.println("EROARE IN MEDIC LA INITIALIZARE PACIENTI");
             throw new RuntimeException(e);
@@ -186,8 +187,11 @@ public class SceneMedic implements Initializable {
         LocalDate data = LocalDate.of(an, numarLuna, 1);
         HashMap<String, String> H = faHashMap(orarString);
         orar.clear();
-        for (int i = 1; i <= data.lengthOfMonth(); i++)
-            orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
+        for (int i = 1; i <= data.lengthOfMonth(); i++){
+            data = LocalDate.of(an, numarLuna, i);
+            String interval =  Model.programMedicZi(Model.getMedicCurent().getId(), Date.valueOf(data));
+            orar.add(new OrarAngajat(i, interval));
+        }
         puneConcediuInOrar(data);
         populateTabelOrar();
     }
