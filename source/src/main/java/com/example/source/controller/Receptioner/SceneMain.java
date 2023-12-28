@@ -133,11 +133,14 @@ public class SceneMain implements Initializable {
         int salariuNegociat = Model.getAngajatCurent().getSalariu_negociat();
         labelSalariuNegociat.setText(Integer.toString(salariuNegociat) + " LEI");
         int numarOreContract = Model.getAngajatCurent().getNumar_ore();
-        int numarOreLucrate = numarOreContract;
-        for (int i = 0; i < orar.size(); i++)
+        int numarOreConcediu = 0;
+        int numarOreLucrate = 0;
+        for (int i = 0; i < orar.size(); i++) {
             if (orar.get(i).getInterval().equals("CONCEDIU"))
-                numarOreLucrate -= (int) orar.get(i).getDiferenta();
-
+                numarOreConcediu += (int) orar.get(i).getDiferenta();
+            numarOreLucrate += (int) orar.get(i).getDiferenta();
+        }
+        numarOreLucrate -= numarOreConcediu;
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
