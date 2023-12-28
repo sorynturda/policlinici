@@ -3,7 +3,6 @@ package com.example.source.controller;
 import com.example.source.Model;
 import com.example.source.claseTabele.DataConcediu;
 import com.example.source.claseTabele.OrarAngajat;
-import com.example.source.claseTabele.Pacient;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +19,14 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class SceneAsistentMedical implements Initializable {
+    @FXML
+    private Label labelSalariuNegociat;
+    @FXML
+    private Label labelNumarOre;
+    @FXML
+    private Label labelSalariuCalculat;
+    @FXML
+    private Label labelMesajPacientNou;
     @FXML
     private Label labelNume;
     @FXML
@@ -77,18 +84,34 @@ public class SceneAsistentMedical implements Initializable {
         setAlegeLunaAn();
     }
 
-    private void populateTabelConcediu() {
+    private void populateTabelOrar() {
         coloanaZi.setCellValueFactory(new PropertyValueFactory<>("zi"));
         coloanaInterval.setCellValueFactory(new PropertyValueFactory<>("interval"));
         tabelOrar.setItems(orar);
     }
 
     private void setAlegeLunaAn() {
-        alegeLuna.setValue(luni[0]);
+        alegeLuna.setValue(luni[LocalDate.now().getMonth().getValue() - 1]);
         alegeLuna.getItems().addAll(luni);
         int anCurent = LocalDate.now().getYear();
         alegeAn.setValue(Integer.toString(anCurent));
         alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        afiseazaOrar();
+        calculeazaVenituri();
+    }
+
+    private void calculeazaVenituri() {
+        int salariuNegociat = Model.getAngajatCurent().getSalariu_negociat();
+        labelSalariuNegociat.setText(Integer.toString(salariuNegociat) + " LEI");
+        int numarOreContract = Model.getAngajatCurent().getNumar_ore();
+        int numarOreLucrate = numarOreContract;
+        for (int i = 0; i < orar.size(); i++)
+            if (orar.get(i).getInterval().equals("CONCEDIU"))
+                numarOreLucrate -= (int) orar.get(i).getDiferenta();
+
+        labelNumarOre.setText(Integer.toString(numarOreLucrate));
+        int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
+        labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
     }
 
     public void afiseazaOrar() {
@@ -103,7 +126,7 @@ public class SceneAsistentMedical implements Initializable {
         for (int i = 1; i <= data.lengthOfMonth(); i++)
             orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
         puneConcediuInOrar(data);
-        populateTabelConcediu();
+        populateTabelOrar();
     }
 
     private int getNumarLuna(String luna) {
@@ -118,27 +141,28 @@ public class SceneAsistentMedical implements Initializable {
         for (DataConcediu it : concedii) {
             LocalDate data_inceput = it.getData_inceput().toLocalDate();
             LocalDate data_sfarsit = it.getData_sfarsit().toLocalDate();
-            if (data_sfarsit.getYear() == data_inceput.getYear() && data.getYear() == data_inceput.getYear()) {
-                if (data_sfarsit.getMonth() == data_inceput.getMonth() && data_sfarsit.getMonth() == data.getMonth())
+            if (data_sfarsit.getYear() == data_inceput.getYear()) {
+                if (data_sfarsit.getMonth() == data_inceput.getMonth() && data_sfarsit.getMonth() == data.getMonth() && data.getYear() == data_inceput.getYear())
                     for (int i = data_inceput.getDayOfMonth() - 1; i < data_sfarsit.getDayOfMonth(); i++)
-                        orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                        orar.get(i).setInterval("CONCEDIU");
                 else {
                     if (data_inceput.getMonth() != data_sfarsit.getMonth()) {
                         if (data_inceput.getMonth() == data.getMonth())
                             for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
-                                orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                                orar.get(i).setInterval("CONCEDIU");
                         if (data_sfarsit.getMonth() == data.getMonth())
                             for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
-                                orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                                orar.get(i).setInterval("CONCEDIU");
                     }
                 }
             } else {
+                System.out.println(data_inceput + " " + data_sfarsit);
                 if (data_inceput.getYear() == data.getYear() && data_inceput.getMonth() == data.getMonth())
                     for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
-                        orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                        orar.get(i).setInterval("CONCEDIU");
                 if (data_sfarsit.getYear() == data.getYear() && data_sfarsit.getMonth() == data.getMonth())
                     for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
-                        orar.set(i, new OrarAngajat(i + 1, "CONCEDIU"));
+                        orar.get(i).setInterval("CONCEDIU");
             }
         }
     }

@@ -170,32 +170,32 @@
                      <children>
                         <AnchorPane layoutY="-1.0" prefHeight="422.0" prefWidth="489.0" style="-fx-background-color: #e6e6ff;">
                            <children>
-                              <Label layoutX="14.0" layoutY="15.0" prefHeight="40.0" prefWidth="130.0" text="SALAR NEGOCIAT:">
+                              <Label layoutX="4.0" layoutY="15.0" prefHeight="40.0" prefWidth="143.0" text="SALARIU NEGOCIAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="130.0" text="NUMAR ORE:">
+                              <Label layoutX="6.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelSalariuNegociat" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="130.0" text="SALAR CALCULAT:">
+                              <Label layoutX="5.0" layoutY="115.0" prefHeight="40.0" prefWidth="139.0" text="SALARIU CALCULAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
