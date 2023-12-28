@@ -22,6 +22,12 @@ import java.util.ResourceBundle;
 
 public class SceneEconomic implements Initializable {
     @FXML
+    private Label labelSalariuNegociat;
+    @FXML
+    private Label labelNumarOre;
+    @FXML
+    private Label labelSalariuCalculat;
+    @FXML
     private Label labelNume;
     @FXML
     private Label labelPrenume;
@@ -100,6 +106,22 @@ public class SceneEconomic implements Initializable {
         int anCurent = LocalDate.now().getYear();
         alegeAn.setValue(Integer.toString(anCurent));
         alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        afiseazaOrar();
+        calculeazaVenituri();
+    }
+
+    private void calculeazaVenituri() {
+        int salariuNegociat = Model.getAngajatCurent().getSalariu_negociat();
+        labelSalariuNegociat.setText(Integer.toString(salariuNegociat) + " LEI");
+        int numarOreContract = Model.getAngajatCurent().getNumar_ore();
+        int numarOreLucrate = numarOreContract;
+        for (int i = 0; i < orar.size(); i++)
+            if (orar.get(i).getInterval().equals("CONCEDIU"))
+                numarOreLucrate -= (int) orar.get(i).getDiferenta();
+
+        labelNumarOre.setText(Integer.toString(numarOreLucrate));
+        int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
+        labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
     }
 
     public void afiseazaOrar() {
