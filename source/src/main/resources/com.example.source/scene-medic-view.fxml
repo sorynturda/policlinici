@@ -278,10 +278,10 @@
                            <columns>
                               <TableColumn fx:id="id2" prefWidth="128.0" text="id" visible="false" />
                               <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
-                              <TableColumn fx:id="numePacientProgramare" editable="false" prefWidth="100.66668450832367" sortable="false" text="NUME" />
-                              <TableColumn fx:id="prenumePacientProgramare" editable="false" prefWidth="109.33332061767578" sortable="false" text="PRENUME" />
-                              <TableColumn fx:id="dataPacientProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="DATA PROGRAMARE" />
-                              <TableColumn fx:id="oraPacientProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="ORA PROGRAMARE" />
+                              <TableColumn fx:id="numePacient" editable="false" prefWidth="100.66668450832367" sortable="false" text="NUME" />
+                              <TableColumn fx:id="prenumePacient" editable="false" prefWidth="109.33332061767578" sortable="false" text="PRENUME" />
+                              <TableColumn fx:id="dataProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="DATA PROGRAMARE" />
+                              <TableColumn fx:id="oraProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="ORA PROGRAMARE" />
                            </columns>
                         </TableView>
                      </center>
@@ -304,56 +304,12 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="RAPORT NOU">
+                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="RAPORT">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
                               <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="276.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                           </children>
-                        </AnchorPane>
-                     </top>
-                  </BorderPane>
-               </content>
-            </Tab>
-            <Tab text="RAPOARTE PACIENTI">
-               <content>
-                  <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <center>
-                        <TableView fx:id="tabel" prefHeight="146.0" prefWidth="487.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
-                           <columns>
-                              <TableColumn fx:id="id" prefWidth="128.0" text="id" visible="false" />
-                              <TableColumn fx:id="id_utilizator" prefWidth="128.0" text="id_utilizator" visible="false" />
-                              <TableColumn fx:id="nume" prefWidth="150.0" text="ID / DATA" />
-                              <TableColumn fx:id="prenume" prefWidth="170.0" text="NUME" />
-                              <TableColumn fx:id="nume3" prefWidth="150.0" text="PRENUME" />
-                           </columns>
-                        </TableView>
-                     </center>
-                     <top>
-                        <AnchorPane prefHeight="97.0" prefWidth="480.0" style="-fx-background-color: #b3fff0;" BorderPane.alignment="CENTER">
-                           <children>
-                              <TextField layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
-                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENTI:" textAlignment="CENTER">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Label>
-                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
-                                 <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="EDITEAZA">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>

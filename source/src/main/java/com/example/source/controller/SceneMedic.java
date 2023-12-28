@@ -84,16 +84,6 @@ public class SceneMedic implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
-    @FXML
-    private TableView<Pacient> tabelPacientiProgramati;
-    @FXML
-    private TableColumn<Pacient, String> numePacientProgramare;
-    @FXML
-    private TableColumn<Pacient, String> prenumePacientProgramare;
-    @FXML
-    private TableColumn<Pacient, String> dataPacientProgramare;
-    @FXML
-    private TableColumn<Pacient, String> oraPacientProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
@@ -127,7 +117,7 @@ public class SceneMedic implements Initializable {
         }
         try {
             programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
-//            populateTabelPacienti();
+            populateTabelPacienti();
         } catch (SQLException e) {
             System.out.println("EROARE IN MEDIC LA INITIALIZARE PACIENTI");
             throw new RuntimeException(e);
@@ -258,7 +248,8 @@ public class SceneMedic implements Initializable {
     }
 
     public void selecteazaPacient(ActionEvent event) throws IOException {
-
+        Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
+        System.out.println(p);
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {

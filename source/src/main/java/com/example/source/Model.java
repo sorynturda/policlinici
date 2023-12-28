@@ -1642,7 +1642,7 @@ public class Model {
         return orar;
     }
 
-    public static ObservableList<Pacient> pacientiProgramatAziLaPoliclinica(int idPoliclinica) {
+    public static ObservableList<Programare> pacientiProgramati(int idPoliclinica, String s) {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1650,7 +1650,7 @@ public class Model {
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
 
-        ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
+        ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -1662,17 +1662,29 @@ public class Model {
         try {
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
-            String query = "SELECT pacienti.id, pacienti.nume, pacienti.prenume FROM  pacienti " +
-                    "JOIN programari p " +
-                    "WHERE p.id_policlinica = " + "'" + idPoliclinica + "' " + "AND pacienti.id = p.id_pacient " +
-                    "AND p._data = CURDATE()";
+            String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
+                    "p.id_pacient, p.id_medic, p._data, " +
+                    "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
+                    "INNER JOIN programari p " +
+                    "WHERE pac.id = p.id_pacient AND p.id_policlinica =" + "'" + idPoliclinica + "' " +
+                    "AND (pac.nume = '" + s + "' or pac.prenume = '" + s + "')";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nume = resultSet.getString("nume");
-                String prenume = resultSet.getString("prenume");
-                pacienti.add(new Pacient(id, nume, prenume));
+                Programare programare = new Programare(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_policlinica"),
+                        resultSet.getInt("id_angajat"),
+                        resultSet.getInt("id_pacient"),
+                        resultSet.getInt("id_medic"),
+                        resultSet.getDate("_data"),
+                        resultSet.getTime("ora_inceput"),
+                        resultSet.getTime("ora_sfarsit"),
+                        resultSet.getBoolean("inregistrat"),
+                        resultSet.getString("nume"),
+                        resultSet.getString("prenume")
+                );
+                programari.add(programare);
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -1703,10 +1715,10 @@ public class Model {
                 }
             }
         }
-        return pacienti;
+        return programari;
     }
 
-    public static ObservableList<Pacient> pacientiProgramati(int idPoliclinica, String s) {
+    public static ObservableList<Programare> pacientiProgramati(int idPoliclinica, String nume_p, String prenume_p) {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1714,7 +1726,7 @@ public class Model {
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
 
-        ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
+        ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -1726,17 +1738,29 @@ public class Model {
         try {
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
-            String query = "SELECT pacienti.id, pacienti.nume, pacienti.prenume FROM  pacienti " +
-                    "JOIN programari p " +
-                    "WHERE p.id_policlinica = " + "'" + idPoliclinica + "' " + "AND pacienti.id = p.id_pacient " +
-                    "AND (pacienti.nume = " + "'" + s + "' " + "OR pacienti.prenume = " + "'" + s + "')";
+            String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
+                    "p.id_pacient, p.id_medic, p._data, " +
+                    "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
+                    "INNER JOIN programari p " +
+                    "WHERE pac.id = p.id_pacient AND p.id_policlinica =" + "'" + idPoliclinica + "' " +
+                    "AND pac.nume = '" + nume_p + "' AND pac.prenume = '" + prenume_p + "'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nume = resultSet.getString("nume");
-                String prenume = resultSet.getString("prenume");
-                pacienti.add(new Pacient(id, nume, prenume));
+                Programare programare = new Programare(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_policlinica"),
+                        resultSet.getInt("id_angajat"),
+                        resultSet.getInt("id_pacient"),
+                        resultSet.getInt("id_medic"),
+                        resultSet.getDate("_data"),
+                        resultSet.getTime("ora_inceput"),
+                        resultSet.getTime("ora_sfarsit"),
+                        resultSet.getBoolean("inregistrat"),
+                        resultSet.getString("nume"),
+                        resultSet.getString("prenume")
+                );
+                programari.add(programare);
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -1767,10 +1791,10 @@ public class Model {
                 }
             }
         }
-        return pacienti;
+        return programari;
     }
 
-    public static ObservableList<Pacient> pacientiProgramati(int idPoliclinica, String nume_p, String prenume_p) {
+    public static ObservableList<Programare> pacientiProgramati(int idPoliclinica) {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -1778,7 +1802,7 @@ public class Model {
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
 
-        ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
+        ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
@@ -1790,17 +1814,28 @@ public class Model {
         try {
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
-            String query = "SELECT pacienti.id, pacienti.nume, pacienti.prenume FROM  pacienti " +
-                    "JOIN programari p " +
-                    "WHERE p.id_policlinica = " + "'" + idPoliclinica + "' " + "AND pacienti.id = p.id_pacient " +
-                    "AND pacienti.nume = " + "'" + nume_p + "' " + "AND pacienti.prenume = " + "'" + prenume_p + "' ";
+            String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
+                    "p.id_pacient, p.id_medic, p._data, " +
+                    "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
+                    "INNER JOIN programari p " +
+                    "WHERE pac.id = p.id_pacient AND p.id_policlinica =" + "'" + idPoliclinica + "'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nume = resultSet.getString("nume");
-                String prenume = resultSet.getString("prenume");
-                pacienti.add(new Pacient(id, nume, prenume));
+                Programare programare = new Programare(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_policlinica"),
+                        resultSet.getInt("id_angajat"),
+                        resultSet.getInt("id_pacient"),
+                        resultSet.getInt("id_medic"),
+                        resultSet.getDate("_data"),
+                        resultSet.getTime("ora_inceput"),
+                        resultSet.getTime("ora_sfarsit"),
+                        resultSet.getBoolean("inregistrat"),
+                        resultSet.getString("nume"),
+                        resultSet.getString("prenume")
+                );
+                programari.add(programare);
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -1831,70 +1866,7 @@ public class Model {
                 }
             }
         }
-        return pacienti;
-    }
-
-    public static ObservableList<Pacient> pacientiProgramati(int idPoliclinica) {
-        Connection connection = null;
-        Statement selectStatement = null;
-        Statement insertStatement = null;
-        ResultSet resultSet = null;
-        ResultSetMetaData resultSetMetaData = null;
-        CallableStatement callableStatement = null;
-
-        ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
-
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
-        } catch (Exception ex) {
-            System.err.println("An Exception occured during JDBC Driver loading." +
-                    " Details are provided below:");
-            ex.printStackTrace(System.err);
-        }
-        try {
-            connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
-            String query = "SELECT pacienti.id, pacienti.nume, pacienti.prenume FROM  pacienti " +
-                    "JOIN programari p " +
-                    "WHERE p.id_policlinica = " + "'" + idPoliclinica + "' " + "AND pacienti.id = p.id_pacient";
-            callableStatement = connection.prepareCall(query);
-            resultSet = callableStatement.executeQuery();
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nume = resultSet.getString("nume");
-                String prenume = resultSet.getString("prenume");
-                pacienti.add(new Pacient(id, nume, prenume));
-            }
-        } catch (SQLException sqlex) {
-            System.err.println("An SQL Exception occured. Details are provided below:");
-            sqlex.printStackTrace(System.err);
-        } finally {
-            if (resultSet != null) {
-                try {
-                    resultSet.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (selectStatement != null) {
-                try {
-                    selectStatement.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (insertStatement != null) {
-                try {
-                    insertStatement.close();
-                } catch (SQLException e) {
-                }
-            }
-            if (connection != null) {
-                try {
-                    connection.close();
-                } catch (SQLException e) {
-                }
-            }
-        }
-        return pacienti;
+        return programari;
     }
 
     public static String programMedicZi(Integer idAngajat, Date dataSelectata) {

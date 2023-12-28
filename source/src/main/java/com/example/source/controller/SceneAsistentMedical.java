@@ -3,7 +3,7 @@ package com.example.source.controller;
 import com.example.source.Model;
 import com.example.source.claseTabele.DataConcediu;
 import com.example.source.claseTabele.OrarAngajat;
-import com.example.source.claseTabele.Pacient;
+import com.example.source.claseTabele.Programare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,15 +67,19 @@ public class SceneAsistentMedical implements Initializable {
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
     @FXML
-    private TableView<Pacient> tabelPacientiProgramati;
+    private TableView<Programare> tabelPacienti;
     @FXML
-    private TableColumn<Pacient, String> numePacientProgramare;
+    private TableColumn<Programare, String> numePacient;
     @FXML
-    private TableColumn<Pacient, String> prenumePacientProgramare;
+    private TableColumn<Programare, String> prenumePacient;
+    @FXML
+    private TableColumn<Programare, String> dataProgramare;
+    @FXML
+    private TableColumn<Programare, String> oraProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
-    ObservableList<Pacient> pacientiProgramati = FXCollections.observableArrayList();
+    ObservableList<Programare> programari = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -190,35 +194,39 @@ public class SceneAsistentMedical implements Initializable {
     }
 
     public void afiseazaPacientiProgramatiAzi() {
-        pacientiProgramati.clear();
-        pacientiProgramati = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
-        populateTabelPacientiProgramati();
+//        programari.clear();
+//        programari = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
+//        populateTabelPacienti();
     }
+    public void cautaPacient(){
 
+    }
     public void afiseazaPacientiProgramati() {
-        pacientiProgramati.clear();
+        programari.clear();
         String text = cautaPacientProgramatTextField.getText();
         if (text.isEmpty())
-            pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
+            programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
         else
             switch (text.split(" ").length) {
                 case 1:
-                    pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0]);
+                    programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0]);
                     break;
                 case 2:
-                    pacientiProgramati = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0], text.split(" ")[1]);
+                    programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0], text.split(" ")[1]);
                     break;
                 default:
                     System.out.println("DOAR DOUA CUVINTE");
                     break;
             }
-        populateTabelPacientiProgramati();
+        populateTabelPacienti();
     }
 
-    private void populateTabelPacientiProgramati() {
-        numePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("nume"));
-        prenumePacientProgramare.setCellValueFactory(new PropertyValueFactory<>("prenume"));
-        tabelPacientiProgramati.setItems(pacientiProgramati);
+    private void populateTabelPacienti() {
+        numePacient.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
+        oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
+        tabelPacienti.setItems(programari);
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
