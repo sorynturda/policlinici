@@ -278,10 +278,10 @@
                            <columns>
                               <TableColumn fx:id="id2" prefWidth="128.0" text="id" visible="false" />
                               <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
-                              <TableColumn fx:id="numePacient" prefWidth="100.66668450832367" text="NUME" />
-                              <TableColumn fx:id="prenumePacient" prefWidth="109.33332061767578" text="PRENUME" />
-                              <TableColumn fx:id="dataProgramare" prefWidth="138.66664123535156" text="DATA PROGRAMARE" />
-                              <TableColumn fx:id="oraProgramare" prefWidth="138.66664123535156" text="ORA PROGRAMARE" />
+                              <TableColumn fx:id="numePacientProgramare" editable="false" prefWidth="100.66668450832367" sortable="false" text="NUME" />
+                              <TableColumn fx:id="prenumePacientProgramare" editable="false" prefWidth="109.33332061767578" sortable="false" text="PRENUME" />
+                              <TableColumn fx:id="dataPacientProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="DATA PROGRAMARE" />
+                              <TableColumn fx:id="oraPacientProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="ORA PROGRAMARE" />
                            </columns>
                         </TableView>
                      </center>

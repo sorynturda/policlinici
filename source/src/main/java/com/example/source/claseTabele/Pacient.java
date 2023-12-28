@@ -5,10 +5,21 @@ public class Pacient {
     String nume;
     String prenume;
 
+    String dataProgramare;
+    String oraProgramare;
+
     public Pacient(int id, String nume, String prenume) {
         this.id = id;
         this.nume = nume;
         this.prenume = prenume;
+    }
+
+    public Pacient(int id, String nume, String prenume, String dataProgramare, String oraProgramare) {
+        this.id = id;
+        this.nume = nume;
+        this.prenume = prenume;
+        this.dataProgramare = dataProgramare;
+        this.oraProgramare = oraProgramare;
     }
 
     public int getId() {
@@ -21,6 +32,14 @@ public class Pacient {
 
     public String getPrenume() {
         return prenume;
+    }
+
+    public String getDataProgramare() {
+        return dataProgramare;
+    }
+
+    public String getOraProgramare() {
+        return oraProgramare;
     }
 
     @Override
