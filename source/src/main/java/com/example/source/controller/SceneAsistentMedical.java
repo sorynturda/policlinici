@@ -219,6 +219,11 @@ public class SceneAsistentMedical implements Initializable {
         populateTabelPacienti();
     }
 
+    public void selecteazaPacient(ActionEvent event) throws IOException {
+        Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
+        System.out.println(p);
+    }
+
     private void populateTabelPacienti() {
         numePacient.setCellValueFactory(new PropertyValueFactory<>("nume"));
         prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));

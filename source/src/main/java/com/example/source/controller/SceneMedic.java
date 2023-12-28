@@ -73,7 +73,7 @@ public class SceneMedic implements Initializable {
     @FXML
     private Button buttonLogOut;
     @FXML
-    private TextField inputTextFieldPacienti;
+    private TextField cautaPacientProgramatTextField;
     @FXML
     private ChoiceBox<String> alegeLuna;
     @FXML
@@ -177,9 +177,9 @@ public class SceneMedic implements Initializable {
         LocalDate data = LocalDate.of(an, numarLuna, 1);
         HashMap<String, String> H = faHashMap(orarString);
         orar.clear();
-        for (int i = 1; i <= data.lengthOfMonth(); i++){
+        for (int i = 1; i <= data.lengthOfMonth(); i++) {
             data = LocalDate.of(an, numarLuna, i);
-            String interval =  Model.programMedicZi(Model.getMedicCurent().getId(), Date.valueOf(data));
+            String interval = Model.programMedicZi(Model.getMedicCurent().getId(), Date.valueOf(data));
             orar.add(new OrarAngajat(i, interval));
         }
         puneConcediuInOrar(data);
@@ -236,20 +236,35 @@ public class SceneMedic implements Initializable {
         return H;
     }
 
-    public void cautaPacient(ActionEvent event) throws IOException, SQLException {
-//        String input = inputTextFieldPacienti.getText().trim();
-//        if (!input.isEmpty()) {
-//            programari = Model.cautaPacient(input);
-//            populateTabelPacienti();
-//        } else {
-//            programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
-//            populateTabelPacienti();
-//        }
+    public void afiseazaPacientiProgramati() throws SQLException {
+        programari.clear();
+        String text = cautaPacientProgramatTextField.getText();
+        if (text.isEmpty())
+            programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
+        else
+            switch (text.split(" ").length) {
+                case 1:
+                    programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId(), text.split(" ")[0]);
+                    break;
+                case 2:
+                    programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId(), text.split(" ")[0], text.split(" ")[1]);
+                    break;
+                default:
+                    System.out.println("DOAR DOUA CUVINTE");
+                    break;
+            }
+        populateTabelPacienti();
     }
 
     public void selecteazaPacient(ActionEvent event) throws IOException {
         Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
         System.out.println(p);
+    }
+
+    public void afiseazaPacientiProgramatiAzi() {
+        programari.clear();
+        programari = Model.pacientiProgramatAziLaPoliclinicaM(Model.getMedicCurent().getId());
+        populateTabelPacienti();
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {
