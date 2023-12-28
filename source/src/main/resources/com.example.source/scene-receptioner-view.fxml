@@ -296,7 +296,7 @@
                      <top>
                         <AnchorPane prefHeight="97.0" prefWidth="480.0" style="-fx-background-color: #e6e6ff;" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" />
+                              <TextField layoutX="132.0" layoutY="22.0" prefHeight="32.0" prefWidth="165.0" />
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA PACIENTI:" textAlignment="CENTER">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
@@ -312,12 +312,17 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
+                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="181.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
                               <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="INREGISTREAZA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="203.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="94.0" style="-fx-background-color: #ffffff;" text="BON">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
