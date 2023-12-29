@@ -109,3 +109,22 @@ insert into programari (id_policlinica, id_angajat, id_pacient, id_medic, _data,
 insert into programari (id_policlinica, id_angajat, id_pacient, id_medic, _data, ora_inceput, ora_sfarsit, inregistrat) values
 (5, 5, 1, 1, "2024-01-22", "10:00:00", "12:00:00", false);
 
+insert into servicii_oferite_policlinica values
+	(1, 1),
+    (1, 3),
+    (1, 4),
+    (1, 5),
+    (2, 4),
+    (2, 5),
+    (3, 1),
+    (3, 2),
+    (3, 3),
+    (3, 4),
+    (3, 5),
+    (4, 1),
+    (4, 2),
+    (4, 3),
+    (5, 1),
+    (5, 2),
+    (5, 4);
+

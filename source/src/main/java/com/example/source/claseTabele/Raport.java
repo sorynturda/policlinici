@@ -1,6 +1,8 @@
 package com.example.source.claseTabele;
 
-import java.util.ArrayList;
+import javafx.collections.ObservableList;
+
+import java.util.HashSet;
 
 public class Raport {
     private int id;
@@ -15,7 +17,7 @@ public class Raport {
     private String recomandari;
     private boolean parafa;
 
-    ArrayList<Serviciu> servicii = new ArrayList<>();
+    private ObservableList<Serviciu> serviciiRaport;
 
     public Raport(int id, int id_programare, int id_medic, int id_asistent, String nume_medic_recomandare, String prenume_medic_recomandare, String istoric, String simptome, String diagnostic, String recomandari, boolean parafa) {
         this.id = id;
@@ -44,8 +46,8 @@ public class Raport {
         this.parafa = parafa;
     }
 
-    public void setServicii(ArrayList<Serviciu> servicii) {
-        this.servicii = servicii;
+    public void addServicii(Serviciu serviciu) {
+        serviciiRaport.add(serviciu);
     }
 
     public int getId() {
@@ -90,6 +92,10 @@ public class Raport {
 
     public boolean isParafa() {
         return parafa;
+    }
+
+    public ObservableList<Serviciu> getServiciiRaport() {
+        return (ObservableList<Serviciu>) serviciiRaport;
     }
 
     public void setId(int id) {
@@ -152,6 +158,10 @@ public class Raport {
 
     public void setParafa(boolean parafa) {
         this.parafa = parafa;
+    }
+
+    public void setServiciiRaport(ObservableList<Serviciu> serviciiRaport) {
+        this.serviciiRaport = serviciiRaport;
     }
 
     @Override

@@ -154,7 +154,7 @@ create table if not exists servicii_oferite_programare(
 create table if not exists servicii_oferite_raport(
     id_raport int not null,
     id_serviciu int not null,
-    investigatii varchar(500) not null
+    investigatii varchar(500) default " "
 );
 
 create table if not exists servicii_specialitate_medic(

@@ -113,7 +113,7 @@
                                  </font>
                               </Button>
                               <TextArea fx:id="textInvestigatii" layoutX="209.0" layoutY="15.0" prefHeight="101.0" prefWidth="375.0" style="-fx-background-color: #ffffff;" />
-                              <Button layoutX="209.0" layoutY="139.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
+                              <Button layoutX="209.0" layoutY="139.0" mnemonicParsing="false" onAction="#updateServicii" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -124,10 +124,10 @@
                      <bottom>
                         <AnchorPane prefHeight="385.0" prefWidth="604.0" style="-fx-background-color: #eeffcc;" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView layoutX="13.0" layoutY="6.0" prefHeight="372.0" prefWidth="574.0" style="-fx-background-color: #ffffff;">
+                              <TableView fx:id="tabelInvestigatii" layoutX="13.0" layoutY="6.0" prefHeight="372.0" prefWidth="574.0" style="-fx-background-color: #ffffff;">
                                 <columns>
-                                  <TableColumn prefWidth="167.33331298828125" text="SERVICIU" />
-                                  <TableColumn prefWidth="406.0000305175781" text="INVESTIGATII" />
+                                  <TableColumn fx:id="numeServiciu" prefWidth="167.33331298828125" text="SERVICIU" />
+                                  <TableColumn fx:id="detaliiInvestigatii" prefWidth="406.0000305175781" text="INVESTIGATII" />
                                 </columns>
                               </TableView>
                            </children>

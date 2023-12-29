@@ -3,12 +3,19 @@ package com.example.source.controller;
 import com.example.source.Model;
 import com.example.source.claseTabele.Programare;
 import com.example.source.claseTabele.Raport;
+import com.example.source.claseTabele.Serviciu;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.ResourceBundle;
 
 public class SceneRaport {
     private Programare programareSelectata;
@@ -33,24 +40,46 @@ public class SceneRaport {
     private TextArea textInvestigatii;
     @FXML
     private Button puneParafa;
+    @FXML
+    private TableView<Serviciu> tabelInvestigatii;
+    @FXML
+    private TableColumn<Serviciu, String> numeServiciu;
+    @FXML
+    private TableColumn<Serviciu, String> detaliiInvestigatii;
+    private HashSet<Serviciu> serviciiRaport = new HashSet<>();
 
-    public void adaugaServiciu() {
-//        String serviciuSelectat = alegeServiciu.getValue();
-//        ArrayList<Serviciu> servicii = medicSelectat.getServicii();
-//        for (Serviciu s : servicii)
-//            if (s.getNume_serviciu().equals(serviciuSelectat))
-//                serviciiProgramare.add(s);
+    private void populateTabelInvestigatii() {
+        numeServiciu.setCellValueFactory(new PropertyValueFactory<>("nume_serviciu"));
+        detaliiInvestigatii.setCellValueFactory(new PropertyValueFactory<>("investigatii"));
+        tabelInvestigatii.setItems(raportPacient.getServiciiRaport());
     }
 
+    public void adaugaServiciu() {
+        String serviciuSelectat = alegeServiciu.getValue();
+        ArrayList<Serviciu> servicii = Model.cautaServiciiPoliclinica(Model.getAngajatCurent().getId_policlinica());
+        for (Serviciu s : servicii)
+            if (s.getNume_serviciu().equals(serviciuSelectat)) {
+                s.setInvestigatii(textInvestigatii.getText());
+                serviciiRaport.add(s);
+                raportPacient.addServicii(s);
+            }
+        System.out.println(serviciiRaport);
+    }
 
     public void setProgramareSelectata(Programare programare) throws SQLException {
         programareSelectata = programare;
+        creazaCheckBoxServicii();
         if(Model.getAngajatCurent().getFunctie().equals(Model.ASISTENT_MEDICAL))
             puneParafa.setVisible(false);
         else
             puneParafa.setVisible(true);
         System.out.println(programare);
+
         raportPacient = Model.extrageRaport(programare.getId());
+        raportPacient.setServiciiRaport(Model.cautaServiciiRaport(raportPacient.getId()));
+        populateTabelInvestigatii();
+
+        System.out.println(raportPacient.getServiciiRaport());
         if (!raportPacient.getNume_medic_recomandare().isEmpty())
             numeTextField.setText(raportPacient.getNume_medic_recomandare());
         if (!raportPacient.getPrenume_medic_recomandare().isEmpty())
@@ -74,6 +103,22 @@ public class SceneRaport {
         raportPacient.setSimptome(textSimptome.getText());
         raportPacient.setRecomandari(textRecomandari.getText());
         Model.updateRaport(raportPacient);
+    }
+
+    private void creazaCheckBoxServicii() {
+        alegeServiciu.getItems().clear();
+        ArrayList<Serviciu> serviciiMedic = Model.cautaServiciiPoliclinica(programareSelectata.getId_policlinica());
+        alegeServiciu.setValue(serviciiMedic.get(0).getNume_serviciu());
+        String[] nume_servicii = new String[serviciiMedic.size()];
+        for (int i = 0; i < serviciiMedic.size(); i++)
+            nume_servicii[i] = serviciiMedic.get(i).getNume_serviciu();
+        alegeServiciu.getItems().addAll(nume_servicii);
+    }
+
+    public void updateServicii() throws SQLException {
+        Model.updateServiciiRaport(raportPacient.getId(), serviciiRaport);
+        serviciiRaport.clear();
+        populateTabelInvestigatii();
     }
 
     public void goBack(ActionEvent event) throws IOException {

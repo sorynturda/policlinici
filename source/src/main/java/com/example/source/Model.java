@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class Model {
     public static final String SUPERADMIN = "super_admin";
@@ -2584,6 +2585,192 @@ public class Model {
                     "WHERE id = '" + raportPacient.getId() + "'";
             callableStatement = connection.prepareCall(query);
             callableStatement.executeUpdate();
+        } catch (
+                SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static ArrayList<Serviciu> cautaServiciiPoliclinica(int id_policlinica) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ArrayList<Serviciu> servicii = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "select s.id, s.nume_serviciu, s.pret, s.durata from (policlinici p inner join servicii_oferite_policlinica sp) inner join servicii s " +
+                    "where p.id = '" + id_policlinica + "' and s.id = sp.id_serviciu and sp.id_policlinica = p.id";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nume_serviciu = resultSet.getString("nume_serviciu");
+                Double pret = resultSet.getDouble("pret");
+                Time durata = resultSet.getTime("durata");
+                servicii.add(new Serviciu(id, nume_serviciu, pret, durata));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return servicii;
+    }
+
+    public static ObservableList<Serviciu> cautaServiciiRaport(int id_raport) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Serviciu> servicii = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "select s.id, s.nume_serviciu, s.pret, s.durata, sr.investigatii from (rapoarte r inner join servicii_oferite_raport sr) inner join servicii s " +
+                    "where r.id = '" + id_raport + "' and s.id = sr.id_serviciu and sr.id_raport = r.id";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nume_serviciu = resultSet.getString("nume_serviciu");
+                Double pret = resultSet.getDouble("pret");
+                Time durata = resultSet.getTime("durata");
+                String investigatii = resultSet.getString("investigatii");
+                servicii.add(new Serviciu(id, nume_serviciu, pret, durata, investigatii));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return servicii;
+    }
+
+    public static void updateServiciiRaport(int id_raport, HashSet<Serviciu> serviciiRaport) throws SQLException {
+
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (
+                Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            for(Serviciu s: serviciiRaport) {
+                String query = "INSERT INTO servicii_oferite_raport(id_raport, id_serviciu, investigatii)" +
+                                "VALUES ('" + id_raport + "' , '" + s.getId() + "' , '" + s.getInvestigatii() +"')";
+                callableStatement = connection.prepareCall(query);
+                callableStatement.executeUpdate();
+            }
         } catch (
                 SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");

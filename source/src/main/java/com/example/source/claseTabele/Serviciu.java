@@ -16,6 +16,14 @@ public class Serviciu {
         this.durata = durata;
     }
 
+    public Serviciu(int id, String nume_serviciu, Double pret, Time durata, String investigatii) {
+        this.id = id;
+        this.nume_serviciu = nume_serviciu;
+        this.pret = pret;
+        this.durata = durata;
+        this.investigatii = investigatii;
+    }
+
     public int getId() {
         return id;
     }
@@ -23,7 +31,6 @@ public class Serviciu {
     public String getNume_serviciu() {
         return nume_serviciu;
     }
-
 
     public Double getPret() {
         return pret;
@@ -33,6 +40,14 @@ public class Serviciu {
         return durata;
     }
 
+    public String getInvestigatii() {
+        return investigatii;
+    }
+
+    public void setInvestigatii(String investigatii) {
+        this.investigatii = investigatii;
+    }
+
     @Override
     public String toString() {
         return "Serviciu{" +
@@ -40,6 +55,7 @@ public class Serviciu {
                 ", nume_serviciu='" + nume_serviciu + '\'' +
                 ", pret=" + pret +
                 ", durata=" + durata +
+                ", investigatii='" + investigatii + '\'' +
                 '}';
     }
 }
