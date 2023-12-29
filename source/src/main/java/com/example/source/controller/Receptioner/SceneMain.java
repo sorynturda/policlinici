@@ -4,6 +4,7 @@ import com.example.source.Model;
 import com.example.source.claseTabele.DataConcediu;
 import com.example.source.claseTabele.OrarAngajat;
 import com.example.source.claseTabele.Pacient;
+import com.example.source.claseTabele.Programare;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +21,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SceneMain implements Initializable {
@@ -58,7 +60,9 @@ public class SceneMain implements Initializable {
     @FXML
     private Label labelLocatie;
     @FXML
-    private Button buttonLogOut;
+    private Label label1;
+    @FXML
+    private TextField cautaPacientProgramatTextField;
     @FXML
     private Tab tabAdaugaPacient;
     @FXML
@@ -79,10 +83,22 @@ public class SceneMain implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
+    @FXML
+    private TableView<Programare> tabelPacienti;
+    @FXML
+    private TableColumn<Programare, String> numePacient;
+    @FXML
+    private TableColumn<Programare, String> prenumePacient;
+    @FXML
+    private TableColumn<Programare, String> dataProgramare;
+    @FXML
+    private TableColumn<Programare, String> oraProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
+    ObservableList<Programare> programari = FXCollections.observableArrayList();
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -169,7 +185,16 @@ public class SceneMain implements Initializable {
         }
     }
 
+    private void populateTabelPacientiProgramati() {
+        numePacient.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
+        oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
+        tabelPacienti.setItems(programari);
+    }
+
     public void cautaPacient(ActionEvent event) throws IOException, SQLException {
+        label1.setText("");
         String input = inputTextField.getText().trim();
         if (!input.isEmpty()) {
             pacienti = Model.cautaPacient(input);
@@ -246,6 +271,33 @@ public class SceneMain implements Initializable {
         return 1;
     }
 
+    public void afiseazaPacientiProgramati() {
+        programari.clear();
+        String text = cautaPacientProgramatTextField.getText();
+        if (text.isEmpty())
+            programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
+        else
+            switch (text.split(" ").length) {
+                case 1:
+                    programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0]);
+                    break;
+                case 2:
+                    programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0], text.split(" ")[1]);
+                    break;
+                default:
+                    System.out.println("DOAR DOUA CUVINTE");
+                    break;
+            }
+        populateTabelPacientiProgramati();
+    }
+
+    public void afiseazaPacientiProgramatiAzi() {
+        label1.setText("");
+        programari.clear();
+        programari = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
+        populateTabelPacientiProgramati();
+    }
+
     public void adaugaPacientNou(ActionEvent event) throws SQLException {
         String nume = numePacientNouTextField.getText();
         String prenume = prenumePacientNouTextField.getText();
@@ -263,6 +315,18 @@ public class SceneMain implements Initializable {
         }
     }
 
+    public void inregistreazaPacientProgramat() throws SQLException {
+        Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
+        if(p != null && Objects.equals(p.get_data().toLocalDate(), LocalDate.now())){
+            int id = p.getId();
+            int id_medic = p.getId_medic();
+            Model.inregistreazaPacientProgramat(id);
+            label1.setText("");
+            Model.genereazaRaport(id, id_medic);
+        }
+        else
+            label1.setText("ALEGE UN PACIENT PROGRAMAT ASTAZI!");
+    }
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);

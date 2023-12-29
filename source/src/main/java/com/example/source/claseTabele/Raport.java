@@ -92,6 +92,68 @@ public class Raport {
         return parafa;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setId_programare(int id_programare) {
+        this.id_programare = id_programare;
+    }
+
+    public void setId_medic(int id_medic) {
+        this.id_medic = id_medic;
+    }
+
+    public void setId_asistent(int id_asistent) {
+        this.id_asistent = id_asistent;
+    }
+
+    public void setNume_medic_recomandare(String nume_medic_recomandare) {
+        if (nume_medic_recomandare.isEmpty())
+            this.nume_medic_recomandare = " ";
+        else
+            this.nume_medic_recomandare = nume_medic_recomandare;
+    }
+
+    public void setPrenume_medic_recomandare(String prenume_medic_recomandare) {
+        if (prenume_medic_recomandare.isEmpty())
+            this.prenume_medic_recomandare = " ";
+        else
+            this.prenume_medic_recomandare = prenume_medic_recomandare;
+    }
+
+    public void setIstoric(String istoric) {
+        if (istoric.isEmpty())
+            this.istoric = " ";
+        else
+            this.istoric = istoric;
+    }
+
+    public void setSimptome(String simptome) {
+        if (simptome.isEmpty())
+            this.simptome = " ";
+        else
+            this.simptome = simptome;
+    }
+
+    public void setDiagnostic(String diagnostic) {
+        if (diagnostic.isEmpty())
+            this.diagnostic = " ";
+        else
+            this.diagnostic = diagnostic;
+    }
+
+    public void setRecomandari(String recomandari) {
+        if (recomandari.isEmpty())
+            this.recomandari = " ";
+        else
+            this.recomandari = recomandari;
+    }
+
+    public void setParafa(boolean parafa) {
+        this.parafa = parafa;
+    }
+
     @Override
     public String toString() {
         return "Raport{" +

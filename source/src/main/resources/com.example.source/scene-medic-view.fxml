@@ -280,8 +280,9 @@
                               <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
                               <TableColumn fx:id="numePacient" editable="false" prefWidth="100.66668450832367" sortable="false" text="NUME" />
                               <TableColumn fx:id="prenumePacient" editable="false" prefWidth="109.33332061767578" sortable="false" text="PRENUME" />
-                              <TableColumn fx:id="dataProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="DATA PROGRAMARE" />
-                              <TableColumn fx:id="oraProgramare" editable="false" prefWidth="138.66664123535156" sortable="false" text="ORA PROGRAMARE" />
+                              <TableColumn fx:id="dataProgramare" editable="false" prefWidth="126.0" sortable="false" text="DATA PROGRAMARE" />
+                              <TableColumn fx:id="oraProgramare" editable="false" prefWidth="122.0" sortable="false" text="ORA PROGRAMARE" />
+                              <TableColumn fx:id="coloanaInregistrat" editable="false" prefWidth="26.0" sortable="false" text="X" />
                            </columns>
                         </TableView>
                      </center>
@@ -314,6 +315,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
+                              <Label fx:id="label1" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="459.0" textFill="RED" />
                            </children>
                         </AnchorPane>
                      </top>

@@ -27,6 +27,8 @@ public class SceneMedic implements Initializable {
     @FXML
     private Label labelSalariuCalculat;
     @FXML
+    private Label label1;
+    @FXML
     private Label labelNume;
     @FXML
     private Label labelPrenume;
@@ -70,6 +72,8 @@ public class SceneMedic implements Initializable {
     private TableColumn<Programare, String> dataProgramare;
     @FXML
     private TableColumn<Programare, String> oraProgramare;
+    @FXML
+    private TableColumn<Programare, Integer> coloanaInregistrat;
     @FXML
     private Button buttonLogOut;
     @FXML
@@ -135,6 +139,7 @@ public class SceneMedic implements Initializable {
         prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));
         dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
         oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
+        coloanaInregistrat.setCellValueFactory(new PropertyValueFactory<>("inregistrat"));
         tabelPacienti.setItems(programari);
     }
 
@@ -238,6 +243,7 @@ public class SceneMedic implements Initializable {
 
     public void afiseazaPacientiProgramati() throws SQLException {
         programari.clear();
+        label1.setText("");
         String text = cautaPacientProgramatTextField.getText();
         if (text.isEmpty())
             programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
@@ -256,19 +262,25 @@ public class SceneMedic implements Initializable {
         populateTabelPacienti();
     }
 
-    public void selecteazaPacient(ActionEvent event) throws IOException {
+    public void selecteazaPacient(ActionEvent event) throws IOException, SQLException {
         Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
         System.out.println(p);
-        switchToSceneRaport(event);
+        if (p != null && p.isInregistrat()) {
+            label1.setText("");
+            switchToSceneRaport(event);
+        } else
+            label1.setText("ALEGE UN PACIENT INREGISTRAT");
     }
 
     public void afiseazaPacientiProgramatiAzi() {
+        label1.setText("");
         programari.clear();
         programari = Model.pacientiProgramatAziLaPoliclinicaM(Model.getMedicCurent().getId());
         populateTabelPacienti();
     }
 
-    public void switchToSceneRaport(ActionEvent event) throws IOException {
+    public void switchToSceneRaport(ActionEvent event) throws IOException, SQLException {
+        label1.setText("");
         String scene = "/com.example.source/scene-raport-view.fxml";
         Model.switchToWindowRaport(event, tabelPacienti.getSelectionModel().getSelectedItem());
     }

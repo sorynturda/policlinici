@@ -56,3 +56,25 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER $
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AdaugaOrarMedic`(
+	IN id INT,
+    IN tip BOOLEAN,
+    IN input VARCHAR(10),
+    IN ora_i TIME,
+    IN ora_s TIME
+    )
+BEGIN
+	
+	SET @exista = (SELECT count(*) from orar_medici
+					where id_medic = id and zi_saptamana_sau_data = input);
+	if @exista > 0 then
+		UPDATE orar_medici
+        SET ora_inceput = ora_i, ora_sfarsit = ora_s
+        WHERE zi_saptamana_sau_data = input AND id_medic = id;
+	else
+		INSERT INTO orar_medici	VALUES
+        (id, tip, input, ora_i, ora_s);
+	end if;
+END $
+DELIMITER ;

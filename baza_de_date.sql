@@ -99,13 +99,13 @@ create table if not exists rapoarte(
     id int auto_increment primary key not null,
     id_programare int unique not null,
     id_medic int not null,
-    id_asistent int not null,
-    nume_medic_recomandare varchar(20),
-    prenume_medic_recomandare varchar(20),
-    istoric varchar(5000),
-    simptome varchar(1000),
-    diagnostic varchar(200),
-    recomandari varchar(5000),
+    id_asistent int,
+    nume_medic_recomandare varchar(20) default " ",
+    prenume_medic_recomandare varchar(20) default " ",
+    istoric varchar(5000) default " ",
+    simptome varchar(1000) default " ",
+    diagnostic varchar(200) default " ",
+    recomandari varchar(5000) default " ",
     parafa boolean default false
 );
 

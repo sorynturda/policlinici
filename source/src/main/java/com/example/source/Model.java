@@ -1030,7 +1030,7 @@ public class Model {
         stage.show();
     }
 
-    public static void switchToWindowRaport(ActionEvent event, Programare programare) throws IOException {
+    public static void switchToWindowRaport(ActionEvent event, Programare programare) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-raport-view.fxml"));
         root = loader.load();
 
@@ -2345,6 +2345,247 @@ public class Model {
             callableStatement.setTime(5, time1);
             resultSet = callableStatement.executeQuery();
         } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void inregistreazaPacientProgramat(int id) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "update programari " +
+                    "set inregistrat = true where id = " + "'" + id + "'";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.executeUpdate();
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void genereazaRaport(int id, int idMedic) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "insert into rapoarte(id_programare, id_medic) values " +
+                    "('" + id + "', '" + idMedic + "')";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.executeUpdate();
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static Raport extrageRaport(int id) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        Raport res = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT * FROM rapoarte WHERE id_programare = '" + id + "'";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next()) {
+                res = new Raport(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_programare"),
+                        resultSet.getInt("id_medic"),
+                        resultSet.getInt("id_asistent"),
+                        resultSet.getString("nume_medic_recomandare"),
+                        resultSet.getString("prenume_medic_recomandare"),
+                        resultSet.getString("istoric"),
+                        resultSet.getString("simptome"),
+                        resultSet.getString("diagnostic"),
+                        resultSet.getString("recomandari"),
+                        resultSet.getBoolean("parafa")
+                );
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return res;
+    }
+
+    public static void updateRaport(Raport raportPacient) throws SQLException {
+
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (
+                Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "UPDATE rapoarte SET " +
+                    "nume_medic_recomandare = '" + raportPacient.getNume_medic_recomandare() + "', " +
+                    "prenume_medic_recomandare = '" + raportPacient.getPrenume_medic_recomandare() + "', " +
+                    "istoric = '" + raportPacient.getIstoric() + "', " +
+                    "simptome = '" + raportPacient.getSimptome() + "', " +
+                    "diagnostic = '" + raportPacient.getDiagnostic() + "', " +
+                    "recomandari = '" + raportPacient.getRecomandari() + "' " +
+                    "WHERE id = '" + raportPacient.getId() + "'";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.executeUpdate();
+        } catch (
+                SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
             sqlex.printStackTrace(System.err);
         } finally {

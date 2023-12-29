@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,7 +28,7 @@ public class SceneAsistentMedical implements Initializable {
     @FXML
     private Label labelSalariuCalculat;
     @FXML
-    private Label labelMesajPacientNou;
+    private Label label1;
     @FXML
     private Label labelNume;
     @FXML
@@ -195,12 +196,14 @@ public class SceneAsistentMedical implements Initializable {
 
     public void afiseazaPacientiProgramatiAzi() {
         programari.clear();
+        label1.setText("");
         programari = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
         populateTabelPacienti();
     }
 
     public void afiseazaPacientiProgramati() {
         programari.clear();
+        label1.setText("");
         String text = cautaPacientProgramatTextField.getText();
         if (text.isEmpty())
             programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
@@ -219,9 +222,14 @@ public class SceneAsistentMedical implements Initializable {
         populateTabelPacienti();
     }
 
-    public void selecteazaPacient(ActionEvent event) throws IOException {
+    public void selecteazaPacient(ActionEvent event) throws IOException, SQLException {
         Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
         System.out.println(p);
+        if (p != null && p.isInregistrat()) {
+            label1.setText("");
+            switchToSceneRaport(event);
+        } else
+            label1.setText("ALEGE UN PACIENT INREGISTRAT");
     }
 
     private void populateTabelPacienti() {
@@ -230,6 +238,12 @@ public class SceneAsistentMedical implements Initializable {
         dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
         oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
         tabelPacienti.setItems(programari);
+    }
+
+    public void switchToSceneRaport(ActionEvent event) throws IOException, SQLException {
+        label1.setText("");
+        String scene = "/com.example.source/scene-raport-view.fxml";
+        Model.switchToWindowRaport(event, tabelPacienti.getSelectionModel().getSelectedItem());
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {

@@ -35,7 +35,7 @@ INSERT INTO policlinici (id_program_functionare, adresa, denumire) VALUES
     
     INSERT INTO angajati (id_utilizator, id_policlinica, functie, salariu_negociat, numar_ore) VALUES
     (1, 1, 'administrator', 5000.00, 40),
-    (2, 2, 'receptioner', 2500.00, 30),
+    (2, 3, 'receptioner', 2500.00, 30),
     (3, 3, 'resurse_umane', 3500.00, 35),
     (4, 4, 'economic', 3000.00, 37),
     (5, 5, 'medic', 7000.00, 45),

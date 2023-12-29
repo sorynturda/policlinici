@@ -8,11 +8,12 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/21" fx:controller="com.example.source.controller.SceneRaport">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="608.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneRaport">
   <tabs>
     <Tab text="RAPORT">
       <content>
@@ -43,16 +44,6 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="170.0" layoutY="15.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="nume">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <Label alignment="CENTER" layoutX="390.0" layoutY="15.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" text="prenume">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                              </Label>
                               <Label alignment="CENTER" layoutX="10.0" layoutY="69.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="ISTORIC:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
@@ -71,6 +62,8 @@
                                  </font>
                               </Label>
                               <TextArea fx:id="textDiagnostic" layoutX="170.0" layoutY="270.0" prefHeight="80.0" prefWidth="420.0" style="-fx-background-color: #ffffff;" />
+                              <TextField fx:id="numeTextField" layoutX="176.0" layoutY="13.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" />
+                              <TextField fx:id="prenumeTextField" layoutX="390.0" layoutY="15.0" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #ffffff;" />
                            </children>
                         </AnchorPane>
                      </center>
@@ -83,12 +76,12 @@
                                  </font>
                               </Label>
                               <TextArea fx:id="textRecomandari" layoutX="170.0" layoutY="12.0" prefHeight="80.0" prefWidth="420.0" style="-fx-background-color: #ffffff;" />
-                              <Button layoutX="14.0" layoutY="103.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="PARAFA">
+                              <Button fx:id="puneParafa" layoutX="14.0" layoutY="103.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="PARAFA">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="170.0" layoutY="103.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="420.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
+                              <Button layoutX="170.0" layoutY="103.0" mnemonicParsing="false" onAction="#updateRaport" prefHeight="30.0" prefWidth="420.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
