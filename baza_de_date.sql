@@ -97,15 +97,15 @@ create table if not exists bonuri_fiscale(
 
 create table if not exists rapoarte(
     id int auto_increment primary key not null,
-    id_pacient int not null,
+    id_programare int unique not null,
     id_medic int not null,
     id_asistent int not null,
     nume_medic_recomandare varchar(20),
     prenume_medic_recomandare varchar(20),
-    istoric varchar(100),
-    simptome varchar(100),
-    diagnostic varchar(100),
-    recomandari varchar(1000),
+    istoric varchar(5000),
+    simptome varchar(1000),
+    diagnostic varchar(200),
+    recomandari varchar(5000),
     parafa boolean default false
 );
 

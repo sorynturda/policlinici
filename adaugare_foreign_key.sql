@@ -44,7 +44,7 @@ ALTER TABLE orar_medici
 ADD FOREIGN KEY (id_medic) REFERENCES medici(id);
 
 ALTER TABLE rapoarte
-ADD FOREIGN KEY (id_pacient) REFERENCES pacienti(id),
+ADD FOREIGN KEY (id_programare) REFERENCES programari(id),
 ADD FOREIGN KEY (id_medic) REFERENCES medici(id),
 ADD FOREIGN KEY (id_asistent) REFERENCES asistenti_medicali(id);
 
