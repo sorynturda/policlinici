@@ -270,7 +270,7 @@ public class SceneMedic implements Initializable {
 
     public void switchToSceneRaport(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-raport-view.fxml";
-        Model.logOut(event, scene);
+        Model.switchToWindowRaport(event, tabelPacienti.getSelectionModel().getSelectedItem());
     }
 
     public void switchToSceneLogin(ActionEvent event) throws IOException {

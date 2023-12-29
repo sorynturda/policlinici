@@ -1,6 +1,7 @@
 package com.example.source.controller;
 
 import com.example.source.Model;
+import com.example.source.claseTabele.Programare;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
@@ -11,6 +12,7 @@ import javafx.scene.control.TextArea;
 import java.io.IOException;
 
 public class SceneRaport {
+    private Programare programareSelectata;
     @FXML
     private Label labelPacient;
     @FXML
@@ -37,5 +39,10 @@ public class SceneRaport {
     public void goBack(ActionEvent event) throws IOException {
         String scenePath = "/com.example.source/scene-medic-view.fxml";
         Model.goToMainMenu(event, scenePath);
+    }
+
+    public void setProgramareSelectata(Programare programare) {
+        programareSelectata = programare;
+        labelPacient.setText(programareSelectata.getNume() + " " + programareSelectata.getPrenume());
     }
 }

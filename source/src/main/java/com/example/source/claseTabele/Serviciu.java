@@ -7,6 +7,7 @@ public class Serviciu {
     private String nume_serviciu;
     private Double pret;
     private Time durata;
+    private String investigatii;
 
     public Serviciu(int id, String nume_serviciu, Double pret, Time durata) {
         this.id = id;

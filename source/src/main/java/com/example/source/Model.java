@@ -4,6 +4,7 @@ import com.example.source.claseTabele.*;
 import com.example.source.controller.Receptioner.SceneProgramare;
 import com.example.source.controller.ResurseUmane.SceneConcediu;
 import com.example.source.controller.ResurseUmane.SceneOrarConcediu;
+import com.example.source.controller.SceneRaport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -34,6 +35,7 @@ public class Model {
     private static Medic medicCurent;
     private static AsistentMedical asistentCurent;
     private static Pacient pacientSelectat;
+    private static Programare programareSelectata;
     private static Stage stage;
     private static Scene scene;
     private static Parent root;
@@ -1021,6 +1023,20 @@ public class Model {
         SceneProgramare prgramare = loader.getController();
         prgramare.setPacientSelectat(pacient);
         pacientSelectat = pacient;
+
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void switchToWindowRaport(ActionEvent event, Programare programare) throws IOException {
+        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-raport-view.fxml"));
+        root = loader.load();
+
+        SceneRaport raport = loader.getController();
+        raport.setProgramareSelectata(programare);
+        programareSelectata = programare;
 
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);

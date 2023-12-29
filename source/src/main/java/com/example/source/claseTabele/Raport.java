@@ -1,5 +1,7 @@
 package com.example.source.claseTabele;
 
+import java.util.ArrayList;
+
 public class Raport {
     private int id;
     private int id_programare;
@@ -12,6 +14,8 @@ public class Raport {
     private String diagnostic;
     private String recomandari;
     private boolean parafa;
+
+    ArrayList<Serviciu> servicii = new ArrayList<>();
 
     public Raport(int id, int id_programare, int id_medic, int id_asistent, String nume_medic_recomandare, String prenume_medic_recomandare, String istoric, String simptome, String diagnostic, String recomandari, boolean parafa) {
         this.id = id;
@@ -38,6 +42,10 @@ public class Raport {
         this.diagnostic = diagnostic;
         this.recomandari = recomandari;
         this.parafa = parafa;
+    }
+
+    public void setServicii(ArrayList<Serviciu> servicii) {
+        this.servicii = servicii;
     }
 
     public int getId() {

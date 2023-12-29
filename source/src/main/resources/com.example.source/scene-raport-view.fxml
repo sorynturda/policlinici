@@ -119,7 +119,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Button>
-                              <TextArea fx:id="textInvestigatii" layoutX="216.0" layoutY="15.0" prefHeight="101.0" prefWidth="373.0" style="-fx-background-color: #ffffff;" />
+                              <TextArea fx:id="textInvestigatii" layoutX="209.0" layoutY="15.0" prefHeight="101.0" prefWidth="375.0" style="-fx-background-color: #ffffff;" />
                               <Button layoutX="209.0" layoutY="139.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="375.0" style="-fx-background-color: #ffffff;" text="SALVEAZA">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
