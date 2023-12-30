@@ -24,6 +24,8 @@ public class SceneMain implements Initializable {
     @FXML
     private Label labelSalariuNegociat;
     @FXML
+    private Label labelOreNegociate;
+    @FXML
     private Label labelNumarOre;
     @FXML
     private Label labelSalariuCalculat;
@@ -144,11 +146,14 @@ public class SceneMain implements Initializable {
         int salariuNegociat = Model.getAngajatCurent().getSalariu_negociat();
         labelSalariuNegociat.setText(Integer.toString(salariuNegociat) + " LEI");
         int numarOreContract = Model.getAngajatCurent().getNumar_ore();
-        int numarOreLucrate = numarOreContract;
+        int numarOreLucrate = 0;
         for (int i = 0; i < orar.size(); i++)
             if (orar.get(i).getInterval().equals("CONCEDIU"))
                 numarOreLucrate -= (int) orar.get(i).getDiferenta();
+            else
+                numarOreLucrate += (int) orar.get(i).getDiferenta();
 
+        labelOreNegociate.setText(Integer.toString(numarOreContract));
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
@@ -167,6 +172,7 @@ public class SceneMain implements Initializable {
             orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
         puneConcediuInOrar(data);
         populateTabelOrar();
+        calculeazaVenituri();
     }
 
     private void populateTabelOrar() {

@@ -175,7 +175,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="6.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
+                              <Label layoutX="6.0" layoutY="115.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -185,17 +185,27 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="5.0" layoutY="115.0" prefHeight="40.0" prefWidth="139.0" text="SALARIU CALCULAT:">
+                              <Label layoutX="5.0" layoutY="165.0" prefHeight="40.0" prefWidth="139.0" text="SALARIU CALCULAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="ORE NEGOCIATE:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelOreNegociate" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>

@@ -132,6 +132,7 @@ public class SceneOrarConcediu implements Initializable {
         oraSfarsit.setVisible(value);
         oraInceput.setVisible(value);
         butonOrar.setVisible(value);
+        dataOrar.setVisible(value);
         if (value) {
             alegeZi.setValue(zile[0]);
             String zi = alegeZi.getValue();
