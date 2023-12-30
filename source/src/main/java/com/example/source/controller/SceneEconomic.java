@@ -4,6 +4,7 @@ import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
 import com.example.source.claseTabele.DataConcediu;
 import com.example.source.claseTabele.OrarAngajat;
+import com.example.source.claseTabele.Policlinica;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,6 +26,8 @@ public class SceneEconomic implements Initializable {
     private Label labelSalariuNegociat;
     @FXML
     private Label labelNumarOre;
+    @FXML
+    private Label labelNumarOreNegociate;
     @FXML
     private Label labelSalariuCalculat;
     @FXML
@@ -73,10 +76,17 @@ public class SceneEconomic implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
+    @FXML
+    private TableView<Policlinica> tabelPoliclinici;
+    @FXML
+    private TableColumn<Policlinica, String> denumire;
+    @FXML
+    private TableColumn<Policlinica, String> adresa;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
+    ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -94,10 +104,18 @@ public class SceneEconomic implements Initializable {
         try {
             angajati = Model.listaAngajati();
             populateTabel();
+            policlinici = Model.listPoliclinici();
+            populateTabelPoliclinici();
         } catch (SQLException e) {
             System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
             throw new RuntimeException(e);
         }
+    }
+
+    private void populateTabelPoliclinici() {
+        denumire.setCellValueFactory(new PropertyValueFactory<>("denumire"));
+        adresa.setCellValueFactory(new PropertyValueFactory<>("adresa"));
+        tabelPoliclinici.setItems(policlinici);
     }
 
     private void setAlegeLunaAn() {
@@ -114,11 +132,14 @@ public class SceneEconomic implements Initializable {
         int salariuNegociat = Model.getAngajatCurent().getSalariu_negociat();
         labelSalariuNegociat.setText(Integer.toString(salariuNegociat) + " LEI");
         int numarOreContract = Model.getAngajatCurent().getNumar_ore();
-        int numarOreLucrate = numarOreContract;
+        int numarOreLucrate = 0;
         for (int i = 0; i < orar.size(); i++)
             if (orar.get(i).getInterval().equals("CONCEDIU"))
                 numarOreLucrate -= (int) orar.get(i).getDiferenta();
+            else
+                numarOreLucrate += (int) orar.get(i).getDiferenta();
 
+        labelNumarOreNegociate.setText(Integer.toString(numarOreContract));
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
@@ -137,6 +158,7 @@ public class SceneEconomic implements Initializable {
             orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
         puneConcediuInOrar(data);
         populateTabelOrar();
+        calculeazaVenituri();
     }
 
     public void cautaAngajat(ActionEvent event) throws IOException, SQLException {

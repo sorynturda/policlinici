@@ -44,7 +44,7 @@
             <tabs>
                 <Tab text="DETALII CONT">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #d1e0e0;">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="421.0" prefWidth="367.0" style="-fx-background-color: #ccffff;">
                             <children>
                                 <Label fx:id="labelDepartament" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                            <font>
@@ -125,7 +125,7 @@
                         </TableView>
                      </center>
                      <top>
-                        <AnchorPane prefHeight="103.0" prefWidth="480.0" style="-fx-background-color: #e6e6ff;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="103.0" prefWidth="480.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="LUNA:" textAlignment="CENTER">
                                  <font>
@@ -159,14 +159,14 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <AnchorPane layoutY="-1.0" prefHeight="422.0" prefWidth="489.0" style="-fx-background-color: #e6e6ff;">
+                        <AnchorPane layoutY="-1.0" prefHeight="422.0" prefWidth="489.0" style="-fx-background-color: #ccffff;">
                            <children>
                               <Label layoutX="4.0" layoutY="15.0" prefHeight="40.0" prefWidth="143.0" text="SALARIU NEGOCIAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="6.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
+                              <Label layoutX="6.0" layoutY="115.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -176,17 +176,27 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelNumarOreNegociate" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="5.0" layoutY="115.0" prefHeight="40.0" prefWidth="139.0" text="SALARIU CALCULAT:">
+                              <Label layoutX="5.0" layoutY="165.0" prefHeight="40.0" prefWidth="139.0" text="SALARIU CALCULAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="5.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="ORE NEGOCIATE:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -195,11 +205,6 @@
                         </AnchorPane>
                      </children>
                   </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="POLICLINICI">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                </content>
             </Tab>
                 <Tab text="ANGAJATI">
@@ -217,18 +222,65 @@
                         </TableView>
                      </center>
                      <top>
-                        <AnchorPane prefHeight="77.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField fx:id="inputTextField" layoutX="170.0" layoutY="26.0" prefHeight="24.0" prefWidth="146.0" />
-                              <Label layoutX="46.0" layoutY="23.0" prefHeight="31.0" prefWidth="116.0" text="Cauta angajat" />
-                              <Button layoutX="348.0" layoutY="21.0" minWidth="37.0" mnemonicParsing="false" onAction="#cautaAngajat" prefHeight="35.0" prefWidth="50.0" text="cauta" />
-                              <Button layoutX="415.0" layoutY="21.0" minWidth="47.0" mnemonicParsing="false" onAction="#selecteazaAngajat" prefHeight="36.0" prefWidth="47.0" text="select" />
+                              <TextField fx:id="inputTextField" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
+                              <Label alignment="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA ANGAJATI:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" onAction="#cautaAngajat" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" onAction="#selecteazaAngajat" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
                            </children>
                         </AnchorPane>
                      </top>
                   </BorderPane>
                </content>
                 </Tab>
+            <Tab text="POLICLINICI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tabelPoliclinici" prefHeight="146.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id1" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator1" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="denumire" prefWidth="180.6666921377182" text="DENUMIRE" />
+                              <TableColumn fx:id="adresa" prefWidth="302.66664123535156" text="ADRESA" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="inputTextField1" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
+                              <Label alignment="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA ANGAJATI:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </right>
