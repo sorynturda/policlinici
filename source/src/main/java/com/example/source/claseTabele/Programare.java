@@ -86,6 +86,10 @@ public class Programare {
         return prenume;
     }
 
+    public void setInregistrat(boolean inregistrat) {
+        this.inregistrat = inregistrat;
+    }
+
     @Override
     public String toString() {
         return "Programare{" +

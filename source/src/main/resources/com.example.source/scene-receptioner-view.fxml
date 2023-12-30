@@ -175,7 +175,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="6.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
+                              <Label layoutX="6.0" layoutY="115.0" prefHeight="40.0" prefWidth="140.0" text="NUMAR ORE:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -185,17 +185,27 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="5.0" layoutY="115.0" prefHeight="40.0" prefWidth="139.0" text="SALARIU CALCULAT:">
+                              <Label layoutX="6.0" layoutY="165.0" prefHeight="40.0" prefWidth="140.0" text="SALARIU CALCULAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="115.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="150.0" layoutY="165.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="6.0" layoutY="65.0" prefHeight="40.0" prefWidth="140.0" text="ORE NEGOCIATE:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelNumarOreNegociate" alignment="CENTER" layoutX="150.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -307,22 +317,25 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#inregistreazaPacientProgramat" prefHeight="30.0" prefWidth="170.0" style="-fx-background-color: #ffffff;" text="INREGISTREAZA">
+                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#inregistreazaPacientProgramat" prefHeight="30.0" prefWidth="165.0" style="-fx-background-color: #ffffff;" text="INREGISTREAZA">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#afiseazaPacientiProgramatiAzi" prefHeight="30.0" prefWidth="177.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
+                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#afiseazaPacientiProgramatiAzi" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="389.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="87.0" style="-fx-background-color: #ffffff;" text="BON">
+                              <Button layoutX="389.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" onAction="#emiteBon" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="BON">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Label fx:id="label1" alignment="CENTER" layoutX="12.0" layoutY="6.0" prefHeight="17.0" prefWidth="458.0" textFill="#ff2200" />
+                              <Label fx:id="label1" alignment="CENTER" layoutX="12.0" layoutY="3.0" prefHeight="17.0" prefWidth="458.0" textFill="#ff2200">
+                                 <font>
+                                    <Font name="System Bold" size="11.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
                      </top>

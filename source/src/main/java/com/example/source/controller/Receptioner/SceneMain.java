@@ -1,10 +1,7 @@
 package com.example.source.controller.Receptioner;
 
 import com.example.source.Model;
-import com.example.source.claseTabele.DataConcediu;
-import com.example.source.claseTabele.OrarAngajat;
-import com.example.source.claseTabele.Pacient;
-import com.example.source.claseTabele.Programare;
+import com.example.source.claseTabele.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Alert.AlertType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,6 +29,8 @@ public class SceneMain implements Initializable {
     private TextField numePacientNouTextField;
     @FXML
     private TextField prenumePacientNouTextField;
+    @FXML
+    private Label labelNumarOreNegociate;
     @FXML
     private Label labelSalariuNegociat;
     @FXML
@@ -93,12 +93,12 @@ public class SceneMain implements Initializable {
     private TableColumn<Programare, String> dataProgramare;
     @FXML
     private TableColumn<Programare, String> oraProgramare;
+    private Raport raportPacient;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
     ObservableList<Programare> programari = FXCollections.observableArrayList();
-
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -133,6 +133,55 @@ public class SceneMain implements Initializable {
             System.out.println("EROARE LA RECEPTIONER IN MAIN WINDOW");
             throw new RuntimeException(e);
         }
+        afiseazaPacientiProgramati();
+    }
+
+    private void afiseazaBon(Bon bon) {
+        String servicii = "";
+
+        for(Serviciu s: raportPacient.getServiciiRaport())
+            servicii = servicii + s.getNume_serviciu() + " " + Double.toString(s.getPret()) + " LEI\n";
+
+        Alert a = new Alert(AlertType.INFORMATION);
+        a.setTitle("BON");
+        a.setHeaderText("Total: " + calcTotalBon() + " LEI");
+        a.setContentText(servicii);
+        a.showAndWait();
+    }
+
+    private double calcTotalBon() {
+        double total = 0;
+        for(Serviciu s: raportPacient.getServiciiRaport())
+            total += s.getPret();
+
+        return total;
+    }
+
+    public void emiteBon() throws SQLException {
+        if(tabelPacienti.getSelectionModel().getSelectedItem().isInregistrat()) {
+            raportPacient = Model.extrageRaport(tabelPacienti.getSelectionModel().getSelectedItem().getId());
+            raportPacient.setServiciiRaport(Model.cautaServiciiRaport(raportPacient.getId()));
+
+            if(raportPacient.getServiciiRaport().isEmpty()) {
+                label1.setText("NU EXISTA SERVICII IN RAPORT!");
+            }
+            else {
+                Bon bon = Model.extrageBon(raportPacient.getId());
+                if(bon == null) {
+                    bon = new Bon(raportPacient.getId(), Model.getAngajatCurent().getId(), calcTotalBon(), LocalDate.now());
+                    afiseazaBon(bon);
+                    Model.inserareBon(bon);
+                }
+                else {
+                    bon.setData_emitere(LocalDate.now());
+                    bon.setTotal(calcTotalBon());
+                    afiseazaBon(bon);
+                    Model.udateBon(bon);
+                }
+            }
+        }
+        else
+            label1.setText("ALEGE UN PACIENT PROGRAMAT ASTAZI SI CARE A FOST INREGISTRAT!");
     }
 
     private void setAlegeLunaAn() {
@@ -157,6 +206,7 @@ public class SceneMain implements Initializable {
             numarOreLucrate += (int) orar.get(i).getDiferenta();
         }
         numarOreLucrate -= numarOreConcediu;
+        labelNumarOreNegociate.setText(Integer.toString(numarOreContract));
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
@@ -218,6 +268,7 @@ public class SceneMain implements Initializable {
             orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
         puneConcediuInOrar(data);
         populateTabelOrar();
+        calculeazaVenituri();
     }
 
     private void puneConcediuInOrar(LocalDate data) {
@@ -318,11 +369,17 @@ public class SceneMain implements Initializable {
     public void inregistreazaPacientProgramat() throws SQLException {
         Programare p = tabelPacienti.getSelectionModel().getSelectedItem();
         if(p != null && Objects.equals(p.get_data().toLocalDate(), LocalDate.now())){
-            int id = p.getId();
-            int id_medic = p.getId_medic();
-            Model.inregistreazaPacientProgramat(id);
-            label1.setText("");
-            Model.genereazaRaport(id, id_medic);
+            if(p.isInregistrat()) {
+                label1.setText("PACIENTUL A FOST DEJA INREGISTRAT");
+            }
+            else {
+                int id = p.getId();
+                int id_medic = p.getId_medic();
+                p.setInregistrat(true);
+                Model.inregistreazaPacientProgramat(id);
+                label1.setText("");
+                Model.genereazaRaport(id, id_medic);
+            }
         }
         else
             label1.setText("ALEGE UN PACIENT PROGRAMAT ASTAZI!");
