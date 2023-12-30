@@ -13,7 +13,7 @@ public class Raport {
     private int id;
     private int id_programare;
     private int id_medic;
-    private int id_asistent;
+    private Integer id_asistent;
     private String nume_medic_recomandare;
     private String prenume_medic_recomandare;
     private String istoric;

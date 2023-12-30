@@ -174,7 +174,7 @@ public class SceneMedic implements Initializable {
             else
                 numarOreLucrate += (int) orar.get(i).getDiferenta();
 
-        labelOreNegociate.setText(Integer.toString(Model.getAngajatCurent().getNumar_ore()));
+        labelOreNegociate.setText(Integer.toString(numarOreContract));
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");

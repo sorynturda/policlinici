@@ -79,14 +79,19 @@ public class SceneRaport {
     public void setProgramareSelectata(Programare programare) throws SQLException {
         programareSelectata = programare;
         creazaCheckBoxServicii();
-        if(Model.getAngajatCurent().getFunctie().equals(Model.ASISTENT_MEDICAL))
-            puneParafa.setVisible(false);
-        else
-            puneParafa.setVisible(true);
-        System.out.println(programare);
 
         raportPacient = Model.extrageRaport(programare.getId());
         raportPacient.setServiciiRaport(Model.cautaServiciiRaport(raportPacient.getId()));
+
+        if(Model.getAngajatCurent().getFunctie().equals(Model.ASISTENT_MEDICAL)) {
+            puneParafa.setVisible(false);
+            raportPacient.setId_asistent(Model.getAsistentCurent().getId());
+            Model.updateRaportAsistent(raportPacient);
+            System.out.println(raportPacient);
+        }
+        else
+            puneParafa.setVisible(true);
+        System.out.println(programare);
         populateTabelInvestigatii();
 
         if(raportPacient.isParafa()) {
