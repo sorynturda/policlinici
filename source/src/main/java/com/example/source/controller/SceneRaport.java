@@ -46,6 +46,16 @@ public class SceneRaport {
     private TableColumn<Serviciu, String> numeServiciu;
     @FXML
     private TableColumn<Serviciu, String> detaliiInvestigatii;
+    @FXML
+    private Button buttonSalveazaPag1;
+    @FXML
+    private Button buttonSalveazaPag2;
+    @FXML
+    private Button buttonAdauga;
+    @FXML
+    private Label labelMesaj1;
+    @FXML
+    private Label labelMesaj2;
     private HashSet<Serviciu> serviciiRaport = new HashSet<>();
 
     private void populateTabelInvestigatii() {
@@ -79,6 +89,20 @@ public class SceneRaport {
         raportPacient.setServiciiRaport(Model.cautaServiciiRaport(raportPacient.getId()));
         populateTabelInvestigatii();
 
+        if(raportPacient.isParafa()) {
+            numeTextField.setEditable(false);
+            prenumeTextField.setEditable(false);
+            textIstoric.setEditable(false);
+            textDiagnostic.setEditable(false);
+            textSimptome.setEditable(false);
+            textRecomandari.setEditable(false);
+            textInvestigatii.setEditable(false);
+            buttonSalveazaPag1.setVisible(false);
+            buttonSalveazaPag2.setVisible(false);
+            buttonAdauga.setVisible(false);
+            puneParafa.setText("ANULEAZA");
+        }
+
         System.out.println(raportPacient.getServiciiRaport());
         if (!raportPacient.getNume_medic_recomandare().isEmpty())
             numeTextField.setText(raportPacient.getNume_medic_recomandare());
@@ -103,6 +127,7 @@ public class SceneRaport {
         raportPacient.setSimptome(textSimptome.getText());
         raportPacient.setRecomandari(textRecomandari.getText());
         Model.updateRaport(raportPacient);
+        labelMesaj1.setText("SALVAT CU SUCCES");
     }
 
     private void creazaCheckBoxServicii() {
@@ -118,7 +143,45 @@ public class SceneRaport {
     public void updateServicii() throws SQLException {
         Model.updateServiciiRaport(raportPacient.getId(), serviciiRaport);
         serviciiRaport.clear();
-        populateTabelInvestigatii();
+        labelMesaj2.setText("SALVAT CU SUCCES");
+    }
+
+    public void puneParafa() throws SQLException {
+        if(raportPacient.isParafa() == false) {
+            raportPacient.setParafa(true);
+            numeTextField.setEditable(false);
+            prenumeTextField.setEditable(false);
+            textIstoric.setEditable(false);
+            textDiagnostic.setEditable(false);
+            textSimptome.setEditable(false);
+            textRecomandari.setEditable(false);
+            textInvestigatii.setEditable(false);
+            buttonSalveazaPag1.setVisible(false);
+            buttonSalveazaPag2.setVisible(false);
+            buttonAdauga.setVisible(false);
+            updateRaport();
+            puneParafa.setText("ANULEAZA");
+        }
+        else {
+            raportPacient.setParafa(false);
+            numeTextField.setEditable(true);
+            prenumeTextField.setEditable(true);
+            textIstoric.setEditable(true);
+            textDiagnostic.setEditable(true);
+            textSimptome.setEditable(true);
+            textRecomandari.setEditable(true);
+            textInvestigatii.setEditable(true);
+            buttonSalveazaPag1.setVisible(true);
+            buttonSalveazaPag2.setVisible(true);
+            buttonAdauga.setVisible(true);
+            updateRaport();
+            puneParafa.setText("PARAFA");
+        }
+    }
+
+    public void scoateText() {
+        labelMesaj1.setText("");
+        labelMesaj2.setText("");
     }
 
     public void goBack(ActionEvent event) throws IOException {

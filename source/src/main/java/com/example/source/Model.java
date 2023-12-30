@@ -2573,6 +2573,7 @@ public class Model {
             ex.printStackTrace(System.err);
         }
         try {
+            int parafa = raportPacient.isParafa() ? 1 : 0;
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
             String query = "UPDATE rapoarte SET " +
@@ -2581,7 +2582,8 @@ public class Model {
                     "istoric = '" + raportPacient.getIstoric() + "', " +
                     "simptome = '" + raportPacient.getSimptome() + "', " +
                     "diagnostic = '" + raportPacient.getDiagnostic() + "', " +
-                    "recomandari = '" + raportPacient.getRecomandari() + "' " +
+                    "recomandari = '" + raportPacient.getRecomandari() + "', " +
+                    "parafa = '" + parafa + "' " +
                     "WHERE id = '" + raportPacient.getId() + "'";
             callableStatement = connection.prepareCall(query);
             callableStatement.executeUpdate();

@@ -23,9 +23,13 @@ public class SceneMedic implements Initializable {
     @FXML
     private Label labelSalariuNegociat;
     @FXML
+    private Label labelOreNegociate;
+    @FXML
     private Label labelNumarOre;
     @FXML
     private Label labelSalariuCalculat;
+    @FXML
+    private Label labelVenitAditionalCalculat;
     @FXML
     private Label label1;
     @FXML
@@ -163,14 +167,19 @@ public class SceneMedic implements Initializable {
         int salariuNegociat = Model.getAngajatCurent().getSalariu_negociat();
         labelSalariuNegociat.setText(Integer.toString(salariuNegociat) + " LEI");
         int numarOreContract = Model.getAngajatCurent().getNumar_ore();
-        int numarOreLucrate = numarOreContract;
+        int numarOreLucrate = 0;
         for (int i = 0; i < orar.size(); i++)
             if (orar.get(i).getInterval().equals("CONCEDIU"))
                 numarOreLucrate -= (int) orar.get(i).getDiferenta();
+            else
+                numarOreLucrate += (int) orar.get(i).getDiferenta();
 
+        labelOreNegociate.setText(Integer.toString(Model.getAngajatCurent().getNumar_ore()));
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
+        double venitAditional = salariuCalculat * Model.getMedicCurent().getVenit_aditional();
+        labelVenitAditionalCalculat.setText(Double.toString(venitAditional) + " LEI");
     }
 
     public void afiseazaOrar() {
@@ -189,6 +198,7 @@ public class SceneMedic implements Initializable {
         }
         puneConcediuInOrar(data);
         populateTabelOrar();
+        calculeazaVenituri();
     }
 
     private int getNumarLuna(String luna) {

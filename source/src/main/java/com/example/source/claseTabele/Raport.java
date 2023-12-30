@@ -5,6 +5,11 @@ import javafx.collections.ObservableList;
 import java.util.HashSet;
 
 public class Raport {
+    static final int MAX_ISTORIC = 5000;
+    static final int MAX_SIMPTOME = 1000;
+    static final int MAX_DIAGNOSTIC = 200;
+    static final int MAX_RECOMANDARI = 5000;
+    static final int MAX_INVESTIGATII = 500;
     private int id;
     private int id_programare;
     private int id_medic;

@@ -188,7 +188,7 @@
                         </TableView>
                      </center>
                      <top>
-                        <AnchorPane prefHeight="103.0" prefWidth="480.0" style="-fx-background-color: #e6e6ff;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="103.0" prefWidth="480.0" style="-fx-background-color: #b3fff0;" BorderPane.alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="LUNA:" textAlignment="CENTER">
                                  <font>
@@ -229,7 +229,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="130.0" text="NUMAR ORE:">
+                              <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="130.0" text="NUMAR ORE:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -239,27 +239,37 @@
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="160.0" layoutY="65.0" prefHeight="40.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelNumarOre" alignment="CENTER" layoutX="160.0" layoutY="115.0" prefHeight="40.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="140.0" text="SALARIU CALCULAT:">
+                              <Label layoutX="14.0" layoutY="165.0" prefHeight="40.0" prefWidth="140.0" text="SALARIU CALCULAT:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="160.0" layoutY="115.0" prefHeight="40.0" prefWidth="291.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelSalariuCalculat" alignment="CENTER" layoutX="159.0" layoutY="165.0" prefHeight="40.0" prefWidth="291.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
                               </Label>
-                              <Label layoutX="14.0" layoutY="165.0" prefHeight="40.0" prefWidth="130.0" text="VENIT ADITIONAL:">
+                              <Label layoutX="14.0" layoutY="215.0" prefHeight="40.0" prefWidth="130.0" text="VENIT ADITIONAL:">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Label alignment="CENTER" layoutX="159.0" layoutY="165.0" prefHeight="40.0" prefWidth="293.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                              <Label fx:id="labelVenitAditionalCalculat" alignment="CENTER" layoutX="158.0" layoutY="215.0" prefHeight="40.0" prefWidth="293.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
+                                 <font>
+                                    <Font size="16.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="143.0" text="ORE NEGOCIATE:">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="labelOreNegociate" alignment="CENTER" layoutX="160.0" layoutY="65.0" prefHeight="40.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                                  <font>
                                     <Font size="16.0" />
                                  </font>
@@ -278,11 +288,11 @@
                            <columns>
                               <TableColumn fx:id="id2" prefWidth="128.0" text="id" visible="false" />
                               <TableColumn fx:id="id_utilizator2" prefWidth="128.0" text="id_utilizator" visible="false" />
-                              <TableColumn fx:id="numePacient" editable="false" prefWidth="100.66668450832367" sortable="false" text="NUME" />
-                              <TableColumn fx:id="prenumePacient" editable="false" prefWidth="109.33332061767578" sortable="false" text="PRENUME" />
-                              <TableColumn fx:id="dataProgramare" editable="false" prefWidth="126.0" sortable="false" text="DATA PROGRAMARE" />
-                              <TableColumn fx:id="oraProgramare" editable="false" prefWidth="122.0" sortable="false" text="ORA PROGRAMARE" />
-                              <TableColumn fx:id="coloanaInregistrat" editable="false" prefWidth="26.0" sortable="false" text="X" />
+                              <TableColumn fx:id="numePacient" editable="false" prefWidth="90.0" sortable="false" text="NUME" />
+                              <TableColumn fx:id="prenumePacient" editable="false" prefWidth="90.0" sortable="false" text="PRENUME" />
+                              <TableColumn fx:id="dataProgramare" editable="false" prefWidth="125.0" sortable="false" text="DATA PROGRAMARE" />
+                              <TableColumn fx:id="oraProgramare" editable="false" prefWidth="125.0" sortable="false" text="ORA PROGRAMARE" />
+                              <TableColumn fx:id="coloanaInregistrat" editable="false" prefWidth="55.0" sortable="false" text="Inregistrat" />
                            </columns>
                         </TableView>
                      </center>
@@ -305,17 +315,15 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="304.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="169.0" style="-fx-background-color: #ffffff;" text="RAPORT">
+                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#afiseazaPacientiProgramatiAzi" prefHeight="30.0" prefWidth="459.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Button>
-                              <Button layoutX="14.0" layoutY="60.0" minWidth="37.0" mnemonicParsing="false" onAction="#afiseazaPacientiProgramatiAzi" prefHeight="30.0" prefWidth="276.0" style="-fx-background-color: #ffffff;" text="PACIENTI PROGRAMATI AZI">
+                              <Label fx:id="label1" alignment="CENTER" layoutX="14.0" layoutY="3.0" prefHeight="15.0" prefWidth="460.0" textFill="RED">
                                  <font>
-                                    <Font name="System Bold" size="12.0" />
-                                 </font>
-                              </Button>
-                              <Label fx:id="label1" alignment="CENTER" layoutX="14.0" layoutY="6.0" prefHeight="17.0" prefWidth="459.0" textFill="RED" />
+                                    <Font name="System Bold" size="11.0" />
+                                 </font></Label>
                            </children>
                         </AnchorPane>
                      </top>
