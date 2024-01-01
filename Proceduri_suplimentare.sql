@@ -47,3 +47,27 @@ BEGIN
     select id_policlinica from angajati inner join medici where angajati.id = medici.id_angajat and medici.id = id;
 END //
 DELIMITER ;
+
+DELIMITER $
+CREATE PROCEDURE AdaugaUtilizator (
+	IN user_n varchar(20),
+    IN pas VARCHAR(20),
+	IN dep VARCHAR(20),
+    IN adr VARCHAR(50),
+    IN cn VARCHAR(13),
+    IN num VARCHAR(30),
+    IN prenum VARCHAR(30),
+    IN tel VARCHAR(10),
+    IN emai VARCHAR(30),
+    IN iba VARCHAR(34),
+    IN _data DATE,
+    IN ro VARCHAR(15)
+)
+BEGIN
+	INSERT INTO policlinica.conturi(nume_utilizator, parola) VALUES
+    (user_n, pas);
+    SET @id_cont = (SELECT conturi.id FROM conturi WHERE nume_utilizator = user_n);
+    INSERT INTO utilizatori(id_cont, departament, adresa, cnp, nume, prenume, telefon, email, iban, data_angajarii, rol) VALUES
+    (@id_cont, dep, adr, cn, num, prenum, tel, emai, iba, _data, ro);
+END $
+DELIMITER ;
