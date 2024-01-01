@@ -3139,7 +3139,6 @@ public class Model {
                         resultSet.getString("data_angajarii"),
                         resultSet.getString("rol")));
             }
-            System.out.println(res);
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
             sqlex.printStackTrace(System.err);
@@ -3170,6 +3169,127 @@ public class Model {
             }
         }
         return res;
+    }
+
+    public static void adaugaUtilizator(String u, String p, String dep, String adr, String cn, String num, String pren, String tel, String em, String ib, Date date, String rol) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call AdaugaUtilizator(?,?,?,?,?,?,?,?,?,?,?,?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, u);
+            callableStatement.setString(2, p);
+            callableStatement.setString(3, dep);
+            callableStatement.setString(4, adr);
+            callableStatement.setString(5, cn);
+            callableStatement.setString(6, num);
+            callableStatement.setString(7, pren);
+            callableStatement.setString(8, tel);
+            callableStatement.setString(9, em);
+            callableStatement.setString(10, ib);
+            callableStatement.setDate(11, date);
+            callableStatement.setString(12, rol);
+            callableStatement.executeUpdate();
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void stergeUtilizator(int id, int idCont) {
+                Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "DELETE FROM utilizatori WHERE utilizatori.id = '" + id + "'";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.executeUpdate();
+            query = "DELETE FROM conturi WHERE conturi.id = '" + idCont + "'";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.executeUpdate();
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
     }
 }
 

@@ -5,19 +5,55 @@ import com.example.source.claseTabele.Utilizator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.stage.Modality;
+import javafx.stage.PopupWindow;
+import javafx.stage.Stage;
+import javafx.stage.Window;
 import javafx.util.converter.IntegerStringConverter;
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class SceneUtilizatori implements Initializable {
+    @FXML
+    private TextField cnpTf;
+    @FXML
+    private TextField numeTf;
+    @FXML
+    private TextField prenumeTf;
+    @FXML
+    private DatePicker data_angajariiDP;
+    @FXML
+    private TextField emailTf;
+    @FXML
+    private TextField ibanTf;
+    @FXML
+    private TextField telefonTf;
+    @FXML
+    private TextField adresaTf;
+    @FXML
+    private TextField usernameTf;
+    @FXML
+    private TextField parolaTf;
+    @FXML
+    private ChoiceBox<String> departamentChoiceBox;
+    @FXML
+    private ChoiceBox<String> rolChoiceBox;
     @FXML
     TableView<Utilizator> tabelUtilizatori;
     @FXML
@@ -44,6 +80,9 @@ public class SceneUtilizatori implements Initializable {
     TableColumn<Utilizator, String> data_angajarii;
     @FXML
     TableColumn<Utilizator, String> rol;
+    ArrayList<String> adrese;
+    String[] departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
+    String[] roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
 
     ObservableList<Utilizator> utilizatori = FXCollections.observableArrayList();
 
@@ -61,6 +100,12 @@ public class SceneUtilizatori implements Initializable {
         iban.setCellFactory(TextFieldTableCell.forTableColumn());
         data_angajarii.setCellFactory(TextFieldTableCell.forTableColumn());
         rol.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        departamentChoiceBox.setValue(departamente[0]);
+        departamentChoiceBox.getItems().addAll(departamente);
+
+        rolChoiceBox.setValue(roluri[0]);
+        rolChoiceBox.getItems().addAll(roluri);
     }
 
     private void populateTabel() {
@@ -80,10 +125,21 @@ public class SceneUtilizatori implements Initializable {
         tabelUtilizatori.setItems(utilizatori);
     }
 
-    public void actualizeaza(){
+    public void actualizeaza() {
         Utilizator u = tabelUtilizatori.getSelectionModel().getSelectedItem();
-        if(u != null)
+        if (u != null)
             System.out.println(u);
+    }
+
+    public void adaugaUtilizator(ActionEvent event) throws IOException {
+        Model.adaugaUtilizator(usernameTf.getText(), parolaTf.getText(), departamentChoiceBox.getValue(), adresaTf.getText(), cnpTf.getText(), numeTf.getText(), prenumeTf.getText(), telefonTf.getText(), emailTf.getText(), ibanTf.getText(), Date.valueOf(data_angajariiDP.getValue()), rolChoiceBox.getValue());
+    }
+
+    public void stergeUtilizator() {
+        Utilizator tmp = tabelUtilizatori.getSelectionModel().getSelectedItem();
+        if (tmp != null && !Objects.equals(tmp.getId(), Model.getUtilizatorCurent().getId()))
+            Model.stergeUtilizator(tmp.getId(), tmp.getId_cont());
+        populateTabel();
     }
 
     public void departamentEdit(TableColumn.CellEditEvent<Utilizator, String> utilizatorStringCellEditEvent) {
@@ -129,5 +185,18 @@ public class SceneUtilizatori implements Initializable {
     public void goBack(ActionEvent event) throws IOException {
         String scenePath = "/com.example.source/scene-super-admin-view.fxml";
         Model.goToMainMenu(event, scenePath);
+    }
+
+    public void reset(Event event) {
+        adresaTf.setText("");
+        cnpTf.setText("");
+        numeTf.setText("");
+        prenumeTf.setText("");
+        telefonTf.setText("");
+        emailTf.setText("");
+        ibanTf.setText("");
+        usernameTf.setText("");
+        parolaTf.setText("");
+        populateTabel();
     }
 }
