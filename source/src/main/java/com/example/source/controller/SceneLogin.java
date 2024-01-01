@@ -32,7 +32,7 @@ public class SceneLogin {
     public void switchToSceneUser(ActionEvent event) throws IOException, SQLException {
         if (Model.logIn(textFieldUsername.getText(), passwordFieldPassword.getText())) {
             if (Model.getUtilizatorCurent().getRol().compareTo(Model.SUPERADMIN) == 0) {
-
+                switchToSceneSuperAdmin(event);
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.ADMIN) == 0) {
 
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.UTILIZATOR) == 0) {
@@ -56,6 +56,14 @@ public class SceneLogin {
         } else {
             labelErrorLogIn.setText("Nume de utilizator sau parola incorecte!");
         }
+    }
+
+    private void switchToSceneSuperAdmin(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-super-admin-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
     }
 
     private void switchToSceneMedic(ActionEvent event) throws IOException {

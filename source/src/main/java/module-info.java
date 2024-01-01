@@ -17,4 +17,6 @@ module app {
     opens com.example.source.controller.ResurseUmane to javafx.fxml;
     exports com.example.source.controller.Receptioner;
     opens com.example.source.controller.Receptioner to javafx.fxml;
+    exports com.example.source.controller.Admin;
+    opens com.example.source.controller.Admin to javafx.fxml;
 }
