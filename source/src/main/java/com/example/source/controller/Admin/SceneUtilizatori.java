@@ -126,9 +126,10 @@ public class SceneUtilizatori implements Initializable {
     }
 
     public void actualizeaza() {
-        Utilizator u = tabelUtilizatori.getSelectionModel().getSelectedItem();
-        if (u != null)
-            System.out.println(u);
+        ArrayList<Utilizator> u = new ArrayList<>();
+        for (int i = 0; i < utilizatori.size(); i++)
+            u.add(utilizatori.get(i).clone());
+        Model.actualizeazaUtilizatori(u);
     }
 
     public void adaugaUtilizator(ActionEvent event) throws IOException {

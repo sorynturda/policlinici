@@ -3237,7 +3237,7 @@ public class Model {
     }
 
     public static void stergeUtilizator(int id, int idCont) {
-                Connection connection = null;
+        Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
@@ -3261,6 +3261,71 @@ public class Model {
             query = "DELETE FROM conturi WHERE conturi.id = '" + idCont + "'";
             callableStatement = connection.prepareCall(query);
             callableStatement.executeUpdate();
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void actualizeazaUtilizatori(ArrayList<Utilizator> u) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            for (Utilizator it : u) {
+                String query = "UPDATE utilizatori " +
+                        "SET departament = '" + it.getDepartament() + "', " +
+                        "nume = '" + it.getNume() + "', " +
+                        "prenume = '" + it.getPrenume() + "', " +
+                        "telefon = '" + it.getTelefon() + "', " +
+                        "cnp = '" + it.getCnp() + "', " +
+                        "rol = '" + it.getRol() + "', " +
+                        "email = '" + it.getEmail() + "', " +
+                        "iban = '" + it.getIban() + "', " +
+                        "data_angajarii = '" + it.getData_angajarii() + "', " +
+                        "adresa = '" + it.getAdresa() + "' " +
+                        "WHERE id = '" + it.getId() + "'";
+                callableStatement = connection.prepareCall(query);
+                callableStatement.executeUpdate();
+            }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
             sqlex.printStackTrace(System.err);

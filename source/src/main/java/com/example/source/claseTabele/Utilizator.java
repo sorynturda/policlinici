@@ -1,6 +1,6 @@
 package com.example.source.claseTabele;
 
-public class Utilizator {
+public class Utilizator implements Cloneable{
     private Integer id;
     private Integer id_cont;
     private String departament;
@@ -168,5 +168,25 @@ public class Utilizator {
                 ", data_angajarii='" + data_angajarii + '\'' +
                 ", rol='" + rol + '\'' +
                 '}';
+    }
+
+    @Override
+    public Utilizator clone() {
+        try {
+            Utilizator clone = (Utilizator) super.clone();
+            clone.setId(id);
+            clone.setAdresa(adresa);
+            clone.setDepartament(departament);
+            clone.setCnp(cnp);
+            clone.setIban(iban);
+            clone.setData_angajarii(data_angajarii);
+            clone.setNume(nume);
+            clone.setPrenume(prenume);
+            clone.setRol(rol);
+            clone.setTelefon(telefon);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
