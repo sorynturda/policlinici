@@ -1,6 +1,6 @@
 package com.example.source.claseTabele;
 
-public class Utilizator implements Cloneable{
+public class Utilizator implements Cloneable {
     private Integer id;
     private Integer id_cont;
     private String departament;
