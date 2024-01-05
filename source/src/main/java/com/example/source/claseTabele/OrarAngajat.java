@@ -32,4 +32,14 @@ public class OrarAngajat {
     public String getInterval() {
         return interval;
     }
+
+    @Override
+    public String toString() {
+        return "OrarAngajat{" +
+                "zi=" + zi +
+                ", start=" + start +
+                ", end=" + end +
+                ", interval='" + interval + '\'' +
+                '}';
+    }
 }

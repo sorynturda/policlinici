@@ -146,10 +146,13 @@ public class Model {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 int id_utilizator = resultSet.getInt("id_utilizator");
+                int id_policlinica = resultSet.getInt("id_policlinica");
                 String nume = resultSet.getString("nume");
                 String prenume = resultSet.getString("prenume");
                 String functie = resultSet.getString("functie");
-                angajati.add(new Angajat(id, id_utilizator, nume, prenume, functie));
+                int salariu_negociat = resultSet.getInt("salariu_negociat");
+                int numar_ore = resultSet.getInt("numar_ore");
+                angajati.add(new Angajat(id, id_utilizator, id_policlinica, nume, prenume, functie, salariu_negociat, numar_ore));
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -209,10 +212,13 @@ public class Model {
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 int id_utilizator = resultSet.getInt("id_utilizator");
+                int id_policlinica = resultSet.getInt("id_policlinica");
                 String nume = resultSet.getString("nume");
                 String prenume = resultSet.getString("prenume");
                 String functie = resultSet.getString("functie");
-                angajati.add(new Angajat(id, id_utilizator, nume, prenume, functie));
+                int salariu_negociat = resultSet.getInt("salariu_negociat");
+                int numar_ore = resultSet.getInt("numar_ore");
+                angajati.add(new Angajat(id, id_utilizator, id_policlinica, nume, prenume, functie, salariu_negociat, numar_ore));
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");

@@ -228,6 +228,7 @@ public class SceneEconomic implements Initializable {
 
     public void selecteazaAngajat(ActionEvent event) throws IOException {
         Angajat a = tabel.getSelectionModel().getSelectedItem();
+        System.out.println("Salar: " + calculeazaVenitDupaOrarAngajat(a));
         System.out.println(a);
     }
 
@@ -246,5 +247,69 @@ public class SceneEconomic implements Initializable {
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);
+    }
+
+    public int calculeazaVenitDupaOrarAngajat(Angajat angajat) {
+        ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
+        int policlinica = angajat.getId_policlinica();
+        ArrayList<String> orarString = Model.orarPoliclinica(policlinica);
+        String luna = alegeLuna.getValue();
+        int numarLuna = getNumarLuna(luna);
+        int an = Integer.parseInt(alegeAn.getValue());
+        LocalDate data = LocalDate.of(an, numarLuna, 1);
+        HashMap<String, String> H = faHashMap(orarString);
+        orar.clear();
+        for (int i = 1; i <= data.lengthOfMonth(); i++)
+            orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
+
+        if(orar.isEmpty())
+            return -1;
+
+        orar = puneConcediuInOrar(data, orar, angajat);
+        return calculeazaVenitOrar(orar, angajat);
+    }
+
+    private int calculeazaVenitOrar(ObservableList<OrarAngajat> orar, Angajat angajat) {
+        int salariuNegociat = angajat.getSalariu_negociat();
+        int numarOreContract = angajat.getNumar_ore() > 0 ? angajat.getNumar_ore() : 1;
+        int numarOreLucrate = 0;
+        for (int i = 0; i < orar.size(); i++)
+            if (orar.get(i).getInterval().equals("CONCEDIU"))
+                numarOreLucrate -= (int) orar.get(i).getDiferenta();
+            else
+                numarOreLucrate += (int) orar.get(i).getDiferenta();
+
+        return (numarOreLucrate * salariuNegociat) / numarOreContract;
+    }
+
+    private ObservableList<OrarAngajat> puneConcediuInOrar(LocalDate data, ObservableList<OrarAngajat> orar, Angajat angajat) {
+        ArrayList<DataConcediu> concedii = Model.angajatInConcediu(angajat.getId());
+        for (DataConcediu it : concedii) {
+            LocalDate data_inceput = it.getData_inceput().toLocalDate();
+            LocalDate data_sfarsit = it.getData_sfarsit().toLocalDate();
+            if (data_sfarsit.getYear() == data_inceput.getYear()) {
+                if (data_sfarsit.getMonth() == data_inceput.getMonth() && data_sfarsit.getMonth() == data.getMonth() && data.getYear() == data_inceput.getYear())
+                    for (int i = data_inceput.getDayOfMonth() - 1; i < data_sfarsit.getDayOfMonth(); i++)
+                        orar.get(i).setInterval("CONCEDIU");
+                else {
+                    if (data_inceput.getMonth() != data_sfarsit.getMonth()) {
+                        if (data_inceput.getMonth() == data.getMonth())
+                            for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
+                                orar.get(i).setInterval("CONCEDIU");
+                        if (data_sfarsit.getMonth() == data.getMonth())
+                            for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
+                                orar.get(i).setInterval("CONCEDIU");
+                    }
+                }
+            } else {
+                if (data_inceput.getYear() == data.getYear() && data_inceput.getMonth() == data.getMonth())
+                    for (int i = data_inceput.getDayOfMonth() - 1; i < data.lengthOfMonth(); i++)
+                        orar.get(i).setInterval("CONCEDIU");
+                if (data_sfarsit.getYear() == data.getYear() && data_sfarsit.getMonth() == data.getMonth())
+                    for (int i = 0; i < data_sfarsit.getDayOfMonth(); i++)
+                        orar.get(i).setInterval("CONCEDIU");
+            }
+        }
+        return orar;
     }
 }

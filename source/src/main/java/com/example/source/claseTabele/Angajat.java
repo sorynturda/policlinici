@@ -10,14 +10,6 @@ public class Angajat {
     private int salariu_negociat;
     private int numar_ore;
 
-    public Angajat(int id, int id_utilizator, String nume, String prenume, String functie) {
-        this.id = id;
-        this.id_utilizator = id_utilizator;
-        this.nume = nume;
-        this.prenume = prenume;
-        this.functie = functie;
-    }
-
     public Angajat(int id, int id_utilizator, int id_policlinica, String nume, String prenume, String functie, int salariu_negociat, int numar_ore) {
         this.id = id;
         this.id_utilizator = id_utilizator;
