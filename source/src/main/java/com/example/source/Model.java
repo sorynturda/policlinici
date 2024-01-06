@@ -3589,5 +3589,71 @@ public class Model {
             }
         }
     }
+
+    public static ArrayList<Bon> extrageBonuriMedic(int id_medic) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ArrayList<Bon> res = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT bonuri_fiscale.id, bonuri_fiscale.id_raport, bonuri_fiscale.id_angajat, bonuri_fiscale.total, bonuri_fiscale.data_emitere FROM rapoarte inner join bonuri_fiscale " +
+                    "WHERE rapoarte.id = bonuri_fiscale.id_raport and id_medic = '" + id_medic + "'";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                res.add(new Bon(
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_raport"),
+                        resultSet.getInt("id_angajat"),
+                        resultSet.getDouble("total"),
+                        resultSet.getDate("data_emitere").toLocalDate()
+                        )
+                );
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return res;
+    }
 }
 
