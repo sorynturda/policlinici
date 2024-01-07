@@ -73,6 +73,10 @@ public class SceneEconomic implements Initializable {
     @FXML
     private ChoiceBox<String> alegeAnAngajati;
     @FXML
+    private ChoiceBox<String> alegeLunaPoliclinici;
+    @FXML
+    private ChoiceBox<String> alegeAnPoliclinici;
+    @FXML
     private TableView<OrarAngajat> tabelOrar;
     @FXML
     private TableColumn<OrarAngajat, Integer> coloanaZi;
@@ -104,6 +108,7 @@ public class SceneEconomic implements Initializable {
         labelLocatie.setText(Model.getUtilizatorCurent().getAdresa());
         setAlegeLunaAn();
         setAlegeLunaAnAngajati();
+        setAlegeLunaAnPoliclinici();
         try {
             angajati = Model.listaAngajati();
             populateTabel();
@@ -121,6 +126,14 @@ public class SceneEconomic implements Initializable {
         int anCurent = LocalDate.now().getYear();
         alegeAnAngajati.setValue(Integer.toString(anCurent));
         alegeAnAngajati.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+    }
+
+    private void setAlegeLunaAnPoliclinici() {
+        alegeLunaPoliclinici.setValue(luni[LocalDate.now().getMonth().getValue() - 1]);
+        alegeLunaPoliclinici.getItems().addAll(luni);
+        int anCurent = LocalDate.now().getYear();
+        alegeAnPoliclinici.setValue(Integer.toString(anCurent));
+        alegeAnPoliclinici.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
     }
 
     private void populateTabelPoliclinici() {
@@ -242,10 +255,10 @@ public class SceneEconomic implements Initializable {
         if(angajat.getFunctie().equals(Model.MEDIC)) {
             Medic medic = Model.cautaMedic(angajat.getId());
             ArrayList<Bon> bonuri = Model.extrageBonuriMedic(medic.getId());
-            afiseazaVenitMedic(calculeazaVenitDupaOrarMedic(angajat, medic), medic, sumaBonuriLunaAleasa(bonuri));
+            afiseazaVenitMedic(calculeazaVenitDupaOrarMedic(alegeLunaAngajati, alegeAnAngajati, angajat, medic), medic, sumaBonuriLunaAleasa(alegeLunaAngajati, alegeAnAngajati,bonuri));
         }
         else
-            afiseazaVenitAngajat(calculeazaVenitDupaOrarAngajat(angajat));
+            afiseazaVenitAngajat(calculeazaVenitDupaOrarAngajat(alegeLunaAngajati, alegeAnAngajati,angajat));
     }
 
     private HashMap<String, String> faHashMap(ArrayList<String> orar) {
@@ -280,13 +293,13 @@ public class SceneEconomic implements Initializable {
         a.showAndWait();
     }
 
-    public int calculeazaVenitDupaOrarAngajat(Angajat angajat) {
+    public int calculeazaVenitDupaOrarAngajat(ChoiceBox<String> alegeLuna, ChoiceBox<String> alegeAn, Angajat angajat) {
         ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
         int policlinica = angajat.getId_policlinica();
         ArrayList<String> orarString = Model.orarPoliclinica(policlinica);
-        String luna = alegeLunaAngajati.getValue();
+        String luna = alegeLuna.getValue();
         int numarLuna = getNumarLuna(luna);
-        int an = Integer.parseInt(alegeAnAngajati.getValue());
+        int an = Integer.parseInt(alegeAn.getValue());
         LocalDate data = LocalDate.of(an, numarLuna, 1);
         HashMap<String, String> H = faHashMap(orarString);
         orar.clear();
@@ -300,13 +313,13 @@ public class SceneEconomic implements Initializable {
         return calculeazaVenitOrar(orar, angajat);
     }
 
-    public int calculeazaVenitDupaOrarMedic(Angajat angajat, Medic medic) {
+    public int calculeazaVenitDupaOrarMedic(ChoiceBox<String> alegeLuna, ChoiceBox<String> alegeAn, Angajat angajat, Medic medic) {
         ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
         int policlinica = angajat.getId_policlinica();
         ArrayList<String> orarString = Model.orarPoliclinica(policlinica);
-        String luna = alegeLunaAngajati.getValue();
+        String luna = alegeLuna.getValue();
         int numarLuna = getNumarLuna(luna);
-        int an = Integer.parseInt(alegeAnAngajati.getValue());
+        int an = Integer.parseInt(alegeAn.getValue());
         LocalDate data = LocalDate.of(an, numarLuna, 1);
         HashMap<String, String> H = faHashMap(orarString);
         orar.clear();
@@ -363,14 +376,51 @@ public class SceneEconomic implements Initializable {
         return orar;
     }
 
-    private int sumaBonuriLunaAleasa(ArrayList<Bon> bonuri) {
+    private int sumaBonuriLunaAleasa(ChoiceBox<String> alegeLuna, ChoiceBox<String> alegeAn, ArrayList<Bon> bonuri) {
         int suma = 0;
         for(Bon bon: bonuri) {
-            if(getNumarLuna(alegeLunaAngajati.getValue()) == bon.getData_emitere().getMonthValue() && alegeAnAngajati.getValue().compareToIgnoreCase("" + bon.getData_emitere().getYear()) == 0) {
+            if(getNumarLuna(alegeLuna.getValue()) == bon.getData_emitere().getMonthValue() && alegeAn.getValue().compareToIgnoreCase("" + bon.getData_emitere().getYear()) == 0) {
                 suma += bon.getTotal();
             }
 
         }
+        return suma;
+    }
+
+    public void selecteazaPoliclinica(ActionEvent event) throws IOException, SQLException {
+        Policlinica policlinica = tabelPoliclinici.getSelectionModel().getSelectedItem();
+        ArrayList<Bon> bonuri = Model.extrageBonuriPoliclinica(policlinica.getId());
+        ObservableList<Angajat> angajati = Model.listaAngajatiPoliclinica(policlinica.getId());
+
+        System.out.println(angajati);
+
+        int totalBonuri = sumaBonuriLunaAleasa(alegeLunaPoliclinici, alegeAnPoliclinici, bonuri);
+        double totalSalariiAngajati = sumaSalariiAngajatiPoliclinica(alegeLunaPoliclinici, alegeAnPoliclinici, angajati);
+        afiseazaVenitPoliclinica(totalBonuri, totalSalariiAngajati);
+    }
+
+    private void afiseazaVenitPoliclinica(int totalBonuri, double totalSalariiAngajati) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("VENIT POLICLINICA");
+        a.setHeaderText("Profit: " + (totalBonuri - totalSalariiAngajati) + " LEI");
+        a.setContentText("Total incasari: " + totalBonuri + " LEI" + "\nTotal plati salarii: " + totalSalariiAngajati + " LEI");
+        a.showAndWait();
+    }
+
+    private double sumaSalariiAngajatiPoliclinica(ChoiceBox<String> alegeLunaPoliclinici, ChoiceBox<String> alegeAnPoliclinici, ObservableList<Angajat> angajati) throws SQLException {
+        double suma = 0;
+        for(Angajat angajat: angajati) {
+            if(angajat.getFunctie().equals(Model.MEDIC)) {
+                Medic medic = Model.cautaMedic(angajat.getId());
+                ArrayList<Bon> bonuri = Model.extrageBonuriMedic(medic.getId());
+                suma += calculeazaVenitDupaOrarMedic(alegeLunaPoliclinici, alegeAnPoliclinici, angajat, medic);
+                suma += medic.getVenit_aditional() * sumaBonuriLunaAleasa(alegeLunaPoliclinici, alegeAnPoliclinici, bonuri);
+            }
+            else {
+                suma += calculeazaVenitDupaOrarAngajat(alegeLunaPoliclinici, alegeAnPoliclinici, angajat);
+            }
+        }
+
         return suma;
     }
 }
