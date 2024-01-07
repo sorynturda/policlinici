@@ -53,6 +53,10 @@ public class SceneEconomic implements Initializable {
     @FXML
     private TextField inputTextField;
     @FXML
+    private TextField inputTextFieldPoliclinici;
+    @FXML
+    private TextField inputTextFieldSpecialitati;
+    @FXML
     private TableView<Angajat> tabel;
     @FXML
     private TableColumn<Angajat, Integer> id;
@@ -469,5 +473,27 @@ public class SceneEconomic implements Initializable {
         double sumaSalariiMedici = sumaSalariiAngajatiPoliclinica(alegeLunaSpecialitati, alegeAnSpecialitati, angajati);
         System.out.println(angajati);
         afiseazaVenitSpecialitate(venitServicii, sumaSalariiMedici);
+    }
+
+    public void cautaPoliclinica(ActionEvent event) throws IOException, SQLException {
+        String input = inputTextFieldPoliclinici.getText().trim();
+        if (!input.isEmpty()) {
+            policlinici = Model.cautaPoliclinica(input);
+            populateTabelPoliclinici();
+        } else {
+            policlinici = Model.listPoliclinici();
+            populateTabelPoliclinici();
+        }
+    }
+
+    public void cautaSpecialitati(ActionEvent event) throws IOException, SQLException {
+        String input = inputTextFieldSpecialitati.getText().trim();
+        if (!input.isEmpty()) {
+            specialitati = Model.cautaSpecialitati(input);
+            populateTabelSpecialitati();
+        } else {
+            specialitati = Model.listaSpecialitati();
+            populateTabelSpecialitati();
+        }
     }
 }
