@@ -61,6 +61,10 @@ public class SceneMedic implements Initializable {
     @FXML
     private Label labelLocatie;
     @FXML
+    private Label labelTotalServicii;
+    @FXML
+    private Label labelProfit;
+    @FXML
     private TableView<Specialitati> tableSpecialitati;
     @FXML
     private TableColumn<Specialitati, String> nume_specialitate;
@@ -178,8 +182,22 @@ public class SceneMedic implements Initializable {
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
-        double venitAditional = salariuCalculat * Model.getMedicCurent().getVenit_aditional();
+        int sumaServiciiBonuri = sumaBonuriLunaAleasa();
+        double venitAditional = sumaServiciiBonuri * Model.getMedicCurent().getVenit_aditional();
         labelVenitAditionalCalculat.setText(Double.toString(venitAditional) + " LEI");
+        labelTotalServicii.setText(Integer.toString(sumaServiciiBonuri));
+        labelProfit.setText(Double.toString(sumaServiciiBonuri - salariuCalculat - venitAditional));
+    }
+
+    private int sumaBonuriLunaAleasa() {
+        int suma = 0;
+        ArrayList<Bon> bonuri = Model.extrageBonuriMedic(Model.getMedicCurent().getId());
+        for(Bon bon: bonuri) {
+            if(getNumarLuna(alegeLuna.getValue()) == bon.getData_emitere().getMonthValue() && alegeAn.getValue().compareToIgnoreCase("" + bon.getData_emitere().getYear()) == 0) {
+                suma += bon.getTotal();
+            }
+        }
+        return suma;
     }
 
     public void afiseazaOrar() {

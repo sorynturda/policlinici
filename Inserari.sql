@@ -52,7 +52,7 @@ INSERT INTO policlinici (id_program_functionare, adresa, denumire) VALUES
     INSERT INTO medici (id_angajat, cod_parafa, titlu_stiintific, post_didactic, venit_aditional)
 VALUES
     (5, 'MP12345', 'Doctor in Medicina', 'Conferentiar Universitar', 0.2),
-    (6, 'MP67890', 'Medic Primar Cardiologie', 'Asistent Universitar', 0);
+    (6, 'MP67890', 'Medic Primar Cardiologie', 'Asistent Universitar', 0.4);
 --     (25, 'MP54321', 'Medic Specialist ORL', 'Lector Universitar', 0.2),
 --     (25, 'MP98765', 'Doctor in Stomatologie', 'Profesor Universitar', 0),
 --     (25, 'MP24680', 'Medic Specialist Neurologie', 'Conferentiar Universitar', 0.3);

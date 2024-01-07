@@ -275,8 +275,8 @@ public class SceneEconomic implements Initializable {
     private void afiseazaVenitMedic(int venit, Medic medic, int sumaBonuri) {
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.setTitle("VENIT ANGAJAT");
-        a.setHeaderText("Venit total: " + (venit + medic.getVenit_aditional() * venit) + " LEI\nTotal consultatii: " + sumaBonuri + " LEI\nProfit: " + (sumaBonuri - (venit + medic.getVenit_aditional() * venit)) + " LEI");
-        a.setContentText("Venit: " + venit + " LEI\nProcent venit aditional: " + medic.getVenit_aditional() + " LEI\nVenit aditional calculat: " + (medic.getVenit_aditional() * venit) + " LEI");
+        a.setHeaderText("Venit total: " + (venit + medic.getVenit_aditional() * sumaBonuri) + " LEI\nTotal consultatii: " + sumaBonuri + " LEI\nProfit: " + (sumaBonuri - (venit + medic.getVenit_aditional() * sumaBonuri)) + " LEI");
+        a.setContentText("Venit: " + venit + " LEI\nProcent venit aditional: " + medic.getVenit_aditional() + " LEI\nVenit aditional calculat: " + (medic.getVenit_aditional() * sumaBonuri) + " LEI");
         a.showAndWait();
     }
 
