@@ -100,4 +100,17 @@ BEGIN
 END //
 DELIMITER ;
 
+DELIMITER //
+CREATE PROCEDURE TotalServiciiOferiteSpecialitate(IN idSpecialitate INT, IN _data DATE)
+BEGIN 
+	select sum(servicii.pret) as total_servicii_oferite from ((((specialitati 
+	inner join servicii_specialitate on servicii_specialitate.id_specialitate = specialitati.id)
+	inner join servicii on servicii_specialitate.id_serviciu = servicii.id) 
+	inner join servicii_oferite_raport on servicii_oferite_raport.id_serviciu = servicii.id)
+	inner join rapoarte on servicii_oferite_raport.id_raport = rapoarte.id)
+    inner join bonuri_fiscale on bonuri_fiscale.id_raport = rapoarte.id
+    where specialitati.id = idSpecialitate and month(bonuri_fiscale.data_emitere) = month(_data) and year(bonuri_fiscale.data_emitere) = year(_data);
+END 
+//
+DELIMITER ;
 

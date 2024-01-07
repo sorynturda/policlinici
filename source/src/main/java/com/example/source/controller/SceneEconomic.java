@@ -77,6 +77,10 @@ public class SceneEconomic implements Initializable {
     @FXML
     private ChoiceBox<String> alegeAnPoliclinici;
     @FXML
+    private ChoiceBox<String> alegeLunaSpecialitati;
+    @FXML
+    private ChoiceBox<String> alegeAnSpecialitati;
+    @FXML
     private TableView<OrarAngajat> tabelOrar;
     @FXML
     private TableColumn<OrarAngajat, Integer> coloanaZi;
@@ -88,11 +92,18 @@ public class SceneEconomic implements Initializable {
     private TableColumn<Policlinica, String> denumire;
     @FXML
     private TableColumn<Policlinica, String> adresa;
+    @FXML
+    private TableView<Specialitati> tabelSpecialitati;
+    @FXML
+    private TableColumn<Specialitati, String> numeSpecialitate;
+    @FXML
+    private TableColumn<Specialitati, String> grad;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
     ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
+    ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
 
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -109,15 +120,32 @@ public class SceneEconomic implements Initializable {
         setAlegeLunaAn();
         setAlegeLunaAnAngajati();
         setAlegeLunaAnPoliclinici();
+        setAlegeLunaAnSpecialitati();
         try {
             angajati = Model.listaAngajati();
             populateTabel();
             policlinici = Model.listPoliclinici();
             populateTabelPoliclinici();
+            specialitati = Model.listaSpecialitati();
+            populateTabelSpecialitati();
         } catch (SQLException e) {
             System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
             throw new RuntimeException(e);
         }
+    }
+
+    private void setAlegeLunaAnSpecialitati() {
+        alegeLunaSpecialitati.setValue(luni[LocalDate.now().getMonth().getValue() - 1]);
+        alegeLunaSpecialitati.getItems().addAll(luni);
+        int anCurent = LocalDate.now().getYear();
+        alegeAnSpecialitati.setValue(Integer.toString(anCurent));
+        alegeAnSpecialitati.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+    }
+
+    private void populateTabelSpecialitati() {
+        numeSpecialitate.setCellValueFactory(new PropertyValueFactory<>("nume_specialitate"));
+        grad.setCellValueFactory(new PropertyValueFactory<>("grad"));
+        tabelSpecialitati.setItems(specialitati);
     }
 
     private void setAlegeLunaAnAngajati() {
@@ -422,5 +450,24 @@ public class SceneEconomic implements Initializable {
         }
 
         return suma;
+    }
+
+    private void afiseazaVenitSpecialitate(int totalServicii, double totalSalariiAngajati) {
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.setTitle("VENIT SPECIALITATE");
+        a.setHeaderText("Profit: " + (totalServicii - totalSalariiAngajati) + " LEI");
+        a.setContentText("Total incasari: " + totalServicii + " LEI" + "\nTotal plati salarii: " + totalSalariiAngajati + " LEI");
+        a.showAndWait();
+    }
+
+    public void selecteazaSpecialitate(ActionEvent event) throws IOException, SQLException {
+        Specialitati specialitati = tabelSpecialitati.getSelectionModel().getSelectedItem();
+        ObservableList<Angajat> angajati = Model.listaAngajatiSpecialitati(specialitati.getId());
+        String data = alegeAnSpecialitati.getValue() + "-" + getNumarLuna(alegeLunaSpecialitati.getValue()) + "-1";
+        System.out.println(data);
+        int venitServicii = Model.totalVenitSpecialitate(specialitati.getId(), data);
+        double sumaSalariiMedici = sumaSalariiAngajatiPoliclinica(alegeLunaSpecialitati, alegeAnSpecialitati, angajati);
+        System.out.println(angajati);
+        afiseazaVenitSpecialitate(venitServicii, sumaSalariiMedici);
     }
 }

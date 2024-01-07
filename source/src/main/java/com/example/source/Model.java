@@ -3788,5 +3788,198 @@ public class Model {
         }
         return angajati;
     }
+
+    public static ObservableList<Specialitati> listaSpecialitati() throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT * FROM specialitati";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int id_medic = resultSet.getInt("id_medic");
+                String nume_specialitate = resultSet.getString("nume_specialitate");
+                String grad = resultSet.getString("grad");
+
+                specialitati.add(new Specialitati(id, id_medic, nume_specialitate, grad));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return specialitati;
+    }
+
+    public static int totalVenitSpecialitate(int idSpecialitate, String data) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        int res = 0;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call TotalServiciiOferiteSpecialitate(?, ?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setString(1, Integer.toString(idSpecialitate));
+            callableStatement.setString(2, data);
+            resultSet = callableStatement.executeQuery();
+            if (resultSet.next()) {
+                res = resultSet.getInt("total_servicii_oferite");
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return res;
+    }
+
+    public static ObservableList<Angajat> listaAngajatiSpecialitati(int idSpecialitate) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Angajat> angajati = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT a.id, a.id_utilizator, a.id_policlinica, u.nume, u.prenume, a.functie, a.salariu_negociat, a.numar_ore " +
+                    "FROM ((angajati a INNER JOIN utilizatori u ON a.id_utilizator = u.id) " +
+                    "INNER JOIN medici ON medici.id_angajat = a.id)" +
+                    "INNER JOIN specialitati ON specialitati.id_medic = medici.id" +
+                    " WHERE specialitati.id = '" + idSpecialitate + "'";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int id_utilizator = resultSet.getInt("id_utilizator");
+                int id_policlinica = resultSet.getInt("id_policlinica");
+                String nume = resultSet.getString("nume");
+                String prenume = resultSet.getString("prenume");
+                String functie = resultSet.getString("functie");
+                int salariu_negociat = resultSet.getInt("salariu_negociat");
+                int numar_ore = resultSet.getInt("numar_ore");
+                angajati.add(new Angajat(id, id_utilizator, id_policlinica, nume, prenume, functie, salariu_negociat, numar_ore));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return angajati;
+    }
 }
 

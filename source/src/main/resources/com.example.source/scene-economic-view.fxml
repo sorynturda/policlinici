@@ -305,6 +305,56 @@
                   </BorderPane>
                </content>
             </Tab>
+            <Tab text="SPECIALITATI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <center>
+                        <TableView fx:id="tabelSpecialitati" prefHeight="146.0" prefWidth="487.0" BorderPane.alignment="CENTER">
+                           <columns>
+                              <TableColumn fx:id="id11" prefWidth="128.0" text="id" visible="false" />
+                              <TableColumn fx:id="id_utilizator11" prefWidth="128.0" text="id_utilizator" visible="false" />
+                              <TableColumn fx:id="numeSpecialitate" prefWidth="292.666646361351" text="NUME SPECIALITATE" />
+                              <TableColumn fx:id="grad" prefWidth="191.3333740234375" text="GRAD" />
+                           </columns>
+                        </TableView>
+                     </center>
+                     <top>
+                        <AnchorPane prefHeight="97.0" prefWidth="487.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextField fx:id="inputTextField11" layoutX="140.0" layoutY="22.0" prefHeight="32.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
+                              <Label alignment="CENTER" layoutX="14.0" layoutY="23.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="CAUTA ANGAJATI:">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <Button layoutX="304.0" layoutY="23.0" minWidth="37.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="CAUTA">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Button layoutX="393.0" layoutY="23.0" minWidth="47.0" mnemonicParsing="false" onAction="#selecteazaSpecialitate" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="SELECT">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="61.0" prefHeight="30.0" prefWidth="110.0" style="-fx-background-color: #ffffff;" text="LUNA:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="alegeLunaSpecialitati" layoutX="140.0" layoutY="61.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" layoutX="304.0" layoutY="61.0" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" text="AN:" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Label>
+                              <ChoiceBox fx:id="alegeAnSpecialitati" layoutX="393.0" layoutY="61.0" prefHeight="30.0" prefWidth="80.0" style="-fx-background-color: #ffffff;" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </right>
