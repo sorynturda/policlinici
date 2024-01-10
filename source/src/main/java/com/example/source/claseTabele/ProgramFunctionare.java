@@ -1,6 +1,6 @@
 package com.example.source.claseTabele;
 
-public class ProgramFunctionare {
+public class ProgramFunctionare implements Cloneable {
     private int id;
     private String duminica;
     private String luni;
@@ -81,6 +81,10 @@ public class ProgramFunctionare {
         this.sambata = sambata;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return "ProgramFunctionare{" +
@@ -89,5 +93,23 @@ public class ProgramFunctionare {
                 ", miercuri='" + miercuri + '\'' + ", joi='" + joi + '\'' +
                 ", vineri='" + vineri + '\'' + ", sambata='" + sambata + '\'' +
                 '}';
+    }
+
+    @Override
+    public ProgramFunctionare clone() {
+        try {
+            ProgramFunctionare clone = (ProgramFunctionare) super.clone();
+            clone.setId(id);
+            clone.setDuminica(duminica);
+            clone.setLuni(luni);
+            clone.setMarti(marti);
+            clone.setMiercuri(miercuri);
+            clone.setJoi(joi);
+            clone.setVineri(vineri);
+            clone.setSambata(sambata);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

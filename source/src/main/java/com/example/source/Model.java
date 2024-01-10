@@ -3616,11 +3616,11 @@ public class Model {
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
                 res.add(new Bon(
-                        resultSet.getInt("id"),
-                        resultSet.getInt("id_raport"),
-                        resultSet.getInt("id_angajat"),
-                        resultSet.getDouble("total"),
-                        resultSet.getDate("data_emitere").toLocalDate()
+                                resultSet.getInt("id"),
+                                resultSet.getInt("id_raport"),
+                                resultSet.getInt("id_angajat"),
+                                resultSet.getDouble("total"),
+                                resultSet.getDate("data_emitere").toLocalDate()
                         )
                 );
             }
@@ -3682,11 +3682,11 @@ public class Model {
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
                 res.add(new Bon(
-                        resultSet.getInt("id"),
-                        resultSet.getInt("id_raport"),
-                        resultSet.getInt("id_angajat"),
-                        resultSet.getDouble("total"),
-                        resultSet.getDate("data_emitere").toLocalDate()
+                                resultSet.getInt("id"),
+                                resultSet.getInt("id_raport"),
+                                resultSet.getInt("id_angajat"),
+                                resultSet.getDouble("total"),
+                                resultSet.getDate("data_emitere").toLocalDate()
                         )
                 );
             }
@@ -4110,7 +4110,7 @@ public class Model {
     }
 
     public static ObservableList<ProgramFunctionare> listaProgramFunctionare() {
-         Connection connection = null;
+        Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
@@ -4142,7 +4142,7 @@ public class Model {
                 String vineri = resultSet.getString("vineri");
                 String sambata = resultSet.getString("sambata");
                 res.add(new ProgramFunctionare(id, duminica, luni, marti, miercuri, joi
-                ,vineri,sambata));
+                        , vineri, sambata));
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -4174,6 +4174,77 @@ public class Model {
             }
         }
         return res;
+    }
+
+    public static void actualizeazaPoliclinici(ArrayList<ProgramFunctionare> pr, ArrayList<Policlinica> po) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            for (ProgramFunctionare it : pr) {
+                String query = "UPDATE program_functionare " +
+                        "SET duminica = '" + it.getDuminica() + "', " +
+                        "luni = '" + it.getLuni() + "', " +
+                        "marti = '" + it.getMarti() + "', " +
+                        "miercuri = '" + it.getMiercuri() + "', " +
+                        "joi = '" + it.getJoi() + "', " +
+                        "vineri = '" + it.getVineri() + "', " +
+                        "sambata = '" + it.getSambata() + "' " +
+                        "WHERE id = '" + it.getId() + "'";
+                callableStatement = connection.prepareCall(query);
+                callableStatement.executeUpdate();
+            }
+            for (Policlinica it : po) {
+                String query = "UPDATE policlinici " +
+                        "SET id_program_functionare = '" + it.getId_program_functionare() + "', " +
+                        "denumire = '" + it.getDenumire() + "', " +
+                        "adresa = '" + it.getAdresa() + "' " +
+                        "WHERE id = '" + it.getId() + "'";
+                callableStatement = connection.prepareCall(query);
+                callableStatement.executeUpdate();
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
     }
 }
 

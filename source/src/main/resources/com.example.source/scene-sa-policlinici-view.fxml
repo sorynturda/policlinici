@@ -34,6 +34,7 @@
                                 <TableColumn fx:id="sambata" onEditCommit="#sambataEdit" prefWidth="133.5999755859375" text="sambata" />
                             </columns>
                         </TableView>
+                  <Button layoutX="548.0" layoutY="88.0" mnemonicParsing="false" onAction="#update" text="actualizeaza" />
                     </children>
                 </AnchorPane>
             </content>

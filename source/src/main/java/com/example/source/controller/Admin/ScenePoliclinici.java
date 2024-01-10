@@ -17,6 +17,7 @@ import javafx.util.converter.IntegerStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ScenePoliclinici implements Initializable {
@@ -89,6 +90,16 @@ public class ScenePoliclinici implements Initializable {
         adresa.setCellValueFactory(new PropertyValueFactory<>("adresa"));
         denumire.setCellValueFactory(new PropertyValueFactory<>("denumire"));
         tabelPoliclinici.setItems(policlinici);
+    }
+
+    public void update(){
+        ArrayList<ProgramFunctionare> pr = new ArrayList<>();
+        ArrayList <Policlinica> po = new ArrayList<>();
+        for(ProgramFunctionare progr : program)
+            pr.add(progr.clone());
+        for(Policlinica pol : policlinici)
+            po.add(pol.clone());
+        Model.actualizeazaPoliclinici(pr, po);
     }
 
     public void goBack(ActionEvent event) throws IOException {

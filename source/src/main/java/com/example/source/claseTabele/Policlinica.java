@@ -1,6 +1,6 @@
 package com.example.source.claseTabele;
 
-public class Policlinica {
+public class Policlinica implements Cloneable{
     private int id;
     private int id_program_functionare;
     private String adresa;
@@ -33,6 +33,10 @@ public class Policlinica {
         this.id_program_functionare = id_program_functionare;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void setAdresa(String adresa) {
         this.adresa = adresa;
     }
@@ -49,5 +53,19 @@ public class Policlinica {
                 ", adresa='" + adresa + '\'' +
                 ", denumire='" + denumire + '\'' +
                 '}';
+    }
+
+    @Override
+    public Policlinica clone() {
+        try {
+            Policlinica clone = (Policlinica) super.clone();
+            clone.setId(id);
+            clone.setId_program_functionare(id_program_functionare);
+            clone.setAdresa(adresa);
+            clone.setDenumire(denumire);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
