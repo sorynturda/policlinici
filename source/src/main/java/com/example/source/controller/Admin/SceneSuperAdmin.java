@@ -23,6 +23,14 @@ public class SceneSuperAdmin {
         stage.show();
     }
 
+    public void goToPoliclinici(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("/com.example.source/scene-sa-policlinici-view.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);

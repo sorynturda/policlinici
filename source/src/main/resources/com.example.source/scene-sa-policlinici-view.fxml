@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane prefHeight="533.0" prefWidth="936.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Admin.ScenePoliclinici">
+    <tabs>
+        <Tab text="policlinici">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="617.0">
+                    <children>
+                        <Button layoutX="741.0" layoutY="29.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
+                        <TableView fx:id="tabelPoliclinici" editable="true" layoutX="23.0" layoutY="14.0" prefHeight="200.0" prefWidth="378.0">
+                            <columns>
+                                <TableColumn fx:id="id" prefWidth="63.99999809265137" text="id" />
+                                <TableColumn fx:id="id_program_functionare" onEditCommit="#id_program_functionareEdit" prefWidth="74.39997100830078" text="id_program_functionare" />
+                                <TableColumn fx:id="adresa" onEditCommit="#adresaEdit" prefWidth="99.20001220703125" text="adresa" />
+                                <TableColumn fx:id="denumire" onEditCommit="#denumireEdit" prefWidth="133.5999755859375" text="denumire" />
+                            </columns>
+                        </TableView>
+                        <TableView fx:id="tabelProgram" editable="true" layoutX="23.0" layoutY="216.0" prefHeight="200.0" prefWidth="901.0">
+                            <columns>
+                                <TableColumn fx:id="idP" prefWidth="63.99999809265137" text="id" />
+                                <TableColumn fx:id="duminica" onEditCommit="#duminicaEdit" prefWidth="74.39997100830078" text="duminica" />
+                                <TableColumn fx:id="luni" onEditCommit="#luniEdit" prefWidth="99.20001220703125" text="luni" />
+                                <TableColumn fx:id="marti" onEditCommit="#martiEdit" prefWidth="133.5999755859375" text="marti" />
+                                <TableColumn fx:id="miercuri" onEditCommit="#miercuriEdit" prefWidth="133.5999755859375" text="miercuri" />
+                                <TableColumn fx:id="joi" onEditCommit="#joiEdit" prefWidth="133.5999755859375" text="joi" />
+                                <TableColumn fx:id="vineri" onEditCommit="#vineriEdit" prefWidth="133.5999755859375" text="vineri" />
+                                <TableColumn fx:id="sambata" onEditCommit="#sambataEdit" prefWidth="133.5999755859375" text="sambata" />
+                            </columns>
+                        </TableView>
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

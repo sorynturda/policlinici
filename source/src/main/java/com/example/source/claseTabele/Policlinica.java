@@ -29,6 +29,18 @@ public class Policlinica {
         return denumire;
     }
 
+    public void setId_program_functionare(int id_program_functionare) {
+        this.id_program_functionare = id_program_functionare;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public void setDenumire(String denumire) {
+        this.denumire = denumire;
+    }
+
     @Override
     public String toString() {
         return "Policlinica{" +

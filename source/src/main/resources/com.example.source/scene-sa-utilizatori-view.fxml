@@ -11,38 +11,31 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<TabPane prefHeight="677.0" prefWidth="1091.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21"
-         xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Admin.SceneUtilizatori">
+<TabPane prefHeight="677.0" prefWidth="1091.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Admin.SceneUtilizatori">
     <tabs>
         <Tab text="UTILIZATORI">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#goBack" text="inapoi"/>
+                        <Button layoutX="135.0" layoutY="287.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
                         <TableView fx:id="tabelUtilizatori" editable="true" prefHeight="200.0" prefWidth="1074.0">
                             <columns>
-                                <TableColumn fx:id="id" prefWidth="48.0" text="id"/>
-                                <TableColumn fx:id="id_cont" prefWidth="52.0" text="id_cont"/>
-                                <TableColumn fx:id="departament" onEditCommit="#departamentEdit" prefWidth="117.0"
-                                             text="departament"/>
-                                <TableColumn fx:id="adresa" onEditCommit="#adresaEdit" prefWidth="131.0" text="adresa"/>
-                                <TableColumn fx:id="cnp" onEditCommit="#cnpEdit" prefWidth="87.0" text="cnp"/>
-                                <TableColumn fx:id="nume" onEditCommit="#numeEdit" prefWidth="74.0" text="nume"/>
-                                <TableColumn fx:id="prenume" onEditCommit="#prenumeEdit" prefWidth="74.0"
-                                             text="prenume"/>
-                                <TableColumn fx:id="telefon" onEditCommit="#telefonEdit" prefWidth="74.0"
-                                             text="telefon"/>
-                                <TableColumn fx:id="email" onEditCommit="#emailEdit" prefWidth="74.0" text="email"/>
-                                <TableColumn fx:id="iban" onEditCommit="#ibanEdit" prefWidth="117.0" text="iban"/>
-                                <TableColumn fx:id="data_angajarii" onEditCommit="#data_angajariiEdit" prefWidth="111.0"
-                                             text="data_angajarii"/>
-                                <TableColumn fx:id="rol" onEditCommit="#rolEdit" prefWidth="107.0" text="rol"/>
+                                <TableColumn fx:id="id" prefWidth="48.0" text="id" />
+                                <TableColumn fx:id="id_cont" prefWidth="52.0" text="id_cont" />
+                                <TableColumn fx:id="departament" onEditCommit="#departamentEdit" prefWidth="117.0" text="departament" />
+                                <TableColumn fx:id="adresa" onEditCommit="#adresaEdit" prefWidth="131.0" text="adresa" />
+                                <TableColumn fx:id="cnp" onEditCommit="#cnpEdit" prefWidth="87.0" text="cnp" />
+                                <TableColumn fx:id="nume" onEditCommit="#numeEdit" prefWidth="74.0" text="nume" />
+                                <TableColumn fx:id="prenume" onEditCommit="#prenumeEdit" prefWidth="74.0" text="prenume" />
+                                <TableColumn fx:id="telefon" onEditCommit="#telefonEdit" prefWidth="74.0" text="telefon" />
+                                <TableColumn fx:id="email" onEditCommit="#emailEdit" prefWidth="74.0" text="email" />
+                                <TableColumn fx:id="iban" onEditCommit="#ibanEdit" prefWidth="117.0" text="iban" />
+                                <TableColumn fx:id="data_angajarii" onEditCommit="#data_angajariiEdit" prefWidth="111.0" text="data_angajarii" />
+                                <TableColumn fx:id="rol" onEditCommit="#rolEdit" prefWidth="107.0" text="rol" />
                             </columns>
                         </TableView>
-                        <Button layoutX="204.0" layoutY="441.0" mnemonicParsing="false"
-                                onAction="#actualizeazaUtilizatori" text="update"/>
-                        <Button layoutX="438.0" layoutY="346.0" mnemonicParsing="false" onAction="#stergeUtilizator"
-                                text="sterge"/>
+                        <Button layoutX="204.0" layoutY="441.0" mnemonicParsing="false" onAction="#actualizeazaUtilizatori" text="update" />
+                        <Button layoutX="438.0" layoutY="346.0" mnemonicParsing="false" onAction="#stergeUtilizator" text="sterge" />
                     </children>
                 </AnchorPane>
             </content>
@@ -51,44 +44,31 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="58.0" prefHeight="47.0" prefWidth="114.0"
-                               text="departament"/>
-                        <Label alignment="CENTER" layoutX="95.0" layoutY="105.0" prefHeight="47.0" prefWidth="114.0"
-                               text="adresa"/>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="165.0" prefHeight="47.0" prefWidth="114.0"
-                               text="cnp"/>
-                        <TextField fx:id="cnpTf" layoutX="232.0" layoutY="176.0"/>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="226.0" prefHeight="47.0" prefWidth="114.0"
-                               text="nume"/>
-                        <TextField fx:id="numeTf" layoutX="232.0" layoutY="237.0"/>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="291.0" prefHeight="47.0" prefWidth="114.0"
-                               text="prenume"/>
-                        <TextField fx:id="prenumeTf" layoutX="232.0" layoutY="302.0"/>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="338.0" prefHeight="47.0" prefWidth="114.0"
-                               text="telefon"/>
-                        <TextField fx:id="telefonTf" layoutX="232.0" layoutY="349.0"/>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="374.0" prefHeight="47.0" prefWidth="114.0"
-                               text="email"/>
-                        <TextField fx:id="emailTf" layoutX="232.0" layoutY="385.0"/>
-                        <Label alignment="CENTER" layoutX="101.0" layoutY="421.0" prefHeight="47.0" prefWidth="114.0"
-                               text="iban"/>
-                        <TextField fx:id="ibanTf" layoutX="232.0" layoutY="432.0"/>
-                        <Label alignment="CENTER" layoutX="109.0" layoutY="476.0" prefHeight="47.0" prefWidth="114.0"
-                               text="data_angajarii"/>
-                        <Label alignment="CENTER" layoutX="109.0" layoutY="529.0" prefHeight="47.0" prefWidth="114.0"
-                               text="rol"/>
-                        <ChoiceBox fx:id="departamentChoiceBox" layoutX="232.0" layoutY="69.0" prefWidth="150.0"/>
-                        <ChoiceBox fx:id="rolChoiceBox" layoutX="232.0" layoutY="540.0" prefWidth="150.0"/>
-                        <TextField fx:id="usernameTf" layoutX="637.0" layoutY="32.0"/>
-                        <Button layoutX="593.0" layoutY="336.0" mnemonicParsing="false" onAction="#adaugaUtilizator"
-                                text="add"/>
-                        <Label alignment="CENTER" layoutX="496.0" layoutY="21.0" prefHeight="47.0" prefWidth="114.0"
-                               text="nume utilizator"/>
-                        <Label alignment="CENTER" layoutX="515.0" layoutY="71.0" prefHeight="47.0" prefWidth="114.0"
-                               text="parola"/>
-                        <TextField fx:id="parolaTf" layoutX="629.0" layoutY="82.0"/>
-                        <TextField fx:id="adresaTf" layoutX="223.0" layoutY="116.0"/>
-                        <DatePicker fx:id="data_angajariiDP" layoutX="220.0" layoutY="487.0"/>
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="58.0" prefHeight="47.0" prefWidth="114.0" text="departament" />
+                        <Label alignment="CENTER" layoutX="95.0" layoutY="105.0" prefHeight="47.0" prefWidth="114.0" text="adresa" />
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="165.0" prefHeight="47.0" prefWidth="114.0" text="cnp" />
+                        <TextField fx:id="cnpTf" layoutX="232.0" layoutY="176.0" />
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="226.0" prefHeight="47.0" prefWidth="114.0" text="nume" />
+                        <TextField fx:id="numeTf" layoutX="232.0" layoutY="237.0" />
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="291.0" prefHeight="47.0" prefWidth="114.0" text="prenume" />
+                        <TextField fx:id="prenumeTf" layoutX="232.0" layoutY="302.0" />
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="338.0" prefHeight="47.0" prefWidth="114.0" text="telefon" />
+                        <TextField fx:id="telefonTf" layoutX="232.0" layoutY="349.0" />
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="374.0" prefHeight="47.0" prefWidth="114.0" text="email" />
+                        <TextField fx:id="emailTf" layoutX="232.0" layoutY="385.0" />
+                        <Label alignment="CENTER" layoutX="101.0" layoutY="421.0" prefHeight="47.0" prefWidth="114.0" text="iban" />
+                        <TextField fx:id="ibanTf" layoutX="232.0" layoutY="432.0" />
+                        <Label alignment="CENTER" layoutX="109.0" layoutY="476.0" prefHeight="47.0" prefWidth="114.0" text="data_angajarii" />
+                        <Label alignment="CENTER" layoutX="109.0" layoutY="529.0" prefHeight="47.0" prefWidth="114.0" text="rol" />
+                        <ChoiceBox fx:id="departamentChoiceBox" layoutX="232.0" layoutY="69.0" prefWidth="150.0" />
+                        <ChoiceBox fx:id="rolChoiceBox" layoutX="232.0" layoutY="540.0" prefWidth="150.0" />
+                        <TextField fx:id="usernameTf" layoutX="637.0" layoutY="32.0" />
+                        <Button layoutX="593.0" layoutY="336.0" mnemonicParsing="false" onAction="#adaugaUtilizator" text="add" />
+                        <Label alignment="CENTER" layoutX="496.0" layoutY="21.0" prefHeight="47.0" prefWidth="114.0" text="nume utilizator" />
+                        <Label alignment="CENTER" layoutX="515.0" layoutY="71.0" prefHeight="47.0" prefWidth="114.0" text="parola" />
+                        <TextField fx:id="parolaTf" layoutX="629.0" layoutY="82.0" />
+                        <TextField fx:id="adresaTf" layoutX="223.0" layoutY="116.0" />
+                        <DatePicker fx:id="data_angajariiDP" layoutX="220.0" layoutY="487.0" />
                     </children>
                 </AnchorPane>
             </content>
@@ -97,24 +77,18 @@
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#goBack" text="inapoi"/>
                         <TableView fx:id="tabelConturi" editable="true" prefHeight="270.0" prefWidth="466.0">
                             <columns>
-                                <TableColumn fx:id="idC" prefWidth="48.0" text="id"/>
-                                <TableColumn fx:id="nume_utilizator" onEditCommit="#nume_utilizatorEdit"
-                                             prefWidth="151.99999618530273" text="nume utilizator"/>
-                                <TableColumn fx:id="parola" onEditCommit="#parolaEdit" prefWidth="175.99998474121094"
-                                             text="parola"/>
+                                <TableColumn fx:id="idC" prefWidth="48.0" text="id" />
+                                <TableColumn fx:id="nume_utilizator" onEditCommit="#nume_utilizatorEdit" prefWidth="151.99999618530273" text="nume utilizator" />
+                                <TableColumn fx:id="parola" onEditCommit="#parolaEdit" prefWidth="175.99998474121094" text="parola" />
                             </columns>
                         </TableView>
-                        <Button layoutX="556.0" layoutY="121.0" mnemonicParsing="false" onAction="#adaugaCont"
-                                text="ADD"/>
-                        <TextField fx:id="usernameCTf" layoutX="523.0" layoutY="50.0"/>
-                        <TextField fx:id="passwordTf" layoutX="522.0" layoutY="87.0"/>
-                        <Button layoutX="240.0" layoutY="353.0" mnemonicParsing="false" onAction="#stergeCont"
-                                text="sterge"/>
-                        <Button layoutX="373.0" layoutY="324.0" mnemonicParsing="false" onAction="#actualizeazaConturi"
-                                text="update"/>
+                        <Button layoutX="556.0" layoutY="121.0" mnemonicParsing="false" onAction="#adaugaCont" text="ADD" />
+                        <TextField fx:id="usernameCTf" layoutX="523.0" layoutY="50.0" />
+                        <TextField fx:id="passwordTf" layoutX="522.0" layoutY="87.0" />
+                        <Button layoutX="240.0" layoutY="353.0" mnemonicParsing="false" onAction="#stergeCont" text="sterge" />
+                        <Button layoutX="373.0" layoutY="324.0" mnemonicParsing="false" onAction="#actualizeazaConturi" text="update" />
                     </children>
                 </AnchorPane>
             </content>
