@@ -3,20 +3,26 @@ package com.example.source.controller.Admin;
 import com.example.source.Model;
 import com.example.source.claseTabele.Policlinica;
 import com.example.source.claseTabele.ProgramFunctionare;
+import com.example.source.claseTabele.Serviciu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.util.StringConverter;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
+import javafx.util.converter.TimeStringConverter;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -49,13 +55,40 @@ public class ScenePoliclinici implements Initializable {
     private TableColumn<ProgramFunctionare, String> vineri;
     @FXML
     private TableColumn<ProgramFunctionare, String> sambata;
+    @FXML
+    private TableView<Serviciu> tabelServicii;
+    @FXML
+    private TableColumn<Serviciu, Integer> idS;
+    @FXML
+    private TableColumn<Serviciu, String> nume_serviciu;
+    @FXML
+    private TableColumn<Serviciu, Double> pret;
+    @FXML
+    private TableColumn<Serviciu, Time> durata;
+    @FXML
+    private TextField duminicaTf;
+    @FXML
+    private TextField luniTf;
+    @FXML
+    private TextField martiTf;
+    @FXML
+    private TextField miercuriTf;
+    @FXML
+    private TextField vineriTf;
+    @FXML
+    private TextField joiTf;
+    @FXML
+    private TextField sambataTf;
     ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
     ObservableList<ProgramFunctionare> program = FXCollections.observableArrayList();
+    ObservableList<Serviciu> servicii = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        populateTabelServicii();
         populateTabelPoliclinici();
         populateTabelProgram();
+
         tabelProgram.setEditable(true);
         duminica.setCellFactory(TextFieldTableCell.forTableColumn());
         luni.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -64,10 +97,26 @@ public class ScenePoliclinici implements Initializable {
         joi.setCellFactory(TextFieldTableCell.forTableColumn());
         vineri.setCellFactory(TextFieldTableCell.forTableColumn());
         sambata.setCellFactory(TextFieldTableCell.forTableColumn());
+
         tabelPoliclinici.setEditable(true);
         id_program_functionare.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         denumire.setCellFactory(TextFieldTableCell.forTableColumn());
         adresa.setCellFactory(TextFieldTableCell.forTableColumn());
+
+        tabelServicii.setEditable(true);
+        nume_serviciu.setCellFactory(TextFieldTableCell.forTableColumn());
+        pret.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        durata.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<Time>() {
+            @Override
+            public String toString(Time time) {
+                return time.toString();
+            }
+
+            @Override
+            public Time fromString(String s) {
+                return Time.valueOf(s);
+            }
+        }));
     }
 
     private void populateTabelProgram() {
@@ -85,19 +134,27 @@ public class ScenePoliclinici implements Initializable {
 
     private void populateTabelPoliclinici() {
         policlinici = Model.listPoliclinici();
-        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        idS.setCellValueFactory(new PropertyValueFactory<>("id"));
         id_program_functionare.setCellValueFactory(new PropertyValueFactory<>("id_program_functionare"));
         adresa.setCellValueFactory(new PropertyValueFactory<>("adresa"));
         denumire.setCellValueFactory(new PropertyValueFactory<>("denumire"));
         tabelPoliclinici.setItems(policlinici);
     }
 
-    public void update(){
+    private void populateTabelServicii(){
+        servicii = Model.listaServicii();
+        idP.setCellValueFactory(new PropertyValueFactory<>("id"));
+        nume_serviciu.setCellValueFactory(new PropertyValueFactory<>("nume_serviciu"));
+        pret.setCellValueFactory(new PropertyValueFactory<>("pret"));
+        durata.setCellValueFactory(new PropertyValueFactory<>("durata"));
+        tabelServicii.setItems(servicii);
+    }
+    public void update() {
         ArrayList<ProgramFunctionare> pr = new ArrayList<>();
-        ArrayList <Policlinica> po = new ArrayList<>();
-        for(ProgramFunctionare progr : program)
+        ArrayList<Policlinica> po = new ArrayList<>();
+        for (ProgramFunctionare progr : program)
             pr.add(progr.clone());
-        for(Policlinica pol : policlinici)
+        for (Policlinica pol : policlinici)
             po.add(pol.clone());
         Model.actualizeazaPoliclinici(pr, po);
     }
@@ -110,9 +167,11 @@ public class ScenePoliclinici implements Initializable {
     public void id_program_functionareEdit(TableColumn.CellEditEvent<Policlinica, Integer> policlinicaIntegerCellEditEvent) {
         tabelPoliclinici.getSelectionModel().getSelectedItem().setId_program_functionare(policlinicaIntegerCellEditEvent.getNewValue());
     }
+
     public void adresaEdit(TableColumn.CellEditEvent<Policlinica, String> policlinicaIntegerCellEditEvent) {
         tabelPoliclinici.getSelectionModel().getSelectedItem().setAdresa(policlinicaIntegerCellEditEvent.getNewValue());
     }
+
     public void denumireEdit(TableColumn.CellEditEvent<Policlinica, String> policlinicaIntegerCellEditEvent) {
         tabelPoliclinici.getSelectionModel().getSelectedItem().setDenumire(policlinicaIntegerCellEditEvent.getNewValue());
     }
@@ -143,5 +202,40 @@ public class ScenePoliclinici implements Initializable {
 
     public void sambataEdit(TableColumn.CellEditEvent<ProgramFunctionare, String> programFunctionareStringCellEditEvent) {
         tabelProgram.getSelectionModel().getSelectedItem().setSambata(programFunctionareStringCellEditEvent.getNewValue());
+    }
+
+    public void reset(Event event) {
+        populateTabelProgram();
+    }
+
+    public void adaugaProgramFunctionare(ActionEvent actionEvent) {
+        ArrayList<String> pr = new ArrayList<>();
+        pr.add(duminicaTf.getText());
+        pr.add(luniTf.getText());
+        pr.add(martiTf.getText());
+        pr.add(miercuriTf.getText());
+        pr.add(joiTf.getText());
+        pr.add(vineriTf.getText());
+        pr.add(sambataTf.getText());
+        System.out.println(pr.size());
+        Model.inserareProgramFunctionare(pr);
+        populateTabelProgram();
+    }
+
+    public void nume_serviciuEdit(TableColumn.CellEditEvent<Serviciu, String> serviciuStringCellEditEvent) {
+        tabelServicii.getSelectionModel().getSelectedItem().setNume_serviciu(serviciuStringCellEditEvent.getNewValue());
+    }
+
+    public void pretEdit(TableColumn.CellEditEvent<Serviciu, Double> serviciuDoubleCellEditEvent) {
+        tabelServicii.getSelectionModel().getSelectedItem().setPret(serviciuDoubleCellEditEvent.getNewValue());
+    }
+
+    public void durataEdit(TableColumn.CellEditEvent<Serviciu, Time> serviciuTimeCellEditEvent) {
+        tabelServicii.getSelectionModel().getSelectedItem().setDurata(serviciuTimeCellEditEvent.getNewValue());
+    }
+
+    public void actualizeazaServicii(ActionEvent actionEvent) {
+        for(Serviciu it:servicii)
+            System.out.println(it);
     }
 }

@@ -48,6 +48,18 @@ public class Serviciu {
         this.investigatii = investigatii;
     }
 
+    public void setNume_serviciu(String nume_serviciu) {
+        this.nume_serviciu = nume_serviciu;
+    }
+
+    public void setPret(Double pret) {
+        this.pret = pret;
+    }
+
+    public void setDurata(Time durata) {
+        this.durata = durata;
+    }
+
     @Override
     public String toString() {
         return "Serviciu{" +
