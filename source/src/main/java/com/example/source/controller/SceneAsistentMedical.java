@@ -113,7 +113,7 @@ public class SceneAsistentMedical implements Initializable {
         alegeLuna.getItems().addAll(luni);
         int anCurent = LocalDate.now().getYear();
         alegeAn.setValue(Integer.toString(anCurent));
-        alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent - 1), Integer.toString(anCurent + 1)});
         afiseazaOrar();
         calculeazaVenituri();
     }

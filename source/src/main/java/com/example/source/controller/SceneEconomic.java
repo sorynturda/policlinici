@@ -143,7 +143,7 @@ public class SceneEconomic implements Initializable {
         alegeLunaSpecialitati.getItems().addAll(luni);
         int anCurent = LocalDate.now().getYear();
         alegeAnSpecialitati.setValue(Integer.toString(anCurent));
-        alegeAnSpecialitati.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        alegeAnSpecialitati.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent - 1), Integer.toString(anCurent + 1)});
     }
 
     private void populateTabelSpecialitati() {
@@ -157,7 +157,7 @@ public class SceneEconomic implements Initializable {
         alegeLunaAngajati.getItems().addAll(luni);
         int anCurent = LocalDate.now().getYear();
         alegeAnAngajati.setValue(Integer.toString(anCurent));
-        alegeAnAngajati.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        alegeAnAngajati.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent - 1), Integer.toString(anCurent + 1)});
     }
 
     private void setAlegeLunaAnPoliclinici() {
@@ -165,7 +165,7 @@ public class SceneEconomic implements Initializable {
         alegeLunaPoliclinici.getItems().addAll(luni);
         int anCurent = LocalDate.now().getYear();
         alegeAnPoliclinici.setValue(Integer.toString(anCurent));
-        alegeAnPoliclinici.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        alegeAnPoliclinici.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent - 1), Integer.toString(anCurent + 1)});
     }
 
     private void populateTabelPoliclinici() {
@@ -179,7 +179,7 @@ public class SceneEconomic implements Initializable {
         alegeLuna.getItems().addAll(luni);
         int anCurent = LocalDate.now().getYear();
         alegeAn.setValue(Integer.toString(anCurent));
-        alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent + 1)});
+        alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent - 1), Integer.toString(anCurent + 1)});
         afiseazaOrar();
         calculeazaVenituri();
     }
