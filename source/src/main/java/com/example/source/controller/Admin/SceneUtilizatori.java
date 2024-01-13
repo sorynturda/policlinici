@@ -3,6 +3,7 @@ package com.example.source.controller.Admin;
 import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
 import com.example.source.claseTabele.Cont;
+import com.example.source.claseTabele.Medic;
 import com.example.source.claseTabele.Utilizator;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,8 +14,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.DoubleStringConverter;
 import javafx.util.converter.IntegerStringConverter;
-
 
 import java.io.IOException;
 import java.net.URL;
@@ -105,6 +106,24 @@ public class SceneUtilizatori implements Initializable {
     private TableColumn<Angajat, Integer> id_angajat;
     @FXML
     private TableColumn<Angajat, Integer> id_policlinica;
+    @FXML
+    private TableView<Medic> tabelMedici;
+    @FXML
+    private TableColumn<Medic, Integer> id_medic;
+    @FXML
+    private TableColumn<Medic, Integer> id_angajat_medic;
+    @FXML
+    private TableColumn<Medic, String> cod_parafa;
+    @FXML
+    private TableColumn<Medic, String> titlu_stiintific;
+    @FXML
+    private TableColumn<Medic, String> post_didactic;
+    @FXML
+    private TableColumn<Medic, Double> venit_aditional;
+    @FXML
+    private TextField id_utilizator_add;
+    @FXML
+    private TextField id_angajat_medic_in;
 
     String[] departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
     String[] roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
@@ -112,12 +131,14 @@ public class SceneUtilizatori implements Initializable {
     ObservableList<Utilizator> utilizatori = FXCollections.observableArrayList();
     ObservableList<Cont> conturi = FXCollections.observableArrayList();
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
+    ObservableList<Medic> medici = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTabelUtilizatori();
         populateTabelConturi();
         try {
+            populareTabelMedici();
             populateTabelAngajati();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -141,12 +162,60 @@ public class SceneUtilizatori implements Initializable {
         salariu_negociat.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         numar_ore.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         id_policlinica.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        id_angajat_medic.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        cod_parafa.setCellFactory(TextFieldTableCell.forTableColumn());
+        titlu_stiintific.setCellFactory(TextFieldTableCell.forTableColumn());
+        post_didactic.setCellFactory(TextFieldTableCell.forTableColumn());
+        venit_aditional.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
 
         departamentChoiceBox.setValue(departamente[0]);
         departamentChoiceBox.getItems().addAll(departamente);
 
         rolChoiceBox.setValue(roluri[0]);
         rolChoiceBox.getItems().addAll(roluri);
+    }
+
+    private void populareTabelMedici() throws SQLException {
+        medici = Model.listaMediciAdmin();
+        id_medic.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id_angajat_medic.setCellValueFactory(new PropertyValueFactory<>("id_angajat"));
+        cod_parafa.setCellValueFactory(new PropertyValueFactory<>("cod_parafa"));
+        titlu_stiintific.setCellValueFactory(new PropertyValueFactory<>("titlu_stiintific"));
+        post_didactic.setCellValueFactory(new PropertyValueFactory<>("post_didactic"));
+        venit_aditional.setCellValueFactory(new PropertyValueFactory<>("venit_aditional"));
+        tabelMedici.setItems(medici);
+    }
+
+    public void addMedic() throws SQLException {
+        Model.inserareMedicGol(Integer.parseInt(id_angajat_medic_in.getText()));
+        populareTabelMedici();
+    }
+
+    public void updateMedic(ActionEvent event) {
+        ArrayList<Medic> m = new ArrayList<>();
+        for (Medic medic : medici) m.add(medic.clone());
+        Model.actualizeazaMedic(m);
+    }
+
+    public void venitEdit (TableColumn.CellEditEvent<Angajat, Double> medicStringCellEditEvent) {
+        tabelMedici.getSelectionModel().getSelectedItem().setVenit_aditional(medicStringCellEditEvent.getNewValue());
+    }
+
+    public void postDidacticEdit (TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
+        tabelMedici.getSelectionModel().getSelectedItem().setPost_didactic(medicStringCellEditEvent.getNewValue());
+    }
+
+    public void titluStiintificEdit (TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
+        tabelMedici.getSelectionModel().getSelectedItem().setTitlu_stiintific(medicStringCellEditEvent.getNewValue());
+    }
+
+
+    public void codParafaEdit (TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
+        tabelMedici.getSelectionModel().getSelectedItem().setCod_parafa(medicStringCellEditEvent.getNewValue());
+    }
+
+    public void idAngajatMedicEdit (TableColumn.CellEditEvent<Angajat, Integer> medicStringCellEditEvent) {
+        tabelMedici.getSelectionModel().getSelectedItem().setId_angajat(medicStringCellEditEvent.getNewValue());
     }
 
     private void populateTabelAngajati() throws SQLException {
@@ -160,6 +229,11 @@ public class SceneUtilizatori implements Initializable {
         salariu_negociat.setCellValueFactory(new PropertyValueFactory<>("salariu_negociat"));
         numar_ore.setCellValueFactory(new PropertyValueFactory<>("numar_ore"));
         tabelAngajati.setItems(angajati);
+    }
+
+    public void addAngajat() throws SQLException {
+        Model.inserareAngajatGol(Integer.parseInt(id_utilizator_add.getText()));
+        populateTabelAngajati();
     }
 
     public void functieEdit(TableColumn.CellEditEvent<Angajat, String> angajatStringCellEditEvent) {
@@ -217,11 +291,7 @@ public class SceneUtilizatori implements Initializable {
 
     public void adaugaUtilizator(ActionEvent event) throws IOException, SQLException {
         Model.adaugaUtilizator(usernameTf.getText(), parolaTf.getText(), departamentChoiceBox.getValue(), adresaTf.getText(), cnpTf.getText(), numeTf.getText(), prenumeTf.getText(), telefonTf.getText(), emailTf.getText(), ibanTf.getText(), Date.valueOf(data_angajariiDP.getValue()), rolChoiceBox.getValue());
-        int id = Model.getUltimulUtilizator();
-        if(id > 0){
-            Model.inserareAngajatGol(id);
-            populateTabelAngajati();
-        }
+        populateTabelUtilizatori();
     }
 
     public void actualizeazaConturi() {
@@ -231,7 +301,7 @@ public class SceneUtilizatori implements Initializable {
         Model.actualizeazaConturi(c);
     }
 
-    public void stergeUtilizator() {
+    public void stergeUtilizator() throws SQLException {
         Utilizator tmp = tabelUtilizatori.getSelectionModel().getSelectedItem();
         if (tmp != null && !Objects.equals(tmp.getId(), Model.getUtilizatorCurent().getId()))
             Model.stergeUtilizator(tmp.getId(), tmp.getId_cont());

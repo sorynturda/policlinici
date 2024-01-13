@@ -4,7 +4,7 @@ import com.example.source.Model;
 
 import java.util.ArrayList;
 
-public class Medic {
+public class Medic implements Cloneable{
     private Integer id;
     private Integer id_angajat;
     private String cod_parafa;
@@ -29,6 +29,15 @@ public class Medic {
 
     public Medic(Integer id, String cod_parafa, String titlu_stiintific, String post_didactic, Double venit_aditional) {
         this.id = id;
+        this.cod_parafa = cod_parafa;
+        this.titlu_stiintific = titlu_stiintific;
+        this.post_didactic = post_didactic;
+        this.venit_aditional = venit_aditional;
+    }
+
+    public Medic(Integer id, Integer id_angajat, String cod_parafa, String titlu_stiintific, String post_didactic, Double venit_aditional) {
+        this.id = id;
+        this.id_angajat = id_angajat;
         this.cod_parafa = cod_parafa;
         this.titlu_stiintific = titlu_stiintific;
         this.post_didactic = post_didactic;
@@ -76,6 +85,42 @@ public class Medic {
         return servicii;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setId_angajat(Integer id_angajat) {
+        this.id_angajat = id_angajat;
+    }
+
+    public void setCod_parafa(String cod_parafa) {
+        this.cod_parafa = cod_parafa;
+    }
+
+    public void setTitlu_stiintific(String titlu_stiintific) {
+        this.titlu_stiintific = titlu_stiintific;
+    }
+
+    public void setPost_didactic(String post_didactic) {
+        this.post_didactic = post_didactic;
+    }
+
+    public void setVenit_aditional(Double venit_aditional) {
+        this.venit_aditional = venit_aditional;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
+    }
+
+    public void setServicii(ArrayList<Serviciu> servicii) {
+        this.servicii = servicii;
+    }
+
     @Override
     public String toString() {
         return "Medic{" +
@@ -87,5 +132,23 @@ public class Medic {
                 ", prenume='" + prenume + '\'' +
                 ", venit_aditional=" + venit_aditional +
                 '}';
+    }
+
+    @Override
+    public Medic clone() {
+        try {
+            Medic clone = (Medic) super.clone();
+            clone.setId(id);
+            clone.setId_angajat(id_angajat);
+            clone.setCod_parafa(cod_parafa);
+            clone.setTitlu_stiintific(titlu_stiintific);
+            clone.setPost_didactic(post_didactic);
+            clone.setVenit_aditional(venit_aditional);
+            clone.setNume(nume);
+            clone.setPrenume(prenume);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }

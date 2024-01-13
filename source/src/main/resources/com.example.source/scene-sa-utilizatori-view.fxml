@@ -109,7 +109,10 @@
                         <TableColumn fx:id="id_utilizator" prefWidth="126.0" text="id utilizator" />
                      </columns>
                   </TableView>
-                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateAngajati" text="Update" />
+                  <Button layoutX="93.0" layoutY="365.0" mnemonicParsing="false" onAction="#updateAngajati" text="Update" />
+                  <Button layoutX="334.0" layoutY="437.0" mnemonicParsing="false" onAction="#addAngajat" text="Add" />
+                  <TextField fx:id="id_utilizator_add" layoutX="166.0" layoutY="437.0" />
+                  <Label layoutX="82.0" layoutY="441.0" text="ID UTILIZATOR" />
                </children>
             </AnchorPane>
          </content>
@@ -118,18 +121,20 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <TableView fx:id="tabelMedici1" editable="true" prefHeight="270.0" prefWidth="1091.0">
+                  <TableView fx:id="tabelMedici" editable="true" prefHeight="270.0" prefWidth="1091.0">
                      <columns>
                         <TableColumn fx:id="id_medic" prefWidth="48.0" text="id" />
-                        <TableColumn fx:id="nume_medic" prefWidth="107.33333969116211" text="nume" />
-                        <TableColumn fx:id="prenume_medic" prefWidth="150.66664123535156" text="prenume" />
-                        <TableColumn fx:id="cod_parafa" prefWidth="171.99993896484375" text="cod parafa" />
-                        <TableColumn fx:id="titlu_stiintific" prefWidth="171.99993896484375" text="titlu stiintific" />
-                        <TableColumn fx:id="post_didactic" prefWidth="171.99993896484375" text="post didactic" />
-                        <TableColumn fx:id="venit_aditional" prefWidth="171.99993896484375" text="venit aditional" />
+                        <TableColumn fx:id="id_angajat_medic" onEditCommit="#idAngajatMedicEdit" prefWidth="150.66664123535156" text="id angajat" />
+                        <TableColumn fx:id="cod_parafa" onEditCommit="#codParafaEdit" prefWidth="171.99993896484375" text="cod parafa" />
+                        <TableColumn fx:id="titlu_stiintific" onEditCommit="#titluStiintificEdit" prefWidth="171.99993896484375" text="titlu stiintific" />
+                        <TableColumn fx:id="post_didactic" onEditCommit="#postDidacticEdit" prefWidth="171.99993896484375" text="post didactic" />
+                        <TableColumn fx:id="venit_aditional" onEditCommit="#venitEdit" prefWidth="171.99993896484375" text="venit aditional" />
                      </columns>
                   </TableView>
-                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" text="Button" />
+                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateMedic" text="Button" />
+                  <Button layoutX="477.0" layoutY="437.0" mnemonicParsing="false" onAction="#addMedic" text="Add" />
+                  <TextField fx:id="id_angajat_medic_in" layoutX="308.0" layoutY="437.0" />
+                  <Label layoutX="213.0" layoutY="441.0" text="ID UTILIZATOR" />
                </children>
             </AnchorPane>
          </content>
