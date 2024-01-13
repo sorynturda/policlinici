@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.ContextMenuEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -30,6 +31,10 @@ public class SceneProgramare implements Initializable {
     private ChoiceBox<String> alegeServiciu;
     @FXML
     private Label labelMesaj;
+    @FXML
+    private Label labelMesajAdd;
+    @FXML
+    private Label labelMesajPret;
 
     private ArrayList<Medic> medici;
     private Medic medicSelectat;
@@ -46,6 +51,8 @@ public class SceneProgramare implements Initializable {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+
+        labelMesajAdd.setVisible(false);
     }
 
     public void setPacientSelectat(Pacient pacient) {
@@ -68,10 +75,10 @@ public class SceneProgramare implements Initializable {
     private void creazaCheckBoxServicii() {
         alegeServiciu.getItems().clear();
         ArrayList<Serviciu> serviciiMedic = medicSelectat.getServicii();
-        alegeServiciu.setValue(serviciiMedic.get(0).getNume_serviciu());
+        alegeServiciu.setValue(serviciiMedic.get(0).getNume_serviciu() + "\n\nPret: " + serviciiMedic.get(0).getPret() + " LEI     Durata: " + serviciiMedic.get(0).getDurata());
         String[] nume_servicii = new String[serviciiMedic.size()];
         for (int i = 0; i < serviciiMedic.size(); i++)
-            nume_servicii[i] = serviciiMedic.get(i).getNume_serviciu();
+            nume_servicii[i] = serviciiMedic.get(i).getNume_serviciu() + "\n\nPret: " + serviciiMedic.get(i).getPret() + " LEI     Durata: " + serviciiMedic.get(0).getDurata();
         alegeServiciu.getItems().addAll(nume_servicii);
     }
 
@@ -90,10 +97,13 @@ public class SceneProgramare implements Initializable {
 
     public void adaugaServiciu() {
         String serviciuSelectat = alegeServiciu.getValue();
+        serviciuSelectat = serviciuSelectat.split("\n")[0];
+        System.out.println(serviciuSelectat);
         ArrayList<Serviciu> servicii = medicSelectat.getServicii();
         for (Serviciu s : servicii)
             if (s.getNume_serviciu().equals(serviciuSelectat))
                 serviciiProgramare.add(s);
+        labelMesajAdd.setVisible(true);
     }
 
     private void restrictieData() {
@@ -115,8 +125,18 @@ public class SceneProgramare implements Initializable {
         });
     }
 
+    public void clickServicii() {
+        if(labelMesajAdd.isVisible())
+            labelMesajAdd.setVisible(false);
+
+        labelMesaj.setText("");
+        labelMesajPret.setText("");
+    }
+
     public void faProgramare() {
         LocalDate dataSelectata = dataProgramare.getValue();
+        System.out.println(dataSelectata);
+        System.out.println(serviciiProgramare);
         if (dataSelectata != null && !serviciiProgramare.isEmpty()) {
             IntervalOrar orar = Model.extrageOrarMedicZiProgramare(medicSelectat.getId(), Date.valueOf(dataSelectata));
             Time timp = Model.extrageFinalProgramari(medicSelectat.getId(), dataSelectata, orar.getOra_inceput());
@@ -129,12 +149,22 @@ public class SceneProgramare implements Initializable {
                 labelMesaj.setText("TIMP INSUFICIENT SELECTATI ALTA DATA");
             } else {
                 Model.inserareProgramare(Model.idPoliclinicaDeCareApartineMedic(medicSelectat.getId()), Model.getAngajatCurent().getId(), pacientSelectat.getId(), medicSelectat.getId(), Date.valueOf(dataSelectata), timpInceput, timp);
-                labelMesaj.setText("PROGRAMARE EFECTUATA CU SUCCES " + timpInceput.toString());
+                labelMesaj.setText("PROGRAMARE EFECTUATA CU SUCCES " + timpInceput + " - " + timp);
+                labelMesajPret.setText("PRET: " + sumaServicii() + " LEI");
             }
 
         } else {
             labelMesaj.setText("SELECTATI DATA SI SERVICII");
         }
+    }
+
+    private int sumaServicii() {
+        int suma = 0;
+        for(Serviciu s: serviciiProgramare) {
+            suma += s.getPret();
+        }
+
+        return suma;
     }
 
     public void goBack(ActionEvent event) throws IOException {

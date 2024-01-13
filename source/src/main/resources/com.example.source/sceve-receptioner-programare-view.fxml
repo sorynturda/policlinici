@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="344.0" prefWidth="541.0" style="-fx-background-color: #cceeff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Receptioner.SceneProgramare">
+<AnchorPane prefHeight="353.0" prefWidth="546.0" style="-fx-background-color: #cceeff;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Receptioner.SceneProgramare">
    <children>
       <ChoiceBox fx:id="alegeMedic" layoutX="178.0" layoutY="102.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
       <Label fx:id="labelMedic" alignment="CENTER" layoutX="377.0" layoutY="102.0" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="Label">
@@ -15,7 +15,7 @@
             <Font name="System Bold" size="14.0" />
          </font></Label>
       <DatePicker fx:id="dataProgramare" layoutX="178.0" layoutY="177.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
-      <ChoiceBox fx:id="alegeServiciu" layoutX="178.0" layoutY="140.0" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
+      <ChoiceBox fx:id="alegeServiciu" layoutX="178.0" layoutY="140.0" onMouseClicked="#clickServicii" prefHeight="30.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" />
       <Button layoutX="377.0" layoutY="140.0" mnemonicParsing="false" onAction="#adaugaServiciu" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="ADAUGA">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -24,7 +24,7 @@
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Button>
-      <Label fx:id="labelMesaj" alignment="CENTER" layoutX="123.0" layoutY="303.0" prefHeight="17.0" prefWidth="329.0" textFill="RED">
+      <Label fx:id="labelMesaj" alignment="CENTER" layoutX="6.0" layoutY="303.0" prefHeight="20.0" prefWidth="540.0" textFill="RED">
          <font>
             <Font name="System Bold" size="14.0" />
          </font></Label>
@@ -57,5 +57,15 @@
             </Label>
          </children>
       </AnchorPane>
+      <Label fx:id="labelMesajAdd" alignment="CENTER" layoutX="392.0" layoutY="182.0" prefHeight="20.0" prefWidth="119.0" text="ADAUGAT" textFill="RED">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <Label fx:id="labelMesajPret" alignment="CENTER" layoutX="6.0" layoutY="323.0" prefHeight="20.0" prefWidth="540.0" textFill="RED">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
