@@ -1,6 +1,7 @@
 package com.example.source.controller.Admin;
 
 import com.example.source.Model;
+import com.example.source.claseTabele.Angajat;
 import com.example.source.claseTabele.Cont;
 import com.example.source.claseTabele.Utilizator;
 import javafx.collections.FXCollections;
@@ -12,10 +13,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.converter.IntegerStringConverter;
+
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
@@ -83,17 +87,41 @@ public class SceneUtilizatori implements Initializable {
     private TableColumn<Cont, String> nume_utilizator;
     @FXML
     private TableColumn<Cont, String> parola;
+    @FXML
+    private TableView<Angajat> tabelAngajati;
+    @FXML
+    private TableColumn<Angajat, String> nume_angajat;
+    @FXML
+    private TableColumn<Angajat, String> prenume_angajat;
+    @FXML
+    private TableColumn<Angajat, String> functie;
+    @FXML
+    private TableColumn<Angajat, Integer> salariu_negociat;
+    @FXML
+    private TableColumn<Angajat, Integer> numar_ore;
+    @FXML
+    private TableColumn<Angajat, Integer> id_utilizator;
+    @FXML
+    private TableColumn<Angajat, Integer> id_angajat;
+    @FXML
+    private TableColumn<Angajat, Integer> id_policlinica;
 
     String[] departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
     String[] roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
 
     ObservableList<Utilizator> utilizatori = FXCollections.observableArrayList();
     ObservableList<Cont> conturi = FXCollections.observableArrayList();
+    ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         populateTabelUtilizatori();
         populateTabelConturi();
+        try {
+            populateTabelAngajati();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         tabelConturi.setEditable(true);
         nume_utilizator.setCellFactory(TextFieldTableCell.forTableColumn());
         parola.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -108,12 +136,52 @@ public class SceneUtilizatori implements Initializable {
         iban.setCellFactory(TextFieldTableCell.forTableColumn());
         data_angajarii.setCellFactory(TextFieldTableCell.forTableColumn());
         rol.setCellFactory(TextFieldTableCell.forTableColumn());
+        tabelAngajati.setEditable(true);
+        functie.setCellFactory(TextFieldTableCell.forTableColumn());
+        salariu_negociat.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        numar_ore.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
+        id_policlinica.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
 
         departamentChoiceBox.setValue(departamente[0]);
         departamentChoiceBox.getItems().addAll(departamente);
 
         rolChoiceBox.setValue(roluri[0]);
         rolChoiceBox.getItems().addAll(roluri);
+    }
+
+    private void populateTabelAngajati() throws SQLException {
+        angajati = Model.listaAngajati();
+        id_angajat.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id_utilizator.setCellValueFactory(new PropertyValueFactory<>("id_utilizator"));
+        id_policlinica.setCellValueFactory(new PropertyValueFactory<>("id_policlinica"));
+        nume_angajat.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenume_angajat.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        functie.setCellValueFactory(new PropertyValueFactory<>("functie"));
+        salariu_negociat.setCellValueFactory(new PropertyValueFactory<>("salariu_negociat"));
+        numar_ore.setCellValueFactory(new PropertyValueFactory<>("numar_ore"));
+        tabelAngajati.setItems(angajati);
+    }
+
+    public void functieEdit(TableColumn.CellEditEvent<Angajat, String> angajatStringCellEditEvent) {
+        tabelAngajati.getSelectionModel().getSelectedItem().setFunctie(angajatStringCellEditEvent.getNewValue());
+    }
+
+     public void salarEdit(TableColumn.CellEditEvent<Angajat, Integer> angajatStringCellEditEvent) {
+        tabelAngajati.getSelectionModel().getSelectedItem().setSalariu_negociat(angajatStringCellEditEvent.getNewValue());
+    }
+
+    public void oreEdit(TableColumn.CellEditEvent<Angajat, Integer> angajatStringCellEditEvent) {
+        tabelAngajati.getSelectionModel().getSelectedItem().setNumar_ore(angajatStringCellEditEvent.getNewValue());
+    }
+
+    public void policlinicaEdit(TableColumn.CellEditEvent<Angajat, Integer> angajatStringCellEditEvent) {
+        tabelAngajati.getSelectionModel().getSelectedItem().setId_policlinica(angajatStringCellEditEvent.getNewValue());
+    }
+
+    public void updateAngajati(ActionEvent event) {
+        ArrayList<Angajat> a = new ArrayList<>();
+        for (Angajat angajat : angajati) a.add(angajat.clone());
+        Model.actualizeazaAngajat(a);
     }
 
     private void populateTabelConturi() {
@@ -147,8 +215,13 @@ public class SceneUtilizatori implements Initializable {
         Model.actualizeazaUtilizatori(u);
     }
 
-    public void adaugaUtilizator(ActionEvent event) throws IOException {
+    public void adaugaUtilizator(ActionEvent event) throws IOException, SQLException {
         Model.adaugaUtilizator(usernameTf.getText(), parolaTf.getText(), departamentChoiceBox.getValue(), adresaTf.getText(), cnpTf.getText(), numeTf.getText(), prenumeTf.getText(), telefonTf.getText(), emailTf.getText(), ibanTf.getText(), Date.valueOf(data_angajariiDP.getValue()), rolChoiceBox.getValue());
+        int id = Model.getUltimulUtilizator();
+        if(id > 0){
+            Model.inserareAngajatGol(id);
+            populateTabelAngajati();
+        }
     }
 
     public void actualizeazaConturi() {

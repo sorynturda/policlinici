@@ -13,33 +13,6 @@
 
 <TabPane prefHeight="677.0" prefWidth="1091.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.Admin.SceneUtilizatori">
     <tabs>
-        <Tab text="UTILIZATORI">
-            <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                    <children>
-                        <Button layoutX="135.0" layoutY="287.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
-                        <TableView fx:id="tabelUtilizatori" editable="true" prefHeight="200.0" prefWidth="1074.0">
-                            <columns>
-                                <TableColumn fx:id="id" prefWidth="48.0" text="id" />
-                                <TableColumn fx:id="id_cont" prefWidth="52.0" text="id_cont" />
-                                <TableColumn fx:id="departament" onEditCommit="#departamentEdit" prefWidth="117.0" text="departament" />
-                                <TableColumn fx:id="adresa" onEditCommit="#adresaEdit" prefWidth="131.0" text="adresa" />
-                                <TableColumn fx:id="cnp" onEditCommit="#cnpEdit" prefWidth="87.0" text="cnp" />
-                                <TableColumn fx:id="nume" onEditCommit="#numeEdit" prefWidth="74.0" text="nume" />
-                                <TableColumn fx:id="prenume" onEditCommit="#prenumeEdit" prefWidth="74.0" text="prenume" />
-                                <TableColumn fx:id="telefon" onEditCommit="#telefonEdit" prefWidth="74.0" text="telefon" />
-                                <TableColumn fx:id="email" onEditCommit="#emailEdit" prefWidth="74.0" text="email" />
-                                <TableColumn fx:id="iban" onEditCommit="#ibanEdit" prefWidth="117.0" text="iban" />
-                                <TableColumn fx:id="data_angajarii" onEditCommit="#data_angajariiEdit" prefWidth="111.0" text="data_angajarii" />
-                                <TableColumn fx:id="rol" onEditCommit="#rolEdit" prefWidth="107.0" text="rol" />
-                            </columns>
-                        </TableView>
-                        <Button layoutX="204.0" layoutY="441.0" mnemonicParsing="false" onAction="#actualizeazaUtilizatori" text="update" />
-                        <Button layoutX="438.0" layoutY="346.0" mnemonicParsing="false" onAction="#stergeUtilizator" text="sterge" />
-                    </children>
-                </AnchorPane>
-            </content>
-        </Tab>
         <Tab fx:id="add" onSelectionChanged="#reset" text="ADAUGA UTILIZATOR">
             <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -93,5 +66,73 @@
                 </AnchorPane>
             </content>
         </Tab>
+        <Tab text="UTILIZATORI">
+            <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                    <children>
+                        <Button layoutX="135.0" layoutY="287.0" mnemonicParsing="false" onAction="#goBack" text="inapoi" />
+                        <TableView fx:id="tabelUtilizatori" editable="true" prefHeight="200.0" prefWidth="1074.0">
+                            <columns>
+                                <TableColumn fx:id="id" prefWidth="48.0" text="id" />
+                                <TableColumn fx:id="id_cont" prefWidth="52.0" text="id_cont" />
+                                <TableColumn fx:id="departament" onEditCommit="#departamentEdit" prefWidth="117.0" text="departament" />
+                                <TableColumn fx:id="adresa" onEditCommit="#adresaEdit" prefWidth="131.0" text="adresa" />
+                                <TableColumn fx:id="cnp" onEditCommit="#cnpEdit" prefWidth="87.0" text="cnp" />
+                                <TableColumn fx:id="nume" onEditCommit="#numeEdit" prefWidth="74.0" text="nume" />
+                                <TableColumn fx:id="prenume" onEditCommit="#prenumeEdit" prefWidth="74.0" text="prenume" />
+                                <TableColumn fx:id="telefon" onEditCommit="#telefonEdit" prefWidth="74.0" text="telefon" />
+                                <TableColumn fx:id="email" onEditCommit="#emailEdit" prefWidth="74.0" text="email" />
+                                <TableColumn fx:id="iban" onEditCommit="#ibanEdit" prefWidth="117.0" text="iban" />
+                                <TableColumn fx:id="data_angajarii" onEditCommit="#data_angajariiEdit" prefWidth="111.0" text="data_angajarii" />
+                                <TableColumn fx:id="rol" onEditCommit="#rolEdit" prefWidth="107.0" text="rol" />
+                            </columns>
+                        </TableView>
+                        <Button layoutX="204.0" layoutY="441.0" mnemonicParsing="false" onAction="#actualizeazaUtilizatori" text="update" />
+                        <Button layoutX="438.0" layoutY="346.0" mnemonicParsing="false" onAction="#stergeUtilizator" text="sterge" />
+                    </children>
+                </AnchorPane>
+            </content>
+        </Tab>
+      <Tab text="ANGAJATI">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tabelAngajati" editable="true" prefHeight="270.0" prefWidth="1091.0">
+                     <columns>
+                        <TableColumn fx:id="id_angajat" prefWidth="48.0" text="id" />
+                        <TableColumn fx:id="nume_angajat" prefWidth="107.33333969116211" text="nume" />
+                        <TableColumn fx:id="prenume_angajat" prefWidth="150.66664123535156" text="prenume" />
+                        <TableColumn fx:id="functie" onEditCommit="#functieEdit" prefWidth="171.99993896484375" text="functie" />
+                        <TableColumn fx:id="salariu_negociat" onEditCommit="#salarEdit" prefWidth="171.99993896484375" text="salariu negociat" />
+                        <TableColumn fx:id="numar_ore" onEditCommit="#oreEdit" prefWidth="171.99993896484375" text="numar orec" />
+                        <TableColumn fx:id="id_policlinica" onEditCommit="#policlinicaEdit" prefWidth="126.0" text="id policlinica" />
+                        <TableColumn fx:id="id_utilizator" prefWidth="126.0" text="id utilizator" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateAngajati" text="Update" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="MEDICI">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tabelMedici1" editable="true" prefHeight="270.0" prefWidth="1091.0">
+                     <columns>
+                        <TableColumn fx:id="id_medic" prefWidth="48.0" text="id" />
+                        <TableColumn fx:id="nume_medic" prefWidth="107.33333969116211" text="nume" />
+                        <TableColumn fx:id="prenume_medic" prefWidth="150.66664123535156" text="prenume" />
+                        <TableColumn fx:id="cod_parafa" prefWidth="171.99993896484375" text="cod parafa" />
+                        <TableColumn fx:id="titlu_stiintific" prefWidth="171.99993896484375" text="titlu stiintific" />
+                        <TableColumn fx:id="post_didactic" prefWidth="171.99993896484375" text="post didactic" />
+                        <TableColumn fx:id="venit_aditional" prefWidth="171.99993896484375" text="venit aditional" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" text="Button" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
     </tabs>
 </TabPane>

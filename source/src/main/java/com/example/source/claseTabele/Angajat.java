@@ -1,6 +1,6 @@
 package com.example.source.claseTabele;
 
-public class Angajat {
+public class Angajat implements Cloneable{
     private int id;
     private int id_utilizator;
     private int id_policlinica;
@@ -53,6 +53,38 @@ public class Angajat {
         return numar_ore;
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setId_utilizator(int id_utilizator) {
+        this.id_utilizator = id_utilizator;
+    }
+
+    public void setId_policlinica(int id_policlinica) {
+        this.id_policlinica = id_policlinica;
+    }
+
+    public void setNume(String nume) {
+        this.nume = nume;
+    }
+
+    public void setPrenume(String prenume) {
+        this.prenume = prenume;
+    }
+
+    public void setFunctie(String functie) {
+        this.functie = functie;
+    }
+
+    public void setSalariu_negociat(int salariu_negociat) {
+        this.salariu_negociat = salariu_negociat;
+    }
+
+    public void setNumar_ore(int numar_ore) {
+        this.numar_ore = numar_ore;
+    }
+
     @Override
     public String toString() {
         return "Angajat{" +
@@ -65,5 +97,23 @@ public class Angajat {
                 ", salariu_negociat=" + salariu_negociat +
                 ", numar_ore=" + numar_ore +
                 '}';
+    }
+
+    @Override
+    public Angajat clone() {
+        try {
+            Angajat clone = (Angajat) super.clone();
+            clone.setId(id);
+            clone.setId_utilizator(id_utilizator);
+            clone.setId_policlinica(id_policlinica);
+            clone.setNume(nume);
+            clone.setPrenume(prenume);
+            clone.setFunctie(functie);
+            clone.setSalariu_negociat(salariu_negociat);
+            clone.setNumar_ore(numar_ore);
+            return clone;
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError();
+        }
     }
 }
