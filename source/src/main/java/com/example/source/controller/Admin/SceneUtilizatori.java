@@ -1,10 +1,7 @@
 package com.example.source.controller.Admin;
 
 import com.example.source.Model;
-import com.example.source.claseTabele.Angajat;
-import com.example.source.claseTabele.Cont;
-import com.example.source.claseTabele.Medic;
-import com.example.source.claseTabele.Utilizator;
+import com.example.source.claseTabele.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -121,9 +118,21 @@ public class SceneUtilizatori implements Initializable {
     @FXML
     private TableColumn<Medic, Double> venit_aditional;
     @FXML
+    private TableView<AsistentMedical> tabelAsistenti;
+    @FXML
+    private TableColumn<AsistentMedical, Integer> id_asistent;
+    @FXML
+    private TableColumn<AsistentMedical, Integer> id_angajat_asistent;
+    @FXML
+    private TableColumn<AsistentMedical, String> tip;
+    @FXML
+    private TableColumn<AsistentMedical, String> grad;
+    @FXML
     private TextField id_utilizator_add;
     @FXML
     private TextField id_angajat_medic_in;
+    @FXML
+    private TextField id_angajat_asistent_in;
 
     String[] departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
     String[] roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
@@ -132,6 +141,7 @@ public class SceneUtilizatori implements Initializable {
     ObservableList<Cont> conturi = FXCollections.observableArrayList();
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
     ObservableList<Medic> medici = FXCollections.observableArrayList();
+    ObservableList<AsistentMedical> asistenti = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -139,6 +149,7 @@ public class SceneUtilizatori implements Initializable {
         populateTabelConturi();
         try {
             populareTabelMedici();
+            populareTabelAsistenti();
             populateTabelAngajati();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -167,12 +178,48 @@ public class SceneUtilizatori implements Initializable {
         titlu_stiintific.setCellFactory(TextFieldTableCell.forTableColumn());
         post_didactic.setCellFactory(TextFieldTableCell.forTableColumn());
         venit_aditional.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
+        tabelAsistenti.setEditable(true);
+        id_angajat_asistent.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));;
+        tip.setCellFactory(TextFieldTableCell.forTableColumn());
+        grad.setCellFactory(TextFieldTableCell.forTableColumn());
 
         departamentChoiceBox.setValue(departamente[0]);
         departamentChoiceBox.getItems().addAll(departamente);
 
         rolChoiceBox.setValue(roluri[0]);
         rolChoiceBox.getItems().addAll(roluri);
+    }
+
+    private void populareTabelAsistenti() throws SQLException {
+        asistenti = Model.listaAsisteti();
+        id_asistent.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id_angajat_asistent.setCellValueFactory(new PropertyValueFactory<>("id_angajat"));
+        tip.setCellValueFactory(new PropertyValueFactory<>("tip"));
+        grad.setCellValueFactory(new PropertyValueFactory<>("grad"));
+        tabelAsistenti.setItems(asistenti);
+    }
+
+    public void addAsistent() throws SQLException {
+        Model.inserareAsistentGol(Integer.parseInt(id_angajat_asistent_in.getText()));
+        populareTabelAsistenti();
+    }
+
+    public void updateAsistent(ActionEvent event) {
+        ArrayList<AsistentMedical> a = new ArrayList<>();
+        for (AsistentMedical asistentMedical : asistenti) a.add(asistentMedical.clone());
+        Model.actualizeazaAsistenti(a);
+    }
+
+    public void gradEdit(TableColumn.CellEditEvent<AsistentMedical, String> asistentMedicalIntegerCellEditEvent) {
+        tabelAsistenti.getSelectionModel().getSelectedItem().setGrad(asistentMedicalIntegerCellEditEvent.getNewValue());
+    }
+
+    public void tipEdit(TableColumn.CellEditEvent<AsistentMedical, String> asistentMedicalIntegerCellEditEvent) {
+        tabelAsistenti.getSelectionModel().getSelectedItem().setTip(asistentMedicalIntegerCellEditEvent.getNewValue());
+    }
+
+    public void idAngajatAsistentEdit(TableColumn.CellEditEvent<AsistentMedical, Integer> asistentMedicalIntegerCellEditEvent) {
+        tabelAsistenti.getSelectionModel().getSelectedItem().setId_angajat(asistentMedicalIntegerCellEditEvent.getNewValue());
     }
 
     private void populareTabelMedici() throws SQLException {

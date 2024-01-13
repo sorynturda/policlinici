@@ -4716,5 +4716,182 @@ public class Model {
             }
         }
     }
+
+    public static ObservableList<AsistentMedical> listaAsisteti() throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<AsistentMedical> asistenti = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT  * FROM asistenti_medicali";
+
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int id_angajat = resultSet.getInt("id_angajat");
+                String tip = resultSet.getString("tip");
+                String grad = resultSet.getString("grad");
+
+                asistenti.add(new AsistentMedical(id, id_angajat, tip, grad));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return asistenti;
+    }
+
+    public static void actualizeazaAsistenti(ArrayList<AsistentMedical> a) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            for (AsistentMedical it : a) {
+                String query = "UPDATE asistenti_medicali " +
+                        "SET id_angajat = '" + it.getId_angajat() + "', " +
+                        "tip = '" + it.getTip() + "', " +
+                        "grad = '" + it.getGrad() + "' " +
+                        "WHERE id = '" + it.getId() + "'";
+                callableStatement = connection.prepareCall(query);
+                callableStatement.executeUpdate();
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void inserareAsistentGol(int idAngajat) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+
+            insertStatement = connection.createStatement();
+            insertStatement.execute("INSERT INTO asistenti_medicali (id_angajat, tip, grad) " +
+                    "VALUES ( '" + idAngajat + "' , ' ', ' ')");
+
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
 }
 

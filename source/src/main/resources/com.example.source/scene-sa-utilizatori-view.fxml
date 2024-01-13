@@ -131,9 +131,29 @@
                         <TableColumn fx:id="venit_aditional" onEditCommit="#venitEdit" prefWidth="171.99993896484375" text="venit aditional" />
                      </columns>
                   </TableView>
-                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateMedic" text="Button" />
+                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateMedic" text="Update" />
                   <Button layoutX="477.0" layoutY="437.0" mnemonicParsing="false" onAction="#addMedic" text="Add" />
                   <TextField fx:id="id_angajat_medic_in" layoutX="308.0" layoutY="437.0" />
+                  <Label layoutX="213.0" layoutY="441.0" text="ID UTILIZATOR" />
+               </children>
+            </AnchorPane>
+         </content>
+      </Tab>
+      <Tab text="ASISTENTI">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+               <children>
+                  <TableView fx:id="tabelAsistenti" editable="true" prefHeight="270.0" prefWidth="1091.0">
+                     <columns>
+                        <TableColumn fx:id="id_asistent" prefWidth="48.0" text="id" />
+                        <TableColumn fx:id="id_angajat_asistent" onEditCommit="#idAngajatAsistentEdit" prefWidth="150.66664123535156" text="id angajat" />
+                        <TableColumn fx:id="tip" onEditCommit="#tipEdit" prefWidth="171.99993896484375" text="tip" />
+                        <TableColumn fx:id="grad" onEditCommit="#gradEdit" prefWidth="171.99993896484375" text="grad" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateAsistent" text="Update" />
+                  <Button layoutX="477.0" layoutY="437.0" mnemonicParsing="false" onAction="#addAsistent" text="Add" />
+                  <TextField fx:id="id_angajat_asistent_in" layoutX="308.0" layoutY="437.0" />
                   <Label layoutX="213.0" layoutY="441.0" text="ID UTILIZATOR" />
                </children>
             </AnchorPane>
