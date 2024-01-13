@@ -80,37 +80,37 @@
                               <Font size="16.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="15.0" prefHeight="40.0" prefWidth="130.0" text="DEPARTAMENT:">
+                        <Label layoutX="14.0" layoutY="15.0" prefHeight="40.0" prefWidth="130.0" text="DEPARTAMENT:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="130.0" text="ADRESA:">
+                        <Label layoutX="14.0" layoutY="65.0" prefHeight="40.0" prefWidth="130.0" text="ADRESA:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="130.0" text="CNP:">
+                        <Label layoutX="14.0" layoutY="115.0" prefHeight="40.0" prefWidth="130.0" text="CNP:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="165.0" prefHeight="40.0" prefWidth="130.0" text="TELEFON:">
+                        <Label layoutX="14.0" layoutY="165.0" prefHeight="40.0" prefWidth="130.0" text="TELEFON:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="215.0" prefHeight="40.0" prefWidth="130.0" text="EMAIL:">
+                        <Label layoutX="14.0" layoutY="215.0" prefHeight="40.0" prefWidth="130.0" text="EMAIL:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="265.0" prefHeight="40.0" prefWidth="130.0" text="IBAN:">
+                        <Label layoutX="14.0" layoutY="265.0" prefHeight="40.0" prefWidth="130.0" text="IBAN:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="315.0" prefHeight="40.0" prefWidth="130.0" text="DATA ANGAJARII:">
+                        <Label layoutX="14.0" layoutY="315.0" prefHeight="40.0" prefWidth="130.0" text="DATA ANGAJARII:" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="14.0" />
                            </font>

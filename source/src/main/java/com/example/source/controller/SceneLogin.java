@@ -31,12 +31,12 @@ public class SceneLogin {
 
     public void switchToSceneUser(ActionEvent event) throws IOException, SQLException {
         if (Model.logIn(textFieldUsername.getText(), passwordFieldPassword.getText())) {
+            Model.extrageAngajatDupaUtilizator(Model.getUtilizatorCurent().getId());
             if (Model.getUtilizatorCurent().getRol().compareTo(Model.SUPERADMIN) == 0) {
                 switchToSceneSuperAdmin(event);
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.ADMIN) == 0) {
 
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.UTILIZATOR) == 0) {
-                Model.extrageAngajatDupaUtilizator(Model.getUtilizatorCurent().getId());
                 if (Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
                     Model.extrageMedic(Model.getAngajatCurent().getId());
                     switchToSceneMedic(event);
