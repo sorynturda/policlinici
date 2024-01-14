@@ -4303,7 +4303,7 @@ public class Model {
     }
 
     public static ObservableList<Serviciu> listaServicii() {
-                Connection connection = null;
+        Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
@@ -4330,7 +4330,7 @@ public class Model {
                 String nume_serviciu = resultSet.getString("nume_serviciu");
                 Double pret = resultSet.getDouble("pret");
                 Time durata = resultSet.getTime("durata");
-                res.add(new Serviciu(id, nume_serviciu,pret, durata));
+                res.add(new Serviciu(id, nume_serviciu, pret, durata));
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -4503,7 +4503,7 @@ public class Model {
 
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
-            if(resultSet.next()){
+            if (resultSet.next()) {
                 id = resultSet.getInt("idMax");
             }
         } catch (SQLException sqlex) {
@@ -4895,7 +4895,7 @@ public class Model {
     }
 
     public static void adaugaServiciuNou(String numeS, Double pretS, Time durataS) {
-                Connection connection = null;
+        Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
@@ -4919,6 +4919,68 @@ public class Model {
             stmt.setDouble(2, pretS);
             stmt.setTime(3, durataS);
             stmt.executeUpdate();
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+
+    public static void adaugaServiciuSpecialitate(int idSpecialitate, int idServiciu) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT * FROM servicii_specialitate WHERE id_specialitate = ? AND id_serviciu = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, idSpecialitate);
+            stmt.setInt(2, idServiciu);
+            resultSet = stmt.executeQuery();
+            if(!resultSet.next()) {
+                query = "INSERT INTO servicii_specialitate VALUES (?,?)";
+                stmt = connection.prepareStatement(query);
+                stmt.setInt(1, idSpecialitate);
+                stmt.setInt(2, idServiciu);
+                stmt.executeUpdate();
+            }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
             sqlex.printStackTrace(System.err);

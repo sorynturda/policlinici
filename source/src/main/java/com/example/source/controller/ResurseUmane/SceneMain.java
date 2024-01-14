@@ -1,9 +1,7 @@
 package com.example.source.controller.ResurseUmane;
 
 import com.example.source.Model;
-import com.example.source.claseTabele.Angajat;
-import com.example.source.claseTabele.DataConcediu;
-import com.example.source.claseTabele.OrarAngajat;
+import com.example.source.claseTabele.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -78,6 +76,10 @@ public class SceneMain implements Initializable {
     @FXML
     private ChoiceBox<String> alegeAn;
     @FXML
+    private ChoiceBox<String> serviciiCB;
+    @FXML
+    private ChoiceBox<String> specialitatiCB;
+    @FXML
     private TableView<OrarAngajat> tabelOrar;
     @FXML
     private TableColumn<OrarAngajat, Integer> coloanaZi;
@@ -102,6 +104,11 @@ public class SceneMain implements Initializable {
         labelLocatie.setText(Model.getUtilizatorCurent().getAdresa());
         setAlegeLunaAn();
         try {
+            setSpecialitatiServicii();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        try {
             angajati = Model.listaAngajati();
             populateTabel();
         } catch (SQLException e) {
@@ -109,6 +116,7 @@ public class SceneMain implements Initializable {
             throw new RuntimeException(e);
         }
     }
+
 
     public void cautaAngajat(ActionEvent event) throws IOException, SQLException {
         String input = inputTextField.getText().trim();
@@ -150,6 +158,22 @@ public class SceneMain implements Initializable {
         alegeAn.getItems().addAll(new String[]{Integer.toString(anCurent), Integer.toString(anCurent - 1), Integer.toString(anCurent + 1)});
         afiseazaOrar();
         calculeazaVenituri();
+    }
+
+    private void setSpecialitatiServicii() throws SQLException {
+        ObservableList<Serviciu> ser = Model.listaServicii();
+        ObservableList <Specialitati> sp = Model.listaSpecialitati();
+        String[] stringSer = new String[ser.size()];
+        String[] stringSp = new String[sp.size()];
+        for (int i = 0; i < ser.size(); i++)
+            stringSer[i] = ser.get(i).getNume_serviciu() + "\n\nPRET: " + ser.get(i).getPret() + "   DURATA: " + ser.get(i).getDurata();
+        serviciiCB.setValue(stringSer[0]);
+        serviciiCB.getItems().addAll(stringSer);
+
+        for(int i=0;i<sp.size();i++)
+            stringSp[i] = sp.get(i).getNume_specialitate();
+        specialitatiCB.setValue(stringSp[0]);
+        specialitatiCB.getItems().addAll(stringSp);
     }
 
     private void calculeazaVenituri() {
@@ -243,7 +267,7 @@ public class SceneMain implements Initializable {
 
 
     public void adaugaServiciuNou(ActionEvent actionEvent) {
-        if(numeServiciuTf.getText().isEmpty() || pretServiciuTf.getText().isEmpty() || durataServiciuTf1.getText().isEmpty())
+        if (numeServiciuTf.getText().isEmpty() || pretServiciuTf.getText().isEmpty() || durataServiciuTf1.getText().isEmpty())
             eror13.setVisible(true);
         else {
             String numeS = numeServiciuTf.getText();
@@ -253,9 +277,26 @@ public class SceneMain implements Initializable {
             Model.adaugaServiciuNou(numeS, pretS, durataS);
         }
     }
+
     public void schimbaS(Event event) {
         eror13.setVisible(false);
     }
+
+    public void adaugaServiciuSpecialitate(ActionEvent actionEvent) throws SQLException {
+        ObservableList<Specialitati> sp = Model.listaSpecialitati();
+        ObservableList<Serviciu> ser = Model.listaServicii();
+        int id_serviciu = 0, id_specialitate = 0;
+        ObservableList<String> serObs = serviciiCB.getItems();
+        ObservableList<String> spObs = specialitatiCB.getItems();
+        for(int i = 0;i < serObs.size(); i++)
+            if(serObs.get(i).equals(serviciiCB.getValue()))
+                id_serviciu = i + 1;
+        for(int i = 0;i < spObs.size(); i++)
+            if(spObs.get(i).equals(specialitatiCB.getValue()))
+                id_specialitate = i + 1;
+        Model.adaugaServiciuSpecialitate(id_specialitate, id_serviciu);
+    }
+
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);

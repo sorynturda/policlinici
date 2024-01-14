@@ -272,6 +272,24 @@
                   </BorderPane>
                </content>
             </Tab>
+            <Tab onSelectionChanged="#schimbaS" text="SPECIALITATI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <AnchorPane prefHeight="77.0" prefWidth="487.0" style="-fx-background-color: #b3b3ff;" BorderPane.alignment="CENTER" />
+                     </top>
+                     <center>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <ChoiceBox fx:id="specialitatiCB" layoutX="34.0" layoutY="38.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="serviciiCB" layoutX="228.0" layoutY="38.0" prefHeight="55.0" prefWidth="201.0" />
+                              <Button layoutX="244.0" layoutY="147.0" mnemonicParsing="false" onAction="#adaugaServiciuSpecialitate" text="INSERT" />
+                           </children>
+                        </AnchorPane>
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
             </tabs>
         </TabPane>
     </right>
