@@ -78,7 +78,7 @@ public class SceneProgramare implements Initializable {
         alegeServiciu.setValue(serviciiMedic.get(0).getNume_serviciu() + "\n\nPret: " + serviciiMedic.get(0).getPret() + " LEI     Durata: " + serviciiMedic.get(0).getDurata());
         String[] nume_servicii = new String[serviciiMedic.size()];
         for (int i = 0; i < serviciiMedic.size(); i++)
-            nume_servicii[i] = serviciiMedic.get(i).getNume_serviciu() + "\n\nPret: " + serviciiMedic.get(i).getPret() + " LEI     Durata: " + serviciiMedic.get(0).getDurata();
+            nume_servicii[i] = serviciiMedic.get(i).getNume_serviciu() + "\n\nPret: " + serviciiMedic.get(i).getPret() + " LEI     Durata: " + serviciiMedic.get(i).getDurata();
         alegeServiciu.getItems().addAll(nume_servicii);
     }
 
