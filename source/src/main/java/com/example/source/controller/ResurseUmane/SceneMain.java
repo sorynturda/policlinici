@@ -7,6 +7,7 @@ import com.example.source.claseTabele.OrarAngajat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -48,7 +50,13 @@ public class SceneMain implements Initializable {
     @FXML
     private Label labelDataAngajarii;
     @FXML
-    private Button buttonLogOut;
+    private Label eror13;
+    @FXML
+    private TextField numeServiciuTf;
+    @FXML
+    private TextField pretServiciuTf;
+    @FXML
+    private TextField durataServiciuTf1;
     @FXML
     private TextField inputTextField;
     @FXML
@@ -231,6 +239,21 @@ public class SceneMain implements Initializable {
         return H;
     }
 
+
+    public void adaugaServiciuNou(ActionEvent actionEvent) {
+        if(numeServiciuTf.getText().isEmpty() || pretServiciuTf.getText().isEmpty() || durataServiciuTf1.getText().isEmpty())
+            eror13.setVisible(true);
+        else {
+            String numeS = numeServiciuTf.getText();
+            Double pretS = Double.parseDouble(pretServiciuTf.getText());
+            Time durataS = Time.valueOf(durataServiciuTf1.getText());
+            eror13.setVisible(false);
+            Model.adaugaServiciuNou(numeS, pretS, durataS);
+        }
+    }
+    public void schimbaS(Event event) {
+        eror13.setVisible(false);
+    }
     public void switchToSceneLogin(ActionEvent event) throws IOException {
         String scene = "/com.example.source/scene-login-view.fxml";
         Model.logOut(event, scene);
