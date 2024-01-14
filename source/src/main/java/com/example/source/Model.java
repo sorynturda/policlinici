@@ -1010,7 +1010,7 @@ public class Model {
         }
     }
 
-    public static void switchToWindowOrare(ActionEvent event, Angajat a) throws IOException {
+    public static void switchToWindowOrare(ActionEvent event, Angajat a) throws IOException, SQLException {
         FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-resurse-umane-orar-concediu-view.fxml"));
         root = loader.load();
 

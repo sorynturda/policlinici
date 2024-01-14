@@ -3,6 +3,8 @@ package com.example.source.controller.ResurseUmane;
 import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
 import com.example.source.claseTabele.Medic;
+import com.example.source.claseTabele.Specialitati;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.text.Font;
 
 import java.io.IOException;
 import java.net.URL;
@@ -63,9 +66,17 @@ public class SceneOrarConcediu implements Initializable {
     private static int ZILE_MAXIME_CONCEDIU = 14;
     private Angajat angajatSelectat;
 
-    public void setAngajatSelectat(Angajat angajatSelectat) {
+    public void setAngajatSelectat(Angajat angajatSelectat) throws SQLException {
         this.angajatSelectat = angajatSelectat;
-        labelAngajat.setText(angajatSelectat.getFunctie() + ": " + angajatSelectat.getNume() + " " + angajatSelectat.getPrenume());
+        String text = angajatSelectat.getFunctie() + ": " + angajatSelectat.getNume() + " " + angajatSelectat.getPrenume();
+        if (angajatSelectat.getFunctie().equals(Model.MEDIC)) {
+            text += "\nSpecialitati: ";
+            ObservableList<Specialitati> sp = Model.listaSpecialitatiMedic(Model.cautaMedic(this.angajatSelectat.getId()).getId());
+            for (Specialitati it : sp)
+                text += it.getNume_specialitate() + ", ";
+            labelAngajat.setFont(new Font(labelAngajat.getFont().getName(), 12));
+        }
+        labelAngajat.setText(text.substring(0,text.length()-2));
         setOrar(angajatSelectat.getFunctie().trim().equals("medic"));
     }
 

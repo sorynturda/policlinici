@@ -137,6 +137,8 @@ public class SceneMain implements Initializable {
             Model.switchToWindowOrare(event, a);
         } catch (NullPointerException e) {
             System.out.println(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 

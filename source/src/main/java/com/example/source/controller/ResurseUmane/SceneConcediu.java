@@ -52,7 +52,7 @@ public class SceneConcediu implements Initializable {
         labelAngajat.setText(angajatSelectat.getFunctie() + ": " + angajatSelectat.getNume() + " " + angajatSelectat.getPrenume());
     }
 
-    public void goBack(ActionEvent event) throws IOException {
+    public void goBack(ActionEvent event) throws IOException, SQLException {
         Model.switchToWindowOrare(event, angajatSelectat);
     }
 
