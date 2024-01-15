@@ -4558,7 +4558,8 @@ public class Model {
         try {
             connection = DriverManager.
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
-            String query = "{call AfiseazaMedici()}";
+            String query = "SELECT * FROM medici";
+
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
             while (resultSet.next()) {
