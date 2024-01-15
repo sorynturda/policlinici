@@ -25,7 +25,7 @@ public class SceneMain implements Initializable {
     @FXML
     private Label infoServiciu;
     @FXML
-    private Label infoPoliclinica;
+    private TextArea infoPoliclinica;
     @FXML
     private Label labelSalariuNegociat;
     @FXML

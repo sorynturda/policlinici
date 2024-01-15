@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -286,50 +287,68 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab onSelectionChanged="#schimbaS" text="SPECIALITATI">
+            <Tab onSelectionChanged="#schimbaS" text="SERVICII POLICLINICA">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
-                     <top>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                     <center>
+                        <AnchorPane prefHeight="421.0" prefWidth="487.0" style="-fx-background-color: #b3b3ff;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#adaugaSpecialitatePoliclinica" text="SPECIALITATE POLI" />
-                              <TableView fx:id="tabelServicii" layoutX="14.0" layoutY="14.0" onMouseClicked="#setLabelInfo" prefHeight="178.0" prefWidth="232.0">
+                              <Button layoutX="43.0" layoutY="377.0" mnemonicParsing="false" onAction="#adaugaSpecialitatePoliclinica" prefHeight="30.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" text="SPECIALITATE POLI">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <TableView fx:id="tabelServicii" layoutX="243.0" layoutY="14.0" onMouseClicked="#setLabelInfo" prefHeight="210.0" prefWidth="230.0" style="-fx-background-color: #e6e6ff;">
                                 <columns>
-                                  <TableColumn fx:id="nume_serviciuCol" prefWidth="75.0" text="nume_serviciu" />
-                                  <TableColumn fx:id="pretServiciuCol" prefWidth="75.0" text="pret" />
-                                    <TableColumn fx:id="durataServiciuCol" prefWidth="75.0" text="durata" />
+                                  <TableColumn fx:id="nume_serviciuCol" prefWidth="83.99999713897705" text="SERVICIU" />
+                                  <TableColumn fx:id="pretServiciuCol" prefWidth="70.00000762939453" text="PRET" />
+                                    <TableColumn fx:id="durataServiciuCol" prefWidth="75.99998474121094" text="DURATA" />
                                 </columns>
                               </TableView>
-                              <Label fx:id="infoServiciu" layoutX="14.0" layoutY="219.0" prefHeight="23.0" prefWidth="231.0" />
-                              <TableView fx:id="tabelPoliclinici" layoutX="256.0" layoutY="14.0" onMouseClicked="#setLabelPInfo" prefHeight="178.0" prefWidth="221.0">
+                              <Label fx:id="infoServiciu" alignment="CENTER" layoutX="243.0" layoutY="242.0" prefHeight="120.0" prefWidth="230.0" style="-fx-background-color: #ffffff;">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font></Label>
+                              <TableView fx:id="tabelPoliclinici" layoutX="14.0" layoutY="14.0" onMouseClicked="#setLabelPInfo" prefHeight="210.0" prefWidth="220.0" style="-fx-background-color: #e6e6ff;">
                                  <columns>
                                     <TableColumn fx:id="denumireCol" prefWidth="91.19999694824219" text="denumire" />
                                     <TableColumn fx:id="adresaCol" prefWidth="138.4000244140625" text="adresa" />
                                  </columns>
                               </TableView>
-                              <Label fx:id="infoPoliclinica" layoutX="255.0" layoutY="231.0" prefHeight="128.0" prefWidth="223.0" />
+                              <TextArea fx:id="infoPoliclinica" layoutX="14.0" layoutY="242.0" prefHeight="120.0" prefWidth="220.0">
+                                 <font>
+                                    <Font name="System Bold" size="13.0" />
+                                 </font>
+                              </TextArea>
                            </children>
                         </AnchorPane>
-                     </top>
+                     </center>
                   </BorderPane>
                </content>
             </Tab>
-            <Tab onSelectionChanged="#schimbaS" text="SPECIALITATI">
+            <Tab onSelectionChanged="#schimbaS" text="SPECIALITATI MEDIC">
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <top>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="423.0" prefWidth="487.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
                            <children>
-                              <Button layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#adaugaSpecialitateMedic" text="specialitate medic" />
-                              <TableView fx:id="tabelMedici" layoutX="28.0" layoutY="14.0" onMouseClicked="#medicSelectat" prefHeight="178.0" prefWidth="232.0">
+                              <TableView fx:id="tabelMedici" layoutX="14.0" layoutY="14.0" onMouseClicked="#medicSelectat" prefHeight="255.0" prefWidth="244.0">
                                  <columns>
                                     <TableColumn fx:id="numeMedic" prefWidth="120.800048828125" text="nume" />
-                                    <TableColumn fx:id="prenumeMedic" prefWidth="108.79997253417969" text="prenume" />
+                                    <TableColumn fx:id="prenumeMedic" prefWidth="121.33335876464844" text="prenume" />
                                  </columns>
                               </TableView>
-                              <TextField fx:id="specialitateMedic" layoutX="286.0" layoutY="32.0" promptText="Specialitate" />
-                              <TextField fx:id="gradMedic" layoutX="286.0" layoutY="77.0" promptText="Grad" />
-                              <Label fx:id="labelMedic" layoutX="77.0" layoutY="204.0" prefHeight="130.0" prefWidth="182.0" text="Label" />
+                              <Label fx:id="labelMedic" alignment="CENTER" layoutX="14.0" layoutY="279.0" prefHeight="130.0" prefWidth="243.0" style="-fx-background-color: #ffffff;" />
+                              <AnchorPane layoutX="273.0" layoutY="13.0" prefHeight="396.0" prefWidth="200.0" style="-fx-background-color: #b3b3ff;">
+                                 <children>
+                                    <TextField fx:id="specialitateMedic" layoutX="10.0" layoutY="52.0" prefHeight="32.0" prefWidth="180.0" promptText="Specialitate" />
+                                    <TextField fx:id="gradMedic" layoutX="10.0" layoutY="97.0" prefHeight="32.0" prefWidth="180.0" promptText="Grad" />
+                                    <Button layoutX="25.0" layoutY="333.0" mnemonicParsing="false" onAction="#adaugaSpecialitateMedic" prefHeight="30.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="ADAUGA SPECIALITATE">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </top>
