@@ -13,7 +13,7 @@
    <children>
       <AnchorPane layoutX="7.0" layoutY="7.0" prefHeight="200.0" prefWidth="200.0">
          <children>
-            <AnchorPane layoutX="-8.0" layoutY="-9.0" prefHeight="459.0" prefWidth="271.0" style="-fx-background-color: #800000;">
+            <AnchorPane layoutX="-8.0" layoutY="-9.0" prefHeight="459.0" prefWidth="271.0" style="-fx-background-color: #330000;">
                <children>
                   <ImageView fitHeight="174.0" fitWidth="241.0" layoutX="44.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -43,7 +43,7 @@
         <tabs>
             <Tab text="DETALII CONT">
                <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="481.0" style="-fx-background-color: #b30000;">
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="443.0" prefWidth="481.0" style="-fx-background-color: #660000;">
                      <children>
                         <Label fx:id="labelDepartament" alignment="CENTER" layoutX="150.0" layoutY="15.0" prefHeight="40.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" textAlignment="CENTER">
                            <font>
@@ -121,7 +121,7 @@
             </Tab>
           <Tab text="ACTIUNI">
                <content>
-                  <AnchorPane prefHeight="447.0" prefWidth="481.0" style="-fx-background-color: #b30000;">
+                  <AnchorPane prefHeight="447.0" prefWidth="481.0" style="-fx-background-color: #660000;">
                      <children>
                         <Button layoutX="91.0" layoutY="31.0" mnemonicParsing="false" onAction="#goToPoliclinici" prefHeight="30.0" prefWidth="300.0" style="-fx-background-color: #ffffff;" text="POLICLINICI">
                            <font>

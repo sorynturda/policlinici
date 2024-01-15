@@ -8,6 +8,12 @@ public class Policlinica implements Cloneable{
     private int numar_servicii_compatibile;
     private int numar_medici;
 
+    public Policlinica(int id_program_functionare, String adresa, String denumire) {
+        this.id_program_functionare = id_program_functionare;
+        this.adresa = adresa;
+        this.denumire = denumire;
+    }
+
     public Policlinica(int id, int id_program_functionare, String adresa, String denumire) {
         this.id = id;
         this.id_program_functionare = id_program_functionare;

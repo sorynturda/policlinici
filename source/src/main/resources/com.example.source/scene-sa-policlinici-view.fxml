@@ -111,19 +111,37 @@
             </AnchorPane>
          </content>
       </Tab>
-      <Tab text="POLICLINOCA">
+      <Tab text="POLICLINICA NOUA">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="617.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="252.0" prefWidth="617.0" style="-fx-background-color: #660000;">
                <children>
-                  <TableView fx:id="tabelServicii" editable="true" layoutX="60.0" layoutY="65.0" prefHeight="200.0" prefWidth="412.0">
-                     <columns>
-                        <TableColumn fx:id="idS" prefWidth="63.99999809265137" text="id" />
-                        <TableColumn fx:id="nume_serviciu" onEditCommit="#nume_serviciuEdit" prefWidth="74.39997100830078" text="nume_serviciu" />
-                        <TableColumn fx:id="pret" onEditCommit="#pretEdit" prefWidth="83.20001220703125" text="pret" />
-                        <TableColumn fx:id="durata" onEditCommit="#durataEdit" prefWidth="83.20001220703125" text="durata" />
-                     </columns>
-                  </TableView>
-                  <Button layoutX="586.0" layoutY="153.0" mnemonicParsing="false" onAction="#actualizeazaServicii" text="update" />
+                  <AnchorPane layoutX="66.0" layoutY="40.0" prefHeight="500.0" prefWidth="420.0" style="-fx-background-color: #330000;">
+                     <children>
+                        <TextField fx:id="idProgramPoliclinica" layoutX="150.0" layoutY="30.0" prefHeight="30.0" prefWidth="200.0" />
+                        <TextField fx:id="adresaPoliclinica" layoutX="150.0" layoutY="90.0" prefHeight="30.0" prefWidth="200.0" />
+                        <TextField fx:id="denumirePoliclinica" layoutX="150.0" layoutY="150.0" prefHeight="30.0" prefWidth="200.0" />
+                        <Label alignment="CENTER" layoutX="20.0" layoutY="30.0" prefHeight="30.0" prefWidth="110.0" text="ID PROGRAM" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="20.0" layoutY="90.0" prefHeight="30.0" prefWidth="110.0" text="ADRESA" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                        <Label alignment="CENTER" layoutX="20.0" layoutY="150.0" prefHeight="30.0" prefWidth="110.0" text="DENUMIRE" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <Button layoutX="550.0" layoutY="40.0" mnemonicParsing="false" onAction="#adaugaPoliclinica" prefHeight="40.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" text="INSEREAZA">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
          </content>

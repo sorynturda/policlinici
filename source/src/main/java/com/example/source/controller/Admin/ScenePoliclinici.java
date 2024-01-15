@@ -56,16 +56,6 @@ public class ScenePoliclinici implements Initializable {
     @FXML
     private TableColumn<ProgramFunctionare, String> sambata;
     @FXML
-    private TableView<Serviciu> tabelServicii;
-    @FXML
-    private TableColumn<Serviciu, Integer> idS;
-    @FXML
-    private TableColumn<Serviciu, String> nume_serviciu;
-    @FXML
-    private TableColumn<Serviciu, Double> pret;
-    @FXML
-    private TableColumn<Serviciu, Time> durata;
-    @FXML
     private TextField duminicaTf;
     @FXML
     private TextField luniTf;
@@ -79,13 +69,18 @@ public class ScenePoliclinici implements Initializable {
     private TextField joiTf;
     @FXML
     private TextField sambataTf;
+    @FXML
+    private TextField idProgramPoliclinica;
+    @FXML
+    private TextField adresaPoliclinica;
+    @FXML
+    private TextField denumirePoliclinica;
     ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
     ObservableList<ProgramFunctionare> program = FXCollections.observableArrayList();
     ObservableList<Serviciu> servicii = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        populateTabelServicii();
         populateTabelPoliclinici();
         populateTabelProgram();
 
@@ -102,22 +97,16 @@ public class ScenePoliclinici implements Initializable {
         id_program_functionare.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         denumire.setCellFactory(TextFieldTableCell.forTableColumn());
         adresa.setCellFactory(TextFieldTableCell.forTableColumn());
-
-        tabelServicii.setEditable(true);
-        nume_serviciu.setCellFactory(TextFieldTableCell.forTableColumn());
-        pret.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
-        durata.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<Time>() {
-            @Override
-            public String toString(Time time) {
-                return time.toString();
-            }
-
-            @Override
-            public Time fromString(String s) {
-                return Time.valueOf(s);
-            }
-        }));
     }
+
+    public void adaugaPoliclinica(ActionEvent event) {
+        if(!(idProgramPoliclinica.getText() == null || adresaPoliclinica.getText() == null || denumirePoliclinica.getText() == null)){
+            Policlinica policlinica = new Policlinica(Integer.parseInt(idProgramPoliclinica.getText()), adresaPoliclinica.getText(), denumirePoliclinica.getText());
+            Model.inserarePoliclinica(policlinica);
+        }
+        populateTabelPoliclinici();
+    }
+
 
     private void populateTabelProgram() {
         program = Model.listaProgramFunctionare();
@@ -134,20 +123,11 @@ public class ScenePoliclinici implements Initializable {
 
     private void populateTabelPoliclinici() {
         policlinici = Model.listPoliclinici();
-        idS.setCellValueFactory(new PropertyValueFactory<>("id"));
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
         id_program_functionare.setCellValueFactory(new PropertyValueFactory<>("id_program_functionare"));
         adresa.setCellValueFactory(new PropertyValueFactory<>("adresa"));
         denumire.setCellValueFactory(new PropertyValueFactory<>("denumire"));
         tabelPoliclinici.setItems(policlinici);
-    }
-
-    private void populateTabelServicii(){
-        servicii = Model.listaServicii();
-        idP.setCellValueFactory(new PropertyValueFactory<>("id"));
-        nume_serviciu.setCellValueFactory(new PropertyValueFactory<>("nume_serviciu"));
-        pret.setCellValueFactory(new PropertyValueFactory<>("pret"));
-        durata.setCellValueFactory(new PropertyValueFactory<>("durata"));
-        tabelServicii.setItems(servicii);
     }
     public void update() {
         ArrayList<ProgramFunctionare> pr = new ArrayList<>();
@@ -220,18 +200,6 @@ public class ScenePoliclinici implements Initializable {
         System.out.println(pr.size());
         Model.inserareProgramFunctionare(pr);
         populateTabelProgram();
-    }
-
-    public void nume_serviciuEdit(TableColumn.CellEditEvent<Serviciu, String> serviciuStringCellEditEvent) {
-        tabelServicii.getSelectionModel().getSelectedItem().setNume_serviciu(serviciuStringCellEditEvent.getNewValue());
-    }
-
-    public void pretEdit(TableColumn.CellEditEvent<Serviciu, Double> serviciuDoubleCellEditEvent) {
-        tabelServicii.getSelectionModel().getSelectedItem().setPret(serviciuDoubleCellEditEvent.getNewValue());
-    }
-
-    public void durataEdit(TableColumn.CellEditEvent<Serviciu, Time> serviciuTimeCellEditEvent) {
-        tabelServicii.getSelectionModel().getSelectedItem().setDurata(serviciuTimeCellEditEvent.getNewValue());
     }
 
     public void actualizeazaServicii(ActionEvent actionEvent) {
