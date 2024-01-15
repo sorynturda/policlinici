@@ -13,15 +13,15 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.text.Font?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="639.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneRaport">
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.source.controller.SceneRaport">
   <tabs>
     <Tab text="RAPORT">
       <content>
-        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="633.0" prefWidth="600.0">
                <children>
-                  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="604.0">
+                  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="627.0" prefWidth="604.0">
                      <top>
-                        <AnchorPane prefHeight="102.0" prefWidth="604.0" style="-fx-background-color: #ccff66;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="117.0" prefWidth="604.0" style="-fx-background-color: #ccff66;" BorderPane.alignment="CENTER">
                            <children>
                               <Label fx:id="labelPacient" alignment="CENTER" layoutX="110.0" layoutY="17.0" prefHeight="40.0" prefWidth="479.0" style="-fx-background-color: #ffffff;" text="Label">
                                  <font>
@@ -43,7 +43,7 @@
                                     <Font name="System Bold" size="12.0" />
                                  </font>
                               </Label>
-                              <Label fx:id="prenumeAsistentLabel" alignment="CENTER" layoutX="384.0" layoutY="63.0" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #ffffff;">
+                              <Label fx:id="prenumeAsistentLabel" alignment="CENTER" layoutX="384.0" layoutY="66.0" prefHeight="40.0" prefWidth="205.0" style="-fx-background-color: #ffffff;">
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font>
@@ -52,7 +52,7 @@
                         </AnchorPane>
                      </top>
                      <center>
-                        <AnchorPane prefHeight="360.0" prefWidth="553.0" style="-fx-background-color: #ddff99;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="327.0" prefWidth="604.0" style="-fx-background-color: #ddff99;" BorderPane.alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="Medic recomandare:">
                                  <font>
@@ -83,7 +83,7 @@
                         </AnchorPane>
                      </center>
                      <bottom>
-                        <AnchorPane prefHeight="130.0" prefWidth="604.0" style="-fx-background-color: #eeffcc;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="150.0" prefWidth="604.0" style="-fx-background-color: #eeffcc;" BorderPane.alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" layoutX="10.0" layoutY="14.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="RECOMANDARI:">
                                  <font>
@@ -117,9 +117,9 @@
       <content>
         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                <children>
-                  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="604.0">
+                  <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="628.0" prefWidth="604.0">
                      <center>
-                        <AnchorPane prefHeight="207.0" prefWidth="604.0" style="-fx-background-color: #ddff99;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="153.0" prefWidth="604.0" style="-fx-background-color: #ddff99;" BorderPane.alignment="CENTER">
                            <children>
                               <Label alignment="CENTER" layoutX="10.0" layoutY="15.0" prefHeight="40.0" prefWidth="181.0" style="-fx-background-color: #ffffff;" text="ADAUGA INVESTIGATII:">
                                  <font>
@@ -147,9 +147,9 @@
                         </AnchorPane>
                      </center>
                      <bottom>
-                        <AnchorPane prefHeight="385.0" prefWidth="604.0" style="-fx-background-color: #eeffcc;" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="427.0" prefWidth="604.0" style="-fx-background-color: #eeffcc;" BorderPane.alignment="CENTER">
                            <children>
-                              <TableView fx:id="tabelInvestigatii" layoutX="13.0" layoutY="6.0" prefHeight="372.0" prefWidth="574.0" style="-fx-background-color: #ffffff;">
+                              <TableView fx:id="tabelInvestigatii" layoutX="15.0" layoutY="22.0" prefHeight="365.0" prefWidth="574.0" style="-fx-background-color: #ffffff;">
                                 <columns>
                                   <TableColumn fx:id="numeServiciu" prefWidth="167.33331298828125" text="SERVICIU" />
                                   <TableColumn fx:id="detaliiInvestigatii" prefWidth="406.0000305175781" text="INVESTIGATII" />
