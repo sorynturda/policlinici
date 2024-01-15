@@ -35,7 +35,7 @@ public class SceneLogin {
             if (Model.getUtilizatorCurent().getRol().compareTo(Model.SUPERADMIN) == 0) {
                 switchToSceneSuperAdmin(event);
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.ADMIN) == 0) {
-
+                switchToSceneSuperAdmin(event);
             } else if (Model.getUtilizatorCurent().getRol().compareTo(Model.UTILIZATOR) == 0) {
                 if (Model.getAngajatCurent().getFunctie().compareTo(Model.MEDIC) == 0) {
                     Model.extrageMedic(Model.getAngajatCurent().getId());
