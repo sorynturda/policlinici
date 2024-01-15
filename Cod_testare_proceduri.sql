@@ -30,3 +30,4 @@ CALL FinalProgramari (1, "2023-01-19");
 CALL PoliclinicaDeCareApartineMedic(2);
 CALL ExtragePacientiProgramatiMedic(1);
 CALL TotalServiciiOferiteSpecialitate(2, date("2024-1-1"));
+CALL repartizare(1);

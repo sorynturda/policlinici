@@ -128,6 +128,18 @@ public class SceneUtilizatori implements Initializable {
     @FXML
     private TableColumn<AsistentMedical, String> grad;
     @FXML
+    private TableView<Policlinica> tabelPolicliniciCompatibile;
+    @FXML
+    private TableColumn<Policlinica, Integer> idPoliclinicaTabelPoliclinici;
+    @FXML
+    private TableColumn<Policlinica, String> denumireTabelPoliclinici;
+    @FXML
+    private TableColumn<Policlinica, String> adresaTabelPoliclinici;
+    @FXML
+    private TableColumn<Policlinica, Integer> numarServiciiCompatibile;
+    @FXML
+    private TableColumn<Policlinica, Integer> numarMedici;
+    @FXML
     private TextField id_utilizator_add;
     @FXML
     private TextField id_angajat_medic_in;
@@ -142,6 +154,7 @@ public class SceneUtilizatori implements Initializable {
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
     ObservableList<Medic> medici = FXCollections.observableArrayList();
     ObservableList<AsistentMedical> asistenti = FXCollections.observableArrayList();
+    ObservableList<Policlinica> poliniciCompatibileMedic = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -188,6 +201,20 @@ public class SceneUtilizatori implements Initializable {
 
         rolChoiceBox.setValue(roluri[0]);
         rolChoiceBox.getItems().addAll(roluri);
+    }
+
+    private void populareTabelPolicliniciMedic(int id_medic) throws SQLException {
+        poliniciCompatibileMedic = Model.policliniciCompatibile(id_medic);
+        idPoliclinicaTabelPoliclinici.setCellValueFactory(new PropertyValueFactory<>("id"));
+        denumireTabelPoliclinici.setCellValueFactory(new PropertyValueFactory<>("denumire"));
+        adresaTabelPoliclinici.setCellValueFactory(new PropertyValueFactory<>("adresa"));
+        numarServiciiCompatibile.setCellValueFactory(new PropertyValueFactory<>("numar_servicii_compatibile"));
+        numarMedici.setCellValueFactory(new PropertyValueFactory<>("numar_medici"));
+        tabelPolicliniciCompatibile.setItems(poliniciCompatibileMedic);
+    }
+
+    public void afiseazaPoliclinici(ActionEvent event) throws SQLException {
+        populareTabelPolicliniciMedic(tabelMedici.getSelectionModel().getSelectedItem().getId());
     }
 
     private void populareTabelAsistenti() throws SQLException {

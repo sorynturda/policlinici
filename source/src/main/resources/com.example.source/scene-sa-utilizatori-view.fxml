@@ -131,10 +131,20 @@
                         <TableColumn fx:id="venit_aditional" onEditCommit="#venitEdit" prefWidth="171.99993896484375" text="venit aditional" />
                      </columns>
                   </TableView>
-                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateMedic" text="Update" />
-                  <Button layoutX="477.0" layoutY="437.0" mnemonicParsing="false" onAction="#addMedic" text="Add" />
-                  <TextField fx:id="id_angajat_medic_in" layoutX="308.0" layoutY="437.0" />
-                  <Label layoutX="213.0" layoutY="441.0" text="ID UTILIZATOR" />
+                  <Button layoutX="108.0" layoutY="298.0" mnemonicParsing="false" onAction="#updateMedic" text="Update" />
+                  <Button layoutX="508.0" layoutY="298.0" mnemonicParsing="false" onAction="#addMedic" text="Add" />
+                  <TextField fx:id="id_angajat_medic_in" layoutX="327.0" layoutY="298.0" />
+                  <Label layoutX="210.0" layoutY="302.0" text="ID ANGAJAT" />
+                  <TableView fx:id="tabelPolicliniciCompatibile" layoutX="42.0" layoutY="382.0" prefHeight="200.0" prefWidth="638.0">
+                     <columns>
+                        <TableColumn fx:id="idPoliclinicaTabelPoliclinici" prefWidth="75.0" text="ID" />
+                        <TableColumn fx:id="denumireTabelPoliclinici" prefWidth="75.0" text="DENUMIRE" />
+                        <TableColumn fx:id="adresaTabelPoliclinici" prefWidth="75.0" text="ADRESA" />
+                        <TableColumn fx:id="numarServiciiCompatibile" prefWidth="201.33331298828125" text="NUMAR SERVICII COMPATIBILE" />
+                        <TableColumn fx:id="numarMedici" prefWidth="201.33331298828125" text="NUMAR MEDICI" />
+                     </columns>
+                  </TableView>
+                  <Button layoutX="74.0" layoutY="593.0" mnemonicParsing="false" onAction="#afiseazaPoliclinici" text="Button" />
                </children>
             </AnchorPane>
          </content>
@@ -151,10 +161,10 @@
                         <TableColumn fx:id="grad" onEditCommit="#gradEdit" prefWidth="171.99993896484375" text="grad" />
                      </columns>
                   </TableView>
-                  <Button layoutX="213.0" layoutY="364.0" mnemonicParsing="false" onAction="#updateAsistent" text="Update" />
-                  <Button layoutX="477.0" layoutY="437.0" mnemonicParsing="false" onAction="#addAsistent" text="Add" />
-                  <TextField fx:id="id_angajat_asistent_in" layoutX="308.0" layoutY="437.0" />
-                  <Label layoutX="213.0" layoutY="441.0" text="ID UTILIZATOR" />
+                  <Button layoutX="185.0" layoutY="283.0" mnemonicParsing="false" onAction="#updateAsistent" text="Update" />
+                  <Button layoutX="536.0" layoutY="283.0" mnemonicParsing="false" onAction="#addAsistent" text="Add" />
+                  <TextField fx:id="id_angajat_asistent_in" layoutX="372.0" layoutY="283.0" />
+                  <Label layoutX="284.0" layoutY="287.0" text="ID ANGAJAT" />
                </children>
             </AnchorPane>
          </content>
