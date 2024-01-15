@@ -5012,5 +5012,66 @@ public class Model {
             }
         }
     }
-}
 
+    public static void adaugaServiciuPoliclinica(int idServiciu, int idPoliclinica) {
+         Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT * FROM servicii_oferite_policlinica WHERE id_serviciu = ? AND id_policlinica = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+                stmt.setInt(2, idPoliclinica);
+            stmt.setInt(1, idServiciu);
+            resultSet = stmt.executeQuery();
+            if(!resultSet.next()) {
+                query = "INSERT INTO servicii_oferite_policlinica VALUES (?,?)";
+                stmt = connection.prepareStatement(query);
+                stmt.setInt(1, idPoliclinica);
+                stmt.setInt(2, idServiciu);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+}

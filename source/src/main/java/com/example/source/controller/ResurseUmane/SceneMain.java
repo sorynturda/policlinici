@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.io.IOException;
 import java.net.URL;
@@ -21,6 +22,10 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class SceneMain implements Initializable {
+    @FXML
+    private Label infoServiciu;
+    @FXML
+    private Label infoPoliclinica;
     @FXML
     private Label labelSalariuNegociat;
     @FXML
@@ -58,6 +63,12 @@ public class SceneMain implements Initializable {
     @FXML
     private TextField inputTextField;
     @FXML
+    private TableView<Policlinica> tabelPoliclinici;
+    @FXML
+    private TableColumn<Policlinica, String> denumireCol;
+    @FXML
+    private TableColumn<Policlinica, String> adresaCol;
+    @FXML
     private TableView<Angajat> tabel;
     @FXML
     private TableColumn<Angajat, Integer> id;
@@ -69,6 +80,14 @@ public class SceneMain implements Initializable {
     private TableColumn<Angajat, String> prenume;
     @FXML
     private TableColumn<Angajat, String> functie;
+    @FXML
+    private TableView<Serviciu> tabelServicii;
+    @FXML
+    private TableColumn<Serviciu, String> nume_serviciuCol;
+    @FXML
+    private TableColumn<Serviciu, Double> pretServiciuCol;
+    @FXML
+    private TableColumn<Serviciu, Time> durataServiciuCol;
     @FXML
     private Label labelLocatie;
     @FXML
@@ -89,6 +108,8 @@ public class SceneMain implements Initializable {
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
+    ObservableList<Serviciu> servicii = FXCollections.observableArrayList();
+    ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -110,7 +131,11 @@ public class SceneMain implements Initializable {
         }
         try {
             angajati = Model.listaAngajati();
+            servicii = Model.listaServicii();
+            policlinici = Model.listPoliclinici();
+            populateTabelServicii();
             populateTabel();
+            populateTabelPoliclinici();
         } catch (SQLException e) {
             System.out.println("EROARE IN SCENERESURSEUMANE LA INITIALIZARE");
             throw new RuntimeException(e);
@@ -162,7 +187,7 @@ public class SceneMain implements Initializable {
 
     private void setSpecialitatiServicii() throws SQLException {
         ObservableList<Serviciu> ser = Model.listaServicii();
-        ObservableList <Specialitati> sp = Model.listaSpecialitati();
+        ObservableList<Specialitati> sp = Model.listaSpecialitati();
         String[] stringSer = new String[ser.size()];
         String[] stringSp = new String[sp.size()];
         for (int i = 0; i < ser.size(); i++)
@@ -170,7 +195,7 @@ public class SceneMain implements Initializable {
         serviciiCB.setValue(stringSer[0]);
         serviciiCB.getItems().addAll(stringSer);
 
-        for(int i=0;i<sp.size();i++)
+        for (int i = 0; i < sp.size(); i++)
             stringSp[i] = sp.get(i).getNume_specialitate();
         specialitatiCB.setValue(stringSp[0]);
         specialitatiCB.getItems().addAll(stringSp);
@@ -213,6 +238,19 @@ public class SceneMain implements Initializable {
         coloanaZi.setCellValueFactory(new PropertyValueFactory<>("zi"));
         coloanaInterval.setCellValueFactory(new PropertyValueFactory<>("interval"));
         tabelOrar.setItems(orar);
+    }
+
+    private void populateTabelServicii() {
+        nume_serviciuCol.setCellValueFactory(new PropertyValueFactory<>("nume_serviciu"));
+        pretServiciuCol.setCellValueFactory(new PropertyValueFactory<>("pret"));
+        durataServiciuCol.setCellValueFactory(new PropertyValueFactory<>("durata"));
+        tabelServicii.setItems(servicii);
+    }
+
+    private void populateTabelPoliclinici() {
+        denumireCol.setCellValueFactory(new PropertyValueFactory<>("denumire"));
+        adresaCol.setCellValueFactory(new PropertyValueFactory<>("adresa"));
+        tabelPoliclinici.setItems(policlinici);
     }
 
     private int getNumarLuna(String luna) {
@@ -275,6 +313,7 @@ public class SceneMain implements Initializable {
             Time durataS = Time.valueOf(durataServiciuTf1.getText());
             eror13.setVisible(false);
             Model.adaugaServiciuNou(numeS, pretS, durataS);
+            servicii = Model.listaServicii();
         }
     }
 
@@ -288,11 +327,11 @@ public class SceneMain implements Initializable {
         int id_serviciu = 0, id_specialitate = 0;
         ObservableList<String> serObs = serviciiCB.getItems();
         ObservableList<String> spObs = specialitatiCB.getItems();
-        for(int i = 0;i < serObs.size(); i++)
-            if(serObs.get(i).equals(serviciiCB.getValue()))
+        for (int i = 0; i < serObs.size(); i++)
+            if (serObs.get(i).equals(serviciiCB.getValue()))
                 id_serviciu = i + 1;
-        for(int i = 0;i < spObs.size(); i++)
-            if(spObs.get(i).equals(specialitatiCB.getValue()))
+        for (int i = 0; i < spObs.size(); i++)
+            if (spObs.get(i).equals(specialitatiCB.getValue()))
                 id_specialitate = i + 1;
         Model.adaugaServiciuSpecialitate(id_specialitate, id_serviciu);
     }
@@ -302,4 +341,19 @@ public class SceneMain implements Initializable {
         Model.logOut(event, scene);
     }
 
+    public void adaugaSpecialitatePoliclinica(ActionEvent actionEvent) {
+        if (tabelServicii.getSelectionModel().getSelectedItem() != null && tabelPoliclinici.getSelectionModel().getSelectedItem() != null) {
+            int id_serviciu = tabelServicii.getSelectionModel().getSelectedItem().getId();
+            int id_policlinica = tabelPoliclinici.getSelectionModel().getSelectedItem().getId();
+            Model.adaugaServiciuPoliclinica(id_serviciu, id_policlinica);
+        }
+    }
+
+    public void setLabelInfo(MouseEvent mouseEvent) {
+        infoServiciu.setText(tabelServicii.getSelectionModel().getSelectedItem().getNume_serviciu());
+    }
+
+    public void setLabelPInfo(MouseEvent mouseEvent) {
+        infoPoliclinica.setText(tabelPoliclinici.getSelectionModel().getSelectedItem().getDenumire());
+    }
 }
