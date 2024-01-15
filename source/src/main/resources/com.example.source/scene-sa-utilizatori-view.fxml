@@ -192,14 +192,14 @@
                <children>
                   <TableView fx:id="tabelAngajati" editable="true" layoutX="25.0" layoutY="37.0" prefHeight="350.0" prefWidth="950.0" style="-fx-background-color: #330000;">
                      <columns>
-                        <TableColumn fx:id="id_angajat" prefWidth="48.0" text="id" />
-                        <TableColumn fx:id="nume_angajat" prefWidth="107.33333969116211" text="nume" />
-                        <TableColumn fx:id="prenume_angajat" prefWidth="150.66664123535156" text="prenume" />
-                        <TableColumn fx:id="functie" onEditCommit="#functieEdit" prefWidth="132.66668701171875" text="functie" />
-                        <TableColumn fx:id="salariu_negociat" onEditCommit="#salarEdit" prefWidth="148.00006103515625" text="salariu negociat" />
-                        <TableColumn fx:id="numar_ore" onEditCommit="#oreEdit" prefWidth="145.33331298828125" text="numar orec" />
-                        <TableColumn fx:id="id_policlinica" onEditCommit="#policlinicaEdit" prefWidth="109.33331298828125" text="id policlinica" />
-                        <TableColumn fx:id="id_utilizator" prefWidth="104.66668701171875" text="id utilizator" />
+                        <TableColumn fx:id="id_angajat" prefWidth="48.0" text="ID" />
+                        <TableColumn fx:id="nume_angajat" prefWidth="107.33333969116211" text="NUME" />
+                        <TableColumn fx:id="prenume_angajat" prefWidth="150.66664123535156" text="PRENUME" />
+                        <TableColumn fx:id="functie" onEditCommit="#functieEdit" prefWidth="132.66668701171875" text="FUNCTIE" />
+                        <TableColumn fx:id="salariu_negociat" onEditCommit="#salarEdit" prefWidth="148.00006103515625" text="SALARIU NEGOCIAT" />
+                        <TableColumn fx:id="numar_ore" onEditCommit="#oreEdit" prefWidth="145.33331298828125" text="NUMAR ORE" />
+                        <TableColumn fx:id="id_policlinica" onEditCommit="#policlinicaEdit" prefWidth="109.33331298828125" text="POLICLINICA" />
+                        <TableColumn fx:id="id_utilizator" prefWidth="104.66668701171875" text="UTILIZATOR" />
                      </columns>
                   </TableView>
                   <Button layoutX="50.0" layoutY="430.0" mnemonicParsing="false" onAction="#updateAngajati" prefHeight="40.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" text="MODIFICA">
@@ -215,58 +215,85 @@
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Label>
+                  <Label layoutX="223.0" layoutY="387.0" text="FUNCTIE: medic / asistent_medical / receptioner / economic / resurse_umane" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>
       </Tab>
       <Tab text="MEDICI">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #660000;">
                <children>
-                  <TableView fx:id="tabelMedici" editable="true" prefHeight="270.0" prefWidth="909.0">
+                  <TableView fx:id="tabelMedici" editable="true" layoutX="25.0" layoutY="37.0" prefHeight="250.0" prefWidth="950.0" style="-fx-background-color: #330000;">
                      <columns>
-                        <TableColumn fx:id="id_medic" prefWidth="48.0" text="id" />
-                        <TableColumn fx:id="id_angajat_medic" onEditCommit="#idAngajatMedicEdit" prefWidth="150.66664123535156" text="id angajat" />
-                        <TableColumn fx:id="cod_parafa" onEditCommit="#codParafaEdit" prefWidth="171.99993896484375" text="cod parafa" />
-                        <TableColumn fx:id="titlu_stiintific" onEditCommit="#titluStiintificEdit" prefWidth="171.99993896484375" text="titlu stiintific" />
-                        <TableColumn fx:id="post_didactic" onEditCommit="#postDidacticEdit" prefWidth="171.99993896484375" text="post didactic" />
-                        <TableColumn fx:id="venit_aditional" onEditCommit="#venitEdit" prefWidth="171.99993896484375" text="venit aditional" />
+                        <TableColumn fx:id="id_medic" prefWidth="48.0" text="ID" />
+                        <TableColumn fx:id="id_angajat_medic" onEditCommit="#idAngajatMedicEdit" prefWidth="150.66664123535156" text="ANGAJAT" />
+                        <TableColumn fx:id="cod_parafa" onEditCommit="#codParafaEdit" prefWidth="171.99993896484375" text="PARAFA" />
+                        <TableColumn fx:id="titlu_stiintific" onEditCommit="#titluStiintificEdit" prefWidth="258.0" text="TITLU STIINTIFIC" />
+                        <TableColumn fx:id="post_didactic" onEditCommit="#postDidacticEdit" prefWidth="173.33331298828125" text="POST DIDACTIC" />
+                        <TableColumn fx:id="venit_aditional" onEditCommit="#venitEdit" prefWidth="142.6666259765625" text="VENIT ADITIONAL" />
                      </columns>
                   </TableView>
-                  <Button layoutX="108.0" layoutY="298.0" mnemonicParsing="false" onAction="#updateMedic" text="Update" />
-                  <Button layoutX="508.0" layoutY="298.0" mnemonicParsing="false" onAction="#addMedic" text="Add" />
-                  <TextField fx:id="id_angajat_medic_in" layoutX="327.0" layoutY="298.0" />
-                  <Label layoutX="210.0" layoutY="302.0" text="ID ANGAJAT" />
-                  <TableView fx:id="tabelPolicliniciCompatibile" layoutX="42.0" layoutY="382.0" prefHeight="200.0" prefWidth="638.0">
+                  <Button layoutX="705.0" layoutY="330.0" mnemonicParsing="false" onAction="#updateMedic" prefHeight="40.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" text="UPDATE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+                  <Button layoutX="705.0" layoutY="430.0" mnemonicParsing="false" onAction="#addMedic" prefHeight="40.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" text="ADAUGA">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+                  <TextField fx:id="id_angajat_medic_in" layoutX="879.0" layoutY="380.0" prefHeight="40.0" prefWidth="95.0" style="-fx-background-color: #ffffff;" />
+                  <Label alignment="CENTER" layoutX="705.0" layoutY="380.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="ID ANGAJAT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Label>
+                  <TableView fx:id="tabelPolicliniciCompatibile" layoutX="25.0" layoutY="330.0" prefHeight="200.0" prefWidth="640.0" style="-fx-background-color: #330000;">
                      <columns>
-                        <TableColumn fx:id="idPoliclinicaTabelPoliclinici" prefWidth="75.0" text="ID" />
-                        <TableColumn fx:id="denumireTabelPoliclinici" prefWidth="75.0" text="DENUMIRE" />
-                        <TableColumn fx:id="adresaTabelPoliclinici" prefWidth="75.0" text="ADRESA" />
-                        <TableColumn fx:id="numarServiciiCompatibile" prefWidth="201.33331298828125" text="NUMAR SERVICII COMPATIBILE" />
-                        <TableColumn fx:id="numarMedici" prefWidth="201.33331298828125" text="NUMAR MEDICI" />
+                        <TableColumn fx:id="idPoliclinicaTabelPoliclinici" prefWidth="41.33334541320801" text="ID" />
+                        <TableColumn fx:id="denumireTabelPoliclinici" prefWidth="152.6666488647461" text="DENUMIRE" />
+                        <TableColumn fx:id="adresaTabelPoliclinici" prefWidth="130.00001525878906" text="ADRESA" />
+                        <TableColumn fx:id="numarServiciiCompatibile" prefWidth="201.33334350585938" text="NUMAR SERVICII COMPATIBILE" />
+                        <TableColumn fx:id="numarMedici" prefWidth="106.66668701171875" text="NUMAR MEDICI" />
                      </columns>
                   </TableView>
-                  <Button layoutX="568.0" layoutY="338.0" mnemonicParsing="false" onAction="#afiseazaPoliclinici" text="Button" />
+                  <Button layoutX="705.0" layoutY="480.0" mnemonicParsing="false" onAction="#afiseazaPoliclinici" prefHeight="40.0" prefWidth="270.0" style="-fx-background-color: #ffffff;" text="POLICLINICI COMPATIBILE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
                </children>
             </AnchorPane>
          </content>
       </Tab>
       <Tab text="ASISTENTI">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #660000;">
                <children>
-                  <TableView fx:id="tabelAsistenti" editable="true" prefHeight="270.0" prefWidth="669.0">
+                  <TableView fx:id="tabelAsistenti" editable="true" layoutX="25.0" layoutY="37.0" prefHeight="350.0" prefWidth="950.0" style="-fx-background-color: #330000;">
                      <columns>
-                        <TableColumn fx:id="id_asistent" prefWidth="48.0" text="id" />
-                        <TableColumn fx:id="id_angajat_asistent" onEditCommit="#idAngajatAsistentEdit" prefWidth="150.66664123535156" text="id angajat" />
-                        <TableColumn fx:id="tip" onEditCommit="#tipEdit" prefWidth="171.99993896484375" text="tip" />
-                        <TableColumn fx:id="grad" onEditCommit="#gradEdit" prefWidth="171.99993896484375" text="grad" />
+                        <TableColumn fx:id="id_asistent" prefWidth="48.0" text="ID" />
+                        <TableColumn fx:id="id_angajat_asistent" onEditCommit="#idAngajatAsistentEdit" prefWidth="150.66664123535156" text="ANGAJAT" />
+                        <TableColumn fx:id="tip" onEditCommit="#tipEdit" prefWidth="351.33338928222656" text="TIP" />
+                        <TableColumn fx:id="grad" onEditCommit="#gradEdit" prefWidth="398.66656494140625" text="GRAD" />
                      </columns>
                   </TableView>
-                  <Button layoutX="185.0" layoutY="283.0" mnemonicParsing="false" onAction="#updateAsistent" text="Update" />
-                  <Button layoutX="536.0" layoutY="283.0" mnemonicParsing="false" onAction="#addAsistent" text="Add" />
-                  <TextField fx:id="id_angajat_asistent_in" layoutX="372.0" layoutY="283.0" />
-                  <Label layoutX="284.0" layoutY="287.0" text="ID ANGAJAT" />
+                  <Button layoutX="50.0" layoutY="430.0" mnemonicParsing="false" onAction="#updateAsistent" prefHeight="40.0" prefWidth="900.0" style="-fx-background-color: #ffffff;" text="MODIFICA">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+                  <Button layoutX="326.0" layoutY="496.0" mnemonicParsing="false" onAction="#addAsistent" prefHeight="40.0" prefWidth="623.0" style="-fx-background-color: #ffffff;" text="ADAUGA">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+                  <TextField fx:id="id_angajat_asistent_in" layoutX="214.0" layoutY="496.0" prefHeight="40.0" prefWidth="100.0" style="-fx-background-color: #ffffff;" />
+                  <Label alignment="CENTER" layoutX="50.0" layoutY="496.0" prefHeight="40.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" text="ID ANGAJAT">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </content>
