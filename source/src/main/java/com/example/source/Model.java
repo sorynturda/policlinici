@@ -4975,7 +4975,7 @@ public class Model {
             stmt.setInt(1, idSpecialitate);
             stmt.setInt(2, idServiciu);
             resultSet = stmt.executeQuery();
-            if(!resultSet.next()) {
+            if (!resultSet.next()) {
                 query = "INSERT INTO servicii_specialitate VALUES (?,?)";
                 stmt = connection.prepareStatement(query);
                 stmt.setInt(1, idSpecialitate);
@@ -5014,7 +5014,7 @@ public class Model {
     }
 
     public static void adaugaServiciuPoliclinica(int idServiciu, int idPoliclinica) {
-         Connection connection = null;
+        Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
@@ -5034,10 +5034,10 @@ public class Model {
                     getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
             String query = "SELECT * FROM servicii_oferite_policlinica WHERE id_serviciu = ? AND id_policlinica = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
-                stmt.setInt(2, idPoliclinica);
+            stmt.setInt(2, idPoliclinica);
             stmt.setInt(1, idServiciu);
             resultSet = stmt.executeQuery();
-            if(!resultSet.next()) {
+            if (!resultSet.next()) {
                 query = "INSERT INTO servicii_oferite_policlinica VALUES (?,?)";
                 stmt = connection.prepareStatement(query);
                 stmt.setInt(1, idPoliclinica);
@@ -5075,4 +5075,200 @@ public class Model {
         }
     }
 
+    public static ObservableList<Medic> listaMediciObs() throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Medic> medici = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call AfiseazaMedici()}";
+            callableStatement = connection.prepareCall(query);
+            resultSet = callableStatement.executeQuery();
+            while (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                int id_angajat = resultSet.getInt("id_angajat");
+                String cod_parafa = resultSet.getString("cod_parafa");
+                String titlu_stiintific = resultSet.getString("titlu_stiintific");
+                String post_didactic = resultSet.getString("post_didactic");
+                Double venit_aditional = resultSet.getDouble("venit_aditional");
+                String nume = resultSet.getString("nume");
+                String prenume = resultSet.getString("prenume");
+                medici.add(new Medic(id, id_angajat, cod_parafa, titlu_stiintific, post_didactic, venit_aditional, nume, prenume));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return medici;
+    }
+
+    public static void inserareSpecialitate(Integer id, String specialitate, String grad) {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "SELECT * FROM specialitati WHERE id_medic = ? AND nume_specialitate = ? AND grad = ?";
+            PreparedStatement stmt = connection.prepareStatement(query);
+            stmt.setInt(1, id);
+            stmt.setString(2, specialitate);
+            stmt.setString(3, grad);
+            resultSet = stmt.executeQuery();
+            if (!resultSet.next()) {
+                query = "INSERT INTO specialitati (id_medic, nume_specialitate, grad) VALUES (?, ?, ?)";
+                stmt = connection.prepareStatement(query);
+                stmt.setInt(1, id);
+                stmt.setString(2, specialitate);
+                stmt.setString(3, grad);
+                stmt.executeUpdate();
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+    }
+        static public ObservableList<Policlinica> policliniciCompatibile(int id_medic) throws SQLException {
+        Connection connection = null;
+        Statement selectStatement = null;
+        Statement insertStatement = null;
+        ResultSet resultSet = null;
+        ResultSetMetaData resultSetMetaData = null;
+        CallableStatement callableStatement = null;
+
+        ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+        } catch (Exception ex) {
+            System.err.println("An Exception occured during JDBC Driver loading." +
+                    " Details are provided below:");
+            ex.printStackTrace(System.err);
+        }
+
+        try {
+            connection = DriverManager.
+                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+            String query = "{call repartizare(?)}";
+            callableStatement = connection.prepareCall(query);
+            callableStatement.setInt(1, id_medic);
+            resultSet = callableStatement.executeQuery();
+
+            while(resultSet.next()) {
+                policlinici.add(new Policlinica(
+                   resultSet.getInt("id"),
+                   resultSet.getInt("id_program_functionare"),
+                   resultSet.getString("adresa"),
+                   resultSet.getString("denumire"),
+                   resultSet.getInt("nr_servicii_compatibile"),
+                   resultSet.getInt("nr_medici")
+                ));
+            }
+        } catch (SQLException sqlex) {
+            System.err.println("An SQL Exception occured. Details are provided below:");
+            sqlex.printStackTrace(System.err);
+        } finally {
+            if (resultSet != null) {
+                try {
+                    resultSet.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (selectStatement != null) {
+                try {
+                    selectStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (insertStatement != null) {
+                try {
+                    insertStatement.close();
+                } catch (SQLException e) {
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException e) {
+                }
+            }
+        }
+        return policlinici;
+    }
 }

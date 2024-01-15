@@ -263,9 +263,9 @@
                               <TextField fx:id="durataServiciuTf1" layoutX="314.0" layoutY="36.0" prefHeight="26.0" prefWidth="79.0" promptText="HH:MM:SS" />
                               <Button layoutX="283.0" layoutY="71.0" mnemonicParsing="false" onAction="#adaugaServiciuNou" text="ADAUGA SERVICIU" />
                               <Label fx:id="eror13" layoutX="153.0" layoutY="14.0" text="PUNETI DETALIILE CUM TREBE" />
-                              <ChoiceBox fx:id="specialitatiCB" layoutX="37.0" layoutY="155.0" prefWidth="150.0" />
-                              <ChoiceBox fx:id="serviciiCB" layoutX="231.0" layoutY="127.0" prefHeight="55.0" prefWidth="201.0" />
-                              <Button layoutX="326.0" layoutY="243.0" mnemonicParsing="false" onAction="#adaugaServiciuSpecialitate" text="INSERT" />
+                              <ChoiceBox fx:id="specialitatiCB" layoutX="37.0" layoutY="114.0" prefWidth="150.0" />
+                              <ChoiceBox fx:id="serviciiCB" layoutX="233.0" layoutY="112.0" prefHeight="55.0" prefWidth="201.0" />
+                              <Button layoutX="153.0" layoutY="154.0" mnemonicParsing="false" onAction="#adaugaServiciuSpecialitate" text="INSERT" />
                            </children>
                         </AnchorPane>
                      </center>
@@ -293,7 +293,29 @@
                                     <TableColumn fx:id="adresaCol" prefWidth="138.4000244140625" text="adresa" />
                                  </columns>
                               </TableView>
-                              <Label fx:id="infoPoliclinica" layoutX="263.0" layoutY="231.0" prefHeight="23.0" prefWidth="166.0" text="Label" />
+                              <Label fx:id="infoPoliclinica" layoutX="223.0" layoutY="231.0" prefHeight="128.0" prefWidth="262.0" text="Label" />
+                           </children>
+                        </AnchorPane>
+                     </top>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab onSelectionChanged="#schimbaS" text="SPECIALITATI">
+               <content>
+                  <BorderPane prefHeight="200.0" prefWidth="200.0">
+                     <top>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <Button layoutX="347.0" layoutY="382.0" mnemonicParsing="false" onAction="#adaugaSpecialitateMedic" text="specialitate medic" />
+                              <TableView fx:id="tabelMedici" layoutX="28.0" layoutY="14.0" onMouseClicked="#medicSelectat" prefHeight="178.0" prefWidth="232.0">
+                                 <columns>
+                                    <TableColumn fx:id="numeMedic" prefWidth="120.800048828125" text="nume" />
+                                    <TableColumn fx:id="prenumeMedic" prefWidth="108.79997253417969" text="prenume" />
+                                 </columns>
+                              </TableView>
+                              <TextField fx:id="specialitateMedic" layoutX="286.0" layoutY="32.0" promptText="Specialitate" />
+                              <TextField fx:id="gradMedic" layoutX="286.0" layoutY="77.0" promptText="Grad" />
+                              <Label fx:id="labelMedic" layoutX="77.0" layoutY="204.0" prefHeight="130.0" prefWidth="182.0" text="Label" />
                            </children>
                         </AnchorPane>
                      </top>

@@ -55,6 +55,12 @@ public class SceneMain implements Initializable {
     @FXML
     private Label eror13;
     @FXML
+    private Label labelMedic;
+    @FXML
+    private TextField specialitateMedic;
+    @FXML
+    private TextField gradMedic;
+    @FXML
     private TextField numeServiciuTf;
     @FXML
     private TextField pretServiciuTf;
@@ -68,6 +74,12 @@ public class SceneMain implements Initializable {
     private TableColumn<Policlinica, String> denumireCol;
     @FXML
     private TableColumn<Policlinica, String> adresaCol;
+    @FXML
+    private TableView<Medic> tabelMedici;
+    @FXML
+    private TableColumn<Medic, String> numeMedic;
+    @FXML
+    private TableColumn<Medic, String> prenumeMedic;
     @FXML
     private TableView<Angajat> tabel;
     @FXML
@@ -110,6 +122,7 @@ public class SceneMain implements Initializable {
     ObservableList<Angajat> angajati = FXCollections.observableArrayList();
     ObservableList<Serviciu> servicii = FXCollections.observableArrayList();
     ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
+    ObservableList<Medic> medici = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -130,10 +143,12 @@ public class SceneMain implements Initializable {
             throw new RuntimeException(e);
         }
         try {
+            medici = Model.listaMediciObs();
             angajati = Model.listaAngajati();
             servicii = Model.listaServicii();
             policlinici = Model.listPoliclinici();
             populateTabelServicii();
+            populateTabelMedici();
             populateTabel();
             populateTabelPoliclinici();
         } catch (SQLException e) {
@@ -253,6 +268,12 @@ public class SceneMain implements Initializable {
         tabelPoliclinici.setItems(policlinici);
     }
 
+    private void populateTabelMedici() {
+        numeMedic.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumeMedic.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        tabelMedici.setItems(medici);
+    }
+
     private int getNumarLuna(String luna) {
         for (int i = 0; i < 12; i++)
             if (luni[i].equals(luna))
@@ -354,6 +375,28 @@ public class SceneMain implements Initializable {
     }
 
     public void setLabelPInfo(MouseEvent mouseEvent) {
-        infoPoliclinica.setText(tabelPoliclinici.getSelectionModel().getSelectedItem().getDenumire());
+        Policlinica pol = tabelPoliclinici.getSelectionModel().getSelectedItem();
+        String text = pol.getDenumire() + "\n";
+        ArrayList <Serviciu> ser = Model.cautaServiciiPoliclinica(pol.getId());
+        for (Serviciu it : ser)
+            text+= it.getNume_serviciu() + " " + it.getPret() + "LEI  " + it.getDurata() + " ORE\n";
+        infoPoliclinica.setText(text);
+    }
+
+    public void adaugaSpecialitateMedic(ActionEvent actionEvent) {
+        if (specialitateMedic.getText() != null && gradMedic != null) {
+            String specialitate = specialitateMedic.getText();
+            String grad = gradMedic.getText();
+            Model.inserareSpecialitate(tabelMedici.getSelectionModel().getSelectedItem().getId(), specialitate, grad);
+        }
+    }
+
+    public void medicSelectat(MouseEvent mouseEvent) throws SQLException {
+        Medic medic = tabelMedici.getSelectionModel().getSelectedItem();
+        String text = medic.getNume() + " " + medic.getPrenume() + "\n";
+        ObservableList<Specialitati> sp = Model.listaSpecialitatiMedic(medic.getId());
+        for (Specialitati it:sp)
+            text += it.getNume_specialitate() + "\n";
+        labelMedic.setText(text);
     }
 }
