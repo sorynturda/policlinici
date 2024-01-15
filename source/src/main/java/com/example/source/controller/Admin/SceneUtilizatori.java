@@ -145,8 +145,9 @@ public class SceneUtilizatori implements Initializable {
     private TextField id_angajat_medic_in;
     @FXML
     private TextField id_angajat_asistent_in;
+    private boolean ssuper;
 
-    String[] departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
+    String[] departamente = new String[]{"Medical", "Resurse Umane", "Economic"};
     String[] roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
 
     ObservableList<Utilizator> utilizatori = FXCollections.observableArrayList();
@@ -158,6 +159,10 @@ public class SceneUtilizatori implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        if (Model.getUtilizatorCurent().getRol().equals(Model.SUPERADMIN)) {
+            ssuper = true;
+            departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
+        }
         populateTabelUtilizatori();
         populateTabelConturi();
         try {
@@ -192,7 +197,7 @@ public class SceneUtilizatori implements Initializable {
         post_didactic.setCellFactory(TextFieldTableCell.forTableColumn());
         venit_aditional.setCellFactory(TextFieldTableCell.forTableColumn(new DoubleStringConverter()));
         tabelAsistenti.setEditable(true);
-        id_angajat_asistent.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));;
+        id_angajat_asistent.setCellFactory(TextFieldTableCell.forTableColumn(new IntegerStringConverter()));
         tip.setCellFactory(TextFieldTableCell.forTableColumn());
         grad.setCellFactory(TextFieldTableCell.forTableColumn());
 
@@ -271,24 +276,24 @@ public class SceneUtilizatori implements Initializable {
         Model.actualizeazaMedic(m);
     }
 
-    public void venitEdit (TableColumn.CellEditEvent<Angajat, Double> medicStringCellEditEvent) {
+    public void venitEdit(TableColumn.CellEditEvent<Angajat, Double> medicStringCellEditEvent) {
         tabelMedici.getSelectionModel().getSelectedItem().setVenit_aditional(medicStringCellEditEvent.getNewValue());
     }
 
-    public void postDidacticEdit (TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
+    public void postDidacticEdit(TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
         tabelMedici.getSelectionModel().getSelectedItem().setPost_didactic(medicStringCellEditEvent.getNewValue());
     }
 
-    public void titluStiintificEdit (TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
+    public void titluStiintificEdit(TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
         tabelMedici.getSelectionModel().getSelectedItem().setTitlu_stiintific(medicStringCellEditEvent.getNewValue());
     }
 
 
-    public void codParafaEdit (TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
+    public void codParafaEdit(TableColumn.CellEditEvent<Angajat, String> medicStringCellEditEvent) {
         tabelMedici.getSelectionModel().getSelectedItem().setCod_parafa(medicStringCellEditEvent.getNewValue());
     }
 
-    public void idAngajatMedicEdit (TableColumn.CellEditEvent<Angajat, Integer> medicStringCellEditEvent) {
+    public void idAngajatMedicEdit(TableColumn.CellEditEvent<Angajat, Integer> medicStringCellEditEvent) {
         tabelMedici.getSelectionModel().getSelectedItem().setId_angajat(medicStringCellEditEvent.getNewValue());
     }
 
@@ -302,6 +307,20 @@ public class SceneUtilizatori implements Initializable {
         functie.setCellValueFactory(new PropertyValueFactory<>("functie"));
         salariu_negociat.setCellValueFactory(new PropertyValueFactory<>("salariu_negociat"));
         numar_ore.setCellValueFactory(new PropertyValueFactory<>("numar_ore"));
+        if (!ssuper) {
+            ArrayList<Integer> sters = new ArrayList<>();
+            for (int i = 0; i < angajati.size(); i++) {
+                Angajat a = angajati.get(i);
+                if (a.getFunctie().equalsIgnoreCase("administratie") || a.getFunctie().equalsIgnoreCase("administrator"))
+                    sters.add(i);
+            }
+            int n = 0;
+            for (Integer it : sters) {
+                int id = it - n;
+                angajati.remove(id);
+                n++;
+            }
+        }
         tabelAngajati.setItems(angajati);
     }
 
@@ -314,7 +333,7 @@ public class SceneUtilizatori implements Initializable {
         tabelAngajati.getSelectionModel().getSelectedItem().setFunctie(angajatStringCellEditEvent.getNewValue());
     }
 
-     public void salarEdit(TableColumn.CellEditEvent<Angajat, Integer> angajatStringCellEditEvent) {
+    public void salarEdit(TableColumn.CellEditEvent<Angajat, Integer> angajatStringCellEditEvent) {
         tabelAngajati.getSelectionModel().getSelectedItem().setSalariu_negociat(angajatStringCellEditEvent.getNewValue());
     }
 
@@ -337,6 +356,20 @@ public class SceneUtilizatori implements Initializable {
         idC.setCellValueFactory(new PropertyValueFactory<>("id"));
         nume_utilizator.setCellValueFactory(new PropertyValueFactory<>("nume_utilizator"));
         parola.setCellValueFactory(new PropertyValueFactory<>("parola"));
+        if (!ssuper) {
+            ArrayList<Integer> sters = new ArrayList<>();
+            for (int i = 0; i < conturi.size(); i++) {
+                Cont c = conturi.get(i);
+                if (Model.verificaAdmin(c.getId()) && Model.getUtilizatorCurent().getId_cont() != c.getId())
+                    sters.add(i);
+            }
+            int n = 0;
+            for (Integer it : sters) {
+                int id = it - n;
+                conturi.remove(id);
+                n++;
+            }
+        }
         tabelConturi.setItems(conturi);
     }
 
@@ -354,6 +387,20 @@ public class SceneUtilizatori implements Initializable {
         iban.setCellValueFactory(new PropertyValueFactory<>("iban"));
         data_angajarii.setCellValueFactory(new PropertyValueFactory<>("data_angajarii"));
         rol.setCellValueFactory(new PropertyValueFactory<>("rol"));
+        if (!ssuper) {
+            ArrayList<Integer> sters = new ArrayList<>();
+            for (int i = 0; i < utilizatori.size(); i++) {
+                Utilizator u = utilizatori.get(i);
+                if ((u.getRol().equals(Model.SUPERADMIN) || u.getRol().equals(Model.ADMIN)) && !Objects.equals(u.getId(), Model.getUtilizatorCurent().getId()))
+                    sters.add(i);
+            }
+            int n = 0;
+            for (Integer it : sters) {
+                int id = it - n;
+                utilizatori.remove(id);
+                n++;
+            }
+        }
         tabelUtilizatori.setItems(utilizatori);
     }
 
