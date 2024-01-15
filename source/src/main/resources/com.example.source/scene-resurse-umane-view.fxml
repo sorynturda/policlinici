@@ -293,7 +293,7 @@
                                     <TableColumn fx:id="adresaCol" prefWidth="138.4000244140625" text="adresa" />
                                  </columns>
                               </TableView>
-                              <Label fx:id="infoPoliclinica" layoutX="263.0" layoutY="231.0" prefHeight="23.0" prefWidth="166.0" text="Label" />
+                              <Label fx:id="infoPoliclinica" layoutX="223.0" layoutY="231.0" prefHeight="128.0" prefWidth="262.0" text="Label" />
                            </children>
                         </AnchorPane>
                      </top>
@@ -315,7 +315,7 @@
                               </TableView>
                               <TextField fx:id="specialitateMedic" layoutX="286.0" layoutY="32.0" promptText="Specialitate" />
                               <TextField fx:id="gradMedic" layoutX="286.0" layoutY="77.0" promptText="Grad" />
-                              <Label fx:id="labelMedic" layoutX="144.0" layoutY="221.0" prefHeight="18.0" prefWidth="123.0" text="Label" />
+                              <Label fx:id="labelMedic" layoutX="77.0" layoutY="204.0" prefHeight="130.0" prefWidth="182.0" text="Label" />
                            </children>
                         </AnchorPane>
                      </top>

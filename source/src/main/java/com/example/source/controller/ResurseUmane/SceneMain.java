@@ -375,7 +375,12 @@ public class SceneMain implements Initializable {
     }
 
     public void setLabelPInfo(MouseEvent mouseEvent) {
-        infoPoliclinica.setText(tabelPoliclinici.getSelectionModel().getSelectedItem().getDenumire());
+        Policlinica pol = tabelPoliclinici.getSelectionModel().getSelectedItem();
+        String text = pol.getDenumire() + "\n";
+        ArrayList <Serviciu> ser = Model.cautaServiciiPoliclinica(pol.getId());
+        for (Serviciu it : ser)
+            text+= it.getNume_serviciu() + " " + it.getPret() + "LEI  " + it.getDurata() + " ORE\n";
+        infoPoliclinica.setText(text);
     }
 
     public void adaugaSpecialitateMedic(ActionEvent actionEvent) {
@@ -386,7 +391,12 @@ public class SceneMain implements Initializable {
         }
     }
 
-    public void medicSelectat(MouseEvent mouseEvent) {
-        labelMedic.setText(tabelMedici.getSelectionModel().getSelectedItem().getNume() + " " + tabelMedici.getSelectionModel().getSelectedItem().getPrenume());
+    public void medicSelectat(MouseEvent mouseEvent) throws SQLException {
+        Medic medic = tabelMedici.getSelectionModel().getSelectedItem();
+        String text = medic.getNume() + " " + medic.getPrenume() + "\n";
+        ObservableList<Specialitati> sp = Model.listaSpecialitatiMedic(medic.getId());
+        for (Specialitati it:sp)
+            text += it.getNume_specialitate() + "\n";
+        labelMedic.setText(text);
     }
 }
