@@ -256,16 +256,37 @@
                <content>
                   <BorderPane prefHeight="200.0" prefWidth="200.0">
                      <center>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ccffff;" BorderPane.alignment="CENTER">
                            <children>
-                              <TextField fx:id="numeServiciuTf" layoutX="45.0" layoutY="36.0" prefHeight="26.0" prefWidth="143.0" promptText="nume serviciu" />
-                              <TextField fx:id="pretServiciuTf" layoutX="204.0" layoutY="36.0" prefHeight="26.0" prefWidth="79.0" promptText="pret" />
-                              <TextField fx:id="durataServiciuTf1" layoutX="314.0" layoutY="36.0" prefHeight="26.0" prefWidth="79.0" promptText="HH:MM:SS" />
-                              <Button layoutX="283.0" layoutY="71.0" mnemonicParsing="false" onAction="#adaugaServiciuNou" text="ADAUGA SERVICIU" />
-                              <Label fx:id="eror13" layoutX="153.0" layoutY="14.0" text="PUNETI DETALIILE CUM TREBE" />
-                              <ChoiceBox fx:id="specialitatiCB" layoutX="37.0" layoutY="114.0" prefWidth="150.0" />
-                              <ChoiceBox fx:id="serviciiCB" layoutX="233.0" layoutY="112.0" prefHeight="55.0" prefWidth="201.0" />
-                              <Button layoutX="153.0" layoutY="154.0" mnemonicParsing="false" onAction="#adaugaServiciuSpecialitate" text="INSERT" />
+                              <TextField fx:id="numeServiciuTf" layoutX="15.0" layoutY="30.0" prefHeight="32.0" prefWidth="220.0" promptText="nume serviciu" style="-fx-background-color: #ffffff;" />
+                              <TextField fx:id="pretServiciuTf" layoutX="245.0" layoutY="30.0" prefHeight="32.0" prefWidth="110.0" promptText="pret" style="-fx-background-color: #ffffff;" />
+                              <TextField fx:id="durataServiciuTf1" layoutX="365.0" layoutY="30.0" prefHeight="32.0" prefWidth="110.0" promptText="HH:MM:SS" style="-fx-background-color: #ffffff;" />
+                              <Button layoutX="43.0" layoutY="71.0" mnemonicParsing="false" onAction="#adaugaServiciuNou" prefHeight="30.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" text="ADAUGA SERVICIU">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Button>
+                              <Label fx:id="eror13" alignment="CENTER" layoutX="142.0" layoutY="217.0" prefHeight="17.0" prefWidth="205.0" text="INTRODUCETI DATE CORECTE" textFill="RED">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font></Label>
+                              <AnchorPane layoutX="13.0" layoutY="249.0" prefHeight="160.0" prefWidth="460.0" style="-fx-background-color: #b3b3ff;">
+                                 <children>
+                                    <ChoiceBox fx:id="specialitatiCB" layoutX="23.0" layoutY="23.0" prefHeight="80.0" prefWidth="150.0" style="-fx-background-color: #ffffff;" />
+                                    <ChoiceBox fx:id="serviciiCB" layoutX="190.0" layoutY="23.0" prefHeight="80.0" prefWidth="250.0" style="-fx-background-color: #ffffff;" />
+                                    <Button layoutX="30.0" layoutY="116.0" mnemonicParsing="false" onAction="#adaugaServiciuSpecialitate" prefHeight="30.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" text="INSERT">
+                                       <font>
+                                          <Font name="System Bold" size="12.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                              </AnchorPane>
+                              <TextField layoutX="14.0" layoutY="129.0" prefHeight="32.0" prefWidth="297.0" promptText="denumire specialitate" style="-fx-background-color: #ffffff;" />
+                              <TextField layoutX="321.0" layoutY="129.0" prefHeight="32.0" prefWidth="153.0" promptText="grad" style="-fx-background-color: #ffffff;" />
+                              <Button layoutX="43.0" layoutY="171.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="400.0" style="-fx-background-color: #ffffff;" text="ADAUGA SPECIALITATE">
+                                 <font>
+                                    <Font name="System Bold" size="12.0" />
+                                 </font>
+                              </Button>
                            </children>
                         </AnchorPane>
                      </center>
