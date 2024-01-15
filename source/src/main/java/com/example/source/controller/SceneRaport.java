@@ -56,6 +56,10 @@ public class SceneRaport {
     private Label labelMesaj1;
     @FXML
     private Label labelMesaj2;
+    @FXML
+    private Label numeAsistentLabel;
+    @FXML
+    private Label prenumeAsistentLabel;
     private HashSet<Serviciu> serviciiRaport = new HashSet<>();
 
     private void populateTabelInvestigatii() {
@@ -91,6 +95,12 @@ public class SceneRaport {
         }
         else
             puneParafa.setVisible(true);
+        if (raportPacient.getId_asistent() != 0) {
+            int idAsistent = raportPacient.getId_asistent();
+            ArrayList<String> s = Model.cautaAsistent(idAsistent);
+            numeAsistentLabel.setText(s.get(0));
+            prenumeAsistentLabel.setText(s.get(1));
+        }
         System.out.println(programare);
         populateTabelInvestigatii();
 
