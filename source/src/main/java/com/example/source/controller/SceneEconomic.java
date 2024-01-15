@@ -497,6 +497,9 @@ public class SceneEconomic implements Initializable {
         }
     }
 
-    public void afiseazaConcediu(ActionEvent actionEvent) {
+    public void afiseazaConcediu(ActionEvent actionEvent) throws SQLException, IOException {
+        Angajat a = tabel.getSelectionModel().getSelectedItem();
+        Model.setAngajatSelectat(a);
+        Model.switchToWindowConcedii(actionEvent, a);
     }
 }
