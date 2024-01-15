@@ -5204,7 +5204,8 @@ public class Model {
             }
         }
     }
-        static public ObservableList<Policlinica> policliniciCompatibile(int id_medic) throws SQLException {
+
+    static public ObservableList<Policlinica> policliniciCompatibile(int id_medic) throws SQLException {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -5230,14 +5231,14 @@ public class Model {
             callableStatement.setInt(1, id_medic);
             resultSet = callableStatement.executeQuery();
 
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 policlinici.add(new Policlinica(
-                   resultSet.getInt("id"),
-                   resultSet.getInt("id_program_functionare"),
-                   resultSet.getString("adresa"),
-                   resultSet.getString("denumire"),
-                   resultSet.getInt("nr_servicii_compatibile"),
-                   resultSet.getInt("nr_medici")
+                        resultSet.getInt("id"),
+                        resultSet.getInt("id_program_functionare"),
+                        resultSet.getString("adresa"),
+                        resultSet.getString("denumire"),
+                        resultSet.getInt("nr_servicii_compatibile"),
+                        resultSet.getInt("nr_medici")
                 ));
             }
         } catch (SQLException sqlex) {
@@ -5271,4 +5272,9 @@ public class Model {
         }
         return policlinici;
     }
+
+    public static void setAngajatSelectat(Angajat a) {
+        angajatSelectat = a;
+    }
 }
+

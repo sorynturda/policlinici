@@ -53,7 +53,10 @@ public class SceneConcediu implements Initializable {
     }
 
     public void goBack(ActionEvent event) throws IOException, SQLException {
-        Model.switchToWindowOrare(event, angajatSelectat);
+        if(Model.getAngajatCurent().getFunctie().equals(Model.RESURSE_UMANE))
+            Model.switchToWindowOrare(event, angajatSelectat);
+        else
+            Model.goToMainMenu(event, "/com.example.source/scene-economic-view.fxml");
     }
 
     private void populateTabel() {
