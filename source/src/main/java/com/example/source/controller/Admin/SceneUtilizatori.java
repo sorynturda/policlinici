@@ -339,6 +339,7 @@ public class SceneUtilizatori implements Initializable {
     public void adaugaUtilizator(ActionEvent event) throws IOException, SQLException {
         Model.adaugaUtilizator(usernameTf.getText(), parolaTf.getText(), departamentChoiceBox.getValue(), adresaTf.getText(), cnpTf.getText(), numeTf.getText(), prenumeTf.getText(), telefonTf.getText(), emailTf.getText(), ibanTf.getText(), Date.valueOf(data_angajariiDP.getValue()), rolChoiceBox.getValue());
         populateTabelUtilizatori();
+        populateTabelConturi();
     }
 
     public void actualizeazaConturi() {
@@ -425,8 +426,6 @@ public class SceneUtilizatori implements Initializable {
         ibanTf.setText("");
         usernameTf.setText("");
         parolaTf.setText("");
-        populateTabelUtilizatori();
-        populateTabelConturi();
     }
 
     public void goBack(ActionEvent event) throws IOException {
