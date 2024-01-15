@@ -496,4 +496,7 @@ public class SceneEconomic implements Initializable {
             populateTabelSpecialitati();
         }
     }
+
+    public void afiseazaConcediu(ActionEvent actionEvent) {
+    }
 }
