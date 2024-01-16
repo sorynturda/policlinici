@@ -55,6 +55,8 @@ public class SceneOrarConcediu implements Initializable {
     @FXML
     private Label labelConfirmareConcediu;
     @FXML
+    private Label labelConfirmareOrar;
+    @FXML
     private DatePicker concediuInceput;
     @FXML
     private DatePicker concediuSfarsit;
@@ -110,7 +112,7 @@ public class SceneOrarConcediu implements Initializable {
             System.out.println(nrZileConcediu);
             if (Model.concediuCorect(angajatSelectat.getId(), Date.valueOf(ziInceput), Date.valueOf(ziSfarsit))) {
                 Model.adaugaConcediu(angajatSelectat.getId(), ziInceput, ziSfarsit);
-                labelConfirmareConcediu.setText("Succes!");
+                labelConfirmareConcediu.setText("SUCCES!");
             } else {
                 labelConfirmareConcediu.setText("Eroare");
             }
@@ -127,10 +129,16 @@ public class SceneOrarConcediu implements Initializable {
             Model.modificaOrarMedic(medicSelectat.getId(), 0, zi, Time.valueOf(ora_inceput), Time.valueOf(ora_sfarsit));
         else
             Model.modificaOrarMedic(medicSelectat.getId(), 1, data.toString(), Time.valueOf(ora_inceput), Time.valueOf(ora_sfarsit));
+        labelConfirmareOrar.setText("SUCCES!");
     }
 
     public void afiseazaConcediu(ActionEvent event) throws IOException {
         Model.switchToWindowConcedii(event, angajatSelectat);
+    }
+
+    public void stergeTextLabel() {
+        labelConfirmareConcediu.setText("");
+        labelConfirmareOrar.setText("");
     }
 
     public void setOrar(boolean value) {

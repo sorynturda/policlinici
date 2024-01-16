@@ -297,28 +297,32 @@
                                  <font>
                                     <Font name="System Bold" size="12.0" />
                                  </font></Button>
-                              <TableView fx:id="tabelServicii" layoutX="243.0" layoutY="14.0" onMouseClicked="#setLabelInfo" prefHeight="210.0" prefWidth="230.0" style="-fx-background-color: #e6e6ff;">
-                                <columns>
-                                  <TableColumn fx:id="nume_serviciuCol" prefWidth="83.99999713897705" text="SERVICIU" />
-                                  <TableColumn fx:id="pretServiciuCol" prefWidth="70.00000762939453" text="PRET" />
-                                    <TableColumn fx:id="durataServiciuCol" prefWidth="75.99998474121094" text="DURATA" />
-                                </columns>
-                              </TableView>
-                              <Label fx:id="infoServiciu" alignment="CENTER" layoutX="243.0" layoutY="242.0" prefHeight="120.0" prefWidth="230.0" style="-fx-background-color: #ffffff;">
+                              <Label fx:id="infoServiciu" alignment="CENTER" layoutX="241.0" layoutY="242.0" prefHeight="120.0" prefWidth="235.0" style="-fx-background-color: #ffffff;">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font></Label>
-                              <TableView fx:id="tabelPoliclinici" layoutX="14.0" layoutY="14.0" onMouseClicked="#setLabelPInfo" prefHeight="210.0" prefWidth="220.0" style="-fx-background-color: #e6e6ff;">
-                                 <columns>
-                                    <TableColumn fx:id="denumireCol" prefWidth="91.19999694824219" text="denumire" />
-                                    <TableColumn fx:id="adresaCol" prefWidth="138.4000244140625" text="adresa" />
-                                 </columns>
-                              </TableView>
-                              <TextArea fx:id="infoPoliclinica" layoutX="14.0" layoutY="242.0" prefHeight="120.0" prefWidth="220.0">
+                              <TextArea fx:id="infoPoliclinica" layoutX="9.0" layoutY="242.0" prefHeight="120.0" prefWidth="226.0">
                                  <font>
                                     <Font name="System Bold" size="13.0" />
                                  </font>
                               </TextArea>
+                              <AnchorPane layoutX="9.0" layoutY="10.0" prefHeight="223.0" prefWidth="467.0" style="-fx-background-color: #ccffff;">
+                                 <children>
+                                    <TableView fx:id="tabelServicii" layoutX="230.0" layoutY="5.0" onMouseClicked="#setLabelInfo" prefHeight="210.0" prefWidth="230.0" style="-fx-background-color: #e6e6ff;">
+                                      <columns>
+                                        <TableColumn fx:id="nume_serviciuCol" prefWidth="83.99999713897705" text="SERVICIU" />
+                                        <TableColumn fx:id="pretServiciuCol" prefWidth="70.00000762939453" text="PRET" />
+                                          <TableColumn fx:id="durataServiciuCol" prefWidth="75.99998474121094" text="DURATA" />
+                                      </columns>
+                                    </TableView>
+                                    <TableView fx:id="tabelPoliclinici" layoutX="5.0" layoutY="5.0" onMouseClicked="#setLabelPInfo" prefHeight="210.0" prefWidth="220.0" style="-fx-background-color: #e6e6ff;">
+                                       <columns>
+                                          <TableColumn fx:id="denumireCol" prefWidth="91.19999694824219" text="DENUMIRE" />
+                                          <TableColumn fx:id="adresaCol" prefWidth="138.4000244140625" text="ADRESA" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
                            </children>
                         </AnchorPane>
                      </center>
@@ -333,8 +337,8 @@
                            <children>
                               <TableView fx:id="tabelMedici" layoutX="14.0" layoutY="14.0" onMouseClicked="#medicSelectat" prefHeight="255.0" prefWidth="244.0">
                                  <columns>
-                                    <TableColumn fx:id="numeMedic" prefWidth="120.800048828125" text="nume" />
-                                    <TableColumn fx:id="prenumeMedic" prefWidth="121.33335876464844" text="prenume" />
+                                    <TableColumn fx:id="numeMedic" prefWidth="120.800048828125" text="NUME" />
+                                    <TableColumn fx:id="prenumeMedic" prefWidth="121.33335876464844" text="PRENUME" />
                                  </columns>
                               </TableView>
                               <Label fx:id="labelMedic" alignment="CENTER" layoutX="14.0" layoutY="279.0" prefHeight="130.0" prefWidth="243.0" style="-fx-background-color: #ffffff;" />

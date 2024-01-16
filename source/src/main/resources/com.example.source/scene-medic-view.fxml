@@ -312,7 +312,7 @@
                               <TableColumn fx:id="prenumePacient" editable="false" prefWidth="90.0" sortable="false" text="PRENUME" />
                               <TableColumn fx:id="dataProgramare" editable="false" prefWidth="125.0" sortable="false" text="DATA PROGRAMARE" />
                               <TableColumn fx:id="oraProgramare" editable="false" prefWidth="125.0" sortable="false" text="ORA PROGRAMARE" />
-                              <TableColumn fx:id="coloanaInregistrat" editable="false" prefWidth="55.0" sortable="false" text="Inregistrat" />
+                              <TableColumn fx:id="coloanaInregistrat" editable="false" prefWidth="55.0" sortable="false" text="INREGISTRAT" />
                            </columns>
                         </TableView>
                      </center>
