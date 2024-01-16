@@ -1,4 +1,4 @@
-package com.example.source.controller;
+package com.example.source.controller.Economic;
 
 import com.example.source.Model;
 import com.example.source.claseTabele.*;

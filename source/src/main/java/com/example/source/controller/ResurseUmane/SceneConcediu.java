@@ -2,7 +2,7 @@ package com.example.source.controller.ResurseUmane;
 
 import com.example.source.Model;
 import com.example.source.claseTabele.Angajat;
-import com.example.source.claseTabele.ConcediuT;
+import com.example.source.claseTabele.Concediu;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,13 +26,13 @@ public class SceneConcediu implements Initializable {
     @FXML
     private Button butonInapoi;
     @FXML
-    private TableView<ConcediuT> tabel;
+    private TableView<Concediu> tabel;
     @FXML
-    private TableColumn<ConcediuT, Date> data_inceput;
+    private TableColumn<Concediu, Date> data_inceput;
     @FXML
-    private TableColumn<ConcediuT, Date> data_sfarsit;
+    private TableColumn<Concediu, Date> data_sfarsit;
     private Angajat angajatSelectat;
-    ObservableList<ConcediuT> concedii = FXCollections.observableArrayList();
+    ObservableList<Concediu> concedii = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

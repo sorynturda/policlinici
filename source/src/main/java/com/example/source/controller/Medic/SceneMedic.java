@@ -1,9 +1,7 @@
-package com.example.source.controller;
+package com.example.source.controller.Medic;
 
 import com.example.source.Model;
-import com.example.source.claseTabele.DataConcediu;
-import com.example.source.claseTabele.OrarAngajat;
-import com.example.source.claseTabele.Programare;
+import com.example.source.claseTabele.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,21 +12,24 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class SceneAsistentMedical implements Initializable {
+public class SceneMedic implements Initializable {
     @FXML
     private Label labelSalariuNegociat;
     @FXML
-    private Label labelNumarOreNegociate;
+    private Label labelOreNegociate;
     @FXML
     private Label labelNumarOre;
     @FXML
     private Label labelSalariuCalculat;
+    @FXML
+    private Label labelVenitAditionalCalculat;
     @FXML
     private Label label1;
     @FXML
@@ -50,11 +51,37 @@ public class SceneAsistentMedical implements Initializable {
     @FXML
     private Label labelDataAngajarii;
     @FXML
-    private Label labelTip;
+    private Label labelCodParafa;
     @FXML
-    private Label labelGrad;
+    private Label labelTitluStiintific;
+    @FXML
+    private Label labelPostDidactic;
+    @FXML
+    private Label labelVenitAditional;
     @FXML
     private Label labelLocatie;
+    @FXML
+    private Label labelTotalServicii;
+    @FXML
+    private Label labelProfit;
+    @FXML
+    private TableView<Specialitati> tableSpecialitati;
+    @FXML
+    private TableColumn<Specialitati, String> nume_specialitate;
+    @FXML
+    private TableColumn<Specialitati, String> grad;
+    @FXML
+    private TableView<Programare> tabelPacienti;
+    @FXML
+    private TableColumn<Programare, String> numePacient;
+    @FXML
+    private TableColumn<Programare, String> prenumePacient;
+    @FXML
+    private TableColumn<Programare, String> dataProgramare;
+    @FXML
+    private TableColumn<Programare, String> oraProgramare;
+    @FXML
+    private TableColumn<Programare, Integer> coloanaInregistrat;
     @FXML
     private Button buttonLogOut;
     @FXML
@@ -69,19 +96,11 @@ public class SceneAsistentMedical implements Initializable {
     private TableColumn<OrarAngajat, Integer> coloanaZi;
     @FXML
     private TableColumn<OrarAngajat, String> coloanaInterval;
-    @FXML
-    private TableView<Programare> tabelPacienti;
-    @FXML
-    private TableColumn<Programare, String> numePacient;
-    @FXML
-    private TableColumn<Programare, String> prenumePacient;
-    @FXML
-    private TableColumn<Programare, String> dataProgramare;
-    @FXML
-    private TableColumn<Programare, String> oraProgramare;
     private String[] luni = new String[]{"Ianuarie", "Februarie", "Martie", "Aprilie", "Mai", "Iunie",
             "Iulie", "August", "Septembrie", "Octombrie", "Noiembrie", "Decembrie"};
     ObservableList<OrarAngajat> orar = FXCollections.observableArrayList();
+
+    ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
     ObservableList<Programare> programari = FXCollections.observableArrayList();
 
     @Override
@@ -95,11 +114,41 @@ public class SceneAsistentMedical implements Initializable {
         labelEmail.setText(Model.getUtilizatorCurent().getEmail());
         labelIban.setText(Model.getUtilizatorCurent().getIban());
         labelDataAngajarii.setText(Model.getUtilizatorCurent().getData_angajarii());
-        labelTip.setText(Model.getAsistentCurent().getTip());
-        labelGrad.setText(Model.getAsistentCurent().getGrad());
+        labelCodParafa.setText(Model.getMedicCurent().getCod_parafa());
+        labelTitluStiintific.setText(Model.getMedicCurent().getTitlu_stiintific());
+        labelPostDidactic.setText(Model.getMedicCurent().getPost_didactic());
+        labelVenitAditional.setText(Model.getMedicCurent().getVenit_aditional().toString());
         labelLocatie.setText(Model.getUtilizatorCurent().getAdresa());
         setAlegeLunaAn();
-        afiseazaPacientiProgramati();
+        try {
+            specialitati = Model.listaSpecialitatiMedic(Model.getMedicCurent().getId());
+            populateTabelSpecialitati();
+        } catch (SQLException e) {
+            System.out.println("EROARE IN MEDIC LA INITIALIZARE SPECIALITATI");
+            throw new RuntimeException(e);
+        }
+        try {
+            programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
+            populateTabelPacienti();
+        } catch (SQLException e) {
+            System.out.println("EROARE IN MEDIC LA INITIALIZARE PACIENTI");
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void populateTabelSpecialitati() {
+        nume_specialitate.setCellValueFactory(new PropertyValueFactory<>("nume_specialitate"));
+        grad.setCellValueFactory(new PropertyValueFactory<>("grad"));
+        tableSpecialitati.setItems(specialitati);
+    }
+
+    private void populateTabelPacienti() {
+        numePacient.setCellValueFactory(new PropertyValueFactory<>("nume"));
+        prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));
+        dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
+        oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
+        coloanaInregistrat.setCellValueFactory(new PropertyValueFactory<>("inregistrat"));
+        tabelPacienti.setItems(programari);
     }
 
     private void populateTabelOrar() {
@@ -129,10 +178,26 @@ public class SceneAsistentMedical implements Initializable {
             else
                 numarOreLucrate += (int) orar.get(i).getDiferenta();
 
-        labelNumarOreNegociate.setText(Integer.toString(numarOreContract));
+        labelOreNegociate.setText(Integer.toString(numarOreContract));
         labelNumarOre.setText(Integer.toString(numarOreLucrate));
         int salariuCalculat = (numarOreLucrate * salariuNegociat) / numarOreContract;
         labelSalariuCalculat.setText(Integer.toString(salariuCalculat) + " LEI");
+        int sumaServiciiBonuri = sumaBonuriLunaAleasa();
+        double venitAditional = sumaServiciiBonuri * Model.getMedicCurent().getVenit_aditional();
+        labelVenitAditionalCalculat.setText(Double.toString(venitAditional) + " LEI");
+        labelTotalServicii.setText(Integer.toString(sumaServiciiBonuri));
+        labelProfit.setText(Double.toString(sumaServiciiBonuri - salariuCalculat - venitAditional));
+    }
+
+    private int sumaBonuriLunaAleasa() {
+        int suma = 0;
+        ArrayList<Bon> bonuri = Model.extrageBonuriMedic(Model.getMedicCurent().getId());
+        for(Bon bon: bonuri) {
+            if(getNumarLuna(alegeLuna.getValue()) == bon.getData_emitere().getMonthValue() && alegeAn.getValue().compareToIgnoreCase("" + bon.getData_emitere().getYear()) == 0) {
+                suma += bon.getTotal();
+            }
+        }
+        return suma;
     }
 
     public void afiseazaOrar() {
@@ -144,8 +209,11 @@ public class SceneAsistentMedical implements Initializable {
         LocalDate data = LocalDate.of(an, numarLuna, 1);
         HashMap<String, String> H = faHashMap(orarString);
         orar.clear();
-        for (int i = 1; i <= data.lengthOfMonth(); i++)
-            orar.add(new OrarAngajat(i, H.get(LocalDate.of(an, numarLuna, i).getDayOfWeek().toString())));
+        for (int i = 1; i <= data.lengthOfMonth(); i++) {
+            data = LocalDate.of(an, numarLuna, i);
+            String interval = Model.programMedicZi(Model.getMedicCurent().getId(), Date.valueOf(data));
+            orar.add(new OrarAngajat(i, interval));
+        }
         puneConcediuInOrar(data);
         populateTabelOrar();
         calculeazaVenituri();
@@ -201,26 +269,19 @@ public class SceneAsistentMedical implements Initializable {
         return H;
     }
 
-    public void afiseazaPacientiProgramatiAzi() {
-        programari.clear();
-        label1.setText("");
-        programari = Model.pacientiProgramatAziLaPoliclinica(Model.getAngajatCurent().getId_policlinica());
-        populateTabelPacienti();
-    }
-
-    public void afiseazaPacientiProgramati() {
+    public void afiseazaPacientiProgramati() throws SQLException {
         programari.clear();
         label1.setText("");
         String text = cautaPacientProgramatTextField.getText();
         if (text.isEmpty())
-            programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica());
+            programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId());
         else
             switch (text.split(" ").length) {
                 case 1:
-                    programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0]);
+                    programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId(), text.split(" ")[0]);
                     break;
                 case 2:
-                    programari = Model.pacientiProgramati(Model.getAngajatCurent().getId_policlinica(), text.split(" ")[0], text.split(" ")[1]);
+                    programari = Model.cautaProgramariMedic(Model.getMedicCurent().getId(), text.split(" ")[0], text.split(" ")[1]);
                     break;
                 default:
                     System.out.println("DOAR DOUA CUVINTE");
@@ -239,12 +300,11 @@ public class SceneAsistentMedical implements Initializable {
             label1.setText("ALEGE UN PACIENT INREGISTRAT");
     }
 
-    private void populateTabelPacienti() {
-        numePacient.setCellValueFactory(new PropertyValueFactory<>("nume"));
-        prenumePacient.setCellValueFactory(new PropertyValueFactory<>("prenume"));
-        dataProgramare.setCellValueFactory(new PropertyValueFactory<>("_data"));
-        oraProgramare.setCellValueFactory(new PropertyValueFactory<>("ora_inceput"));
-        tabelPacienti.setItems(programari);
+    public void afiseazaPacientiProgramatiAzi() {
+        label1.setText("");
+        programari.clear();
+        programari = Model.pacientiProgramatAziLaPoliclinicaM(Model.getMedicCurent().getId());
+        populateTabelPacienti();
     }
 
     public void switchToSceneRaport(ActionEvent event) throws IOException, SQLException {

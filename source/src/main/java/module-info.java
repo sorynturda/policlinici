@@ -7,8 +7,6 @@ module app {
     requires java.sql;
     requires mysql.connector.j;
 
-    exports com.example.source.controller;
-    opens com.example.source.controller to javafx.fxml;
     exports com.example.source;
     opens com.example.source to javafx.fxml;
     exports com.example.source.claseTabele;
@@ -19,4 +17,12 @@ module app {
     opens com.example.source.controller.Receptioner to javafx.fxml;
     exports com.example.source.controller.Admin;
     opens com.example.source.controller.Admin to javafx.fxml;
+    exports com.example.source.controller.Asistent;
+    opens com.example.source.controller.Asistent to javafx.fxml;
+    exports com.example.source.controller.Economic;
+    opens com.example.source.controller.Economic to javafx.fxml;
+    exports com.example.source.controller.Altele;
+    opens com.example.source.controller.Altele to javafx.fxml;
+    exports com.example.source.controller.Medic;
+    opens com.example.source.controller.Medic to javafx.fxml;
 }

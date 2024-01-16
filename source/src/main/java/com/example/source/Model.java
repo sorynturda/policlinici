@@ -4,7 +4,7 @@ import com.example.source.claseTabele.*;
 import com.example.source.controller.Receptioner.SceneProgramare;
 import com.example.source.controller.ResurseUmane.SceneConcediu;
 import com.example.source.controller.ResurseUmane.SceneOrarConcediu;
-import com.example.source.controller.SceneRaport;
+import com.example.source.controller.Altele.SceneRaport;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -255,7 +255,7 @@ public class Model {
         return angajati;
     }
 
-    public static ObservableList<ConcediuT> listaConcedii(int id_angajat) throws SQLException {
+    public static ObservableList<Concediu> listaConcedii(int id_angajat) throws SQLException {
         Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
@@ -263,7 +263,7 @@ public class Model {
         ResultSetMetaData resultSetMetaData = null;
         CallableStatement callableStatement = null;
 
-        ObservableList<ConcediuT> concedii = FXCollections.observableArrayList();
+        ObservableList<Concediu> concedii = FXCollections.observableArrayList();
 
         try {
             Class.forName(DRIVER).newInstance();
@@ -284,7 +284,7 @@ public class Model {
                 Date data_inceput = resultSet.getDate("data_inceput");
                 Date data_sfarsit = resultSet.getDate("data_sfarsit");
                 System.out.println(id + " " + " " + id_angajat + " " + " " + data_inceput + " " + " " + data_sfarsit);
-                concedii.add(new ConcediuT(id, id_angajat, data_inceput, data_sfarsit));
+                concedii.add(new Concediu(id, id_angajat, data_inceput, data_sfarsit));
             }
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
@@ -5345,7 +5345,7 @@ public class Model {
     }
 
     public static boolean verificaAdmin(int id) {
-                Connection connection = null;
+        Connection connection = null;
         Statement selectStatement = null;
         Statement insertStatement = null;
         ResultSet resultSet = null;
@@ -5368,7 +5368,7 @@ public class Model {
             callableStatement = connection.prepareCall(query);
             callableStatement.setInt(1, id);
             resultSet = callableStatement.executeQuery();
-            if(resultSet.next())
+            if (resultSet.next())
                 res = true;
         } catch (SQLException sqlex) {
             System.err.println("An SQL Exception occured. Details are provided below:");
