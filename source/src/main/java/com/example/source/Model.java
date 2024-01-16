@@ -41,6 +41,9 @@ public class Model {
     private static Scene scene;
     private static Parent root;
 
+    private static final String URL = "jdbc:mysql://localhost/policlinica?user=root&password=parola";
+    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";
+
     public static void logOut(ActionEvent event, String scenePath) throws IOException {
         root = FXMLLoader.load(Model.class.getResource(scenePath));
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -63,7 +66,7 @@ public class Model {
         boolean booleanVariable = false;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -72,7 +75,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaCont(?,?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, username);
@@ -130,7 +133,7 @@ public class Model {
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -138,7 +141,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaAngajat(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, input);
@@ -197,7 +200,7 @@ public class Model {
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -205,7 +208,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call AfiseazaAngajati()}";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -263,7 +266,7 @@ public class Model {
         ObservableList<ConcediuT> concedii = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -271,7 +274,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call ExtrageConcediiReadOnly(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id_angajat));
@@ -326,7 +329,7 @@ public class Model {
         ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -334,7 +337,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call ExtragePacienti()}";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -387,7 +390,7 @@ public class Model {
         ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -395,7 +398,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call AfiseazaSpecialitati(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -449,7 +452,7 @@ public class Model {
         ArrayList<Medic> medici = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -457,7 +460,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call AfiseazaMedici()}";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -515,7 +518,7 @@ public class Model {
         ObservableList<Pacient> pacienti = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -523,7 +526,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM pacienti " +
                     "WHERE pacienti.nume = " + "'" + input + "'" + " or pacienti.prenume = " + "'" + input + "'";
             callableStatement = connection.prepareCall(query);
@@ -576,7 +579,7 @@ public class Model {
         boolean exista = false;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -584,7 +587,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM pacienti " +
                     "WHERE pacienti.nume = " + "'" + nume + "'" + " and pacienti.prenume = " + "'" + prenume + "'";
             callableStatement = connection.prepareCall(query);
@@ -633,7 +636,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -642,7 +645,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaUtilizatorDupaCont(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -705,7 +708,7 @@ public class Model {
         boolean posibil = true;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -714,7 +717,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT  id, concedii.id_angajat, concedii.data_inceput, concedii.data_sfarsit FROM concedii " +
                     "WHERE concedii.id_angajat = " + id_angajat +
                     " AND id = (SELECT max(id) FROM concedii WHERE id_angajat = " + id_angajat + ")";
@@ -773,7 +776,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -782,7 +785,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call SeteazaConcediu(?, ?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id_angajat));
@@ -829,7 +832,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -838,7 +841,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaAngajatDupaUtilizator(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -895,7 +898,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -904,7 +907,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaAsistentMedical(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -956,7 +959,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -965,7 +968,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaMedic(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -1109,7 +1112,7 @@ public class Model {
         ArrayList<Serviciu> servicii = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1117,7 +1120,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "select sss.id, sss.nume_serviciu, sss.pret, sss.durata from specialitati s, servicii_specialitate ss, servicii sss " +
                     "join medici m " +
                     "where s.id_medic = '" + id_medic + "'and m.id = s.id_medic " + "and sss.id = ss.id_serviciu and ss.id_specialitate = s.id";
@@ -1171,7 +1174,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1180,7 +1183,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call InserarePacient(?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, nume);
@@ -1228,7 +1231,7 @@ public class Model {
         ArrayList<DataConcediu> concedii = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1237,7 +1240,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM policlinica.concedii " +
                     "WHERE concedii.id_angajat = " + "'" + idAngajat + "'";
             callableStatement = connection.prepareCall(query);
@@ -1290,7 +1293,7 @@ public class Model {
         IntervalOrar res = new IntervalOrar();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1299,7 +1302,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call OrarPentrudataProgramare(?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, idAngajat.toString());
@@ -1354,7 +1357,7 @@ public class Model {
         Time res = Time.valueOf("00:00:00");
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1363,7 +1366,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call FinalProgramari(?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -1420,7 +1423,7 @@ public class Model {
         int res = 0;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1429,7 +1432,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call PoliclinicaDeCareApartineMedic(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id));
@@ -1480,7 +1483,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1489,7 +1492,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO programari (id_policlinica, id_angajat, id_pacient, id_medic, _data, ora_inceput, ora_sfarsit, inregistrat) " +
@@ -1536,7 +1539,7 @@ public class Model {
 
         ObservableList<Programare> programari = FXCollections.observableArrayList();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1544,7 +1547,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call ExtragePacientiProgramatiMedic(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id_medic));
@@ -1608,7 +1611,7 @@ public class Model {
 
         ObservableList<Programare> programari = FXCollections.observableArrayList();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1616,7 +1619,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call ExtragePacientiProgramatiMedic(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id_medic));
@@ -1684,7 +1687,7 @@ public class Model {
 
         ObservableList<Programare> programari = FXCollections.observableArrayList();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1692,7 +1695,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call ExtragePacientiProgramatiMedic(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(id_medic));
@@ -1761,7 +1764,7 @@ public class Model {
         ArrayList<String> orar = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1769,7 +1772,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "select duminica as '1', luni as '2', marti as '3', miercuri as '4',"
                     + "joi as '5', vineri as '6', sambata as '7' from program_functionare pf " + "join policlinici p"
                     + " where p.id_program_functionare = pf.id and p.id =" + "'" + policlinica + "'";
@@ -1829,7 +1832,7 @@ public class Model {
         ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1837,7 +1840,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
                     "p.id_pacient, p.id_medic, p._data, " +
                     "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
@@ -1905,7 +1908,7 @@ public class Model {
         ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1913,7 +1916,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
                     "p.id_pacient, p.id_medic, p._data, " +
                     "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
@@ -1981,7 +1984,7 @@ public class Model {
         ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -1989,7 +1992,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
                     "p.id_pacient, p.id_medic, p._data, " +
                     "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
@@ -2057,7 +2060,7 @@ public class Model {
         ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2065,7 +2068,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
                     "p.id_pacient, p.id_medic, p._data, " +
                     "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
@@ -2133,7 +2136,7 @@ public class Model {
         ObservableList<Programare> programari = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2141,7 +2144,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT p.id, p.id_policlinica, p.id_angajat, " +
                     "p.id_pacient, p.id_medic, p._data, " +
                     "p.ora_inceput, p.ora_sfarsit, p.inregistrat, pac.nume, pac.prenume FROM pacienti pac " +
@@ -2208,7 +2211,7 @@ public class Model {
         String interval = "";
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2217,7 +2220,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call OrarPentrudataProgramare(?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, idAngajat.toString());
@@ -2271,7 +2274,7 @@ public class Model {
         Medic medic = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2279,7 +2282,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call CautaMedic(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setInt(1, idAngajat);
@@ -2335,7 +2338,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2343,7 +2346,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call Adaugaorarmedic(?, ?, ?, ?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setInt(1, id);
@@ -2393,7 +2396,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2401,7 +2404,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "update programari " +
                     "set inregistrat = true where id = " + "'" + id + "'";
             callableStatement = connection.prepareCall(query);
@@ -2447,7 +2450,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2455,7 +2458,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "insert into rapoarte(id_programare, id_medic) values " +
                     "('" + id + "', '" + idMedic + "')";
             callableStatement = connection.prepareCall(query);
@@ -2502,7 +2505,7 @@ public class Model {
         Raport res = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2510,7 +2513,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM rapoarte WHERE id_programare = '" + id + "'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -2572,7 +2575,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (
                 Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
@@ -2582,7 +2585,7 @@ public class Model {
         try {
             int parafa = raportPacient.isParafa() ? 1 : 0;
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "UPDATE rapoarte SET " +
                     "nume_medic_recomandare = '" + raportPacient.getNume_medic_recomandare() + "', " +
                     "prenume_medic_recomandare = '" + raportPacient.getPrenume_medic_recomandare() + "', " +
@@ -2637,7 +2640,7 @@ public class Model {
         ArrayList<Serviciu> servicii = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2645,7 +2648,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "select s.id, s.nume_serviciu, s.pret, s.durata from (policlinici p inner join servicii_oferite_policlinica sp) inner join servicii s " +
                     "where p.id = '" + id_policlinica + "' and s.id = sp.id_serviciu and sp.id_policlinica = p.id";
             callableStatement = connection.prepareCall(query);
@@ -2700,7 +2703,7 @@ public class Model {
         ObservableList<Serviciu> servicii = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2708,7 +2711,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "select s.id, s.nume_serviciu, s.pret, s.durata, sr.investigatii from (rapoarte r inner join servicii_oferite_raport sr) inner join servicii s " +
                     "where r.id = '" + id_raport + "' and s.id = sr.id_serviciu and sr.id_raport = r.id";
             callableStatement = connection.prepareCall(query);
@@ -2764,7 +2767,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (
                 Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
@@ -2773,7 +2776,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (Serviciu s : serviciiRaport) {
                 String query = "INSERT INTO servicii_oferite_raport(id_raport, id_serviciu, investigatii)" +
                         "VALUES ('" + id_raport + "' , '" + s.getId() + "' , '" + s.getInvestigatii() + "')";
@@ -2823,7 +2826,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (
                 Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
@@ -2833,7 +2836,7 @@ public class Model {
         try {
             int parafa = raportPacient.isParafa() ? 1 : 0;
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "UPDATE rapoarte SET " +
                     "id_asistent = '" + raportPacient.getId_asistent() + "' " +
                     "WHERE id = '" + raportPacient.getId() + "'";
@@ -2882,7 +2885,7 @@ public class Model {
         Bon res = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2890,7 +2893,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM bonuri_fiscale WHERE id_raport = '" + id_raport + "'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -2944,7 +2947,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -2953,7 +2956,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO bonuri_fiscale (id_raport, id_angajat, total, data_emitere) " +
@@ -3000,7 +3003,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3008,7 +3011,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = ("UPDATE bonuri_fiscale " +
                     "SET total = '" + bon.getTotal() + "', data_emitere ='" + bon.getData_emitere() + "' WHERE id = '" + +bon.getId() + "'");
             callableStatement = connection.prepareCall(query);
@@ -3055,7 +3058,7 @@ public class Model {
         ObservableList<Policlinica> res = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3063,7 +3066,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM policlinici";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -3119,7 +3122,7 @@ public class Model {
         ObservableList<Utilizator> res = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3127,7 +3130,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM utilizatori";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -3188,7 +3191,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3196,7 +3199,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call AdaugaUtilizator(?,?,?,?,?,?,?,?,?,?,?,?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, u);
@@ -3253,7 +3256,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3261,7 +3264,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "DELETE FROM utilizatori WHERE utilizatori.id = '" + id + "'";
             callableStatement = connection.prepareCall(query);
             callableStatement.executeUpdate();
@@ -3308,7 +3311,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3316,7 +3319,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (Utilizator it : u) {
                 String query = "UPDATE utilizatori " +
                         "SET departament = '" + it.getDepartament() + "', " +
@@ -3375,7 +3378,7 @@ public class Model {
         ObservableList<Cont> res = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3383,7 +3386,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM conturi";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -3436,7 +3439,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3444,7 +3447,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "INSERT INTO conturi(nume_utilizator, parola) VALUES " +
                     "('" + user + "', '" + pass + "')";
             callableStatement = connection.prepareCall(query);
@@ -3490,7 +3493,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3498,7 +3501,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "DELETE FROM conturi WHERE conturi.id = '" + id + "'";
             callableStatement = connection.prepareCall(query);
             callableStatement.executeUpdate();
@@ -3542,7 +3545,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3550,7 +3553,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (Cont it : c) {
                 String query = "UPDATE conturi " +
                         "SET nume_utilizator = '" + it.getNume_utilizator() + "', " +
@@ -3601,7 +3604,7 @@ public class Model {
         ArrayList<Bon> res = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3609,7 +3612,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT bonuri_fiscale.id, bonuri_fiscale.id_raport, bonuri_fiscale.id_angajat, bonuri_fiscale.total, bonuri_fiscale.data_emitere FROM rapoarte inner join bonuri_fiscale " +
                     "WHERE rapoarte.id = bonuri_fiscale.id_raport and id_medic = '" + id_medic + "'";
             callableStatement = connection.prepareCall(query);
@@ -3667,7 +3670,7 @@ public class Model {
         ArrayList<Bon> res = new ArrayList<>();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3675,7 +3678,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT bonuri_fiscale.id, bonuri_fiscale.id_raport, bonuri_fiscale.id_angajat, bonuri_fiscale.total, bonuri_fiscale.data_emitere FROM angajati inner join bonuri_fiscale " +
                     "WHERE angajati.id = bonuri_fiscale.id_angajat and angajati.id_policlinica = '" + id_policlinica + "'";
             callableStatement = connection.prepareCall(query);
@@ -3733,7 +3736,7 @@ public class Model {
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3741,7 +3744,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT a.id, a.id_utilizator, a.id_policlinica, u.nume, u.prenume, a.functie, a.salariu_negociat, a.numar_ore " +
                     "FROM angajati a INNER JOIN utilizatori u ON a.id_utilizator = u.id WHERE a.id_policlinica = '" + id_poli + "'";
             callableStatement = connection.prepareCall(query);
@@ -3800,7 +3803,7 @@ public class Model {
         ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3808,7 +3811,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM specialitati";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -3863,7 +3866,7 @@ public class Model {
         int res = 0;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3871,7 +3874,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call TotalServiciiOferiteSpecialitate(?, ?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setString(1, Integer.toString(idSpecialitate));
@@ -3923,7 +3926,7 @@ public class Model {
         ObservableList<Angajat> angajati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -3931,7 +3934,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT a.id, a.id_utilizator, a.id_policlinica, u.nume, u.prenume, a.functie, a.salariu_negociat, a.numar_ore " +
                     "FROM ((angajati a INNER JOIN utilizatori u ON a.id_utilizator = u.id) " +
                     "INNER JOIN medici ON medici.id_angajat = a.id)" +
@@ -3993,7 +3996,7 @@ public class Model {
         ObservableList<Policlinica> res = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4001,7 +4004,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM policlinici WHERE policlinici.denumire LIKE '%" + input + "%'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -4057,7 +4060,7 @@ public class Model {
         ObservableList<Specialitati> specialitati = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4065,7 +4068,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM specialitati WHERE nume_specialitate LIKE '%" + input + "%'";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -4120,7 +4123,7 @@ public class Model {
         ObservableList<ProgramFunctionare> res = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4128,7 +4131,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM program_functionare";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -4185,7 +4188,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4193,7 +4196,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (ProgramFunctionare it : pr) {
                 String query = "UPDATE program_functionare " +
                         "SET duminica = '" + it.getDuminica() + "', " +
@@ -4257,7 +4260,7 @@ public class Model {
 
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4265,7 +4268,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "INSERT INTO program_functionare(duminica, luni, marti, miercuri, joi, vineri, sambata) VALUES ('" +
                     pr.get(0) + "','" + pr.get(1) + "','" + pr.get(2) + "','" + pr.get(3) + "','" +
                     pr.get(4) + "','" + pr.get(5) + "','" + pr.get(6) + "')";
@@ -4313,7 +4316,7 @@ public class Model {
         ObservableList<Serviciu> res = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4321,7 +4324,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM servicii";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -4373,7 +4376,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4381,7 +4384,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (Angajat it : a) {
                 String query = "UPDATE angajati " +
                         "SET id_policlinica = '" + it.getId_policlinica() + "', " +
@@ -4432,7 +4435,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4441,7 +4444,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO angajati (id_utilizator, id_policlinica, functie, salariu_negociat, numar_ore) " +
@@ -4489,7 +4492,7 @@ public class Model {
         int id = -1;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4498,7 +4501,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT  MAX(id) as idMax FROM utilizatori";
 
             callableStatement = connection.prepareCall(query);
@@ -4549,7 +4552,7 @@ public class Model {
         ObservableList<Medic> medici = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4557,7 +4560,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM medici";
 
             callableStatement = connection.prepareCall(query);
@@ -4612,7 +4615,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4620,7 +4623,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (Medic it : m) {
                 String query = "UPDATE medici " +
                         "SET id_angajat = '" + it.getId_angajat() + "', " +
@@ -4672,7 +4675,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4681,7 +4684,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO medici (id_angajat, cod_parafa, titlu_stiintific, post_didactic, venit_aditional) " +
@@ -4729,7 +4732,7 @@ public class Model {
         ObservableList<AsistentMedical> asistenti = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4737,7 +4740,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT  * FROM asistenti_medicali";
 
             callableStatement = connection.prepareCall(query);
@@ -4791,7 +4794,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4799,7 +4802,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             for (AsistentMedical it : a) {
                 String query = "UPDATE asistenti_medicali " +
                         "SET id_angajat = '" + it.getId_angajat() + "', " +
@@ -4849,7 +4852,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4858,7 +4861,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO asistenti_medicali (id_angajat, tip, grad) " +
@@ -4904,7 +4907,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4913,7 +4916,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "INSERT INTO servicii(nume_serviciu, pret, durata) VALUES(?,?,?)";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setString(1, numeS);
@@ -4960,7 +4963,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -4969,7 +4972,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM servicii_specialitate WHERE id_specialitate = ? AND id_serviciu = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, idSpecialitate);
@@ -5022,7 +5025,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5031,7 +5034,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM servicii_oferite_policlinica WHERE id_serviciu = ? AND id_policlinica = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(2, idPoliclinica);
@@ -5086,7 +5089,7 @@ public class Model {
         ObservableList<Medic> medici = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5094,7 +5097,7 @@ public class Model {
         }
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call AfiseazaMedici()}";
             callableStatement = connection.prepareCall(query);
             resultSet = callableStatement.executeQuery();
@@ -5150,7 +5153,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5159,7 +5162,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM specialitati WHERE id_medic = ? AND nume_specialitate = ? AND grad = ?";
             PreparedStatement stmt = connection.prepareStatement(query);
             stmt.setInt(1, id);
@@ -5216,7 +5219,7 @@ public class Model {
         ObservableList<Policlinica> policlinici = FXCollections.observableArrayList();
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5225,7 +5228,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "{call repartizare(?)}";
             callableStatement = connection.prepareCall(query);
             callableStatement.setInt(1, id_medic);
@@ -5287,7 +5290,7 @@ public class Model {
 
         ArrayList<String> s = new ArrayList<>();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5296,7 +5299,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT u.nume, u.prenume FROM utilizatori u " +
                     "INNER JOIN angajati a " +
                     "INNER JOIN asistenti_medicali am " +
@@ -5351,7 +5354,7 @@ public class Model {
 
         boolean res = false;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5360,7 +5363,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
             String query = "SELECT * FROM utilizatori WHERE id_cont = ? AND (rol = 'super_admin' or rol = 'admin')";
             callableStatement = connection.prepareCall(query);
             callableStatement.setInt(1, id);
@@ -5408,7 +5411,7 @@ public class Model {
         CallableStatement callableStatement = null;
 
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName(DRIVER).newInstance();
         } catch (Exception ex) {
             System.err.println("An Exception occured during JDBC Driver loading." +
                     " Details are provided below:");
@@ -5417,7 +5420,7 @@ public class Model {
 
         try {
             connection = DriverManager.
-                    getConnection("jdbc:mysql://localhost/policlinica?user=root&password=parola");
+                    getConnection(URL);
 
             insertStatement = connection.createStatement();
             insertStatement.execute("INSERT INTO policlinici (id_program_functionare, adresa, denumire) " +
