@@ -67,19 +67,19 @@
                            </font>
                         </Label>
                               <TextField fx:id="ibanTf" layoutX="167.0" layoutY="370.0" prefHeight="30.0" prefWidth="200.0" />
-                              <Label alignment="CENTER" layoutX="20.0" layoutY="420.0" prefHeight="30.0" prefWidth="110.0" text="IBAN" textFill="WHITE">
+                              <Label alignment="CENTER" layoutX="20.0" layoutY="370.0" prefHeight="30.0" prefWidth="110.0" text="IBAN" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
                               <DatePicker fx:id="data_angajariiDP" layoutX="167.0" layoutY="419.0" prefHeight="32.0" prefWidth="200.0" />
-                              <Label alignment="CENTER" layoutX="20.0" layoutY="470.0" prefHeight="30.0" prefWidth="110.0" text="DATA ANGAJARII" textFill="WHITE">
+                              <Label alignment="CENTER" layoutX="20.0" layoutY="419.0" prefHeight="30.0" prefWidth="110.0" text="DATA ANGAJARII" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
                               <ChoiceBox fx:id="rolChoiceBox" layoutX="167.0" layoutY="469.0" prefHeight="32.0" prefWidth="200.0" />
-                              <Label alignment="CENTER" layoutX="20.0" layoutY="370.0" prefHeight="30.0" prefWidth="110.0" text="ROL" textFill="WHITE">
+                              <Label alignment="CENTER" layoutX="20.0" layoutY="470.0" prefHeight="30.0" prefWidth="110.0" text="ROL" textFill="WHITE">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

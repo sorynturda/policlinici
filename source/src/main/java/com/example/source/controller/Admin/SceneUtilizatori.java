@@ -148,7 +148,7 @@ public class SceneUtilizatori implements Initializable {
     private boolean ssuper;
 
     String[] departamente = new String[]{"Medical", "Resurse Umane", "Economic"};
-    String[] roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
+    String[] roluri = new String[]{Model.UTILIZATOR};
 
     ObservableList<Utilizator> utilizatori = FXCollections.observableArrayList();
     ObservableList<Cont> conturi = FXCollections.observableArrayList();
@@ -162,6 +162,7 @@ public class SceneUtilizatori implements Initializable {
         if (Model.getUtilizatorCurent().getRol().equals(Model.SUPERADMIN)) {
             ssuper = true;
             departamente = new String[]{"Administratie", "Medical", "Resurse Umane", "Economic"};
+            roluri = new String[]{Model.UTILIZATOR, Model.ADMIN, Model.SUPERADMIN};
         }
         populateTabelUtilizatori();
         populateTabelConturi();

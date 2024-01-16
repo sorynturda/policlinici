@@ -1028,7 +1028,7 @@ public class Model {
     }
 
     public static void switchToWindowProgramare(ActionEvent event, Pacient pacient) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/sceve-receptioner-programare-view.fxml"));
+        FXMLLoader loader = new FXMLLoader(Model.class.getResource("/com.example.source/scene-receptioner-programare-view.fxml"));
         root = loader.load();
 
         SceneProgramare prgramare = loader.getController();
