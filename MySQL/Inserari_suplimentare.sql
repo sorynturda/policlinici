@@ -9,13 +9,13 @@ VALUES
     (1, 5, 1, 1, '2024-01-24', '11:30:00', '13:00:00', false);
     
 
-INSERT INTO rapoarte (id_programare, id_medic, istoric, simptome, diagnostic, recomandari, parafa)
+INSERT INTO rapoarte (id_programare, id_medic, nume_medic_recomandare, prenume_medic_recomandare, istoric, simptome, diagnostic, recomandari, parafa)
 VALUES
-    (1, 1, 'Pacientul a prezentat dureri toracice și dificultăți de respirație...', 'Pacientul a acuzat greață și amețeli...', 'Infarct miocardic acut', 'Internare imediată și administrare de medicamente anti-coagulante.', true),
-    (2, 2, 'Pacienta a prezentat dureri abdominale și senzație de arsură la stomac...', 'Pacienta a relatat episoade frecvente de greață...', 'Gastrită acută', 'Prescriere medicament antiacide și regim alimentar.', true),
-    (3, 1, 'Pacientul a raportat dureri de cap severe și confuzie...', 'Pacientul prezintă stare de oboseală și lipsă de energie...', 'Migrenă severă', 'Recomandat tratament pentru migrenă și odihnă.', false),
-    (5, 1, 'Pacientul a fost expus la un alergen și a dezvoltat reacție alergică...', 'Pacientul prezintă erupții cutanate și mâncărimi...', 'Reacție alergică', 'Administrare antihistaminice și evitarea alergenului.', false),
-    (6, 2, 'Pacientul se confruntă cu oboseală cronică și insomnii...', 'Pacientul a relatat dificultăți în concentrare...', 'Sindrom de oboseală cronică', 'Consiliere psihologică și evaluare amănunțită.', true);
+    (1, 1, ' ', ' ', 'Pacientul a prezentat dureri toracice și dificultăți de respirație...', 'Pacientul a acuzat greață și amețeli...', 'Infarct miocardic acut', 'Internare imediată și administrare de medicamente anti-coagulante.', true),
+    (2, 2, ' ', ' ', 'Pacienta a prezentat dureri abdominale și senzație de arsură la stomac...', 'Pacienta a relatat episoade frecvente de greață...', 'Gastrită acută', 'Prescriere medicament antiacide și regim alimentar.', true),
+    (3, 1, ' ', ' ', 'Pacientul a raportat dureri de cap severe și confuzie...', 'Pacientul prezintă stare de oboseală și lipsă de energie...', 'Migrenă severă', 'Recomandat tratament pentru migrenă și odihnă.', false),
+    (4, 1, ' ', ' ', 'Pacientul a fost expus la un alergen și a dezvoltat reacție alergică...', 'Pacientul prezintă erupții cutanate și mâncărimi...', 'Reacție alergică', 'Administrare antihistaminice și evitarea alergenului.', false),
+    (5, 2, ' ', ' ', 'Pacientul se confruntă cu oboseală cronică și insomnii...', 'Pacientul a relatat dificultăți în concentrare...', 'Sindrom de oboseală cronică', 'Consiliere psihologică și evaluare amănunțită.', true);
 
 INSERT INTO bonuri_fiscale (id_raport, id_angajat, total, data_emitere)
 VALUES
