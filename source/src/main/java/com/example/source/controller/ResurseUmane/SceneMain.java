@@ -325,7 +325,7 @@ public class SceneMain implements Initializable {
     }
 
 
-    public void adaugaServiciuNou(ActionEvent actionEvent) {
+    public void adaugaServiciuNou(ActionEvent actionEvent) throws SQLException {
         if (numeServiciuTf.getText().isEmpty() || pretServiciuTf.getText().isEmpty() || durataServiciuTf1.getText().isEmpty())
             eror13.setVisible(true);
         else {
@@ -335,6 +335,8 @@ public class SceneMain implements Initializable {
             eror13.setVisible(false);
             Model.adaugaServiciuNou(numeS, pretS, durataS);
             servicii = Model.listaServicii();
+            setSpecialitatiServicii();
+            populateTabelServicii();
         }
     }
 
@@ -383,11 +385,13 @@ public class SceneMain implements Initializable {
         infoPoliclinica.setText(text);
     }
 
-    public void adaugaSpecialitateMedic(ActionEvent actionEvent) {
+    public void adaugaSpecialitateMedic(ActionEvent actionEvent) throws SQLException {
         if (specialitateMedic.getText() != null && gradMedic != null) {
             String specialitate = specialitateMedic.getText();
             String grad = gradMedic.getText();
             Model.inserareSpecialitate(tabelMedici.getSelectionModel().getSelectedItem().getId(), specialitate, grad);
+            setSpecialitatiServicii();
+            populateTabelServicii();
         }
     }
 
