@@ -17,6 +17,10 @@ VALUES
     (4, 1, ' ', ' ', 'Pacientul a fost expus la un alergen și a dezvoltat reacție alergică...', 'Pacientul prezintă erupții cutanate și mâncărimi...', 'Reacție alergică', 'Administrare antihistaminice și evitarea alergenului.', false),
     (5, 2, ' ', ' ', 'Pacientul se confruntă cu oboseală cronică și insomnii...', 'Pacientul a relatat dificultăți în concentrare...', 'Sindrom de oboseală cronică', 'Consiliere psihologică și evaluare amănunțită.', true);
 
+INSERT INTO rapoarte (id_programare, id_medic, nume_medic_recomandare, prenume_medic_recomandare, istoric, simptome, diagnostic, recomandari, parafa)
+VALUES
+    (7, 2, ' ', ' ', 'Pacientul a prezentat dureri toracice și dificultăți de respirație...', 'Pacientul a acuzat greață și amețeli...', 'Infarct miocardic acut', 'Internare imediată și administrare de medicamente anti-coagulante.', true);
+
 INSERT INTO bonuri_fiscale (id_raport, id_angajat, total, data_emitere)
 VALUES
     (1, 5, 250.00, '2024-01-20'),
