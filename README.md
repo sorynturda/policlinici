@@ -1,5 +1,8 @@
+# Login page
 ![plot](./images/login.png)
+# Medic view page
 ![plot](./images/user1.png)
+# Human resources view page
 ![plot](./images/user2.png)
 # 📌 Policlinic Management System  
 
